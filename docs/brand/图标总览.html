@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>知证 VeriMind 图标总览</title>
+  <style>
+    :root { color-scheme: light; --ink:#233b66; --muted:#64748b; --line:#dce4ee; --blue:#315bc7; --teal:#168b82; --paper:#f5f7fb; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.55 "Microsoft YaHei", "PingFang SC", sans-serif; }
+    main { width:min(1120px, calc(100% - 40px)); margin:42px auto; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:22px; padding:28px 32px; background:#fff; border:1px solid var(--line); border-radius:18px; box-shadow:0 12px 34px rgba(38,66,107,.045); }
+    .identity { display:flex; align-items:center; gap:22px; }
+    .identity img { width:88px; height:88px; }
+    figure { display:grid; justify-items:center; gap:5px; margin:0; color:var(--muted); font-size:11px; text-align:center; }
+    figure img { width:58px; height:58px; }
+    h1 { margin:0; font-size:28px; letter-spacing:.04em; }
+    header p { margin:7px 0 0; color:var(--muted); }
+    section { margin-top:28px; }
+    h2 { margin:0 0 14px; font-size:18px; }
+    .grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+    article { min-height:190px; padding:20px; border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:0 5px 16px rgba(38,66,107,.035); }
+    .icon-tile { display:grid; width:62px; height:62px; margin-bottom:13px; place-items:center; border:1px solid #e7edf6; border-radius:16px; background:#f2f5fc; }
+    .icon-tile img { display:block; width:44px; height:44px; }
+    article.research .icon-tile { border-color:#eee7f5; background:linear-gradient(145deg,#f6f2fa,#fbf9fd); }
+    article h3 { margin:0 0 4px; font-size:15px; letter-spacing:.01em; }
+    article p { margin:0; color:var(--muted); font-size:13px; }
+    .foot { margin-top:18px; color:var(--muted); font-size:12px; }
+    @media(max-width:760px) { main { width:calc(100% - 24px); margin:18px auto; } header { padding:20px; } .identity { gap:12px; } .identity img { width:64px;height:64px; } figure img { width:46px;height:46px; } h1 { font-size:22px; } .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media print { body { background:#fff; } main { width:100%; margin:0; } header,article { break-inside:avoid; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="identity"><img src="../../web/public/brand/verimind-mark.svg" alt="知证 VeriMind 项目主标志" />
+        <div><h1>知证 VeriMind</h1><p>双源合证主标志 · 折面视觉语言的 FEVA 功能图标</p></div>
+      </div>
+      <figure><img src="../../web/public/brand/verimind-mark-mono.svg" alt=""/><figcaption>单色打印版</figcaption></figure>
+    </header>
+    <p class="foot">主标志强调双来源汇合与核验；功能图标沿用统一切面语言，模块名称负责解释含义。</p>
+    <section aria-labelledby="module-icons"><h2 id="module-icons">机制与能力图标</h2>
+      <div class="grid">
+        <article><div class="icon-tile"><img src="../../web/public/brand/icons/feva-architecture.svg" alt=""/></div><h3>FEVA 整体架构</h3><p>以多层折面表达统摄事实组织与证据核验的整体机制，不代指独立执行模块。</p></article>
+        <article><div class="icon-tile"><img src="../../web/public/brand/icons/fact-flow.svg" alt=""/></div><h3>事实流 FactFlow</h3><p>表达待回答事实及其依赖顺序。</p></article>
+        <article><div class="icon-tile"><img src="../../web/public/brand/icons/source-bridge.svg" alt=""/></div><h3>跨源证桥 SourceBridge</h3><p>表达不同来源间的受控对象关联。</p></article>
+        <article><div class="icon-tile"><img src="../../web/public/brand/icons/metric-align.svg" alt=""/></div><h3>口径对齐 MetricAlign</h3><p>表达事实定义与比较口径核对。</p></article>
+        <article><div class="icon-tile"><img src="../../web/public/brand/icons/evidence-ledger.svg" alt=""/></div><h3>证据账本 EvidenceLedger</h3><p>表达事实状态及其证据来源记录。</p></article>
+        <article><div class="icon-tile"><img src="../../web/public/brand/icons/bounded-verify.svg" alt=""/></div><h3>有界求证 BoundedVerify</h3><p>表达补查预算与停止边界。</p></article>
+        <article><div class="icon-tile"><img src="../../web/public/brand/icons/query-guard.svg" alt=""/></div><h3>查询卫士 QueryGuard</h3><p>表达结构化数据查询能力。</p></article>
+        <article><div class="icon-tile"><img src="../../web/public/brand/icons/doc-lens.svg" alt=""/></div><h3>文证透镜 DocLens</h3><p>表达文档检索与原文定位能力。</p></article>
+        <article class="research"><div class="icon-tile"><img src="../../web/public/brand/icons/gap2graph.svg" alt=""/></div><h3>缺口补图 Gap2Graph</h3><p>表达 KAG 研究支线，不表示已接入主链路。</p></article>
+        <article><div class="icon-tile"><img src="../../web/public/brand/icons/database-catalog.svg" alt=""/></div><h3>数据库与库表目录</h3><p>查看业务库连接状态及当前结构目录中的表、字段与关联。</p></article>
+      </div>
+    </section>
+    <p class="foot">源图标：web/public/brand/ · 规则见 docs/品牌图标设计规范_v0.3.md。通用交互图标仍由 AppIcon 提供。</p>
+  </main>
+</body>
+</html>

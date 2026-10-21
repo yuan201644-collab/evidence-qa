@@ -1,0 +1,1185 @@
+{
+  "contract_version": "0.1",
+  "database": "askdata_gov",
+  "dialect": "postgres",
+  "source": "information_schema（反射生成，非手抄）",
+  "generated_at": "2026-10-17T12:52:06Z",
+  "generator": "infra/scripts/gen_schema_meta_gov.py",
+  "tables": [
+    {
+      "table": "agencies",
+      "schema": "public",
+      "description": "采购代理机构。一行代表一家代理机构。",
+      "row_count": 1118,
+      "primary_key": [
+        "agency_id"
+      ],
+      "columns": [
+        {
+          "name": "agency_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "代理机构主键。",
+          "sample_values": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "agency_name",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "采购代理机构名称。",
+          "sample_values": [
+            "万邦工程管理咨询有限公司",
+            "三门县熠橙工程管理有限公司",
+            "上海上咨建设工程咨询有限公司"
+          ]
+        },
+        {
+          "name": "announcement_count",
+          "type": "INTEGER",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "",
+          "sample_values": [
+            "22",
+            "11",
+            "9"
+          ]
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "announcements",
+      "schema": "public",
+      "description": "采购公告。一行代表一份公告（招标/中标/成交/更正/废标等），与 projects 多对一。",
+      "row_count": 2742,
+      "primary_key": [
+        "announcement_id"
+      ],
+      "columns": [
+        {
+          "name": "announcement_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "公告主键。",
+          "sample_values": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "project_id",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "所属采购项目，外键指向 projects。",
+          "sample_values": [
+            "/（招标文件编号：/）",
+            "04-12-04F-2026-D-F-E27513C01",
+            "0546-HB261014"
+          ]
+        },
+        {
+          "name": "title",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "公告标题，含公告类型后缀。",
+          "sample_values": [
+            "中央社会主义学院服务中心劳务服务项目（二次）更正公告",
+            "清华大学测试服务器采购项目（第二次）中标公告",
+            "华新项目管理集团有限公司关于广西海事局2026-2027年海巡船艇船用燃油供应服务统一采购项目（..."
+          ]
+        },
+        {
+          "name": "kind",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "公告类型：招标公告/中标公告/成交公告/磋商公告/更正公告/废标终止公告/其他公告等。",
+          "sample_values": [
+            "dylygg",
+            "jzxtpgg",
+            "xjgg"
+          ]
+        },
+        {
+          "name": "publish_date",
+          "type": "DATE",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "公告发布日。",
+          "sample_values": [
+            "2026-10-08",
+            "2026-10-09",
+            "2026-10-10"
+          ]
+        },
+        {
+          "name": "source_url",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "源站原始地址。",
+          "sample_values": [
+            "http://www.ccgp.gov.cn/cggg/dfgg/cjgg/202610/t20261017_27511",
+            "http://www.ccgp.gov.cn/cggg/dfgg/cjgg/202610/t20261017_27512",
+            "http://www.ccgp.gov.cn/cggg/dfgg/cjgg/202610/t20261017_27512"
+          ]
+        },
+        {
+          "name": "body_chars",
+          "type": "INTEGER",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "正文清洗后的字符数。",
+          "sample_values": [
+            "1798",
+            "2335",
+            "1269"
+          ]
+        },
+        {
+          "name": "has_items",
+          "type": "BOOLEAN",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "该公告是否含品目明细区块。",
+          "sample_values": [
+            "False",
+            "True"
+          ]
+        }
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "project_id"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "projects",
+            "columns": [
+              "project_id"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "table": "awards",
+      "schema": "public",
+      "description": "中标结果。一行代表一个包的中标记录，含中标金额与中标供应商。",
+      "row_count": 561,
+      "primary_key": [
+        "award_id"
+      ],
+      "columns": [
+        {
+          "name": "award_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "中标记录主键。",
+          "sample_values": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "project_id",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "所属采购项目，外键指向 projects。",
+          "sample_values": [
+            "/（招标文件编号：/）",
+            "0610-2641NF021799（招标文件编号：0610-2641NF021799）",
+            "0613-267124105581（招标文件编号：0613-267124105581）"
+          ]
+        },
+        {
+          "name": "package_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "所属包组，外键指向 packages。",
+          "sample_values": [
+            "1798",
+            "1642",
+            "184"
+          ]
+        },
+        {
+          "name": "supplier_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "中标供应商，外键指向 suppliers。",
+          "sample_values": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "award_yuan",
+          "type": "NUMERIC",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "中标金额，单位元。注意：源站「0.0000000 万元」空占位会被抽成 0，统计金额须过滤 > 0。",
+          "sample_values": [
+            "0.00",
+            "8.94",
+            "34.35"
+          ]
+        },
+        {
+          "name": "review_score",
+          "type": "NUMERIC",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "评审得分，多数为空。",
+          "sample_values": [
+            "91.00",
+            "94.58",
+            "90.09"
+          ]
+        },
+        {
+          "name": "award_date",
+          "type": "DATE",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "中标/成交公告发布日。",
+          "sample_values": [
+            "2026-10-17",
+            "2026-10-15",
+            "2026-10-16"
+          ]
+        },
+        {
+          "name": "announcement_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "来源公告，外键指向 announcements。",
+          "sample_values": [
+            "1642",
+            "1489",
+            "1580"
+          ]
+        }
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "project_id"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "projects",
+            "columns": [
+              "project_id"
+            ]
+          }
+        },
+        {
+          "columns": [
+            "package_id"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "packages",
+            "columns": [
+              "package_id"
+            ]
+          }
+        },
+        {
+          "columns": [
+            "supplier_id"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "suppliers",
+            "columns": [
+              "supplier_id"
+            ]
+          }
+        },
+        {
+          "columns": [
+            "announcement_id"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "announcements",
+            "columns": [
+              "announcement_id"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "table": "buyers",
+      "schema": "public",
+      "description": "采购单位。一行代表一个采购人（学校、医院、机关等）。",
+      "row_count": 1494,
+      "primary_key": [
+        "buyer_id"
+      ],
+      "columns": [
+        {
+          "name": "buyer_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "采购单位主键。",
+          "sample_values": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "buyer_name",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "采购单位名称，如「清华大学」。",
+          "sample_values": [
+            "SPD",
+            "SPD-13",
+            "SPD-14"
+          ]
+        },
+        {
+          "name": "announcement_count",
+          "type": "INTEGER",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "",
+          "sample_values": [
+            "22",
+            "11",
+            "9"
+          ]
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "documents",
+      "schema": "public",
+      "description": "公告原文归档。一行代表一份公告的正文全文，是结构化数据与文档知识库之间的跨源桥。",
+      "row_count": 2742,
+      "primary_key": [
+        "document_id"
+      ],
+      "columns": [
+        {
+          "name": "document_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "",
+          "sample_values": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "doc_code",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "",
+          "sample_values": [
+            "_cggg_dfgg_cjgg_202610_t20261017_27511929_htm",
+            "_cggg_dfgg_cjgg_202610_t20261017_27512023_htm",
+            "_cggg_dfgg_cjgg_202610_t20261017_27512049_htm"
+          ]
+        },
+        {
+          "name": "project_id",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "所属采购项目，外键指向 projects（跨源桥）。",
+          "sample_values": [
+            "/（招标文件编号：/）",
+            "04-12-04F-2026-D-F-E27513C01",
+            "0546-HB261014"
+          ]
+        },
+        {
+          "name": "announcement_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "对应公告，外键指向 announcements。",
+          "sample_values": [
+            "1798",
+            "1489",
+            "2335"
+          ]
+        },
+        {
+          "name": "doc_type",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "文档类型。",
+          "sample_values": [
+            "announcement"
+          ]
+        },
+        {
+          "name": "title",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "公告标题。",
+          "sample_values": [
+            "中央社会主义学院服务中心劳务服务项目（二次）更正公告",
+            "清华大学测试服务器采购项目（第二次）中标公告",
+            "华新项目管理集团有限公司关于广西海事局2026-2027年海巡船艇船用燃油供应服务统一采购项目（..."
+          ]
+        },
+        {
+          "name": "source_url",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "",
+          "sample_values": [
+            "http://www.ccgp.gov.cn/cggg/zygg/gkzb/202610/t20261016_27508",
+            "http://www.ccgp.gov.cn/cggg/zygg/zbgg/202610/t20261015_27497",
+            "http://www.ccgp.gov.cn/cggg/zygg/zbgg/202610/t20261015_27494"
+          ]
+        },
+        {
+          "name": "local_path",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "正文文件相对路径。",
+          "sample_values": [
+            "agent_temp/pb/probe_ccgp/detail_v3/_cggg_dfgg_zbgg_202610_t2",
+            "agent_temp/pb/probe_ccgp/detail_v3/_cggg_zygg_zbgg_202610_t2",
+            "agent_temp/pb/probe_ccgp/detail_v3/_cggg_zygg_jzxcs_202610_t"
+          ]
+        },
+        {
+          "name": "page_count",
+          "type": "INTEGER",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "",
+          "sample_values": [
+            "1"
+          ]
+        },
+        {
+          "name": "char_count",
+          "type": "INTEGER",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "正文字符数。",
+          "sample_values": [
+            "1798",
+            "2335",
+            "1269"
+          ]
+        },
+        {
+          "name": "checksum",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "",
+          "sample_values": []
+        }
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "project_id"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "projects",
+            "columns": [
+              "project_id"
+            ]
+          }
+        },
+        {
+          "columns": [
+            "announcement_id"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "announcements",
+            "columns": [
+              "announcement_id"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "table": "items",
+      "schema": "public",
+      "description": "品目明细。一行代表一个采购标的（货物或服务）的品目，含品牌、型号、数量、单价。",
+      "row_count": 856,
+      "primary_key": [
+        "item_id"
+      ],
+      "columns": [
+        {
+          "name": "item_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "品目主键。",
+          "sample_values": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "announcement_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "所属公告，外键指向 announcements。注意 items 没有 project_id，需经公告挂到项目。",
+          "sample_values": [
+            "5",
+            "6",
+            "10"
+          ]
+        },
+        {
+          "name": "package_id",
+          "type": "BIGINT",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "所属包组，外键指向 packages，可为空。",
+          "sample_values": [
+            "116",
+            "238",
+            "258"
+          ]
+        },
+        {
+          "name": "item_seq",
+          "type": "SMALLINT",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "品目在区块内的序号。",
+          "sample_values": [
+            "4",
+            "10",
+            "9"
+          ]
+        },
+        {
+          "name": "item_name",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "品目名称，如「服务器」「声学多普勒流速剖面仪」。",
+          "sample_values": [
+            "交换机（含7年维保）",
+            "恒温泥蜡疗仪（A02320800物理治疗、康复及体育治疗仪器设备）",
+            "卫星信道频谱分析仪"
+          ]
+        },
+        {
+          "name": "brand",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "品牌。",
+          "sample_values": [
+            "徐工；徐工；中联；中联；中联",
+            "雷尼绍",
+            "超益集伦"
+          ]
+        },
+        {
+          "name": "model",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "规格型号。",
+          "sample_values": [
+            "Optima XPN-100",
+            "Rocel；EZ Touch Imager/AIP-6C",
+            "非标定制"
+          ]
+        },
+        {
+          "name": "category_code",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "品目分类编码。",
+          "sample_values": [
+            "施工工期",
+            "数量（单位）",
+            "金额(元)"
+          ]
+        },
+        {
+          "name": "category_name",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "品目分类名称。",
+          "sample_values": [
+            "1-1",
+            "施工工期",
+            "-->"
+          ]
+        },
+        {
+          "name": "quantity",
+          "type": "NUMERIC",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "数量。",
+          "sample_values": [
+            "3.000",
+            "1400.000",
+            "17.000"
+          ]
+        },
+        {
+          "name": "quantity_unit",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "数量单位，如「台」「套」「项」。",
+          "sample_values": [
+            "台套",
+            "套等",
+            "千克"
+          ]
+        },
+        {
+          "name": "unit_price_yuan",
+          "type": "NUMERIC",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "单价，单位元。",
+          "sample_values": [
+            "2148900.00",
+            "2160000.00",
+            "1200000.00"
+          ]
+        },
+        {
+          "name": "total_price_yuan",
+          "type": "NUMERIC",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "总价，单位元。当前数据中基本为空（源站表格无总价列）。",
+          "sample_values": []
+        }
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "announcement_id"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "announcements",
+            "columns": [
+              "announcement_id"
+            ]
+          }
+        },
+        {
+          "columns": [
+            "package_id"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "packages",
+            "columns": [
+              "package_id"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "table": "packages",
+      "schema": "public",
+      "description": "采购包组。一行代表一个项目里的一个包（标段），与 announcements 多对一。",
+      "row_count": 2660,
+      "primary_key": [
+        "package_id"
+      ],
+      "columns": [
+        {
+          "name": "package_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "包组主键。",
+          "sample_values": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "project_id",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "所属采购项目，外键指向 projects。",
+          "sample_values": [
+            "/（招标文件编号：/）",
+            "04-12-04F-2026-D-F-E27513C01",
+            "0546-HB261014"
+          ]
+        },
+        {
+          "name": "package_no",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "包组编号，如「1」「A」。",
+          "sample_values": [
+            "002",
+            "001",
+            "2641STC74011"
+          ]
+        },
+        {
+          "name": "budget_yuan",
+          "type": "NUMERIC",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "包组预算金额，单位元。",
+          "sample_values": []
+        },
+        {
+          "name": "award_yuan",
+          "type": "NUMERIC",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "包组中标金额，单位元。注意：当前数据中该列全部为空，包级金额需从 awards 关联获取。",
+          "sample_values": []
+        }
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "project_id"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "projects",
+            "columns": [
+              "project_id"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "table": "projects",
+      "schema": "public",
+      "description": "采购项目。一行代表一个采购项目，按项目编号去重，是结构化数据的中心表。",
+      "row_count": 2659,
+      "primary_key": [
+        "project_id"
+      ],
+      "columns": [
+        {
+          "name": "project_id",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "项目编号（源站原文，形态不统一）。",
+          "sample_values": [
+            "/（招标文件编号：/）",
+            "04-12-04F-2026-D-F-E27513C01",
+            "0546-HB261014"
+          ]
+        },
+        {
+          "name": "project_name",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "项目名称。",
+          "sample_values": [
+            "西北工业大学空间态势展示软件",
+            "校园核心业务系统备份建设",
+            "国家税务总局新泰市税务局2026年采购2026-2027年度食材供应及配送服务项目"
+          ]
+        },
+        {
+          "name": "buyer_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "所属采购单位，外键指向 buyers。",
+          "sample_values": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "agency_id",
+          "type": "BIGINT",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "所属代理机构，外键指向 agencies。",
+          "sample_values": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "region_code",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "项目所属省级行政区，外键指向 regions.region_code。要显示地区名须 join regions 取 region_name。",
+          "sample_values": [
+            "110000",
+            "120000",
+            "130000"
+          ]
+        },
+        {
+          "name": "procurement_way",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "采购方式：公开招标/竞争性磋商/单一来源/竞争性谈判/询价/框架协议，约 22% 为空。",
+          "sample_values": [
+            "公开招标",
+            "单一来源",
+            "框架协议"
+          ]
+        },
+        {
+          "name": "budget_yuan",
+          "type": "NUMERIC",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "项目预算金额，单位元。",
+          "sample_values": [
+            "1.00",
+            "250.00",
+            "445.95"
+          ]
+        },
+        {
+          "name": "first_announce_date",
+          "type": "DATE",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "最早一份公告的发布日。",
+          "sample_values": [
+            "2026-10-08",
+            "2026-10-09",
+            "2026-10-10"
+          ]
+        },
+        {
+          "name": "last_announce_date",
+          "type": "DATE",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "最晚一份公告的发布日。",
+          "sample_values": [
+            "2026-10-17",
+            "2026-10-15",
+            "2026-10-16"
+          ]
+        },
+        {
+          "name": "announcement_count",
+          "type": "INTEGER",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "该项目下的公告条数。",
+          "sample_values": [
+            "3",
+            "5",
+            "4"
+          ]
+        },
+        {
+          "name": "budget_level",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "预算级次：central（中央预算）/local（地方预算）/unknown（未知）。",
+          "sample_values": [
+            "local",
+            "unknown",
+            "central"
+          ]
+        }
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "buyer_id"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "buyers",
+            "columns": [
+              "buyer_id"
+            ]
+          }
+        },
+        {
+          "columns": [
+            "agency_id"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "agencies",
+            "columns": [
+              "agency_id"
+            ]
+          }
+        },
+        {
+          "columns": [
+            "region_code"
+          ],
+          "references": {
+            "schema": "public",
+            "table": "regions",
+            "columns": [
+              "region_code"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "table": "regions",
+      "schema": "public",
+      "description": "省级行政区。一行代表一个省级行政区，含港澳台。",
+      "row_count": 31,
+      "primary_key": [
+        "region_code"
+      ],
+      "columns": [
+        {
+          "name": "region_code",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "省级行政区代码，主键。",
+          "sample_values": [
+            "110000",
+            "120000",
+            "130000"
+          ]
+        },
+        {
+          "name": "region_name",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "省级行政区名称，如「北京」「云南」。",
+          "sample_values": [
+            "辽宁",
+            "西藏",
+            "海南"
+          ]
+        },
+        {
+          "name": "level",
+          "type": "SMALLINT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "",
+          "sample_values": [
+            "1"
+          ]
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "regulation_rules",
+      "schema": "public",
+      "description": "法规条款。一行代表一条可从政府采购法规中机械判定的规则，带原文引用。",
+      "row_count": 0,
+      "primary_key": [
+        "rule_id"
+      ],
+      "columns": [
+        {
+          "name": "rule_id",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "规则主键，如 R001。",
+          "sample_values": []
+        },
+        {
+          "name": "regulation",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "来源法规名称，如「财政部令第87号《政府采购货物和服务招标投标管理办法》」。",
+          "sample_values": []
+        },
+        {
+          "name": "article",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "法规条号，如「第四条」。",
+          "sample_values": []
+        },
+        {
+          "name": "condition_field",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "该规则判定的字段，如 procurement_way、budget_level。",
+          "sample_values": []
+        },
+        {
+          "name": "condition_op",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "判定操作符，如 =、in、ratio_max、window_days。",
+          "sample_values": []
+        },
+        {
+          "name": "condition_value",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "判定取值。",
+          "sample_values": []
+        },
+        {
+          "name": "conclusion",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "规则结论（人话）。",
+          "sample_values": []
+        },
+        {
+          "name": "source_snippet",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "法规原文逐字片段。",
+          "sample_values": []
+        },
+        {
+          "name": "source_document",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "法规正文文件路径。",
+          "sample_values": []
+        },
+        {
+          "name": "source_url",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "法规原文地址。",
+          "sample_values": []
+        },
+        {
+          "name": "note",
+          "type": "CHARACTER VARYING",
+          "nullable": true,
+          "is_primary_key": false,
+          "description": "补充说明。",
+          "sample_values": []
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "suppliers",
+      "schema": "public",
+      "description": "中标供应商。一行代表一家在中标公告里出现过的供应商。",
+      "row_count": 529,
+      "primary_key": [
+        "supplier_id"
+      ],
+      "columns": [
+        {
+          "name": "supplier_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "供应商主键。",
+          "sample_values": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "supplier_name",
+          "type": "CHARACTER VARYING",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "中标供应商名称。",
+          "sample_values": [
+            "三优建设有限公司",
+            "三未信安科技股份有限公司",
+            "上海 ABB 工程有限公司"
+          ]
+        },
+        {
+          "name": "award_count",
+          "type": "INTEGER",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "",
+          "sample_values": [
+            "3",
+            "2",
+            "1"
+          ]
+        }
+      ],
+      "foreign_keys": []
+    }
+  ]
+}

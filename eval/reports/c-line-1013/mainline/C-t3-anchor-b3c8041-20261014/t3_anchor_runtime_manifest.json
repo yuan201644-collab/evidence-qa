@@ -1,0 +1,26 @@
+{
+  "purpose": "T3 formal rerun with fixed time anchor (APP_TIME_ANCHOR=2024-06-15) on the confirmed code version main@b3c8041",
+  "authored_by": "C",
+  "authored_at": "2026-10-14",
+  "code_version": "b3c804133ed463f1b933e499c8dff2ae2f24bfc5",
+  "service": {
+    "entrypoint": "uvicorn app.main:app",
+    "bind_host": "127.0.0.1",
+    "bind_port": 8000,
+    "nl2sql_backend": "real",
+    "document_search_backend": "rag",
+    "graph_backend": "mock",
+    "semantic_planning_enabled": true,
+    "database": "chinook",
+    "sql_dialect": "postgres",
+    "sql_read_only": true,
+    "sql_auto_limit": 1000,
+    "sql_timeout_seconds": 30,
+    "llm_model": "glm-4.5-flash",
+    "llm_timeout_seconds": 60,
+    "llm_max_retries": 2,
+    "nl2sql_max_attempts": 3,
+    "app_time_anchor": "2024-06-15"
+  },
+  "vector_linker_available": false
+}

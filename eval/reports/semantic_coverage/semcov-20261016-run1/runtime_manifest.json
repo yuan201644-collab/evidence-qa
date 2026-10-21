@@ -1,0 +1,41 @@
+{
+  "generated_at": "2026-10-16T11:35:32+0800",
+  "base": "http://127.0.0.1:8000",
+  "timeout_seconds": 180.0,
+  "questions_sha256": "c86fbd4272f9962079388f533f352bb6543994d121495901813963942bf6bbfd",
+  "git": {
+    "commit": "661dc59cad5c70b1453d5da1937459c7c07d098a",
+    "worktree_dirty": true,
+    "dirty_status_sha256": "cba3b5d7986fb0be6b15aa335b35fd031485b4269da38f75d885c63e3e56c950",
+    "dirty_status_lines": 137
+  },
+  "database_fingerprints": {
+    "chinook": {
+      "database": "chinook",
+      "scope": "business",
+      "base_table_count": 11,
+      "total_rows": 15607,
+      "content_sha256": "e35dbd0476692b224864de6c65dd463775459738cde40b369f5fd1604aae8466",
+      "tables": [
+        "public.album",
+        "public.artist",
+        "public.customer",
+        "public.employee",
+        "public.genre",
+        "public.invoice",
+        "public.invoice_line",
+        "public.media_type",
+        "public.playlist",
+        "public.playlist_track",
+        "public.track"
+      ]
+    }
+  },
+  "service": {
+    "health": {
+      "status": "ok"
+    },
+    "gate_mode": "unreported"
+  },
+  "credentials_note": "凭据经环境变量传入，未写入本记录"
+}

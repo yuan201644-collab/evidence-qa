@@ -1,0 +1,19 @@
+{"id":"SC-01","dataset":"chinook","turns":[{"question":"一共有多少位客户？"}]}
+{"id":"SC-02","dataset":"chinook","turns":[{"question":"有多少位？"}]}
+{"id":"SC-03","dataset":"chinook","turns":[{"question":"帮我看下最多的那个。"}]}
+{"id":"SC-04","dataset":"chinook","turns":[{"question":"客户 数量"}]}
+{"id":"SC-05","dataset":"chinook","turns":[{"question":"2023年有多少客户？"}]}
+{"id":"SC-06","dataset":"chinook","turns":[{"question":"2023年购买过的客户有多少？"}]}
+{"id":"SC-07","dataset":"chinook","turns":[{"question":"2023年一共开了多少张发票？"}]}
+{"id":"SC-08","dataset":"chinook","turns":[{"question":"去年有多少员工？"}]}
+{"id":"SC-09","dataset":"chinook","turns":[{"question":"去年新入职员工有多少？"}]}
+{"id":"SC-11","dataset":"chinook","turns":[{"question":"2023年第一季度相比2023年第二季度的销售额增长率是多少？"}]}
+{"id":"SC-12","dataset":"chinook","turns":[{"question":"今年至今开了多少张发票？"}]}
+{"id":"SC-13","dataset":"chinook","turns":[{"question":"巴西有多少客户？"}]}
+{"id":"SC-14","dataset":"chinook","turns":[{"question":"不在巴西的客户有多少？"}]}
+{"id":"SC-15","dataset":"chinook","turns":[{"question":"发票总金额大于100元的有多少张？"}]}
+{"id":"SC-16","dataset":"chinook","turns":[{"question":"金额不小于100元的发票有多少张？"}]}
+{"id":"SC-17","dataset":"chinook","turns":[{"question":"发票平均金额是多少？"}]}
+{"id":"SC-18","dataset":"chinook","turns":[{"question":"金额最高的3张发票"}]}
+{"id":"SC-19","dataset":"chinook","turns":[{"question":"买过商品的客户有多少位？"}]}
+{"id":"SC-30","dataset":"chinook","turns":[{"question":"工单 WO-2026-0001 是否在合同修复时限内完成？"}]}

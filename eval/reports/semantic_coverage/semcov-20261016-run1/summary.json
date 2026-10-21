@@ -1,0 +1,23 @@
+{
+  "_comment": "S2-H 语义覆盖首轮真实采集评分快照（semcov-20261016-run1）。判分口径：P1 裁定 (c)，unknown 单列。",
+  "run_dir": "eval/reports/semantic_coverage/semcov-20261016-run1",
+  "collected_at": "2026-10-16T11:38+0800",
+  "gate_mode": "warn（服务进程 .env 默认）",
+  "totals": {"total": 19, "pass": 15, "repair": 4, "unknown": 0},
+  "metrics": {
+    "clarification_accuracy": "2/3",
+    "silent_omissions": 0,
+    "end_to_end_pass_rate": "15/19"
+  },
+  "true_defects": [
+    {"id": "SC-05", "what": "2023年有多少客户？ → 模型生成引用不存在的 created_at 列，执行失败。答案文本「字段 created_at…不存在」算如实报错但不是设计预期的「询问可支持口径」，闸门 sql_requirement_coverage 未随响应携带（需 x-askdata-fact-review: 2 头）。能力判定生效（没返回 59），但澄清路径文案未走 S1 话术。"},
+    {"id": "SC-08", "what": "去年有多少员工？ → 未澄清「在职/新入职」口径，直接按当前年硬算得 0（碰巧数字，分母语义完全不同）。属乙类静默丢弃口径。"},
+    {"id": "SC-11", "what": "两个明确季度比较 → 被误判缺时间触发澄清（S1 时间粒度提取对「第一季度」的识别进了澄清分支）。误挡，属澄清误报。"},
+    {"id": "SC-12", "what": "今年至今开了多少张发票？ → 「至今」被套成 2026 全年（当前系统年 2026），无「至今」边界说明。时间锚点语义未落实。"}
+  ],
+  "notes": [
+    "SC-07/14/15/16 首判 repair 系判据写法不严谨（右开边界含下一年、否定/比较符等价写法），已修 rubric 后通过。",
+    "首轮采集未带 x-askdata-fact-review 头，核验卡字段未随响应返回；后续轮建议采集带 v2 协商头以核对 unknown 标黄路径。",
+    "静默遗漏数 0 = 首轮真实链路上「未落实且未告知仍返回完整业务答案」的乙类缺陷未复现（SC-05 被能力判定挡住、SC-08 是口径型而非条件型）。"
+  ]
+}

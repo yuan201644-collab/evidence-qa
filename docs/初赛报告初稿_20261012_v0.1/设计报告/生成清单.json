@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-18",
+  "version": "v0.3",
+  "status": "candidate_with_registered_measurements",
+  "documents": [
+    {
+      "kind": "设计报告",
+      "source": "设计报告_正文.md",
+      "source_sha256": "41aa2444f69974e642dae55a467f029e0819c4b82c78a5a6c234d3decb53de51",
+      "docx": "设计报告_v0.3.docx"
+    }
+  ]
+}

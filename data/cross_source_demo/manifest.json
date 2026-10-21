@@ -1,0 +1,46 @@
+{
+  "dataset_id": "cross_source_maintenance_demo_v0.1",
+  "dataset_version": "0.1",
+  "created_date": "2026-09-28",
+  "synthetic": true,
+  "purpose": "架构评审与后续跨源任务设计；不是系统性能证明",
+  "timezone": "+08:00",
+  "files": [
+    "README.md",
+    "schema.sql",
+    "load_postgres.py",
+    "structured/equipment.csv",
+    "structured/contracts.csv",
+    "structured/contract_equipment.csv",
+    "structured/work_orders.csv",
+    "structured/work_order_events.csv",
+    "documents/HT-MNT-2026-001.md",
+    "documents/HT-MNT-2026-002.md",
+    "documents/HT-MNT-2026-003.md",
+    "cases.jsonl"
+  ],
+  "counts": {
+    "equipment": 6,
+    "contracts": 3,
+    "contract_equipment_mappings": 5,
+    "work_orders": 7,
+    "events": 24,
+    "documents": 3,
+    "cases": 7
+  },
+  "key_fields": {
+    "equipment_id": "跨结构化设备记录的稳定标识；设备名称不唯一",
+    "contract_id": "合同元数据与合同文档的共同编号",
+    "work_order_id": "工单和事件记录的连接键",
+    "event_type": "accepted / first_response / onsite_arrival / service_restored"
+  },
+  "known_cases": [
+    "合法映射且在期限内",
+    "修复超时但响应满足",
+    "另一个合同口径下在期限内",
+    "另一个合同口径下修复超时",
+    "工单发生时合同已过期",
+    "同名但设备编号不同且没有映射",
+    "缺少服务恢复事件"
+  ]
+}

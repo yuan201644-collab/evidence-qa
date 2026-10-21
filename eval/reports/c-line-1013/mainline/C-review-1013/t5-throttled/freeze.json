@@ -1,0 +1,44 @@
+{
+  "run_id": "20261013T105820Z-effe3f4d",
+  "capture_status": "completed",
+  "expected_case_runs": 20,
+  "completed_case_runs": 20,
+  "expected_turns": 20,
+  "recorded_turns": 20,
+  "attempted_requests": 20,
+  "in_flight": null,
+  "created_at": "2026-10-13T10:58:20+00:00",
+  "base_url_origin": "http://127.0.0.1:8018",
+  "health": {
+    "status": "ok",
+    "graph_backend": "mock"
+  },
+  "case_file": "eval\\mainline\\development_v0.1\\t5_v02_questions.jsonl",
+  "case_file_sha256": "33c761d0c68ddc13f7ca5be96ddae12cb4d06effd46b522206e091af2ce29fe5",
+  "case_count": 20,
+  "repeat": 1,
+  "request_timeout_seconds": 120,
+  "git_commit": "4494aedd1d66675f251ed29b13199bd5d37db152",
+  "git_status_available": true,
+  "git_dirty": false,
+  "source_manifest": [],
+  "dependency_files": {
+    "uv.lock": "2769a00ab5fddc1bef3cb2b68ae9178fbce08d2fc4ec22bad2fd0fbc1b5ae273",
+    "pyproject.toml": "eee1a9dcc6c2018b29b51ecb23f7865aa2be893ed0fe15ae9331a25b7bd7a838",
+    "web/package-lock.json": "4545364be588eb91878d08b4ee4eabf34dbe9073f4cb5e4462ee936fc6aa217f"
+  },
+  "collector_process_config": {},
+  "collector_process_config_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "service_runtime_manifest": {
+    "file": "t5_v02_runtime_manifest.json",
+    "sha256": "22a148a937ed0bd9f4a098afd63aa4a4bc193c3d5ddc738835f85f2c8836ced1"
+  },
+  "server_runtime_config_fingerprint_supplied": true,
+  "data_manifest": {
+    "file": "t5_v02_data_manifest.json",
+    "sha256": "d99d028ec876784cd9c61203d4c2ccfe80fd7d0a7ddf9bd1ff94147a8afc2abd"
+  },
+  "data_snapshot_fingerprint_supplied": true,
+  "answer_key_read_by_driver": false,
+  "answer_key_files_excluded_from_source_manifest": true
+}

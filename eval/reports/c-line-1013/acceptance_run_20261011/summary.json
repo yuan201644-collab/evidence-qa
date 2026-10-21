@@ -1,0 +1,213 @@
+{
+  "model": "glm-4.5-flash",
+  "total": 20,
+  "verdicts": {
+    "PASS": 17,
+    "CLARIFY": 2,
+    "FAIL": 1
+  },
+  "sum_elapsed_s": 243.1,
+  "avg_elapsed_s": 12.2,
+  "items": [
+    {
+      "id": "acc-01",
+      "difficulty": "easy",
+      "elapsed_s": 18.35,
+      "question": "平台上一共收录了多少位艺术家？",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT COUNT(*) AS artist_count FROM artist LIMIT 1000"
+    },
+    {
+      "id": "acc-02",
+      "difficulty": "easy",
+      "elapsed_s": 18.46,
+      "question": "把平台支持的所有媒体类型名称列出来，按名称升序排列。",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT name FROM media_type ORDER BY name ASC LIMIT 1000"
+    },
+    {
+      "id": "acc-03",
+      "difficulty": "easy",
+      "elapsed_s": 36.4,
+      "question": "标准单价为 0.99 的曲目一共有多少首？",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT COUNT(*) AS track_count FROM track WHERE unit_price = 0.99 LIMIT 1000"
+    },
+    {
+      "id": "acc-04",
+      "difficulty": "easy",
+      "elapsed_s": 25.13,
+      "question": "全平台时长最长的一首曲目，时长是多少毫秒？",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT MAX(milliseconds) AS max_milliseconds FROM track LIMIT 1000"
+    },
+    {
+      "id": "acc-05",
+      "difficulty": "easy",
+      "elapsed_s": 7.95,
+      "question": "平台上一共有多少个播放列表？",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT COUNT(*) AS playlist_count FROM playlist LIMIT 1000"
+    },
+    {
+      "id": "acc-06",
+      "difficulty": "easy",
+      "elapsed_s": 29.1,
+      "question": "请按客户姓氏的字母顺序升序列出前 10 位客户的姓和名。",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT last_name, first_name FROM customer ORDER BY last_name ASC LIMIT 10;"
+    },
+    {
+      "id": "acc-07",
+      "difficulty": "easy",
+      "elapsed_s": 8.55,
+      "question": "金额最高的一张发票，总金额是多少？",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT total AS highest_invoice_amount\nFROM invoice\nORDER BY total DESC\nLIMIT 1;"
+    },
+    {
+      "id": "acc-08",
+      "difficulty": "medium",
+      "elapsed_s": 5.21,
+      "question": "按客户所在国家统计客户数量，列出客户数最多的 5 个国家及其客户数；客户数相同时按国家名称升序排列。",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT country, COUNT(*) AS customer_count FROM customer GROUP BY country ORDER BY customer_count DESC, country ASC LIMIT 5;"
+    },
+    {
+      "id": "acc-09",
+      "difficulty": "medium",
+      "elapsed_s": 5.02,
+      "question": "曲目有几种标准单价？每种单价各有多少首曲目？按单价升序排列，给出单价和曲目数。",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT unit_price, COUNT(*) AS track_count\nFROM track\nGROUP BY unit_price\nORDER BY unit_price ASC;"
+    },
+    {
+      "id": "acc-10",
+      "difficulty": "medium",
+      "elapsed_s": 7.17,
+      "question": "列出所有职位为『Sales Support Agent』的员工的姓、名和联系电话，按姓氏升序排列。",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT last_name, first_name, phone FROM employee WHERE title = 'Sales Support Agent' ORDER BY last_name ASC LIMIT 1000"
+    },
+    {
+      "id": "acc-11",
+      "difficulty": "medium",
+      "elapsed_s": 0.01,
+      "question": "统计每位作曲者名下的曲目数量（作曲者为空的跳过不计），列出曲目数最多的 5 位作曲者及其曲目数；曲目数相同时按作曲者名称升序排列。",
+      "verdict": "CLARIFY",
+      "detail": "问题中的业务词存在多个可能含义，请说明你指的是哪个对象或指标。",
+      "need_clarify": true,
+      "sql": null
+    },
+    {
+      "id": "acc-12",
+      "difficulty": "medium",
+      "elapsed_s": 14.67,
+      "question": "有多少位客户没有登记传真号码（fax 为空）？",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT COUNT(*) AS customer_count FROM customer WHERE fax IS NULL LIMIT 1000"
+    },
+    {
+      "id": "acc-13",
+      "difficulty": "medium",
+      "elapsed_s": 6.91,
+      "question": "按账单国家统计发票数量，只保留发票数达到 20 张及以上的国家；给出国家名称和发票数，按发票数从多到少、国家名称升序排列。",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT billing_country AS country_name, COUNT(invoice_id) AS invoice_count FROM invoice GROUP BY billing_country HAVING COUNT(invoice_id) >= 20 ORDER BY invoice_count DESC, country_name ASC;"
+    },
+    {
+      "id": "acc-14",
+      "difficulty": "medium",
+      "elapsed_s": 3.07,
+      "question": "所有发票明细行的购买数量加起来一共是多少？",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT SUM(quantity) AS total_quantity FROM invoice_line LIMIT 1000"
+    },
+    {
+      "id": "acc-15",
+      "difficulty": "hard",
+      "elapsed_s": 7.52,
+      "question": "找出名称重复的曲目：列出出现次数最多的 10 个重复曲目名称以及各自出现的次数，按出现次数从多到少、名称升序排列。",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT name AS track_name, COUNT(*) AS occurrence_count FROM track GROUP BY name HAVING COUNT(*) > 1 ORDER BY occurrence_count DESC, name ASC LIMIT 10;"
+    },
+    {
+      "id": "acc-16",
+      "difficulty": "hard",
+      "elapsed_s": 6.39,
+      "question": "按账单国家统计平均发票金额，只保留平均金额高于 6 的国家；给出国家名称和平均金额（保留两位小数），按平均金额从高到低、国家名称升序排列。",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT billing_country AS country, ROUND(AVG(total), 2) AS average_amount FROM invoice GROUP BY billing_country HAVING AVG(total) > 6 ORDER BY average_amount DESC, country ASC;"
+    },
+    {
+      "id": "acc-17",
+      "difficulty": "hard",
+      "elapsed_s": 8.64,
+      "question": "把曲目时长从毫秒换算成秒（保留一位小数），列出时长最长的 10 首曲目的名称和秒数，按秒数从长到短、曲目名称升序排列。",
+      "verdict": "FAIL",
+      "detail": "live[:2]=[('Occupation / Precipice', 5286.0), ('Through a Looking Glass', 5088.0)] vs gold[:2]=[('Occupation / Precipice', 5287.0), ('Through a Looking Glass', 5088.8)]",
+      "need_clarify": false,
+      "sql": "SELECT name AS track_name, ROUND(milliseconds / 1000, 1) AS duration_seconds FROM track ORDER BY duration_seconds DESC, name ASC LIMIT 10;"
+    },
+    {
+      "id": "acc-18",
+      "difficulty": "hard",
+      "elapsed_s": 25.72,
+      "question": "统计每位管理者直接管理了几名下属（没有下属的人不出现在结果里）；给出管理者的员工编号和直接下属人数，按下属人数从多到少、员工编号升序排列。",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT m.employee_id AS manager_id, COUNT(e.employee_id) AS direct_report_count FROM employee e JOIN employee m ON e.reports_to = m.employee_id GROUP BY m.employee_id ORDER BY direct_report_count DESC, manager_id ASC"
+    },
+    {
+      "id": "acc-19",
+      "difficulty": "hard",
+      "elapsed_s": 0.0,
+      "question": "在全部曲目中，作曲者为空的曲目占比是多少？以百分比表示，保留一位小数。",
+      "verdict": "CLARIFY",
+      "detail": "问题中的业务词存在多个可能含义，请说明你指的是哪个对象或指标。",
+      "need_clarify": true,
+      "sql": null
+    },
+    {
+      "id": "acc-20",
+      "difficulty": "hard",
+      "elapsed_s": 8.82,
+      "question": "有多少张发票的金额高于所有发票的平均金额？",
+      "verdict": "PASS",
+      "detail": "",
+      "need_clarify": false,
+      "sql": "SELECT COUNT(*) AS invoice_count FROM invoice WHERE total > (SELECT AVG(total) FROM invoice) LIMIT 1000"
+    }
+  ]
+}

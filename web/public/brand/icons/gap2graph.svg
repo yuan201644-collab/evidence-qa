@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">KAG增强路线（研究支线·未接入默认链路）</title>
+  <path d="m10 11 12 8m5 0 11-8M24 24v10" fill="none" stroke="#80649b" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 3"/>
+  <path d="m10 4 6 3v7l-6 4-6-4V7z" fill="#80649b"/>
+  <path d="m38 4 6 3v7l-6 4-6-4V7z" fill="#b49bc8"/>
+  <path d="m24 18 6 3v7l-6 4-6-4v-7z" fill="#a78cbd"/>
+  <path d="m24 31 6 3v7l-6 4-6-4v-7z" fill="#80649b"/>
+  <path d="m23 22 2-1 2 2-2 2z" fill="#fff"/>
+</svg>

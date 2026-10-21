@@ -1,0 +1,20 @@
+{
+  "schema": "structured_scale_run_freeze_v1",
+  "run_id": "scale_run_20261018T031516",
+  "capture_status": "completed",
+  "answer_key_read_by_driver": false,
+  "started_at_utc": "2026-10-18T03:15:20.785955+00:00",
+  "finished_at_utc": "2026-10-18T03:17:38.071560+00:00",
+  "case_count": 30,
+  "case_file_sha256": "dadd6058c6b92ad1299b8336a8722d7f7c9329712e456b96d6d2455665c3e15b",
+  "data_manifest": {
+    "path": "eval\\cases\\scale_structured_v01\\data_manifest.json",
+    "sha256": "4da13c108d24a67cb5c315413d3e8995fd9991ac37ca63df3ac29566ed2adb49"
+  },
+  "service_runtime_manifest": {
+    "path": "eval\\cases\\scale_structured_v01\\runtime_manifest.json",
+    "sha256": "b4c04a8eebcb084de07bfb980faeaa6a9ffe49b0e2e10dc35440ca9c16ff2f94"
+  },
+  "raw_answers_sha256": "850866acba7d96589bf134c48b2a8d7dd3423e33af3507801b7f6f7cee78306e",
+  "notes": "本冻结在读取参考答案之前完成；参考答案只由 score_scale_run.py 在只读事务里事后读取。"
+}

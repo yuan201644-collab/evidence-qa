@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "askdata-agent"
+version = "0.1.0"
+description = "多模态数据驱动的可解释精准问数/问答智能体（赛题八）"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi==0.141.1",
+    "uvicorn==0.53.0",
+    "pydantic==2.13.5",
+    "pymupdf==1.28.2",
+    "rapidocr-onnxruntime>=1.4.4",
+    "jieba>=0.42.1",
+    "torch>=2.11.0",
+    "sentence-transformers>=3.3.0",
+    "sqlglot>=26.0.0",
+    "psycopg[binary]>=3.2.0",
+    "pgvector>=0.3.0",
+]
+
+# jieba 0.42.1 没有 wheel，必须源码构建；新版 setuptools 把它的旧式
+# "License :: OSI Approved :: MIT License" 分类器当成错误导致构建失败。
+# 这里固定 jieba 构建隔离环境用的 setuptools 版本（<80 只警告不报错）。
+[tool.uv.extra-build-dependencies]
+jieba = ["setuptools<80"]
+
+# Use CPU-only PyTorch wheels from the dedicated index to avoid CUDA runtimes.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
+namespaces = true
+
+[tool.pytest.ini_options]
+testpaths = ["app", "eval", "infra/tests", "tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*", "t_*"]
+addopts = "-q -p no:cacheprovider"
+# 实验运行目录里留着各自的 source_snapshot/tests 快照副本，文件名与 tests/ 下的
+# 正式测试同名（如 test_evont_next_runner.py）。全量收集时 pytest 按「文件名即
+# 模块名」去重，先扫到哪个副本就把模块名占掉，正式测试随后报
+# "import file mismatch"。这些快照只服务于当年的实验复现，不进 CI
+# （目录被 .gitignore 排除），这里直接不收集。
+norecursedirs = ["eval/experiments/*/source_snapshot", "eval/experiments/*/source_snapshot/*", "*.egg-info", ".git", ".venv", "node_modules"]

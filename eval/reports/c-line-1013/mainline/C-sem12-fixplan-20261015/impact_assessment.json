@@ -1,0 +1,191 @@
+{
+  "T4": {
+    "schema_meta": "infra/schema_meta.adventureworks.json",
+    "multi_table_cases": 12,
+    "status": {
+      "pass": 12
+    },
+    "reason_codes": {
+      "declared_fk_path": 12
+    },
+    "cases": [
+      {
+        "case_id": "U06",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 2
+      },
+      {
+        "case_id": "U16",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 1
+      },
+      {
+        "case_id": "U29",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 1
+      },
+      {
+        "case_id": "E02",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 1
+      },
+      {
+        "case_id": "T4V3-01",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 2
+      },
+      {
+        "case_id": "T4V3-02",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 1
+      },
+      {
+        "case_id": "T4V3-03",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 1
+      },
+      {
+        "case_id": "T4V3-05",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 2
+      },
+      {
+        "case_id": "T4V3-06",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 1
+      },
+      {
+        "case_id": "T4V3-10",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 3
+      },
+      {
+        "case_id": "T4V3-11",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 2
+      },
+      {
+        "case_id": "T4V3-12",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 1
+      }
+    ]
+  },
+  "T5": {
+    "schema_meta": "infra/schema_meta.json",
+    "multi_table_cases": 15,
+    "status": {
+      "pass": 14,
+      "repair": 1
+    },
+    "reason_codes": {
+      "declared_fk_path": 13,
+      "nested_scopes_validated": 1,
+      "nested_scope_join_condition_unverified": 1
+    },
+    "cases": [
+      {
+        "case_id": "nl2sql-m-01",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 1
+      },
+      {
+        "case_id": "nl2sql-m-03",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 1
+      },
+      {
+        "case_id": "nl2sql-m-05",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 1
+      },
+      {
+        "case_id": "nl2sql-h-01",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 4
+      },
+      {
+        "case_id": "nl2sql-h-02",
+        "status": "pass",
+        "reason_code": "nested_scopes_validated",
+        "join_count": 6
+      },
+      {
+        "case_id": "nl2sql-h-03",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 2
+      },
+      {
+        "case_id": "nl2sql-h-05",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 3
+      },
+      {
+        "case_id": "sem-02",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 2
+      },
+      {
+        "case_id": "sem-03",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 4
+      },
+      {
+        "case_id": "sem-04",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 2
+      },
+      {
+        "case_id": "sem-09",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 1
+      },
+      {
+        "case_id": "sem-10",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 3
+      },
+      {
+        "case_id": "sem-12",
+        "status": "repair",
+        "reason_code": "nested_scope_join_condition_unverified",
+        "join_count": 8
+      },
+      {
+        "case_id": "sem-13",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 2
+      },
+      {
+        "case_id": "sem-14",
+        "status": "pass",
+        "reason_code": "declared_fk_path",
+        "join_count": 1
+      }
+    ]
+  }
+}

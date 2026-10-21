@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="453.543307pt" height="351.496063pt" viewBox="0 0 453.543307 351.496063" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-19T00:16:09.704464</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 351.496063 
+L 453.543307 351.496063 
+L 453.543307 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 80.617323 65.097071 
+L 164.63622 65.097071 
+Q 169.058268 65.097071 169.058268 63.761386 
+L 169.058268 57.750803 
+Q 169.058268 56.415118 164.63622 56.415118 
+L 80.617323 56.415118 
+Q 76.195276 56.415118 76.195276 57.750803 
+L 76.195276 63.761386 
+Q 76.195276 65.097071 80.617323 65.097071 
+z
+" clip-path="url(#p729a761f48)" style="fill: #eaf0fc"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 186.746457 65.097071 
+L 270.765354 65.097071 
+Q 275.187402 65.097071 275.187402 63.761386 
+L 275.187402 57.750803 
+Q 275.187402 56.415118 270.765354 56.415118 
+L 186.746457 56.415118 
+Q 182.324409 56.415118 182.324409 57.750803 
+L 182.324409 63.761386 
+Q 182.324409 65.097071 186.746457 65.097071 
+z
+" clip-path="url(#p729a761f48)" style="fill: #eaf0fc"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 82.828346 105.167622 
+L 162.425197 105.167622 
+Q 169.058268 105.167622 169.058268 103.164094 
+L 169.058268 71.107654 
+Q 169.058268 69.104126 162.425197 69.104126 
+L 82.828346 69.104126 
+Q 76.195276 69.104126 76.195276 71.107654 
+L 76.195276 103.164094 
+Q 76.195276 105.167622 82.828346 105.167622 
+z
+" clip-path="url(#p729a761f48)" style="fill: #eaf0fc; stroke: #b9c9ee; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 188.95748 105.167622 
+L 268.554331 105.167622 
+Q 275.187402 105.167622 275.187402 103.164094 
+L 275.187402 71.107654 
+Q 275.187402 69.104126 268.554331 69.104126 
+L 188.95748 69.104126 
+Q 182.324409 69.104126 182.324409 71.107654 
+L 182.324409 103.164094 
+Q 182.324409 105.167622 188.95748 105.167622 
+z
+" clip-path="url(#p729a761f48)" style="fill: #f8edf2; stroke: #e8c8d5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 82.828346 147.909543 
+L 162.425197 147.909543 
+Q 169.058268 147.909543 169.058268 145.906016 
+L 169.058268 113.849575 
+Q 169.058268 111.846047 162.425197 111.846047 
+L 82.828346 111.846047 
+Q 76.195276 111.846047 76.195276 113.849575 
+L 76.195276 145.906016 
+Q 76.195276 147.909543 82.828346 147.909543 
+z
+" clip-path="url(#p729a761f48)" style="fill: #e6f4f1; stroke: #afdcd4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 188.95748 147.909543 
+L 268.554331 147.909543 
+Q 275.187402 147.909543 275.187402 145.906016 
+L 275.187402 113.849575 
+Q 275.187402 111.846047 268.554331 111.846047 
+L 188.95748 111.846047 
+Q 182.324409 111.846047 182.324409 113.849575 
+L 182.324409 145.906016 
+Q 182.324409 147.909543 188.95748 147.909543 
+z
+" clip-path="url(#p729a761f48)" style="fill: #f1f4f7; stroke: #d6dfe8; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 279.609449 147.909543 
+L 279.609449 69.104126 
+" clip-path="url(#p729a761f48)" style="fill: none; stroke: #dce4ed; stroke-width: 0.9; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 8.6px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #24364b" x="5.44252" y="33.23683" transform="rotate(-0 5.44252 33.23683)">A  逐题配对转移（题数）,  n = 64</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 7px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #6a7d91" x="5.44252" y="46.650365" transform="rotate(-0 5.44252 46.650365)">同一题分别由两种流程作答，逐题对齐后统计</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 6.8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #6a7d91" x="261.92126" y="48.937979" transform="rotate(-0 261.92126 48.937979)">新事实核验流程判定</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 7.2px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #254ba6" x="122.626772" y="62.805691" transform="rotate(-0 122.626772 62.805691)">通过</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 7.2px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #254ba6" x="228.755906" y="62.805691" transform="rotate(-0 228.755906 62.805691)">未通过</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 6.6px; font-family: 'Microsoft YaHei'; fill: #6a7d91" transform="translate(25.407874 58.126985)">匹配参考</text>
+    <text style="font-size: 6.6px; font-family: 'Microsoft YaHei'; fill: #6a7d91" transform="translate(32.007874 67.153929)">流程</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 7.2px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #6a7d91" x="38.607874" y="89.118687" transform="rotate(-0 38.607874 89.118687)">通过</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 7.2px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #6a7d91" x="38.607874" y="131.860608" transform="rotate(-0 38.607874 131.860608)">未通过</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #254ba6" x="122.626772" y="87.404651" transform="rotate(-0 122.626772 87.404651)">7</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 6.9px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #24364b" x="122.626772" y="98.051943" transform="rotate(-0 122.626772 98.051943)">两流程均通过</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #a65c78" x="228.755906" y="87.404651" transform="rotate(-0 228.755906 87.404651)">0</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 6.9px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #24364b" x="228.755906" y="98.051943" transform="rotate(-0 228.755906 98.051943)">仅参考流程通过</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #168b82" x="122.626772" y="130.146572" transform="rotate(-0 122.626772 130.146572)">55</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 6.9px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #24364b" x="122.626772" y="140.793865" transform="rotate(-0 122.626772 140.793865)">仅新流程通过</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #53677c" x="228.755906" y="130.146572" transform="rotate(-0 228.755906 130.146572)">2</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 6.9px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #24364b" x="228.755906" y="140.793865" transform="rotate(-0 228.755906 140.793865)">两流程均未通过</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 7.2px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #6a7d91" x="288.453543" y="79.101049" transform="rotate(-0 288.453543 79.101049)">配对差</text>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #168b82" x="288.453543" y="94.605946" transform="rotate(-0 288.453543 94.605946)">+55 题</text>
+   </g>
+   <g id="text_19">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #168b82" x="288.453543" y="105.387854" transform="rotate(-0 288.453543 105.387854)">+85.94 个百分点</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 7px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #24364b" x="288.453543" y="117.780837" transform="rotate(-0 288.453543 117.780837)">新流程通过 62/64（96.9%）</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 7px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #24364b" x="288.453543" y="127.130632" transform="rotate(-0 288.453543 127.130632)">参考流程通过 7/64（10.9%）</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 7px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #6a7d91" x="288.453543" y="136.480427" transform="rotate(-0 288.453543 136.480427)">仅参考流程通过 0 题，改良并非来自</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 7px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #6a7d91" x="288.453543" y="145.830223" transform="rotate(-0 288.453543 145.830223)">参考流程本来能做对的题。</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_8">
+    <path d="M 34.015748 270.651969 
+L 260.787402 270.651969 
+L 260.787402 205.625197 
+L 34.015748 205.625197 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 34.015748 254.395276 
+L 260.787402 254.395276 
+" clip-path="url(#p3533a3e7e0)" style="fill: none; stroke: #dce4ed; stroke-width: 0.7; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 34.015748 238.138583 
+L 260.787402 238.138583 
+" clip-path="url(#p3533a3e7e0)" style="fill: none; stroke: #dce4ed; stroke-width: 0.7; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_4">
+    <path d="M 34.015748 221.88189 
+L 260.787402 221.88189 
+" clip-path="url(#p3533a3e7e0)" style="fill: none; stroke: #dce4ed; stroke-width: 0.7; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_5">
+    <path d="M 34.015748 205.625197 
+L 260.787402 205.625197 
+" clip-path="url(#p3533a3e7e0)" style="fill: none; stroke: #dce4ed; stroke-width: 0.7; stroke-linecap: square"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_6"/>
+     <g id="text_24">
+      <text style="font-size: 6.5px; font-family: 'Microsoft YaHei'; text-anchor: end; fill: #6a7d91" x="32.015748" y="273.249937" transform="rotate(-0 32.015748 273.249937)">0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_7"/>
+     <g id="text_25">
+      <text style="font-size: 6.5px; font-family: 'Microsoft YaHei'; text-anchor: end; fill: #6a7d91" x="32.015748" y="240.736551" transform="rotate(-0 32.015748 240.736551)">50</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_8"/>
+     <g id="text_26">
+      <text style="font-size: 6.5px; font-family: 'Microsoft YaHei'; text-anchor: end; fill: #6a7d91" x="32.015748" y="208.223166" transform="rotate(-0 32.015748 208.223166)">100</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_9">
+    <path d="M 70.731159 270.651969 
+L 116.085489 270.651969 
+L 116.085489 207.657283 
+L 70.731159 207.657283 
+z
+" clip-path="url(#p3533a3e7e0)" style="fill: #168b82; stroke: #ffffff; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 70.731159 207.657283 
+L 116.085489 207.657283 
+L 116.085489 205.625197 
+L 70.731159 205.625197 
+z
+" clip-path="url(#p3533a3e7e0)" style="fill: #168b82; fill-opacity: 0.42; stroke: #ffffff; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 178.71766 270.651969 
+L 224.071991 270.651969 
+L 224.071991 263.539665 
+L 178.71766 263.539665 
+z
+" clip-path="url(#p3533a3e7e0)" style="fill: #315bc7; stroke: #ffffff; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 178.71766 263.539665 
+L 224.071991 263.539665 
+L 224.071991 247.282972 
+L 178.71766 247.282972 
+z
+" clip-path="url(#p3533a3e7e0)" style="fill: #315bc7; fill-opacity: 0.42; stroke: #ffffff; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 178.71766 247.282972 
+L 224.071991 247.282972 
+L 224.071991 205.625197 
+L 178.71766 205.625197 
+z
+" clip-path="url(#p3533a3e7e0)" style="fill: #c3cdd8; stroke: #ffffff; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 34.015748 270.651969 
+L 260.787402 270.651969 
+" style="fill: none; stroke: #6a7d91; stroke-width: 0.9; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_27">
+    <text style="font-weight: 700; font-size: 7.2px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #ffffff" x="93.408324" y="241.137438" transform="rotate(-0 93.408324 241.137438)">96.9%</text>
+   </g>
+   <g id="text_28">
+    <text style="font-weight: 700; font-size: 7.2px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #24364b" x="93.408324" y="281.60961" transform="rotate(-0 93.408324 281.60961)">新事实核验流程</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 6.4px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #168b82" x="93.408324" y="288.773323" transform="rotate(-0 93.408324 288.773323)">严格通过 62/64</text>
+   </g>
+   <g id="text_30">
+    <text style="font-weight: 700; font-size: 7.2px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #ffffff" x="201.394826" y="269.078629" transform="rotate(-0 201.394826 269.078629)">10.9%</text>
+   </g>
+   <g id="text_31">
+    <text style="font-weight: 700; font-size: 7.2px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #ffffff" x="201.394826" y="257.394131" transform="rotate(-0 201.394826 257.394131)">25.0%</text>
+   </g>
+   <g id="text_32">
+    <text style="font-weight: 700; font-size: 7.2px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #33465c" x="201.394826" y="228.436897" transform="rotate(-0 201.394826 228.436897)">64.1%</text>
+   </g>
+   <g id="text_33">
+    <text style="font-weight: 700; font-size: 7.2px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #24364b" x="201.394826" y="281.60961" transform="rotate(-0 201.394826 281.60961)">匹配参考流程</text>
+   </g>
+   <g id="text_34">
+    <text style="font-size: 6.4px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #315bc7" x="201.394826" y="288.773323" transform="rotate(-0 201.394826 288.773323)">严格通过 7/64</text>
+   </g>
+   <g id="patch_15">
+    <path d="M 138.896377 206.155973 
+Q 128.421988 209.032766 117.067441 206.840003 
+" style="fill: none; stroke: #1f3b70; stroke-width: 0.7; stroke-linecap: round"/>
+   </g>
+   <g id="text_35">
+    <text style="font-size: 6.6px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #1f3b70" x="130.123735" y="202.240633" transform="rotate(-0 130.123735 202.240633)">部分正确 3.1%</text>
+   </g>
+  </g>
+  <g id="text_36">
+   <text style="font-weight: 700; font-size: 10px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #24364b" x="5.44252" y="15.726663" transform="rotate(-0 5.44252 15.726663)">CS18 同一批 64 题：两种流程的逐题配对与判定构成</text>
+  </g>
+  <g id="text_37">
+   <text style="font-size: 7px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #6a7d91" x="5.44252" y="23.521924" transform="rotate(-0 5.44252 23.521924)">青绿＝新事实核验流程　蓝＝匹配参考流程；同色浅档＝部分正确，中性灰＝错误。两栏分母均为 64 题。</text>
+  </g>
+  <g id="text_38">
+   <text style="font-weight: 700; font-size: 8.6px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #24364b" x="5.44252" y="178.116391" transform="rotate(-0 5.44252 178.116391)">B  同一批 64 题的正确性标签构成（%）</text>
+  </g>
+  <g id="text_39">
+   <text style="font-size: 6.9px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #6a7d91" x="5.44252" y="191.005077" transform="rotate(-0 5.44252 191.005077)">柱高固定为 100%，显示各标签在 64 题中的占比；柱下为臂名与严格通过题数。</text>
+  </g>
+  <g id="text_40">
+   <text style="font-weight: 700; font-size: 7.4px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #24364b" x="278.929134" y="226.995371" transform="rotate(-0 278.929134 226.995371)">另一维度：过度拒答</text>
+  </g>
+  <g id="text_41">
+   <text style="font-size: 7px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #6a7d91" x="278.929134" y="239.187577" transform="rotate(-0 278.929134 239.187577)">新事实核验流程 0/64　匹配参考流程 41/64</text>
+  </g>
+  <g id="text_42">
+   <text style="font-size: 6.9px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #6a7d91" x="278.929134" y="250.759408" transform="rotate(-0 278.929134 250.759408)">过度拒答与「错误」是同一批题的两次计数，</text>
+  </g>
+  <g id="text_43">
+   <text style="font-size: 6.9px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #6a7d91" x="278.929134" y="260.601298" transform="rotate(-0 278.929134 260.601298)">故单列于此，不叠加进 B 栏的柱。</text>
+  </g>
+  <g id="text_44">
+   <text style="font-size: 6.9px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #24364b" x="5.44252" y="328.088542" transform="rotate(-0 5.44252 328.088542)">严格通过＝人工评定为“正确”且证据为“充分”。两栏使用同一批 64 题、同一判据，分母相同。</text>
+  </g>
+  <g id="text_45">
+   <text style="font-size: 6.7px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #6a7d91" x="5.44252" y="337.523857" transform="rotate(-0 5.44252 337.523857)">边界：合成题上的描述性配对对照，不代表真实业务准确率；评审顺序未独立随机化、多合同晚停与原因码优先级三项限制见正文。</text>
+  </g>
+  <g id="text_46">
+   <text style="font-size: 6.5px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #8a98a8" x="5.44252" y="346.959173" transform="rotate(-0 5.44252 346.959173)">数据来源：CS18 v0.6 盲审报告（2026-10-10），64 题成对；设计报告表 6、说明书表 16 同源。</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p729a761f48">
+   <rect x="5.44252" y="26.362205" width="442.204724" height="133.568504"/>
+  </clipPath>
+  <clipPath id="p3533a3e7e0">
+   <rect x="34.015748" y="205.625197" width="226.771654" height="65.026772"/>
+  </clipPath>
+ </defs>
+</svg>

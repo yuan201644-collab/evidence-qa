@@ -1,0 +1,13 @@
+# sem-12 最小修复与回归方案 —— SHA-256 清单
+# 口径：已曝光开发回归；定性为系统问题（候选 SQL 跨表 JOIN 列名错误）；未改代码/判据/答案/评分口径
+# 生成方式：只读哈希计算，未改动任何内容
+#
+# 行尾策略：仓库 .gitattributes 为 `* text=auto eol=lf`，入库为 LF 形态。
+#   [LF] = 入库形态（跨平台复核用）；[本地] = 本机工作副本形态。
+
+[LF]   0c6eb31fe3e32fea3f143cb564a66e1d58a277880bed74182cbae20fe9b0c794  eval/reports/c-line-1013/mainline/C-sem12-fixplan-20261015/assess_semantic_gate_impact.py
+[LF]   9ebafa1e58a1a5ec93853c489fee3827e097867bec95f49b1921e3c951352870  eval/reports/c-line-1013/mainline/C-sem12-fixplan-20261015/audit_semantic_validation_coverage.py
+[LF]   7db7faccce214115cdf4fe06af6f1ecf5b68d10278c206c6b8dfd2f30af30e6d  eval/reports/c-line-1013/mainline/C-sem12-fixplan-20261015/impact_assessment.json
+[本地] bdc67842e530aa4e16ac6feb6323cbb59153f41b35c9f0f712b50f1b1c8e0ca5  eval/reports/c-line-1013/mainline/C-sem12-fixplan-20261015/impact_assessment.json
+[LF]   85d506f1c07277fbe824a1e9c4142609fd253eff7f14cfca1f885a37f426280e  eval/reports/c-line-1013/mainline/C-sem12-fixplan-20261015/probe_sem12_validator.py
+[LF]   49804bfcf825fefa147dc392f0582036e1532a62cc927c751ec0b32ab709a5b7  eval/reports/c-line-1013/mainline/C-sem12-fixplan-20261015/sem12_最小修复与回归方案.md

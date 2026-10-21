@@ -1,0 +1,27 @@
+# 独立的跨源演示数据库；不加入默认 compose，也不复用 Chinook / AdventureWorks 数据卷。
+name: askdata-cross-source-demo
+
+services:
+  db:
+    image: pgvector/pgvector:pg16@sha256:ccc6e83d6e35e931dc7c5def2022729d5a6c370318d099181995567ff1fb4d6b
+    container_name: askdata-cross-source-demo-db
+    environment:
+      POSTGRES_DB: cross_source_demo
+      POSTGRES_USER: ${CROSS_SOURCE_DEMO_USER:-cross_source_demo}
+      POSTGRES_PASSWORD: ${CROSS_SOURCE_DEMO_PASSWORD:?请先设置 CROSS_SOURCE_DEMO_PASSWORD}
+      TZ: Asia/Shanghai
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    ports:
+      - "127.0.0.1:55532:5432"
+    volumes:
+      - cross_source_demo_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -q -U $$POSTGRES_USER -d cross_source_demo"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+volumes:
+  cross_source_demo_pgdata:
+    name: askdata_cross_source_demo_pgdata

@@ -1,0 +1,269 @@
+[
+  {
+    "id": "rag-e-04",
+    "reason": "measure_without_object",
+    "status": "ask",
+    "doc_scope": false,
+    "kinds": {
+      "measure": [
+        "多少"
+      ]
+    },
+    "norm_unresolved": [
+      "未识别到任何可定位的数据要素（表 / 字段 / 取值 / 文档），交由澄清环节处理"
+    ]
+  },
+  {
+    "id": "rag-m-03",
+    "reason": "measure_without_object",
+    "status": "ask",
+    "doc_scope": false,
+    "kinds": {
+      "measure": [
+        "几",
+        "多少"
+      ]
+    },
+    "norm_unresolved": [
+      "未识别到任何可定位的数据要素（表 / 字段 / 取值 / 文档），交由澄清环节处理"
+    ]
+  },
+  {
+    "id": "rag-m-05",
+    "reason": "",
+    "status": "continue",
+    "doc_scope": true,
+    "kinds": {
+      "document_scope": [
+        "记录表"
+      ],
+      "measure": [
+        "多少"
+      ]
+    },
+    "norm_unresolved": [
+      "未识别到任何可定位的数据要素（表 / 字段 / 取值 / 文档），交由澄清环节处理"
+    ]
+  },
+  {
+    "id": "rag-h-02",
+    "reason": "",
+    "status": "continue",
+    "doc_scope": true,
+    "kinds": {
+      "document_scope": [
+        "预案"
+      ],
+      "measure": [
+        "多少"
+      ]
+    },
+    "norm_unresolved": [
+      "未识别到任何可定位的数据要素（表 / 字段 / 取值 / 文档），交由澄清环节处理"
+    ]
+  },
+  {
+    "id": "rag-m-08",
+    "reason": "",
+    "status": "continue",
+    "doc_scope": true,
+    "kinds": {
+      "document_scope": [
+        "规格书"
+      ],
+      "grouping": [
+        "分别"
+      ],
+      "measure": [
+        "多少"
+      ],
+      "object": [
+        "招标文件技术规格书扫描件"
+      ]
+    },
+    "norm_unresolved": []
+  },
+  {
+    "id": "rag-m-09",
+    "reason": "",
+    "status": "continue",
+    "doc_scope": true,
+    "kinds": {
+      "document_scope": [
+        "记录表",
+        "标准"
+      ],
+      "grouping": [
+        "分别"
+      ],
+      "measure": [
+        "多少"
+      ]
+    },
+    "norm_unresolved": [
+      "未识别到任何可定位的数据要素（表 / 字段 / 取值 / 文档），交由澄清环节处理"
+    ]
+  },
+  {
+    "id": "rag-m-10",
+    "reason": "",
+    "status": "continue",
+    "doc_scope": true,
+    "kinds": {
+      "document_scope": [
+        "记录表",
+        "标准"
+      ],
+      "grouping": [
+        "分别"
+      ],
+      "measure": [
+        "多少"
+      ]
+    },
+    "norm_unresolved": [
+      "未识别到任何可定位的数据要素（表 / 字段 / 取值 / 文档），交由澄清环节处理"
+    ]
+  },
+  {
+    "id": "rag-m-11",
+    "reason": "",
+    "status": "continue",
+    "doc_scope": true,
+    "kinds": {
+      "document_scope": [
+        "记录表"
+      ],
+      "measure": [
+        "多少"
+      ]
+    },
+    "norm_unresolved": [
+      "未识别到任何可定位的数据要素（表 / 字段 / 取值 / 文档），交由澄清环节处理"
+    ]
+  },
+  {
+    "id": "rag-mh-07",
+    "reason": "",
+    "status": "continue",
+    "doc_scope": true,
+    "kinds": {
+      "document_scope": [
+        "承诺函",
+        "合同"
+      ],
+      "object": [
+        "维保合同",
+        "售后服务承诺函"
+      ]
+    },
+    "norm_unresolved": []
+  },
+  {
+    "id": "rag-mh-08",
+    "reason": "",
+    "status": "continue",
+    "doc_scope": true,
+    "kinds": {
+      "document_scope": [
+        "验收报告",
+        "合同"
+      ],
+      "object": [
+        "维保合同",
+        "信息系统项目验收报告"
+      ]
+    },
+    "norm_unresolved": []
+  },
+  {
+    "id": "rag-mh-09",
+    "reason": "",
+    "status": "continue",
+    "doc_scope": true,
+    "kinds": {
+      "grouping": [
+        "按",
+        "按"
+      ],
+      "document_scope": [
+        "预案",
+        "预案"
+      ],
+      "measure": [
+        "几"
+      ]
+    },
+    "norm_unresolved": [
+      "未识别到任何可定位的数据要素（表 / 字段 / 取值 / 文档），交由澄清环节处理"
+    ]
+  },
+  {
+    "id": "rag-mh-12",
+    "reason": "",
+    "status": "continue",
+    "doc_scope": true,
+    "kinds": {
+      "document_scope": [
+        "记录表",
+        "合同"
+      ],
+      "grouping": [
+        "按"
+      ],
+      "value_scope": [
+        "范围内"
+      ],
+      "object": [
+        "维保合同"
+      ]
+    },
+    "norm_unresolved": []
+  },
+  {
+    "id": "rag-mh-16",
+    "reason": "",
+    "status": "continue",
+    "doc_scope": true,
+    "kinds": {
+      "document_scope": [
+        "记录表",
+        "手册",
+        "规定"
+      ],
+      "grouping": [
+        "按"
+      ],
+      "object": [
+        "员工"
+      ],
+      "measure": [
+        "几",
+        "几"
+      ]
+    },
+    "norm_unresolved": []
+  },
+  {
+    "id": "rag-mh-17",
+    "reason": "",
+    "status": "continue",
+    "doc_scope": true,
+    "kinds": {
+      "grouping": [
+        "每"
+      ],
+      "measure": [
+        "多少次",
+        "多少"
+      ],
+      "document_scope": [
+        "白皮书"
+      ],
+      "object": [
+        "数据中台白皮书"
+      ]
+    },
+    "norm_unresolved": []
+  }
+]

@@ -1,0 +1,212 @@
+{
+  "generator": "infra/scripts/seed_scale_sales.py",
+  "purpose": "题面「系统效率」5 分：结构化数据多规模（1 千 / 1 万 / 10 万行）性能对比实测底座",
+  "generated_at_utc": "2026-10-17T18:31:24+00:00",
+  "connection": {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "dbname": "chinook",
+    "user": "ict",
+    "password": "<由 .env 的 DATABASE_URL 运行时注入，不落盘>"
+  },
+  "schema": "scale",
+  "isolation": {
+    "public_schema_untouched": true,
+    "note": "规模表置于独立 schema `scale`，public 下 Chinook 基表数保持 11，故 verify_infra.py 的 chinook 断言与 healthcheck 的 track=3503 均无需改动。"
+  },
+  "determinism": {
+    "random_free": true,
+    "note": "全部取值由 generate_series 序号纯算术派生，content_md5 可在任意机器复现。"
+  },
+  "tiers": [
+    {
+      "rows": 1000,
+      "table": "scale.sales_scale_1000",
+      "ddl": "CREATE TABLE scale.sales_scale_1000 (\n    sale_id    BIGINT         PRIMARY KEY,\n    sale_date  DATE           NOT NULL,\n    region     TEXT           NOT NULL,\n    product_id INTEGER        NOT NULL,\n    quantity   INTEGER        NOT NULL,\n    unit_price NUMERIC(10, 2) NOT NULL,\n    amount     NUMERIC(12, 2) NOT NULL\n)",
+      "indexes": [
+        "CREATE INDEX scale.sales_scale_1000_sale_date_idx ON scale.sales_scale_1000 (sale_date)"
+      ],
+      "columns": [
+        {
+          "name": "sale_id",
+          "type": "BIGINT",
+          "note": "订单主键，等于生成序号 g（1..N）"
+        },
+        {
+          "name": "sale_date",
+          "type": "DATE",
+          "note": "销售日期，在 2021-01-01~2025-12-31 区间内按行序均匀铺满（与档位无关，保证各档同一查询可比）"
+        },
+        {
+          "name": "region",
+          "type": "TEXT",
+          "note": "销售大区，五种取值按 mod(g,5) 轮转"
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "note": "商品编号，1..100 按 mod(g,100)+1 轮转"
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "note": "数量，1..20"
+        },
+        {
+          "name": "unit_price",
+          "type": "NUMERIC(10,2)",
+          "note": "单价，10.00~909.99 元，由 g 算术派生"
+        },
+        {
+          "name": "amount",
+          "type": "NUMERIC(12,2)",
+          "note": "金额 = quantity * unit_price"
+        }
+      ],
+      "fingerprint": {
+        "row_count": 1000,
+        "content_md5": "7bb1ed38251170ab5d3e4fd8360a3193",
+        "sum_amount": "2058230.00",
+        "min_amount": "17.40",
+        "max_amount": "7592.60",
+        "min_sale_date": "2021-01-01",
+        "max_sale_date": "2025-12-30",
+        "min_sale_id": 1,
+        "max_sale_id": 1000,
+        "region_counts": {
+          "东北": 200,
+          "华东": 200,
+          "华北": 200,
+          "华南": 200,
+          "西南": 200
+        }
+      }
+    },
+    {
+      "rows": 10000,
+      "table": "scale.sales_scale_10000",
+      "ddl": "CREATE TABLE scale.sales_scale_10000 (\n    sale_id    BIGINT         PRIMARY KEY,\n    sale_date  DATE           NOT NULL,\n    region     TEXT           NOT NULL,\n    product_id INTEGER        NOT NULL,\n    quantity   INTEGER        NOT NULL,\n    unit_price NUMERIC(10, 2) NOT NULL,\n    amount     NUMERIC(12, 2) NOT NULL\n)",
+      "indexes": [
+        "CREATE INDEX scale.sales_scale_10000_sale_date_idx ON scale.sales_scale_10000 (sale_date)"
+      ],
+      "columns": [
+        {
+          "name": "sale_id",
+          "type": "BIGINT",
+          "note": "订单主键，等于生成序号 g（1..N）"
+        },
+        {
+          "name": "sale_date",
+          "type": "DATE",
+          "note": "销售日期，在 2021-01-01~2025-12-31 区间内按行序均匀铺满（与档位无关，保证各档同一查询可比）"
+        },
+        {
+          "name": "region",
+          "type": "TEXT",
+          "note": "销售大区，五种取值按 mod(g,5) 轮转"
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "note": "商品编号，1..100 按 mod(g,100)+1 轮转"
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "note": "数量，1..20"
+        },
+        {
+          "name": "unit_price",
+          "type": "NUMERIC(10,2)",
+          "note": "单价，10.00~909.99 元，由 g 算术派生"
+        },
+        {
+          "name": "amount",
+          "type": "NUMERIC(12,2)",
+          "note": "金额 = quantity * unit_price"
+        }
+      ],
+      "fingerprint": {
+        "row_count": 10000,
+        "content_md5": "4836d3fb93556d847133e36c063dee20",
+        "sum_amount": "47148500.00",
+        "min_amount": "11.00",
+        "max_amount": "18156.60",
+        "min_sale_date": "2021-01-01",
+        "max_sale_date": "2025-12-31",
+        "min_sale_id": 1,
+        "max_sale_id": 10000,
+        "region_counts": {
+          "东北": 2000,
+          "华东": 2000,
+          "华北": 2000,
+          "华南": 2000,
+          "西南": 2000
+        }
+      }
+    },
+    {
+      "rows": 100000,
+      "table": "scale.sales_scale_100000",
+      "ddl": "CREATE TABLE scale.sales_scale_100000 (\n    sale_id    BIGINT         PRIMARY KEY,\n    sale_date  DATE           NOT NULL,\n    region     TEXT           NOT NULL,\n    product_id INTEGER        NOT NULL,\n    quantity   INTEGER        NOT NULL,\n    unit_price NUMERIC(10, 2) NOT NULL,\n    amount     NUMERIC(12, 2) NOT NULL\n)",
+      "indexes": [
+        "CREATE INDEX scale.sales_scale_100000_sale_date_idx ON scale.sales_scale_100000 (sale_date)"
+      ],
+      "columns": [
+        {
+          "name": "sale_id",
+          "type": "BIGINT",
+          "note": "订单主键，等于生成序号 g（1..N）"
+        },
+        {
+          "name": "sale_date",
+          "type": "DATE",
+          "note": "销售日期，在 2021-01-01~2025-12-31 区间内按行序均匀铺满（与档位无关，保证各档同一查询可比）"
+        },
+        {
+          "name": "region",
+          "type": "TEXT",
+          "note": "销售大区，五种取值按 mod(g,5) 轮转"
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "note": "商品编号，1..100 按 mod(g,100)+1 轮转"
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "note": "数量，1..20"
+        },
+        {
+          "name": "unit_price",
+          "type": "NUMERIC(10,2)",
+          "note": "单价，10.00~909.99 元，由 g 算术派生"
+        },
+        {
+          "name": "amount",
+          "type": "NUMERIC(12,2)",
+          "note": "金额 = quantity * unit_price"
+        }
+      ],
+      "fingerprint": {
+        "row_count": 100000,
+        "content_md5": "cc0237928ac3076d90c0d0e6181598ef",
+        "sum_amount": "481841300.00",
+        "min_amount": "10.00",
+        "max_amount": "18196.60",
+        "min_sale_date": "2021-01-01",
+        "max_sale_date": "2025-12-31",
+        "min_sale_id": 1,
+        "max_sale_id": 100000,
+        "region_counts": {
+          "东北": 20000,
+          "华东": 20000,
+          "华北": 20000,
+          "华南": 20000,
+          "西南": 20000
+        }
+      }
+    }
+  ]
+}

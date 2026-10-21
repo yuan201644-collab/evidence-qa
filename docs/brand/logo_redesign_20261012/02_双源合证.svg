@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="双源合证概念标志">
+  <path d="M21 25h39q8 0 8 8v53q0 8-8 8H21q-8 0-8-8V33q0-8 8-8Z" fill="#15171b"/>
+  <path d="M68 34q0-8 8-8h31q8 0 8 8v52q0 8-8 8H76q-8 0-8-8Z" fill="#15171b"/>
+  <path d="M27 40h20M27 53h26M27 66h18" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <path d="M82 43h10m8 0h7M82 56h7m10 0h8M82 69h10m8 0h7" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <path d="m64 68 21 14-21 27-21-27z" fill="#15171b" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+  <path d="m56 82 6 6 11-13" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

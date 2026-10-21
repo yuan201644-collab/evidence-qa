@@ -1,0 +1,94 @@
+/* 知证折面动效：参数与公共行为集中维护。扩展指南见 docs/brand/前端动效规范与扩展指南_v0.1.md。 */
+:root {
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --motion-enter: 320ms;
+  --motion-sweep: 420ms;
+  --motion-stagger: 45ms;
+  --motion-shift: 10px;
+  --motion-hover: 2px;
+  --motion-ease: cubic-bezier(.16, 1, .3, 1);
+  --motion-exit-ease: cubic-bezier(.4, 0, 1, 1);
+}
+
+/* 默认最终态可见。只在元素挂载时播放一次，不给回答添加人为延迟。 */
+.vm-reveal {
+  animation: vm-enter var(--motion-enter) var(--motion-ease) backwards;
+  animation-delay: calc(var(--motion-order, 0) * var(--motion-stagger));
+}
+.vm-facet-reveal {
+  animation: vm-facet-enter var(--motion-enter) var(--motion-ease) backwards;
+  animation-delay: calc(var(--motion-order, 0) * var(--motion-stagger));
+}
+.vm-panel { animation: vm-panel-enter var(--motion-base) var(--motion-ease) backwards; }
+.vm-detail { animation: vm-enter var(--motion-base) var(--motion-ease) backwards; }
+.vm-turn .content { animation: vm-enter var(--motion-base) var(--motion-ease) backwards; }
+
+/* 操作反馈不改变布局；键盘用户同样可见。仅显式标记的控件参与。 */
+button.vm-press, .topbar__actions > button { transition: transform var(--motion-fast) var(--motion-ease), background-color var(--motion-fast), border-color var(--motion-fast), color var(--motion-fast); }
+button.vm-press:active:not(:disabled), .topbar__actions > button:active:not(:disabled) { transform: translateY(1px) scale(.98); }
+.vm-icon-shift { transition: transform var(--motion-fast) var(--motion-ease); }
+@media (hover: hover) {
+  .vm-interact:hover .vm-icon-shift { transform: translate(var(--motion-hover), calc(-1 * var(--motion-hover))); }
+}
+.vm-interact:focus-visible .vm-icon-shift { transform: translate(var(--motion-hover), calc(-1 * var(--motion-hover))); }
+
+/* Vue 弹窗过渡：遮罩短淡入，面板沿折面方向进入；退出更快。 */
+.vm-dialog-enter-active { transition: opacity var(--motion-base) var(--motion-ease); }
+.vm-dialog-leave-active { transition: opacity var(--motion-fast) var(--motion-exit-ease); pointer-events: none; }
+.vm-dialog-enter-active > section { transition: transform var(--motion-base) var(--motion-ease); }
+.vm-dialog-leave-active > section { transition: transform var(--motion-fast) var(--motion-exit-ease); }
+.vm-dialog-enter-active .eval { transition: transform var(--motion-base) var(--motion-ease); }
+.vm-dialog-leave-active .eval { transition: transform var(--motion-fast) var(--motion-exit-ease); }
+.vm-dialog-enter-from, .vm-dialog-leave-to { opacity: 0; }
+.vm-dialog-enter-from > section { transform: translate(8px, 12px) scale(.985); }
+.vm-dialog-leave-to > section { transform: translateY(6px); }
+.vm-dialog-enter-from .eval { transform: translate(8px, 12px) scale(.985); }
+.vm-dialog-leave-to .eval { transform: translateY(6px); }
+
+@keyframes vm-enter {
+  from { opacity: 0; transform: translate3d(var(--motion-shift), var(--motion-shift), 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes vm-facet-enter {
+  from { opacity: 0; clip-path: polygon(0 0, 0 0, -12% 100%, 0 100%); transform: translateX(6px); }
+  65% { opacity: 1; clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%); }
+  to { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: none; }
+}
+@keyframes vm-panel-enter {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes vm-line-enter {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes vm-blade {
+  from { transform: translateX(-180%); }
+  to { transform: translateX(220%); }
+}
+/* 只有真实等待状态使用循环动效。方块逐级明暗，不暗示具体工具进度。 */
+@keyframes vm-wait {
+  0%, 100% { opacity: .35; }
+  50% { opacity: 1; }
+}
+/* 仅实际处于执行中的阶段使用短促折面明暗，不显示估算百分比。 */
+@keyframes vm-progress-cut {
+  0%, 100% { opacity: .45; transform: translateX(-1px) skewX(-5deg); }
+  50% { opacity: 1; transform: translateX(1px) skewX(-5deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+    --motion-enter: 0ms;
+    --motion-sweep: 0ms;
+    --motion-stagger: 0ms;
+    --motion-hover: 0px;
+  }
+  .vm-reveal, .vm-facet-reveal, .vm-panel, .vm-detail, .vm-turn .content { animation: none; }
+  button.vm-press:active:not(:disabled), .topbar__actions > button:active:not(:disabled),
+  .vm-interact:hover .vm-icon-shift, .vm-interact:focus-visible .vm-icon-shift { transform: none; }
+  .thinking-mark i, .progress-stage--started .progress-stage__rail i { animation: none; }
+}

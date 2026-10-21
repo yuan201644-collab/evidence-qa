@@ -1,0 +1,6 @@
+contract_id,equipment_id,valid_from,valid_to,mapping_basis
+HT-MNT-2026-001,DEV-001,2026-09-01,2026-12-31,explicit_equipment_schedule
+HT-MNT-2026-001,DEV-002,2026-09-01,2026-12-31,explicit_equipment_schedule
+HT-MNT-2026-002,DEV-003,2026-09-01,2026-12-31,explicit_equipment_schedule
+HT-MNT-2026-002,DEV-004,2026-09-01,2026-12-31,explicit_equipment_schedule
+HT-MNT-2026-003,DEV-005,2026-03-01,2026-08-31,explicit_equipment_schedule

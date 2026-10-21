@@ -1,0 +1,4 @@
+contract_id,customer_id,effective_from,effective_to,status,timezone
+HT-MNT-2026-001,ORG-001,2026-09-01,2026-12-31,active,+08:00
+HT-MNT-2026-002,ORG-002,2026-09-01,2026-12-31,active,+08:00
+HT-MNT-2026-003,ORG-003,2026-03-01,2026-08-31,expired,+08:00

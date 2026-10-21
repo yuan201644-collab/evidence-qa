@@ -1,0 +1,30 @@
+flowchart TD
+    U[数据源输入<br/>数据库 / 文档] --> M[登记来源与权限边界]
+    M --> DB[数据库元数据抽取<br/>表 / 字段 / 键 / 描述]
+    M --> D[文档解析<br/>文本 / 页码 / 原始坐标]
+    D --> H[目录层级识别<br/>章节路径与层级]
+    H --> C[切片与来源定位<br/>文档 / 页 / 章节 / 偏移]
+    DB --> E[对象与标识候选抽取]
+    C --> E
+    E --> V{映射关系有可复核依据且在有效期内?}
+    V -->|是| L[登记映射依据 / 有效期 / 审核状态]
+    V -->|否或歧义| Q[保留未确认候选<br/>不自动桥接]
+    DB --> I[构建结构元数据索引]
+    C --> J[构建文档检索索引]
+    L --> G[可选关系索引<br/>仅在映射确认后]
+    Q --> R[质量报告与待处理清单]
+    I --> X[版本化数据快照]
+    J --> X
+    G -.建议 / 未实现.-> X
+    R --> X
+    X --> T[记录解析失败 / 空字段 / 页码缺失 / 映射冲突]
+
+    classDef verified fill:#d9ead3,stroke:#38761d,color:#111;
+    classDef todo fill:#fff2cc,stroke:#bf9000,color:#111;
+    classDef suggested fill:#d9eaf7,stroke:#3d85c6,color:#111;
+    classDef absent fill:#f4cccc,stroke:#cc0000,color:#111;
+    class U,M,DB,D,C,I,J,X,T todo;
+    class H,E,V,Q,R todo;
+    class L,G suggested;
+
+    LEGEND[图例：绿色=已验证；黄色=已实现待验证或设计流程待核验；蓝色=建议；红色=未实现。阶段A文档未执行数据管线验证，节点按待核验/建议标记。]

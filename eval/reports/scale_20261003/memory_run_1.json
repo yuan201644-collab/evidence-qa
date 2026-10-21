@@ -1,0 +1,442 @@
+{
+  "protocol_version": 2,
+  "run_id": "1",
+  "scale_order": [
+    "10",
+    "100",
+    "500"
+  ],
+  "query_count": 10,
+  "warmup": {
+    "embedder_seconds": 40.65,
+    "reranker_seconds": 11.21,
+    "total_seconds": 51.86
+  },
+  "environment": {
+    "python": "3.11.15 (main, Jul 23 2026, 14:42:43) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "torch": {
+      "version": "2.14.0+cpu",
+      "cuda_available": false
+    }
+  },
+  "rows": [
+    {
+      "scale_id": "10",
+      "scale": "10-page",
+      "target_pages": 10,
+      "actual_pages": 14,
+      "file": "KB-003_10页规模版.pdf",
+      "retrieve_top_k": 20,
+      "index_seconds": 46.88,
+      "chunks": 47,
+      "corpus_chars": 14222,
+      "chars_per_chunk": 302.6,
+      "vector_mb_est": 0.18,
+      "retrieve_samples": [
+        {
+          "query_index": 1,
+          "elapsed_ms": 37504.22,
+          "hybrid_retrieve_ms": 675.75,
+          "rerank_ms": 36827.93,
+          "num_hits": 15
+        },
+        {
+          "query_index": 2,
+          "elapsed_ms": 28867.11,
+          "hybrid_retrieve_ms": 440.19,
+          "rerank_ms": 28426.67,
+          "num_hits": 17
+        },
+        {
+          "query_index": 3,
+          "elapsed_ms": 24204.99,
+          "hybrid_retrieve_ms": 527.63,
+          "rerank_ms": 23676.92,
+          "num_hits": 15
+        },
+        {
+          "query_index": 4,
+          "elapsed_ms": 15820.64,
+          "hybrid_retrieve_ms": 132.95,
+          "rerank_ms": 15687.93,
+          "num_hits": 15
+        },
+        {
+          "query_index": 5,
+          "elapsed_ms": 10203.96,
+          "hybrid_retrieve_ms": 142.82,
+          "rerank_ms": 10060.73,
+          "num_hits": 10
+        },
+        {
+          "query_index": 6,
+          "elapsed_ms": 13932.83,
+          "hybrid_retrieve_ms": 129.02,
+          "rerank_ms": 13802.89,
+          "num_hits": 13
+        },
+        {
+          "query_index": 7,
+          "elapsed_ms": 15840.82,
+          "hybrid_retrieve_ms": 133.02,
+          "rerank_ms": 15708.48,
+          "num_hits": 15
+        },
+        {
+          "query_index": 8,
+          "elapsed_ms": 18151.11,
+          "hybrid_retrieve_ms": 152.17,
+          "rerank_ms": 17998.99,
+          "num_hits": 17
+        },
+        {
+          "query_index": 9,
+          "elapsed_ms": 15083.96,
+          "hybrid_retrieve_ms": 128.86,
+          "rerank_ms": 14955.22,
+          "num_hits": 14
+        },
+        {
+          "query_index": 10,
+          "elapsed_ms": 10559.11,
+          "hybrid_retrieve_ms": 157.1,
+          "rerank_ms": 10401.8,
+          "num_hits": 10
+        }
+      ],
+      "retrieve_ms": {
+        "p50": 15830.73,
+        "p95": 33617.52,
+        "max": 37504.22
+      },
+      "e2e_samples": [
+        {
+          "query_index": 1,
+          "elapsed_ms": 19309.12
+        },
+        {
+          "query_index": 2,
+          "elapsed_ms": 21934.63
+        },
+        {
+          "query_index": 3,
+          "elapsed_ms": 41550.73
+        },
+        {
+          "query_index": 4,
+          "elapsed_ms": 17530.27
+        },
+        {
+          "query_index": 5,
+          "elapsed_ms": 13492.57
+        },
+        {
+          "query_index": 6,
+          "elapsed_ms": 25880.14
+        },
+        {
+          "query_index": 7,
+          "elapsed_ms": 20210.84
+        },
+        {
+          "query_index": 8,
+          "elapsed_ms": 32369.7
+        },
+        {
+          "query_index": 9,
+          "elapsed_ms": 40040.94
+        },
+        {
+          "query_index": 10,
+          "elapsed_ms": 15993.21
+        }
+      ],
+      "e2e_ok": 10,
+      "e2e_errors": 0,
+      "e2e_ms": {
+        "p50": 21072.74,
+        "p95": 40871.32,
+        "max": 41550.73
+      }
+    },
+    {
+      "scale_id": "100",
+      "scale": "100-page",
+      "target_pages": 100,
+      "actual_pages": 126,
+      "file": "KB-003_100页规模版.pdf",
+      "retrieve_top_k": 20,
+      "index_seconds": 138.18,
+      "chunks": 380,
+      "corpus_chars": 137785,
+      "chars_per_chunk": 362.6,
+      "vector_mb_est": 1.48,
+      "retrieve_samples": [
+        {
+          "query_index": 1,
+          "elapsed_ms": 8406.64,
+          "hybrid_retrieve_ms": 89.2,
+          "rerank_ms": 8318.13,
+          "num_hits": 18
+        },
+        {
+          "query_index": 2,
+          "elapsed_ms": 8154.4,
+          "hybrid_retrieve_ms": 83.09,
+          "rerank_ms": 8071.32,
+          "num_hits": 18
+        },
+        {
+          "query_index": 3,
+          "elapsed_ms": 8256.89,
+          "hybrid_retrieve_ms": 86.22,
+          "rerank_ms": 8169.98,
+          "num_hits": 18
+        },
+        {
+          "query_index": 4,
+          "elapsed_ms": 8190.83,
+          "hybrid_retrieve_ms": 94.8,
+          "rerank_ms": 8095.67,
+          "num_hits": 18
+        },
+        {
+          "query_index": 5,
+          "elapsed_ms": 4045.98,
+          "hybrid_retrieve_ms": 85.75,
+          "rerank_ms": 3960.42,
+          "num_hits": 10
+        },
+        {
+          "query_index": 6,
+          "elapsed_ms": 9157.93,
+          "hybrid_retrieve_ms": 103.62,
+          "rerank_ms": 9054.06,
+          "num_hits": 19
+        },
+        {
+          "query_index": 7,
+          "elapsed_ms": 8479.97,
+          "hybrid_retrieve_ms": 95.06,
+          "rerank_ms": 8384.86,
+          "num_hits": 18
+        },
+        {
+          "query_index": 8,
+          "elapsed_ms": 7625.89,
+          "hybrid_retrieve_ms": 84.49,
+          "rerank_ms": 7541.69,
+          "num_hits": 17
+        },
+        {
+          "query_index": 9,
+          "elapsed_ms": 6096.4,
+          "hybrid_retrieve_ms": 83.3,
+          "rerank_ms": 6012.97,
+          "num_hits": 15
+        },
+        {
+          "query_index": 10,
+          "elapsed_ms": 4622.63,
+          "hybrid_retrieve_ms": 87.25,
+          "rerank_ms": 4535.1,
+          "num_hits": 11
+        }
+      ],
+      "retrieve_ms": {
+        "p50": 8172.61,
+        "p95": 8852.85,
+        "max": 9157.93
+      },
+      "e2e_samples": [
+        {
+          "query_index": 1,
+          "elapsed_ms": 13008.69
+        },
+        {
+          "query_index": 2,
+          "elapsed_ms": 11208.54
+        },
+        {
+          "query_index": 3,
+          "elapsed_ms": 28950.26
+        },
+        {
+          "query_index": 4,
+          "elapsed_ms": 10525.07
+        },
+        {
+          "query_index": 5,
+          "elapsed_ms": 7800.31
+        },
+        {
+          "query_index": 6,
+          "elapsed_ms": 17973.46
+        },
+        {
+          "query_index": 7,
+          "elapsed_ms": 11181.52
+        },
+        {
+          "query_index": 8,
+          "elapsed_ms": 24304.95
+        },
+        {
+          "query_index": 9,
+          "elapsed_ms": 24691.81
+        },
+        {
+          "query_index": 10,
+          "elapsed_ms": 8143.87
+        }
+      ],
+      "e2e_ok": 10,
+      "e2e_errors": 0,
+      "e2e_ms": {
+        "p50": 12108.62,
+        "p95": 27033.96,
+        "max": 28950.26
+      }
+    },
+    {
+      "scale_id": "500",
+      "scale": "500-page",
+      "target_pages": 500,
+      "actual_pages": 509,
+      "file": "KB-003_500页规模版.pdf",
+      "retrieve_top_k": 20,
+      "index_seconds": 517.77,
+      "chunks": 1523,
+      "corpus_chars": 555325,
+      "chars_per_chunk": 364.6,
+      "vector_mb_est": 5.95,
+      "retrieve_samples": [
+        {
+          "query_index": 1,
+          "elapsed_ms": 7741.09,
+          "hybrid_retrieve_ms": 159.26,
+          "rerank_ms": 7581.01,
+          "num_hits": 18
+        },
+        {
+          "query_index": 2,
+          "elapsed_ms": 8404.04,
+          "hybrid_retrieve_ms": 159.88,
+          "rerank_ms": 8244.12,
+          "num_hits": 19
+        },
+        {
+          "query_index": 3,
+          "elapsed_ms": 8546.98,
+          "hybrid_retrieve_ms": 134.46,
+          "rerank_ms": 8411.84,
+          "num_hits": 20
+        },
+        {
+          "query_index": 4,
+          "elapsed_ms": 7303.79,
+          "hybrid_retrieve_ms": 125.99,
+          "rerank_ms": 7178.74,
+          "num_hits": 18
+        },
+        {
+          "query_index": 5,
+          "elapsed_ms": 4036.86,
+          "hybrid_retrieve_ms": 125.74,
+          "rerank_ms": 3910.59,
+          "num_hits": 10
+        },
+        {
+          "query_index": 6,
+          "elapsed_ms": 8737.92,
+          "hybrid_retrieve_ms": 128.52,
+          "rerank_ms": 8609.48,
+          "num_hits": 20
+        },
+        {
+          "query_index": 7,
+          "elapsed_ms": 7768.26,
+          "hybrid_retrieve_ms": 122.25,
+          "rerank_ms": 7645.75,
+          "num_hits": 18
+        },
+        {
+          "query_index": 8,
+          "elapsed_ms": 7853.52,
+          "hybrid_retrieve_ms": 136.79,
+          "rerank_ms": 7717.6,
+          "num_hits": 18
+        },
+        {
+          "query_index": 9,
+          "elapsed_ms": 5118.59,
+          "hybrid_retrieve_ms": 127.59,
+          "rerank_ms": 4990.9,
+          "num_hits": 14
+        },
+        {
+          "query_index": 10,
+          "elapsed_ms": 4432.0,
+          "hybrid_retrieve_ms": 126.95,
+          "rerank_ms": 4305.19,
+          "num_hits": 11
+        }
+      ],
+      "retrieve_ms": {
+        "p50": 7754.68,
+        "p95": 8652.0,
+        "max": 8737.92
+      },
+      "e2e_samples": [
+        {
+          "query_index": 1,
+          "elapsed_ms": 10031.76
+        },
+        {
+          "query_index": 2,
+          "elapsed_ms": 14472.43
+        },
+        {
+          "query_index": 3,
+          "elapsed_ms": 44875.22
+        },
+        {
+          "query_index": 4,
+          "elapsed_ms": 9413.68
+        },
+        {
+          "query_index": 5,
+          "elapsed_ms": 6434.23
+        },
+        {
+          "query_index": 6,
+          "elapsed_ms": 36032.66
+        },
+        {
+          "query_index": 7,
+          "elapsed_ms": 12643.62
+        },
+        {
+          "query_index": 8,
+          "elapsed_ms": 18477.69
+        },
+        {
+          "query_index": 9,
+          "elapsed_ms": 11590.5
+        },
+        {
+          "query_index": 10,
+          "elapsed_ms": 8189.72
+        }
+      ],
+      "e2e_ok": 10,
+      "e2e_errors": 0,
+      "e2e_ms": {
+        "p50": 12117.06,
+        "p95": 40896.07,
+        "max": 44875.22
+      }
+    }
+  ]
+}

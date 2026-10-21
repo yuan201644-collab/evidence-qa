@@ -1,0 +1,672 @@
+{
+  "base": "http://127.0.0.1:8001",
+  "generated_at": "2026-10-18T17:39:20+0800",
+  "scope": "多轮对话链路保持验证，非系统准确率实验",
+  "pass_rule": "一条用例 5 轮全部通过才算通过",
+  "attach_rule": "normalizer 输出含「用户补充或修改」接缝即判定为已接上文",
+  "cases": [
+    {
+      "case_id": "gmt-01",
+      "title": "采购项目按预算级次与地区的逐层下钻",
+      "scoring": "多轮对话上下文保持：五轮连续依赖上文的收窄与改分组",
+      "passed": false,
+      "turns_passed": 4,
+      "turns_total": 5,
+      "first_failure_round": 5,
+      "turns": [
+        {
+          "round": 1,
+          "question": "库里一共有多少个采购项目？",
+          "answer": "查询结果：project_count：2659。",
+          "status": 200,
+          "elapsed_ms": 1787.3,
+          "attached": false,
+          "depends_on_context": false,
+          "expect_hits": [
+            "2659"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "project_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT COUNT(*) AS project_count\nFROM projects;",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 2,
+          "question": "只看中央预算的",
+          "answer": "查询结果：count_question：371。 其中说明：「budget_level=central」SQL 在 budget_level 上过滤了取值「central」，但用户本轮没有提出这个条件，继承的上下文里也没有依据。静态核对无法证明它一定错（可能是合理的业务默认），但结果可能因这个未声明的条件而与预期不同。",
+          "status": 200,
+          "elapsed_ms": 2199.3,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "371"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "projects",
+            "budget_level",
+            "central"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "project_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT COUNT(*) AS count_question\nFROM projects\nWHERE budget_level = 'central'",
+          "passed": true,
+          "note": "列别名与预期不同（本轮值断言已命中，不计失败）：project_count"
+        },
+        {
+          "round": 3,
+          "question": "按地区分组看看",
+          "answer": "共 25 行，前 3 行：region_name：辽宁、project_count：2；region_name：西藏、project_count：2；region_name：海南、project_count：2 … 其中说明：「budget_level=central」SQL 在 budget_level 上过滤了取值「central」，但用户本轮没有提出这个条件，继承的上下文里也没有依据。静态核对无法证明它一定错（可能是合理的业务默认），但结果可能因这个未声明的条件而与预期不同。",
+          "status": 200,
+          "elapsed_ms": 2623.7,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "共 25 行"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "region_name",
+            "central"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 25,
+          "actual_row_count": 25,
+          "expected_columns": [
+            "region_name",
+            "project_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT regions.region_name, COUNT(projects.project_id) AS project_count\nFROM projects\nJOIN regions ON projects.region_code = regions.region_code\nWHERE projects.budget_level = 'central'\nGROUP BY regions.region_name;",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 4,
+          "question": "只保留 北京 的，改成按采购方式分组",
+          "answer": "共 5 行，前 3 行：procurement_way：公开招标、project_count：68；procurement_way：单一来源、project_count：2；procurement_way：竞争性磋商、project_count：20 … 其中说明（共 2 项条件未完全落实或未能证实）：「region_name=北京」SQL 在 region_name 上过滤了取值「北京」，但用户本轮没有提出这个条件，继承的上下文里也没有依据。静态核对无法证明它一定错（可能是合理的业务默认），但结果可能因这个未声明的条件而与预期不同；「budget_level=central」SQL 在 budget_level 上过滤了取值「central」，但用户本轮没有提出这个条件，继承的上下文里也没有依据。静态核对无法证明它一定错（可能是合理的业务默认），但结果可能因这个未声明的条件而与预期不同。",
+          "status": 200,
+          "elapsed_ms": 3127.9,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "共 5 行"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "procurement_way",
+            "central"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 5,
+          "actual_row_count": 5,
+          "expected_columns": [
+            "procurement_way",
+            "project_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT procurement_way, COUNT(project_id) AS project_count\nFROM projects\nJOIN regions ON projects.region_code = regions.region_code\nWHERE regions.region_name = '北京' AND projects.budget_level = 'central'\nGROUP BY procurement_way;",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 5,
+          "question": "把地区也带上，两个维度一起看",
+          "answer": "共 31 行，前 3 行：region_name：辽宁、project_count：28；region_name：西藏、project_count：6；region_name：海南、project_count：8 …",
+          "status": 200,
+          "elapsed_ms": 2624.3,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "region_name"
+          ],
+          "expect_missed": [
+            "procurement_way"
+          ],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "region_name"
+          ],
+          "expect_sql_missed": [
+            "procurement_way",
+            "central"
+          ],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 5,
+          "actual_row_count": 31,
+          "expected_columns": [
+            "region_name",
+            "procurement_way",
+            "project_count"
+          ],
+          "missing_columns": [
+            "procurement_way"
+          ],
+          "actual_sql": "SELECT regions.region_name, COUNT(projects.project_id) AS project_count\nFROM projects\nJOIN regions ON projects.region_code = regions.region_code\nGROUP BY regions.region_name;",
+          "passed": false,
+          "note": "答案未包含：procurement_way；SQL 未包含预期字段/条件：procurement_way、central；结果行数不符：预期 5，实际 31；结果缺少预期字段：procurement_way"
+        }
+      ],
+      "notes": "第 2 轮起每轮都省略了对象名（只写「只看中央预算的」），必须从第 1 轮继承「采购项目」。第 4 轮起的地区也是从上文继承的。"
+    },
+    {
+      "case_id": "gmt-02",
+      "title": "中标金额的多轮口径切换",
+      "scoring": "多轮对话上下文保持：度量切换、条件叠加、排序收窄",
+      "passed": false,
+      "turns_passed": 2,
+      "turns_total": 5,
+      "first_failure_round": 3,
+      "turns": [
+        {
+          "round": 1,
+          "question": "所有中标记录的中标金额合计是多少（金额为 0 的不算）？",
+          "answer": "查询结果：total_award_amount：2064498011.13。",
+          "status": 200,
+          "elapsed_ms": 2230.2,
+          "attached": false,
+          "depends_on_context": false,
+          "expect_hits": [
+            "2,064,498,011.13"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "total_award_yuan"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT SUM(award_yuan) AS total_award_amount\nFROM awards\nWHERE award_yuan > 0;",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 2,
+          "question": "改成看平均值",
+          "answer": "查询结果：average_award_amount：4016533.095584。",
+          "status": 200,
+          "elapsed_ms": 7276.6,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "4,016,533.10"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "avg",
+            "award_yuan"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "avg_award_yuan"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT AVG(award_yuan) AS average_award_amount\nFROM awards\nWHERE award_yuan > 0;",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 3,
+          "question": "只看公开招标的项目，合计多少",
+          "answer": "这条问题没能算出结果：子查询关联校验未通过：问题要求统计/聚合指标，但 SQL 没有对应的聚合表达式；不能用常量或 NULL 代替指标。",
+          "status": 200,
+          "elapsed_ms": 5387.1,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [],
+          "expect_missed": [
+            "1,972,844,290.01"
+          ],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "公开招标"
+          ],
+          "expect_sql_missed": [
+            "award_yuan"
+          ],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": null,
+          "expected_columns": [
+            "total_award_yuan"
+          ],
+          "missing_columns": [
+            "total_award_yuan"
+          ],
+          "actual_sql": "SELECT COUNT(*) AS total_count\nFROM projects\nWHERE procurement_way = '公开招标' AND project_id IN (SELECT DISTINCT project_id FROM awards)",
+          "passed": false,
+          "note": "答案未包含：1,972,844,290.01；SQL 未包含预期字段/条件：award_yuan；结果行数不符：预期 1，实际 None；结果缺少预期字段：total_award_yuan"
+        },
+        {
+          "round": 4,
+          "question": "按供应商分组，取金额最高的前 5 家",
+          "answer": "这条问题没能算出结果：检测到可能的一对多汇总粒度风险，需人工确认。",
+          "status": 200,
+          "elapsed_ms": 3483.4,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [],
+          "expect_missed": [
+            "共 5 行"
+          ],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "supplier_name"
+          ],
+          "expect_sql_missed": [
+            "公开招标"
+          ],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 5,
+          "actual_row_count": null,
+          "expected_columns": [
+            "supplier_name",
+            "total_award_yuan"
+          ],
+          "missing_columns": [
+            "supplier_name",
+            "total_award_yuan"
+          ],
+          "actual_sql": "SELECT supplier_id, supplier_name, SUM(award_yuan) AS total_award_amount\nFROM awards\nJOIN suppliers ON awards.supplier_id = suppliers.supplier_id\nWHERE award_yuan > 0\nGROUP BY supplier_id, supplier_name\nORDER BY total_award_amount DESC\nLIMIT 5;",
+          "passed": false,
+          "note": "答案未包含：共 5 行；SQL 未包含预期字段/条件：公开招标；结果行数不符：预期 5，实际 None；结果缺少预期字段：supplier_name、total_award_yuan"
+        },
+        {
+          "round": 5,
+          "question": "只保留金额超过一百万的",
+          "answer": "请补充要统计的业务对象（如采购代理机构、采购公告 或 中标结果）。",
+          "status": 200,
+          "elapsed_ms": 8.7,
+          "attached": false,
+          "depends_on_context": true,
+          "expect_hits": [],
+          "expect_missed": [
+            "共 5 行"
+          ],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [
+            "supplier_name",
+            "1000000"
+          ],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 5,
+          "actual_row_count": null,
+          "expected_columns": [
+            "supplier_name",
+            "total_award_yuan"
+          ],
+          "missing_columns": [
+            "supplier_name",
+            "total_award_yuan"
+          ],
+          "actual_sql": "",
+          "passed": false,
+          "note": "答案未包含：共 5 行；SQL 未包含预期字段/条件：supplier_name、1000000；结果行数不符：预期 5，实际 None；结果缺少预期字段：supplier_name、total_award_yuan；未接上上文（normalizer 输出里没有接缝），本轮按孤立问题处理"
+        }
+      ],
+      "notes": "第 2 轮「改成看平均值」是**换度量**不是加条件，上文的对象与过滤都要保留。第 4 轮起的「公开招标」若被丢掉，前 N 名的构成会变。"
+    },
+    {
+      "case_id": "gmt-03",
+      "title": "单个采购人的自由表述追问",
+      "scoring": "多轮对话上下文保持：实体继承 + 自由表述的度量切换",
+      "passed": false,
+      "turns_passed": 1,
+      "turns_total": 5,
+      "first_failure_round": 2,
+      "turns": [
+        {
+          "round": 1,
+          "question": "哪家采购人发起的采购项目最多？有几个？",
+          "answer": "查询结果：buyer_name：清华大学、project_count：32。",
+          "status": 200,
+          "elapsed_ms": 4208.2,
+          "attached": false,
+          "depends_on_context": false,
+          "expect_hits": [
+            "清华大学",
+            "32"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "buyer_name",
+            "project_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT buyers.buyer_name, COUNT(projects.project_id) AS project_count\nFROM buyers\nJOIN projects ON buyers.buyer_id = projects.buyer_id\nGROUP BY buyers.buyer_name\nORDER BY project_count DESC\nLIMIT 1;",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 2,
+          "question": "他的项目一共花了多少钱？",
+          "answer": "查询结果：total_spent_amount：168644000。 其中说明：「buyer_name=清华大学」SQL 在 buyer_name 上过滤了取值「清华大学」，但用户本轮没有提出这个条件，继承的上下文里也没有依据。静态核对无法证明它一定错（可能是合理的业务默认），但结果可能因这个未声明的条件而与预期不同。",
+          "status": 200,
+          "elapsed_ms": 9497.9,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [],
+          "expect_missed": [
+            "45,058,000.00"
+          ],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [
+            "award_yuan"
+          ],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "total_award_yuan"
+          ],
+          "missing_columns": [
+            "total_award_yuan"
+          ],
+          "actual_sql": "SELECT SUM(projects.budget_yuan) AS total_spent_amount\nFROM projects\nJOIN buyers ON projects.buyer_id = buyers.buyer_id\nWHERE buyers.buyer_name = '清华大学'\nGROUP BY buyers.buyer_name\nHAVING buyers.buyer_name = '清华大学'\nORDER BY total_spent_amount DESC\nLIMIT 1;",
+          "passed": false,
+          "note": "答案未包含：45,058,000.00；SQL 未包含预期字段/条件：award_yuan；结果缺少预期字段：total_award_yuan"
+        },
+        {
+          "round": 3,
+          "question": "这些项目分别委托给了哪些代理机构？",
+          "answer": "共 1117 行，前 3 行：agency_name：万邦工程管理咨询有限公司、project_count：1；agency_name：三门县熠橙工程管理有限公司、project_count：2；agency_name：上海上咨建设工程咨询有限公司、project_count：2 … 完整结果可在下方分页查看，也可下载 CSV。",
+          "status": 200,
+          "elapsed_ms": 3922.5,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [],
+          "expect_missed": [
+            "共 9 行"
+          ],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "agency"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 9,
+          "actual_row_count": 1117,
+          "expected_columns": [
+            "agency_name",
+            "project_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT agencies.agency_name, COUNT(DISTINCT projects.project_id) AS project_count\nFROM projects\nJOIN agencies ON projects.agency_id = agencies.agency_id\nGROUP BY agencies.agency_name;",
+          "passed": false,
+          "note": "答案未包含：共 9 行；结果行数不符：预期 9，实际 1117"
+        },
+        {
+          "round": 4,
+          "question": "取承接最多的那家",
+          "answer": "查询结果：agency_name：万邦工程管理咨询有限公司、project_count：1。 其中说明：「agency_name=万邦工程管理咨询有限公司」SQL 在 agency_name 上过滤了取值「万邦工程管理咨询有限公司」，但用户本轮没有提出这个条件，继承的上下文里也没有依据。静态核对无法证明它一定错（可能是合理的业务默认），但结果可能因这个未声明的条件而与预期不同。",
+          "status": 200,
+          "elapsed_ms": 4580.1,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [],
+          "expect_missed": [
+            "中招国际招标有限公司"
+          ],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "agency"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "agency_name",
+            "project_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT agencies.agency_name, COUNT(DISTINCT projects.project_id) AS project_count\nFROM projects\nJOIN agencies ON projects.agency_id = agencies.agency_id\nWHERE agencies.agency_name = '万邦工程管理咨询有限公司'\nGROUP BY agencies.agency_name\nORDER BY project_count DESC\nLIMIT 1;",
+          "passed": false,
+          "note": "答案未包含：中招国际招标有限公司"
+        },
+        {
+          "round": 5,
+          "question": "它承接的这些项目里，公告一共多少条？",
+          "answer": "请说明「它」指的是哪个对象或哪份文档。",
+          "status": 200,
+          "elapsed_ms": 23.6,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [],
+          "expect_missed": [
+            "8"
+          ],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [
+            "announcements"
+          ],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": null,
+          "expected_columns": [
+            "announcement_count"
+          ],
+          "missing_columns": [
+            "announcement_count"
+          ],
+          "actual_sql": "",
+          "passed": false,
+          "note": "答案未包含：8；SQL 未包含预期字段/条件：announcements；结果行数不符：预期 1，实际 None；结果缺少预期字段：announcement_count"
+        }
+      ],
+      "notes": "第 2 轮「他的项目有多少个」里的「他」指第 1 轮点名的采购人；第 3 轮「一共花了多少钱」是**自由表述**（不是「改成看X」句式），考的是能否把口语映射到中标金额。第 1 轮实体：清华大学（32 个项目）。"
+    },
+    {
+      "case_id": "gmt-04",
+      "title": "公告发布时间的多轮收窄",
+      "scoring": "多轮对话上下文保持：日期替换、区间扩展、类型过滤叠加",
+      "passed": true,
+      "turns_passed": 5,
+      "turns_total": 5,
+      "first_failure_round": null,
+      "turns": [
+        {
+          "round": 1,
+          "question": "2026-10-16 发布了多少条采购公告？",
+          "answer": "查询结果：announcement_count：791。",
+          "status": 200,
+          "elapsed_ms": 3468.7,
+          "attached": false,
+          "depends_on_context": false,
+          "expect_hits": [
+            "791"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "announcement_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT COUNT(*) AS announcement_count\nFROM announcements\nWHERE publish_date >= '2026-10-16' AND publish_date < '2026-10-17';",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 2,
+          "question": "改成 2026-10-15 呢？",
+          "answer": "查询结果：count_question：624。",
+          "status": 200,
+          "elapsed_ms": 1555.9,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "624"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "2026-10-15"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "announcement_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT COUNT(*) AS count_question\nFROM announcements\nWHERE publish_date >= '2026-10-15' AND publish_date < '2026-10-16';",
+          "passed": true,
+          "note": "列别名与预期不同（本轮值断言已命中，不计失败）：announcement_count"
+        },
+        {
+          "round": 3,
+          "question": "从 10 月 15 日到 17 日一共多少条？",
+          "answer": "查询结果：announcement_count：1969。",
+          "status": 200,
+          "elapsed_ms": 2410.5,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "1969"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "2026-10-15",
+            "2026-10-18"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "announcement_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT COUNT(*) AS announcement_count\nFROM announcements\nWHERE publish_date >= '2026-10-15' AND publish_date < '2026-10-18'",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 4,
+          "question": "其中招标公告有几条？",
+          "answer": "查询结果：announcement_count：649。",
+          "status": 200,
+          "elapsed_ms": 3423.5,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "649"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "招标公告",
+            "2026-10-15"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "announcement_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT COUNT(*) AS announcement_count\nFROM announcements\nWHERE kind = '招标公告'\nAND publish_date >= '2026-10-15' AND publish_date < '2026-10-18';",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 5,
+          "question": "按天分开看，每天各多少条？",
+          "answer": "共 3 行，前 3 行：publish_date：2026-10-16、announcement_count：252；publish_date：2026-10-15、announcement_count：236；publish_date：2026-10-17、announcement_count：161。",
+          "status": 200,
+          "elapsed_ms": 3484.7,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "共 3 行"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "publish_date",
+            "招标公告"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 3,
+          "actual_row_count": 3,
+          "expected_columns": [
+            "publish_date",
+            "announcement_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT publish_date, COUNT(*) AS announcement_count\nFROM announcements\nWHERE kind = '招标公告'\nAND publish_date >= '2026-10-15' AND publish_date < '2026-10-18'\nGROUP BY publish_date;",
+          "passed": true,
+          "note": ""
+        }
+      ],
+      "notes": "锚点 2026-10-17。第 2 轮是**替换**不是叠加；第 3 轮从单日扩成三天区间；第 4 轮才叠加类型过滤。真值：10-16 为 791 条、10-15 为 624 条、10-15~10-17 三天为 1969 条、其中招标公告 649 条。"
+    }
+  ]
+}

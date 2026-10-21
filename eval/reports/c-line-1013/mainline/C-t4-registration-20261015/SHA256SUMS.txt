@@ -1,0 +1,43 @@
+# T4 开发回归评分正式登记 —— SHA-256 清单
+# 口径：已曝光开发集回归（exposed development regression），非未见题泛化结果、非比赛成绩
+# 生成脚本：prepare_t4_registration.py（复制 + 哈希自校验，未改判据/未重跑模型）
+# 历史材料全部保留：agent_temp 临时副本、C-review-1013/ 已入库原始响应与冻结记录均未改动
+#
+# ⚠️ 行尾策略（务必读）：仓库 .gitattributes 声明 `* text=auto eol=lf`，
+#   因此【入库后拿到的是 LF 形态】。下面每个受本登记管辖的文件给出两个哈希：
+#     [LF]   = 入库形态（clone/在任意平台检出的形态），复核时用这个
+#     [本地] = 本机工作副本形态（本文件由 CRLF 来源复制而来）
+#   若在同一台机器上直接读工作区文件，会得到 [本地] 那一列。
+
+# --- 登记目录内文件（副本）---
+[LF]   3301ef5446e5c27d3094c3c170f785ab76501df3dcc24c005ebec57c30f20710  eval/reports/c-line-1013/mainline/C-t4-registration-20261015/t4_development_score.json
+[本地] 2bb905a1684d2aac57d28474ac46b14eec4034705a128971d7c26ada442c0a5c  eval/reports/c-line-1013/mainline/C-t4-registration-20261015/t4_development_score.json
+[LF]   ae4265cc056d9e2126dc135c8f5a425d2da907157a90bd8dae9b524c8e6f524a  eval/reports/c-line-1013/mainline/C-t4-registration-20261015/criteria/t4_v03_rubric.jsonl
+[LF]   0ea6ec368759658ad879df47ad9cfb8900faa562678dbb01f697d965711f04c0  eval/reports/c-line-1013/mainline/C-t4-registration-20261015/criteria/t4_v03_reference_queries.jsonl
+[LF]   8358e45280836dc148b6c9466f5cba0e8a58b080070cb2dfb3aee149ab787081  eval/reports/c-line-1013/mainline/C-t4-registration-20261015/C_T4评分正式登记_20261015.md
+
+# --- 绑定材料（引用仓库内既有文件，原件未动）---
+[LF]   23e124f703225db06552d9b12e3f3105b333567a3084e61c69273ea71f0c9938  eval/mainline/development_v0.1/t4_v03_questions.jsonl    # T4 题包 v03
+[LF]   b2e636680dca95f6b20c329e69ee118964ff761ecfe30bfc23475fc0c4d62668  eval/mainline/development_v0.1/t4_run3_data_manifest.json    # T4 数据清单 run3
+[LF]   9b02a3719c4aeba47cb6c38218a512eae48bb824ed3e06d6f0a58eef1721b9fb  eval/mainline/development_v0.1/t4_v03_runtime_manifest.json    # T4 运行清单 v03
+[LF]   0d8a66105605eb7337ce2893d27f339afd06110f3e57844dce46e4db747eec48  eval/reports/c-line-1013/mainline/C-review-1013/t4-throttled/raw_answers.jsonl    # T4 原始响应（已入库存档）
+[LF]   ec1cca1754da4db3b55ab4b4716f508338c839d891e3c3d0b83a5bb4060940ac  eval/reports/c-line-1013/mainline/C-review-1013/t4-throttled/freeze.json    # T4 冻结记录（已入库存档）
+
+# --- 判据来源材料（A 材料包原件，仍在 agent_temp，未改动）---
+[LF]   ae4265cc056d9e2126dc135c8f5a425d2da907157a90bd8dae9b524c8e6f524a  agent_temp/handoff_C_20261014/t4_t5_criteria/t4_v03_rubric.jsonl    # T4 判据 rubric 原件
+
+# --- 自校验结果 ---
+[PASS] 复制一致 eval/reports/c-line-1013/mainline/C-t4-registration-20261015/t4_development_score.json  (2bb905a1684d2aac...)
+[PASS] 复制一致 eval/reports/c-line-1013/mainline/C-t4-registration-20261015/criteria/t4_v03_rubric.jsonl  (ae4265cc056d9e21...)
+[PASS] 复制一致 eval/reports/c-line-1013/mainline/C-t4-registration-20261015/criteria/t4_v03_reference_queries.jsonl  (0ea6ec368759658a...)
+[PASS] 评分文件 raw_answers_sha256 == 已入库原始响应  (0d8a66105605eb73...)
+[PASS] 评分文件 freeze_sha256 == 已入库冻结记录  (ec1cca1754da4db3...)
+[PASS] 评分文件 question_pack_sha256 == 仓库题包  (23e124f703225db0...)
+[PASS] 评分文件 reference_queries_sha256 == 判据包参考答案  (0ea6ec368759658a...)
+[PASS] 冻结记录 case_file_sha256 == 仓库题包  (23e124f703225db0...)
+[PASS] 冻结记录 data_manifest.sha256 == 仓库数据清单  (b2e636680dca95f6...)
+[PASS] 冻结记录 service_runtime_manifest.sha256 == 仓库运行清单  (9b02a3719c4aeba4...)
+[PASS] 评分文件标注 run_type=已曝光开发集回归  (exposed_developm...)
+[PASS] 评分文件含 warning 免责说明  (ok...)
+
+# 合计 12 项，通过 12 项，失败 0 项

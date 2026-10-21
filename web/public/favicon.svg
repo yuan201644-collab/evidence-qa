@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-labelledby="title">
+  <title id="title">知证 VeriMind</title>
+  <!-- 兼容入口：复用品牌母版，不另画或复制一份图形。 -->
+  <image href="brand/verimind-mark.svg" width="32" height="32" />
+</svg>

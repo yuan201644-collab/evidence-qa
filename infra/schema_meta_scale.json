@@ -1,0 +1,331 @@
+{
+  "schema_version": "v1",
+  "description": "规模效率实验专用 schema：只含 scale.sales_scale_{1000,10000,100000} 三张同构合成销售表。与 infra/schema_meta.json 分开，是为了不让合成表给默认业务链路的 Schema Linking 引入无关干扰项；跑规模题时以 SCHEMA_META_PATH 指向本文件。",
+  "database": "chinook（scale schema 与 Chinook 11 表同库、独立 schema）",
+  "tables": [
+    {
+      "table": "sales_scale_1000",
+      "schema": "scale",
+      "description": "合成销售明细（1,000 行），仅用于结构化规模效率评估，不代表真实业务数据。",
+      "row_count": 1000,
+      "primary_key": [
+        "sale_id"
+      ],
+      "columns": [
+        {
+          "name": "sale_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "销售记录主键，由生成序号确定。"
+        },
+        {
+          "name": "sale_date",
+          "type": "DATE",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "销售日期，分布于 2021-01-01 至 2025-12-31。"
+        },
+        {
+          "name": "region",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "销售大区，取值为华东、华北、华南、西南、东北。",
+          "sample_values": [
+            "华东",
+            "华北",
+            "华南",
+            "西南",
+            "东北"
+          ]
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "商品编号，范围为 1 至 100。",
+          "sample_values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "销售数量，范围为 1 至 20。",
+          "sample_values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        {
+          "name": "unit_price",
+          "type": "NUMERIC(10,2)",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "商品单价，单位为元。",
+          "sample_values": [
+            "10.37",
+            "10.74",
+            "11.11",
+            "11.48",
+            "11.85",
+            "12.22",
+            "12.59",
+            "12.96"
+          ]
+        },
+        {
+          "name": "amount",
+          "type": "NUMERIC(12,2)",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "销售金额，等于销售数量乘以商品单价，单位为元。",
+          "sample_values": [
+            "20.74",
+            "32.22",
+            "44.44",
+            "57.40",
+            "71.10",
+            "85.54",
+            "100.72",
+            "116.64"
+          ]
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "sales_scale_10000",
+      "schema": "scale",
+      "description": "合成销售明细（10,000 行），仅用于结构化规模效率评估，不代表真实业务数据。",
+      "row_count": 10000,
+      "primary_key": [
+        "sale_id"
+      ],
+      "columns": [
+        {
+          "name": "sale_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "销售记录主键，由生成序号确定。"
+        },
+        {
+          "name": "sale_date",
+          "type": "DATE",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "销售日期，分布于 2021-01-01 至 2025-12-31。"
+        },
+        {
+          "name": "region",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "销售大区，取值为华东、华北、华南、西南、东北。",
+          "sample_values": [
+            "华东",
+            "华北",
+            "华南",
+            "西南",
+            "东北"
+          ]
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "商品编号，范围为 1 至 100。",
+          "sample_values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "销售数量，范围为 1 至 20。",
+          "sample_values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        {
+          "name": "unit_price",
+          "type": "NUMERIC(10,2)",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "商品单价，单位为元。",
+          "sample_values": [
+            "10.37",
+            "10.74",
+            "11.11",
+            "11.48",
+            "11.85",
+            "12.22",
+            "12.59",
+            "12.96"
+          ]
+        },
+        {
+          "name": "amount",
+          "type": "NUMERIC(12,2)",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "销售金额，等于销售数量乘以商品单价，单位为元。",
+          "sample_values": [
+            "20.74",
+            "32.22",
+            "44.44",
+            "57.40",
+            "71.10",
+            "85.54",
+            "100.72",
+            "116.64"
+          ]
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "sales_scale_100000",
+      "schema": "scale",
+      "description": "合成销售明细（100,000 行），仅用于结构化规模效率评估，不代表真实业务数据。",
+      "row_count": 100000,
+      "primary_key": [
+        "sale_id"
+      ],
+      "columns": [
+        {
+          "name": "sale_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "销售记录主键，由生成序号确定。"
+        },
+        {
+          "name": "sale_date",
+          "type": "DATE",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "销售日期，分布于 2021-01-01 至 2025-12-31。"
+        },
+        {
+          "name": "region",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "销售大区，取值为华东、华北、华南、西南、东北。",
+          "sample_values": [
+            "华东",
+            "华北",
+            "华南",
+            "西南",
+            "东北"
+          ]
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "商品编号，范围为 1 至 100。",
+          "sample_values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "销售数量，范围为 1 至 20。",
+          "sample_values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        {
+          "name": "unit_price",
+          "type": "NUMERIC(10,2)",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "商品单价，单位为元。",
+          "sample_values": [
+            "10.37",
+            "10.74",
+            "11.11",
+            "11.48",
+            "11.85",
+            "12.22",
+            "12.59",
+            "12.96"
+          ]
+        },
+        {
+          "name": "amount",
+          "type": "NUMERIC(12,2)",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "销售金额，等于销售数量乘以商品单价，单位为元。",
+          "sample_values": [
+            "20.74",
+            "32.22",
+            "44.44",
+            "57.40",
+            "71.10",
+            "85.54",
+            "100.72",
+            "116.64"
+          ]
+        }
+      ],
+      "foreign_keys": []
+    }
+  ]
+}

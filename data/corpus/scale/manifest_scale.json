@@ -1,0 +1,58 @@
+{
+  "generator": "data/corpus/tools/build_scale_corpus.py",
+  "purpose": "题面 L507–509「非结构化文档 10 页 / 100 页 / 500 页」多规模性能对比",
+  "seed": "KB-003",
+  "count": 3,
+  "hash_notes": {
+    "content_sha256": "语料内容指纹，对章节数据做哈希，跨机器与 PyMuPDF 版本稳定。",
+    "file_sha256_local": "生成文件字节哈希，受写入器版本影响，只作本地产物指纹。",
+    "actual_pages": "渲染后回读的真实 PDF 页数（用 PyMuPDF，不可用时退回正则数 /Type /Page）。"
+  },
+  "documents": [
+    {
+      "id": "KB-003-S10",
+      "file": "KB-003_10页规模版.pdf",
+      "format": "pdf",
+      "kind": "pdf",
+      "category": "技术文档类",
+      "target_pages": 10,
+      "actual_pages": 14,
+      "bytes": 163149,
+      "sections": 374,
+      "derived_from": "KB-003",
+      "content_sha256": "c76ccbe68e371605c3757c82079842e40656d018549bd630f49f0ae69d80b003",
+      "file_sha256_local": "8a4d3dcb1cbf35a3f5340d6bfd00c6f9e9fdacfffdc0cbb2ee3ac5104f781633",
+      "notes": "规模语料：由 KB-003 扩写至约 10 页，用于效率 5 分（题面 L507–509）的多规模性能对比实测。种子章节原文保留，扩展部分为同源风格填充。"
+    },
+    {
+      "id": "KB-003-S100",
+      "file": "KB-003_100页规模版.pdf",
+      "format": "pdf",
+      "kind": "pdf",
+      "category": "技术文档类",
+      "target_pages": 100,
+      "actual_pages": 126,
+      "bytes": 406392,
+      "sections": 3560,
+      "derived_from": "KB-003",
+      "content_sha256": "cc5b0e123b42690690481ad4905e3dee313543cea6452adc59ec249b63f422eb",
+      "file_sha256_local": "6f2d3fbfc3d23b2afe9921d4c842d20f1d28c2e404588483df58b52e2b39c81d",
+      "notes": "规模语料：由 KB-003 扩写至约 100 页，用于效率 5 分（题面 L507–509）的多规模性能对比实测。种子章节原文保留，扩展部分为同源风格填充。"
+    },
+    {
+      "id": "KB-003-S500",
+      "file": "KB-003_500页规模版.pdf",
+      "format": "pdf",
+      "kind": "pdf",
+      "category": "技术文档类",
+      "target_pages": 500,
+      "actual_pages": 509,
+      "bytes": 1237916,
+      "sections": 10850,
+      "derived_from": "KB-003",
+      "content_sha256": "1d30c85516c1610e12363c9ce55e17c44f346ec1bee082d6e6a9d857b637eb10",
+      "file_sha256_local": "60f2e0d4b596a071ae84acc88eeee4da8eb1ff3902056ac1d0c727a64f92307e",
+      "notes": "规模语料：由 KB-003 扩写至约 500 页，用于效率 5 分（题面 L507–509）的多规模性能对比实测。种子章节原文保留，扩展部分为同源风格填充。"
+    }
+  ]
+}

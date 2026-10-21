@@ -1,0 +1,82 @@
+[
+  {
+    "answer": "工单 WO-2026-0001 的修复耗时为 7 小时，合同限时 8 小时，判定满足。",
+    "trace": [],
+    "refs": [
+      {
+        "kind": "sql",
+        "table": "cross_source_demo.work_order_events",
+        "column": "event_at",
+        "row_pk": "work_order_id=WO-2026-0001&event_type=accepted",
+        "snippet": "accepted：2026-10-14T08:00:00+08:00"
+      },
+      {
+        "kind": "doc",
+        "doc_id": "HT-1",
+        "doc_title": "设备维护合同",
+        "page": 1,
+        "section_path": "第二章 > 2.1 修复时限",
+        "char_start": 100,
+        "char_end": 120,
+        "snippet": "修复完成时限为 8 小时内。"
+      }
+    ],
+    "sql": null,
+    "need_clarify": false,
+    "result_set": null,
+    "suggestions": [],
+    "data_source": null,
+    "context_continuation": null,
+    "fact_review": {
+      "schema_version": "1",
+      "coverage": "cross_source_work_order_sla",
+      "verification_mode": "strict",
+      "scope_note": "仅展示事实计划记录的事实状态与证据关联，不代表答案中的其他表述均已核验。",
+      "items": [
+        {
+          "fact_id": "sla_verdict",
+          "label": "修复时限判断",
+          "summary": "修复耗时 7 小时，合同限时 8 小时，符合合同限时。",
+          "status": "supported",
+          "execution_status": "completed",
+          "evidence_link_status": "complete",
+          "checks": [{"code": "service_restored_within_limit", "result": "passed"}],
+          "evidence_ref_indices": [0, 1],
+          "reason_code": null,
+          "reason": null
+        }
+      ]
+    }
+  },
+  {
+    "answer": "因设备与合同关系未能确认，合同文档检索未执行。",
+    "trace": [],
+    "refs": [],
+    "sql": null,
+    "need_clarify": false,
+    "result_set": null,
+    "suggestions": [],
+    "data_source": null,
+    "context_continuation": null,
+    "fact_review": {
+      "schema_version": "1",
+      "coverage": "cross_source_work_order_sla",
+      "verification_mode": "strict",
+      "scope_note": "仅展示事实计划记录的事实状态与证据关联，不代表答案中的其他表述均已核验。",
+      "items": [
+        {
+          "fact_id": "contract_repair_limit",
+          "label": "合同修复时限",
+          "summary": null,
+          "status": "insufficient",
+          "execution_status": "not_run",
+          "evidence_link_status": "unavailable",
+          "checks": [],
+          "evidence_ref_indices": [],
+          "reason_code": "missing_contract_mapping",
+          "reason": "没有可用的合同映射，因此文档检索未执行。"
+        }
+      ]
+    }
+  }
+]

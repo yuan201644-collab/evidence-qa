@@ -1,0 +1,27 @@
+# 留出集专用 PostgreSQL：独立容器、端口和数据卷，不复用演示数据库。
+name: askdata-cross-source-eval
+
+services:
+  db:
+    image: pgvector/pgvector:pg16@sha256:ccc6e83d6e35e931dc7c5def2022729d5a6c370318d099181995567ff1fb4d6b
+    container_name: askdata-cross-source-eval-db
+    environment:
+      POSTGRES_DB: cross_source_demo
+      POSTGRES_USER: ${CROSS_SOURCE_DEMO_USER:-cross_source_demo}
+      POSTGRES_PASSWORD: ${CROSS_SOURCE_DEMO_PASSWORD:?请先设置 CROSS_SOURCE_DEMO_PASSWORD}
+      TZ: Asia/Shanghai
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    ports:
+      - "127.0.0.1:${CROSS_SOURCE_EVAL_PORT:-55632}:5432"
+    volumes:
+      - cross_source_eval_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -q -U $$POSTGRES_USER -d cross_source_demo"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+volumes:
+  cross_source_eval_pgdata:
+    name: askdata_cross_source_eval_pgdata

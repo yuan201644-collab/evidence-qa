@@ -1,0 +1,78 @@
+# PostgreSQL + pgvector —— 数据底座
+#
+# 状态：**已实测**（2026-09-18，Docker Desktop for Windows）。
+#   实测结论：容器 Up (healthy)、Chinook track 行数 3503、pgvector 扩展 0.8.6，
+#   连库导出的 schema_meta.json 通过 pydantic 契约校验。
+#   镜像摘要：pgvector/pgvector@sha256:ccc6e83d6e35e931dc7c5def2022729d5a6c370318d099181995567ff1fb4d6b
+#   镜像选型理由：pgvector 官方发布的 PG16 镜像，pgvector 与业务库同容器，
+#   满足「部署组件最少」的取舍（见 项目概况 §二 数据层）。
+#   若 Docker Hub 直连拉不动，改用镜像加速地址（实测可用）：
+#       docker pull docker.m.daocloud.io/pgvector/pgvector:pg16
+#       docker tag  docker.m.daocloud.io/pgvector/pgvector:pg16 pgvector/pgvector:pg16
+
+# 独立项目名 ict：与 docker-compose.aw.yml 分开记账。
+#   两个文件若共用同一个 compose 项目名（默认取目录名 infra），
+#   起其中一个会报「发现孤儿容器」，而 `up --remove-orphans` 会把另一个库直接删掉——
+#   这是会丢演示环境的操作。显式命名项目后，两库互不干扰。
+#   容器名与数据卷名也都在这里显式写死，所以改项目名不会动到已有数据卷。
+name: ict
+
+services:
+  db:
+    # tag + digest 双写：tag 给人读，digest 保证拿到的是同一份内容。
+    # 只写 tag 时，上游重新推送同一个 tag 会让镜像内容变化，
+    # 而健康检查断言的 3503 会因此亮红灯——断言能发现，但演示前一晚发现很被动。
+    # 换镜像时改这一行，并同步 README 里的摘要记录。
+    image: pgvector/pgvector:pg16@sha256:ccc6e83d6e35e931dc7c5def2022729d5a6c370318d099181995567ff1fb4d6b
+    container_name: ict-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ict}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD 未设置，请先 cp .env.example .env}
+      # 保持默认库为 postgres：Chinook 官方脚本自带 DROP/CREATE DATABASE chinook，
+      # 若把 POSTGRES_DB 设成 chinook，脚本会在连着自己的会话里 DROP 自己而报错。
+      # 注意：业务库叫 chinook，它是 initdb 脚本建的，与 POSTGRES_DB 无关。
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      # 让 initdb 脚本以确定性排序执行，并统一时区
+      TZ: Asia/Shanghai
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    ports:
+      # 只绑回环地址。数据库口令是开发口令，绑 0.0.0.0 会把它暴露给同网段的任何机器；
+      # 本项目的连库需求全部来自本机（eval/runner.py、导出脚本）与容器内部，
+      # 不需要对外网卡开放。确实要跨机访问时再显式改成 0.0.0.0 并配强口令。
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # 只读挂载初始化脚本：容器首次启动（数据卷为空）时按文件名字典序执行
+      - ./initdb:/docker-entrypoint-initdb.d:ro
+      # 数据就绪探针，供 healthcheck 用 -f 执行（SQL 放在文件里，避免多层引号转义）
+      - ./healthcheck:/opt/healthcheck:ro
+    healthcheck:
+      # 双条件：引擎能连（pg_isready）+ 数据就绪（探针返回 1）。
+      #
+      # 为什么不能只用 pg_isready：它不检查库是否存在、更不检查有没有数据。
+      # docker-entrypoint-initdb.d 只在数据卷为空时执行一次，卷里一旦已有数据，
+      # 建库脚本会被整体跳过，此时容器照样 healthy 而 track 表是空的。
+      # 这个假阳性会让「一条命令起 Demo」在评委机器上静默失败，所以这里必须断言数据。
+      # 语义变化：healthy 现在表示「引擎 + Chinook 数据都已就绪」，不再只是「进程活着」。
+      #
+      # $$ 是 compose 转义，实际传给容器的是 $POSTGRES_USER 与 $(...)。
+      test:
+        - CMD-SHELL
+        - >-
+          pg_isready -q -U $$POSTGRES_USER -d chinook &&
+          [ "$$(psql -q -v ON_ERROR_STOP=1 -U $$POSTGRES_USER -d chinook -tAf /opt/healthcheck/chinook.sql)" = "1" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      # initdb 要把官方全量脚本灌进库，慢机器上要几十秒；这段时间不计入 retries
+      start_period: 60s
+    command:
+      - postgres
+      # 慢查询日志：为「系统效率」那 5 分的实测数据留证据，不靠事后回忆
+      - -c
+      - log_min_duration_statement=200
+
+volumes:
+  pgdata:
+    name: ict_pgdata

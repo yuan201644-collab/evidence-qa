@@ -1,0 +1,56 @@
+{
+  "run_id": "20261014T132355Z-1a1d4f9c",
+  "capture_status": "completed",
+  "expected_case_runs": 20,
+  "completed_case_runs": 20,
+  "expected_turns": 43,
+  "recorded_turns": 43,
+  "attempted_requests": 43,
+  "in_flight": null,
+  "created_at": "2026-10-14T13:23:56+00:00",
+  "base_url_origin": "http://127.0.0.1:8000",
+  "health": {
+    "status": "ok",
+    "graph_backend": "mock"
+  },
+  "case_file": "eval\\mainline\\development_v0.1\\t3_v02_questions.jsonl",
+  "case_file_sha256": "6e2682e0b0033ba5a810b08af94f7e87318febedec379bb9221e5f003f178ac8",
+  "case_count": 20,
+  "repeat": 1,
+  "request_timeout_seconds": 120,
+  "git_commit": "b3c804133ed463f1b933e499c8dff2ae2f24bfc5",
+  "git_status_available": true,
+  "git_dirty": false,
+  "source_manifest": [],
+  "dependency_files": {
+    "uv.lock": "2769a00ab5fddc1bef3cb2b68ae9178fbce08d2fc4ec22bad2fd0fbc1b5ae273",
+    "pyproject.toml": "eee1a9dcc6c2018b29b51ecb23f7865aa2be893ed0fe15ae9331a25b7bd7a838",
+    "web/package-lock.json": "4545364be588eb91878d08b4ee4eabf34dbe9073f4cb5e4462ee936fc6aa217f"
+  },
+  "collector_process_config": {
+    "NL2SQL_BACKEND": "real",
+    "DOC_SEARCH_BACKEND": "rag",
+    "SQL_DIALECT": "postgres",
+    "SQL_READONLY_ONLY": "true",
+    "SQL_AUTO_LIMIT": "1000",
+    "SQL_TIMEOUT_SECONDS": "30",
+    "LLM_TIMEOUT_SECONDS": "60",
+    "LLM_MAX_RETRIES": "2",
+    "NL2SQL_MAX_ATTEMPTS": "3",
+    "APP_TIME_ANCHOR": "2024-06-15",
+    "LLM_MODEL": "glm-4.5-flash"
+  },
+  "collector_process_config_sha256": "b69774e7f844e677f32e6fc5f7b03c8d6a31d0fb0a2ccb40478fe3b8a5c8e364",
+  "service_runtime_manifest": {
+    "file": "t3_anchor_runtime_manifest.json",
+    "sha256": "6de59cdb9f865111a8ef08fd67dd4f016424ec66b2c99655daaaac36de2cad17"
+  },
+  "server_runtime_config_fingerprint_supplied": true,
+  "data_manifest": {
+    "file": "t3_run3_data_manifest.rev1.json",
+    "sha256": "ab2c57d0b9e578f1c0421244633daf972ccc05ca1bba2886d033e0776eebded0"
+  },
+  "data_snapshot_fingerprint_supplied": true,
+  "answer_key_read_by_driver": false,
+  "answer_key_files_excluded_from_source_manifest": true
+}

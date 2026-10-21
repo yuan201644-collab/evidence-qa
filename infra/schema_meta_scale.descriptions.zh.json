@@ -1,0 +1,28 @@
+{
+  "schema": "schema_meta_descriptions_zh_v1",
+  "source_schema": "schema_meta_scale.json",
+  "note": "由 infra/scripts/build_scale_descriptions.py 从 schema_meta_scale.json 的 columns[].description 原样导出，供 app/nl2sql/capability_runtime.py 的时间列判据读取。判据只看说明文本、不看列名，故本文件必须存在，否则规模表会被判成「没有可用的时间依据」。",
+  "columns": {
+    "sales_scale_1000.sale_id": "销售记录主键，由生成序号确定。",
+    "sales_scale_1000.sale_date": "销售日期，分布于 2021-01-01 至 2025-12-31。",
+    "sales_scale_1000.region": "销售大区，取值为华东、华北、华南、西南、东北。",
+    "sales_scale_1000.product_id": "商品编号，范围为 1 至 100。",
+    "sales_scale_1000.quantity": "销售数量，范围为 1 至 20。",
+    "sales_scale_1000.unit_price": "商品单价，单位为元。",
+    "sales_scale_1000.amount": "销售金额，等于销售数量乘以商品单价，单位为元。",
+    "sales_scale_10000.sale_id": "销售记录主键，由生成序号确定。",
+    "sales_scale_10000.sale_date": "销售日期，分布于 2021-01-01 至 2025-12-31。",
+    "sales_scale_10000.region": "销售大区，取值为华东、华北、华南、西南、东北。",
+    "sales_scale_10000.product_id": "商品编号，范围为 1 至 100。",
+    "sales_scale_10000.quantity": "销售数量，范围为 1 至 20。",
+    "sales_scale_10000.unit_price": "商品单价，单位为元。",
+    "sales_scale_10000.amount": "销售金额，等于销售数量乘以商品单价，单位为元。",
+    "sales_scale_100000.sale_id": "销售记录主键，由生成序号确定。",
+    "sales_scale_100000.sale_date": "销售日期，分布于 2021-01-01 至 2025-12-31。",
+    "sales_scale_100000.region": "销售大区，取值为华东、华北、华南、西南、东北。",
+    "sales_scale_100000.product_id": "商品编号，范围为 1 至 100。",
+    "sales_scale_100000.quantity": "销售数量，范围为 1 至 20。",
+    "sales_scale_100000.unit_price": "商品单价，单位为元。",
+    "sales_scale_100000.amount": "销售金额，等于销售数量乘以商品单价，单位为元。"
+  }
+}

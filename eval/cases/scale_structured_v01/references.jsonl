@@ -1,0 +1,30 @@
+{"id":"S1K-Q01","sql":"SELECT COUNT(*) AS total_rows FROM scale.sales_scale_1000"}
+{"id":"S1K-Q02","sql":"SELECT region, COUNT(*) AS record_count FROM scale.sales_scale_1000 GROUP BY region ORDER BY region ASC"}
+{"id":"S1K-Q03","sql":"SELECT region, SUM(amount) AS total_amount FROM scale.sales_scale_1000 GROUP BY region ORDER BY total_amount DESC, region ASC"}
+{"id":"S1K-Q04","sql":"SELECT COUNT(*) AS row_count FROM scale.sales_scale_1000 WHERE sale_date >= DATE '2024-01-01' AND sale_date < DATE '2025-01-01'"}
+{"id":"S1K-Q05","sql":"SELECT SUM(amount) AS total_amount FROM scale.sales_scale_1000 WHERE sale_date >= DATE '2024-01-01' AND sale_date < DATE '2025-01-01'"}
+{"id":"S1K-Q06","sql":"SELECT SUM(amount) AS total_amount FROM scale.sales_scale_1000 WHERE region = '华东' AND sale_date >= DATE '2024-01-01' AND sale_date < DATE '2025-01-01'"}
+{"id":"S1K-Q07","sql":"SELECT product_id, SUM(amount) AS total_amount FROM scale.sales_scale_1000 GROUP BY product_id ORDER BY total_amount DESC, product_id ASC LIMIT 10"}
+{"id":"S1K-Q08","sql":"SELECT DATE_TRUNC('month', sale_date)::date AS month, SUM(amount) AS total_amount FROM scale.sales_scale_1000 WHERE sale_date >= DATE '2024-01-01' AND sale_date < DATE '2025-01-01' GROUP BY month ORDER BY month ASC"}
+{"id":"S1K-Q09","sql":"SELECT AVG(unit_price) AS avg_unit_price, MIN(unit_price) AS min_unit_price, MAX(unit_price) AS max_unit_price FROM scale.sales_scale_1000"}
+{"id":"S1K-Q10","sql":"SELECT sale_id, amount FROM scale.sales_scale_1000 ORDER BY amount DESC, sale_id ASC LIMIT 100"}
+{"id":"S10K-Q01","sql":"SELECT COUNT(*) AS total_rows FROM scale.sales_scale_10000"}
+{"id":"S10K-Q02","sql":"SELECT region, COUNT(*) AS record_count FROM scale.sales_scale_10000 GROUP BY region ORDER BY region ASC"}
+{"id":"S10K-Q03","sql":"SELECT region, SUM(amount) AS total_amount FROM scale.sales_scale_10000 GROUP BY region ORDER BY total_amount DESC, region ASC"}
+{"id":"S10K-Q04","sql":"SELECT COUNT(*) AS row_count FROM scale.sales_scale_10000 WHERE sale_date >= DATE '2024-01-01' AND sale_date < DATE '2025-01-01'"}
+{"id":"S10K-Q05","sql":"SELECT SUM(amount) AS total_amount FROM scale.sales_scale_10000 WHERE sale_date >= DATE '2024-01-01' AND sale_date < DATE '2025-01-01'"}
+{"id":"S10K-Q06","sql":"SELECT SUM(amount) AS total_amount FROM scale.sales_scale_10000 WHERE region = '华东' AND sale_date >= DATE '2024-01-01' AND sale_date < DATE '2025-01-01'"}
+{"id":"S10K-Q07","sql":"SELECT product_id, SUM(amount) AS total_amount FROM scale.sales_scale_10000 GROUP BY product_id ORDER BY total_amount DESC, product_id ASC LIMIT 10"}
+{"id":"S10K-Q08","sql":"SELECT DATE_TRUNC('month', sale_date)::date AS month, SUM(amount) AS total_amount FROM scale.sales_scale_10000 WHERE sale_date >= DATE '2024-01-01' AND sale_date < DATE '2025-01-01' GROUP BY month ORDER BY month ASC"}
+{"id":"S10K-Q09","sql":"SELECT AVG(unit_price) AS avg_unit_price, MIN(unit_price) AS min_unit_price, MAX(unit_price) AS max_unit_price FROM scale.sales_scale_10000"}
+{"id":"S10K-Q10","sql":"SELECT sale_id, amount FROM scale.sales_scale_10000 ORDER BY amount DESC, sale_id ASC LIMIT 100"}
+{"id":"S100K-Q01","sql":"SELECT COUNT(*) AS total_rows FROM scale.sales_scale_100000"}
+{"id":"S100K-Q02","sql":"SELECT region, COUNT(*) AS record_count FROM scale.sales_scale_100000 GROUP BY region ORDER BY region ASC"}
+{"id":"S100K-Q03","sql":"SELECT region, SUM(amount) AS total_amount FROM scale.sales_scale_100000 GROUP BY region ORDER BY total_amount DESC, region ASC"}
+{"id":"S100K-Q04","sql":"SELECT COUNT(*) AS row_count FROM scale.sales_scale_100000 WHERE sale_date >= DATE '2024-01-01' AND sale_date < DATE '2025-01-01'"}
+{"id":"S100K-Q05","sql":"SELECT SUM(amount) AS total_amount FROM scale.sales_scale_100000 WHERE sale_date >= DATE '2024-01-01' AND sale_date < DATE '2025-01-01'"}
+{"id":"S100K-Q06","sql":"SELECT SUM(amount) AS total_amount FROM scale.sales_scale_100000 WHERE region = '华东' AND sale_date >= DATE '2024-01-01' AND sale_date < DATE '2025-01-01'"}
+{"id":"S100K-Q07","sql":"SELECT product_id, SUM(amount) AS total_amount FROM scale.sales_scale_100000 GROUP BY product_id ORDER BY total_amount DESC, product_id ASC LIMIT 10"}
+{"id":"S100K-Q08","sql":"SELECT DATE_TRUNC('month', sale_date)::date AS month, SUM(amount) AS total_amount FROM scale.sales_scale_100000 WHERE sale_date >= DATE '2024-01-01' AND sale_date < DATE '2025-01-01' GROUP BY month ORDER BY month ASC"}
+{"id":"S100K-Q09","sql":"SELECT AVG(unit_price) AS avg_unit_price, MIN(unit_price) AS min_unit_price, MAX(unit_price) AS max_unit_price FROM scale.sales_scale_100000"}
+{"id":"S100K-Q10","sql":"SELECT sale_id, amount FROM scale.sales_scale_100000 ORDER BY amount DESC, sale_id ASC LIMIT 100"}

@@ -1,0 +1,26 @@
+flowchart TD
+    A[冻结代码版本与未提交差异清单] --> B[冻结数据 / 用例 / 配置 / 时间锚点]
+    B --> C[调用真实系统生成结果<br/>不注入标准答案]
+    C --> D[保存原始输出与调用日志]
+    D --> E[答案正确性评估]
+    D --> F[逐事实证据支持与引用完整度]
+    D --> G[路由 / SQL / 检索命中 / 失败类型]
+    D --> H[端到端时延 / P95 / 调用次数]
+    E --> I[人工复核说明<br/>盲审与审阅范围]
+    F --> I
+    G --> J[错误归因与分层统计]
+    H --> J
+    I --> J
+    J --> K[定向修改并记录差异]
+    K --> L[固定集回归 + 独立留出集]
+    L -->|结果与代价| R[形成受范围限制的结论]
+    L -->|发现退化| J
+    O[判分器自检 / 标准答案回放] -.仅检查评测程序，不是系统能力证据.-> P[单独标记，不计入真实系统表现]
+
+    classDef verified fill:#d9ead3,stroke:#38761d,color:#111;
+    classDef todo fill:#fff2cc,stroke:#bf9000,color:#111;
+    classDef suggested fill:#d9eaf7,stroke:#3d85c6,color:#111;
+    classDef absent fill:#f4cccc,stroke:#cc0000,color:#111;
+    class A,B,C,D,E,F,G,H,I,J,K,L,R,O,P todo;
+
+    LEGEND[图例：绿色=已验证；黄色=流程待验证；蓝色=建议；红色=未实现。阶段A只整理既有报告，未运行系统或评测。]

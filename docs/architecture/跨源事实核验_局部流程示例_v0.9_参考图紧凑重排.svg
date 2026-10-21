@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720" role="img" aria-labelledby="title desc">
+<title id="title">工单—合同跨源核验流程：参考图紧凑重排版</title>
+<desc id="desc">沿用 v0.7 插画图标与全部二十二个业务节点。上层两个等宽模块各高三百四十像素，下层模块高三百二十像素。来源事实包置于产生模块出口，核验与证据回链分两排就近布局。</desc>
+<defs>
+    <marker id="arr-blue" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 12 6.5 1 12" fill="none" stroke="#0074e8" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker id="arr-purple" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 12 6.5 1 12" fill="none" stroke="#a319d6" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker id="arr-green" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 12 6.5 1 12" fill="none" stroke="#339d00" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <filter id="hand-ink" x="-12%" y="-12%" width="124%" height="124%">
+      <feTurbulence type="fractalNoise" baseFrequency=".055" numOctaves="1" seed="17" result="grain"/>
+      <feDisplacementMap in="SourceGraphic" in2="grain" scale="2.1" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <style>
+.bg{fill:#fff}
+.title{font-family:"华文行楷","STXingkai","华文琥珀","Microsoft YaHei",sans-serif;font-size:36px;font-style:italic;font-weight:700;fill:#004ea8}
+.subtitle{font-family:"Microsoft YaHei",sans-serif;font-size:16px;fill:#536878}
+.bandTitle{font-family:"华文琥珀","STHupo","Microsoft YaHei",sans-serif;font-size:24px;font-style:italic;font-weight:400;fill:#004d96}
+.bandPurple{fill:#7900ae}
+.stepTitle{font-family:"Microsoft YaHei",sans-serif;font-size:16px;font-weight:700;fill:#243d50}
+.stepText{font-family:"Microsoft YaHei",sans-serif;font-size:12.5px;fill:#536b7c}
+.moduleNote{font-family:"Microsoft YaHei",sans-serif;font-size:12.5px;fill:#425d70}
+.bottomTitle{font-family:"华文琥珀","STHupo","Microsoft YaHei",sans-serif;font-size:24px;font-style:italic;font-weight:400;fill:#246700}
+.smallLabel{font-family:"Microsoft YaHei",sans-serif;font-size:12px;font-weight:700;fill:#4e6272}
+.alert{font-family:"Microsoft YaHei",sans-serif;font-size:13px;font-weight:700;fill:#8d4d0c}
+.answerTitle{font-family:"Microsoft YaHei",sans-serif;font-size:16px;font-weight:700;fill:#173c6c}
+.line{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.iconLine{fill:none;stroke:#30485c;stroke-width:2.7;stroke-linecap:round;stroke-linejoin:round}
+.iconThin{fill:none;stroke:#30485c;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+</style>
+
+    <!-- The slightly uneven contours and doubled short strokes give the icons a hand-drawn feel. -->
+    <symbol id="ico-ticket" viewBox="10 1 44 60">
+  <path d="M17 9q1-3 4-3h25q3 1 3 4v43q-1 3-4 3H18q-3-1-3-4z" fill="#247ee5" stroke="#30485c" stroke-width="2.7" stroke-linejoin="round"/>
+  <path d="M19 14q0-2 3-2h22q2 1 2 3v35q0 2-3 2H21q-2 0-2-3z" fill="#fffdf1" stroke="#30485c" stroke-width="1.8"/>
+  <path d="m23 7 1-4q1-2 4-1h9q3 1 3 5l-1 4H23z" fill="#ffc735" stroke="#30485c" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M22 18h17v5H22z" fill="#23bdfa" stroke="#30485c" stroke-width="1.4"/>
+  <circle cx="24" cy="30" r="2.3" fill="#ff9a25" stroke="#30485c" stroke-width="1"/>
+  <path d="M29 30h10M22 37h3m4 0h11M22 43h3m4 0h10" class="iconThin"/>
+  <path d="M18 17v31" stroke="#ff5b6a" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="43" cy="46" r="7" fill="#58e087" stroke="#30485c" stroke-width="1.7"/>
+  <path d="m39.5 46 2.4 2.5 4.3-5" fill="none" stroke="#145c35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M19 56q13 2 27 0" fill="none" stroke="#30485c" stroke-width="1.7" stroke-linecap="round"/>
+</symbol>
+    <symbol id="ico-bridge" viewBox="3 8 58 46">
+  <path d="M7 17q1-4 5-4h15q4 1 4 5v24q-1 4-5 4H11q-4-1-4-5z" fill="#39aaff" stroke="#30485c" stroke-width="2.7"/>
+  <path d="M35 15q1-4 5-4h14q4 1 4 5v25q-1 4-5 4H39q-4-1-4-5z" fill="#a35bff" stroke="#30485c" stroke-width="2.7"/>
+  <path d="M11 19h16v4H11z" fill="#c6f4ff" stroke="#30485c" stroke-width="1.2"/>
+  <circle cx="14" cy="30" r="2" fill="#ffdc35"/><path d="M19 30h6m-11 6h11" stroke="#174f97" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M39 18h12v4H39z" fill="#ffe78a" stroke="#30485c" stroke-width="1.2"/>
+  <circle cx="42" cy="30" r="2" fill="#64f4b4"/><path d="M47 30h5m-13 6h13" stroke="#512481" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="m27 24 4-4 4 4v8l-4 4-4-4z" fill="#ff8e32" stroke="#30485c" stroke-width="2"/>
+  <path d="m24 27 4 0m10 0h-4m-3 9v5" fill="none" stroke="#ffe84d" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="31" cy="17" r="2.4" fill="#fff" stroke="#30485c" stroke-width="1.3"/>
+</symbol>
+    <symbol id="ico-clock" viewBox="3 2 57 59">
+  <path d="M27 8q14-2 21 9l4 8q3 15-7 24-12 11-27 3Q5 46 7 31 7 16 20 10z" fill="#ffb92e" stroke="#30485c" stroke-width="2.8"/>
+  <path d="M18 14q11-7 23 0 10 8 8 20-2 13-14 16-13 2-21-8-7-12 0-23z" fill="#fff7b4" stroke="#dc7720" stroke-width="2"/>
+  <path d="M24 6q7-5 15 0l-1 7-13 1z" fill="#ff654f" stroke="#30485c" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M31 16v-3m0 37v-3M13 32h4m29 0h4M18 19l3 3m20 20 3 3m0-26-3 3M21 42l-3 3" stroke="#30485c" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M31 31V20m0 11 10 6" fill="none" stroke="#1674d1" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="31" cy="31" r="3.2" fill="#ed4f3b" stroke="#30485c" stroke-width="1.5"/>
+  <path d="M46 11q5 1 7 5m-43 30q3 5 8 7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+</symbol>
+    <symbol id="ico-searchdoc" viewBox="9 0 52 64">
+  <path d="M13 8q0-3 4-3h23l11 12v34q0 3-4 3H17q-4 0-4-4z" fill="#fff3a4" stroke="#30485c" stroke-width="2.7" stroke-linejoin="round"/>
+  <path d="M18 9h19v8h-19z" fill="#21cbe7" stroke="#30485c" stroke-width="1.6"/>
+  <path d="M19 24h20m-20 6h15m-15 6h13" class="iconLine"/>
+  <path d="M39 5v13h12" fill="#ffbf27" stroke="#30485c" stroke-width="2.3" stroke-linejoin="round"/>
+  <path d="m18 43 10 0" stroke="#f04f7b" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="42" cy="43" r="10" fill="#55edff" stroke="#0074e8" stroke-width="2.7"/>
+  <circle cx="42" cy="43" r="5.4" fill="#d9ffff" stroke="#30485c" stroke-width="1.3"/>
+  <path d="m49 50 8 8" stroke="#ef6c2f" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="m48 37 2 2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+  <path d="m14 21-3 2m42-13 3 2" stroke="#f59b20" stroke-width="2.3" stroke-linecap="round"/>
+</symbol>
+    <symbol id="ico-clause" viewBox="10 0 47 64">
+  <path d="M14 7q1-3 4-2h23l10 10v42q0 3-4 3H18q-4 0-4-4z" fill="#fff7c9" stroke="#30485c" stroke-width="2.6"/>
+  <path d="M19 10h18v7H19z" fill="#57bcff" stroke="#30485c" stroke-width="1.4"/>
+  <path d="M20 23h22m-22 7h18m-18 15h18m-18 6h13" stroke="#30485c" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="18" cy="30" r="2" fill="#e54470"/><circle cx="18" cy="45" r="2" fill="#e54470"/>
+  <path d="m19 36 24 .5" stroke="#ff941e" stroke-width="6" stroke-linecap="round" opacity=".85"/>
+  <path d="m39 5 1 12h11" fill="#ffcf36" stroke="#30485c" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M46 22v13l-4-3-4 3V22z" fill="#f05275" stroke="#30485c" stroke-width="1.4" stroke-linejoin="round"/>
+</symbol>
+    <symbol id="ico-scope" viewBox="4 8 56 48">
+  <path d="M8 16q1-4 5-4h37q4 1 4 5v29q-1 4-5 4H13q-5-1-5-5z" fill="#f0d3ff" stroke="#30485c" stroke-width="2.6"/>
+  <path d="M12 18h36v25H12z" fill="#e8f7ff" stroke="#9f55d4" stroke-width="1.8"/>
+  <circle cx="30" cy="30" r="12" fill="#b76aff" stroke="#30485c" stroke-width="2.2"/>
+  <circle cx="30" cy="30" r="7" fill="#ffdf35" stroke="#7e30bd" stroke-width="2"/>
+  <circle cx="30" cy="30" r="2.5" fill="#ff5c46"/>
+  <path d="M30 12v6m0 24v6M8 30h6m32 0h6" stroke="#30485c" stroke-width="2" stroke-linecap="round"/>
+  <path d="m40 43 4 4 8-10" fill="none" stroke="#159d5a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m16 14 2 2m27 27 2 2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+</symbol>
+    <symbol id="ico-align" viewBox="3 4 57 55">
+  <path d="M7 15q0-4 4-4h17q4 1 4 5v8h-8q-1 7 6 8v11H11q-4 0-4-4z" fill="#39b7ff" stroke="#30485c" stroke-width="2.7" stroke-linejoin="round"/>
+  <path d="M34 17q0-4 4-4h14q4 0 4 4v28q0 4-4 4H34V37q-7 0-7-6 0-6 7-6z" fill="#ffcf34" stroke="#30485c" stroke-width="2.7" stroke-linejoin="round"/>
+  <path d="M11 17h13v4H11z" fill="#d9fbff" stroke="#30485c" stroke-width="1.3"/>
+  <path d="M39 17h12v4H39z" fill="#fff4ad" stroke="#30485c" stroke-width="1.3"/>
+  <circle cx="13" cy="30" r="2" fill="#ed4d76"/><path d="M18 30h7m-12 7h10" stroke="#164f9f" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="40" cy="31" r="2" fill="#944ad0"/><path d="M45 31h5" stroke="#754000" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="m19 43 4 4 7-9m12 4 4 4 6-8" fill="none" stroke="#098e56" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+    <symbol id="ico-compare" viewBox="3 2 57 59">
+  <path d="M27 11q14-1 19 10 6 12-1 23-8 12-22 6Q9 46 9 32 9 18 20 13z" fill="#ffcf36" stroke="#30485c" stroke-width="2.7"/>
+  <path d="M24 8q7-4 14 0l-2 7-11 1z" fill="#ff6c37" stroke="#30485c" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M32 18v-3m0 34v-3M13 32h-3m43 0h-3m-31-13-2-2m30 30-2-2m0-26 2-2" stroke="#30485c" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M31 31V21m0 10 10 5" fill="none" stroke="#176cce" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="31" cy="31" r="3" fill="#e94c3d" stroke="#30485c" stroke-width="1.3"/>
+  <path d="M7 54h47" stroke="#287d31" stroke-width="3" stroke-linecap="round"/>
+  <path d="M13 50v8m8-5v5m8-9v9m8-5v5m8-8v8m7-12v12" stroke="#30485c" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M37 52h10" stroke="#ef554b" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+    <symbol id="ico-ledger" viewBox="7 0 49 60">
+  <path d="M13 8q0-3 4-3h30q3 1 3 4v43q-1 3-4 3H16q-4 0-4-4z" fill="#ecff9e" stroke="#30485c" stroke-width="2.7"/>
+  <path d="M18 6h22v7H18z" fill="#47b9ff" stroke="#30485c" stroke-width="1.5"/>
+  <path d="M16 17v32" stroke="#eb684d" stroke-width="2.4" stroke-linecap="round"/>
+  <rect x="20" y="17" width="5" height="5" rx="1" fill="#39ca6b" stroke="#30485c" stroke-width="1"/>
+  <path d="m21 19 1 1 2-3" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M28 19h14" stroke="#30485c" stroke-width="2" stroke-linecap="round"/>
+  <rect x="20" y="29" width="5" height="5" rx="1" fill="#ffc12d" stroke="#30485c" stroke-width="1"/>
+  <path d="M28 31h15" stroke="#30485c" stroke-width="2" stroke-linecap="round"/>
+  <rect x="20" y="41" width="5" height="5" rx="1" fill="#ce63ed" stroke="#30485c" stroke-width="1"/>
+  <path d="M28 43h13" stroke="#30485c" stroke-width="2" stroke-linecap="round"/>
+  <path d="m45 18 2 2m-2 11 2 2m-2 11 2 2" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+</symbol>
+    <symbol id="ico-evidence" viewBox="9 0 50 64">
+  <path d="M13 7q0-3 4-3h24l10 11v40q0 3-4 3H17q-4 0-4-4z" fill="#9bd8ff" stroke="#30485c" stroke-width="2.7"/>
+  <path d="M18 10h20v6H18z" fill="#1879d2" stroke="#30485c" stroke-width="1.3"/>
+  <path d="M20 24h21m-21 7h16m-16 7h13" stroke="#30485c" stroke-width="2.1" stroke-linecap="round"/>
+  <circle cx="18" cy="24" r="2.2" fill="#f04e71"/><circle cx="18" cy="31" r="2.2" fill="#f04e71"/>
+  <path d="M41 4v12h10" fill="#58b4ff" stroke="#30485c" stroke-width="2.3" stroke-linejoin="round"/>
+  <path d="M35 44q-5 5 0 9t9 0l7-7q4-5-1-8t-8 1l-5 5" fill="none" stroke="#068d66" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="48" cy="48" r="2.5" fill="#ffda34" stroke="#30485c" stroke-width="1"/>
+</symbol>
+  <symbol id="ico-answer" viewBox="3 3 58 56">
+  <path d="M10 8q0-3 4-3h38q5 1 5 6l-1 27q-1 4-5 4H29L16 54l1-12h-5q-6 0-6-5z" fill="#7fe6ff" stroke="#30485c" stroke-width="2.7" stroke-linejoin="round"/>
+  <path d="M14 13q4-4 8 0m-7 8h27m-27 6h22" fill="none" stroke="#0871ca" stroke-width="2.3" stroke-linecap="round"/>
+  <circle cx="16" cy="33" r="1.8" fill="#f0536e"/><circle cx="22" cy="33" r="1.8" fill="#ffb629"/>
+  <path d="m39 32 15 1 3 20-17 1z" fill="#ffe347" stroke="#30485c" stroke-width="2.3" stroke-linejoin="round"/>
+  <path d="M42 37h10m-10 4h7" stroke="#30485c" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="m43 47 3 4 6-7" fill="none" stroke="#009f84" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m54 10 3-2m1 7 3 1" stroke="#ffad26" stroke-width="2" stroke-linecap="round"/>
+</symbol>
+<marker id="arr-orange" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 11 6 1 11" fill="none" stroke="#e47c00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<symbol id="ico-check" viewBox="0 0 52 52">
+  <path d="M26 4 44 11v13q0 15-18 24Q8 39 8 24V11z" fill="#64de73" stroke="#30485c" stroke-width="2.7" stroke-linejoin="round"/>
+  <path d="M26 8 40 13v11q0 12-14 19Q12 36 12 24V13z" fill="none" stroke="#aaff9c" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="m15 25 7 7 15-17" fill="none" stroke="#116b2d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m7 13-3-2m43 3 3-2m-4 29 3 2" stroke="#ffbb27" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="43" cy="9" r="3" fill="#fff06b" stroke="#30485c" stroke-width="1"/>
+</symbol>
+<symbol id="ico-over" viewBox="0 0 52 52">
+  <path d="M26 4 44 11v13q0 15-18 24Q8 39 8 24V11z" fill="#ff8d36" stroke="#30485c" stroke-width="2.7" stroke-linejoin="round"/>
+  <path d="M26 9 39 14v10q0 10-13 18Q13 34 13 24V14z" fill="#ffd057" stroke="#e45728" stroke-width="1.8" stroke-linejoin="round"/>
+  <path d="M26 15v13m0 6v1" fill="none" stroke="#9b3516" stroke-width="4" stroke-linecap="round"/>
+  <path d="m12 11-4-4m32 4 4-4m-33 34-4 3" stroke="#e94c38" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M18 19q2-3 5-4m9 24q4-2 6-5" fill="none" stroke="#fff1ae" stroke-width="2" stroke-linecap="round"/>
+</symbol>
+<symbol id="ico-unknown" viewBox="0 0 52 52">
+  <path d="m26 3 22 23-22 23L4 26z" fill="#ffdf39" stroke="#30485c" stroke-width="2.7" stroke-linejoin="round"/>
+  <path d="m26 8 17 18-17 18L9 26z" fill="none" stroke="#ff9f23" stroke-width="1.8" stroke-linejoin="round"/>
+  <circle cx="26" cy="26" r="12" fill="#fff7a1" stroke="#bd8100" stroke-width="1.8"/>
+  <path d="M21 21q1-7 7-6 7 1 6 7-1 4-7 6v3m0 4v1" fill="none" stroke="#554100" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M10 13 7 10m35 32 3 3M42 11l3-3" stroke="#ef7b28" stroke-width="2.5" stroke-linecap="round"/>
+</symbol>
+<marker id="arr-gold" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 11 6 1 11" fill="none" stroke="#c99700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<symbol id="ico-decision" viewBox="0 0 60 60">
+  <path d="M13 29Q20 29 26 30M29 26Q33 19 43 14M33 30H46M29 34Q34 43 43 47" fill="none" stroke="#30485c" stroke-width="3.2" stroke-linecap="round"/>
+  <circle cx="17" cy="29" r="5" fill="#39b7ff" stroke="#30485c" stroke-width="2"/>
+  <circle cx="47" cy="13" r="6" fill="#64de73" stroke="#30485c" stroke-width="2"/>
+  <circle cx="49" cy="30" r="6" fill="#ff8d36" stroke="#30485c" stroke-width="2"/>
+  <circle cx="47" cy="48" r="6" fill="#ffdf39" stroke="#30485c" stroke-width="2"/>
+  <circle cx="29" cy="30" r="9" fill="#fff2a6" stroke="#30485c" stroke-width="2.7"/>
+  <path d="m26 30 2 2 4-5" fill="none" stroke="#1372bf" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+</defs>
+<rect class="bg" width="1000" height="720"/>
+<!-- 模块比例依据参考图收窄，保留图标与名称，取消全局标题和编号 -->
+<rect x="16" y="16" width="476" height="340" rx="14" fill="#f7fcff" stroke="#0074d8" stroke-width="2.2"/>
+<path d="M30 16h448a14 14 0 0 1 14 14v28H16V30a14 14 0 0 1 14-14z" fill="#d4efff" stroke="#0074d8" stroke-width="1.7"/>
+<text class="bandTitle" x="254" y="45" text-anchor="middle">工单事实与对象映射</text>
+<rect x="508" y="16" width="476" height="340" rx="14" fill="#fffaff" stroke="#991ac7" stroke-width="2.2"/>
+<path d="M522 16h448a14 14 0 0 1 14 14v28H508V30a14 14 0 0 1 14-14z" fill="#f0dcff" stroke="#991ac7" stroke-width="1.7"/>
+<text class="bandTitle bandPurple" x="746" y="45" text-anchor="middle">合同原文与适用规则</text>
+<rect x="16" y="384" width="968" height="320" rx="14" fill="#f8fff2" stroke="#398900" stroke-width="2.2"/>
+<path d="M30 384h940a14 14 0 0 1 14 14v28H16v-28a14 14 0 0 1 14-14z" fill="#e2f5c7" stroke="#398900" stroke-width="1.7"/>
+<text class="bottomTitle" x="500" y="413" text-anchor="middle">跨源核验、状态分支与证据回链</text>
+
+<!-- 上层节点按取证关系靠拢；局部并行分叉后回到各模块出口 -->
+<path class="line" d="M96 130H148" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M200 130H238V106H272" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M238 130V223H272" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M324 106H360V148H399" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M324 223H360V176H399" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M451 162H484V311H205V286H174" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M312 80V68H562V104" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M588 130H640" stroke="#a319d6" marker-end="url(#arr-purple)"/>
+<path class="line" d="M692 130H730V106H764" stroke="#a319d6" marker-end="url(#arr-purple)"/>
+<path class="line" d="M730 130V223H764" stroke="#a319d6" marker-end="url(#arr-purple)"/>
+<path class="line" d="M816 106H858V148H894" stroke="#a319d6" marker-end="url(#arr-purple)"/>
+<path class="line" d="M816 223H858V176H894" stroke="#a319d6" marker-end="url(#arr-purple)"/>
+<path class="line" d="M946 162H972V311H695V286H666" stroke="#a319d6" marker-end="url(#arr-purple)"/>
+
+<!-- 模块连接贴外边与模块间通道，不再另占一层输入区 -->
+<path class="line" d="M122 286H8V487H56" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M614 286H500V370H14V501H56" stroke="#a319d6" marker-end="url(#arr-purple)"/>
+
+<!-- 下层第一排：主链与互斥结果 -->
+<rect x="595" y="434" width="377" height="130" rx="12" fill="none" stroke="#398900" stroke-width="1.4" stroke-dasharray="6 5"/>
+<text class="smallLabel" x="785" y="451" text-anchor="middle" fill="#246700">核验结果</text>
+<path class="line" d="M108 500H196" stroke="#398900" marker-end="url(#arr-green)"/>
+<path class="line" d="M248 500H349" stroke="#398900" marker-end="url(#arr-green)"/>
+<path class="line" d="M401 500H484" stroke="#398900" marker-end="url(#arr-green)"/>
+<path class="line" d="M536 500H563V462H920" stroke="#398900"/>
+<path class="line" d="M650 462V474" stroke="#398900" marker-end="url(#arr-green)"/>
+<path class="line" d="M785 462V474" stroke="#398900" marker-end="url(#arr-green)"/>
+<path class="line" d="M920 462V474" stroke="#398900" marker-end="url(#arr-green)"/>
+<!-- 前置条件未满足绕过后续判断，进入无法判定；线条避开全部名称 -->
+<path class="line" d="M56 514H26V571H962V500H946" stroke="#e47c00" marker-end="url(#arr-orange)"/>
+<!-- 结果组整体输出到账本，三个结果的互斥语义不变 -->
+<path class="line" d="M972 538H978V594H530V612" stroke="#398900" marker-end="url(#arr-green)"/>
+<!-- 下层第二排：来源证据、核验账本与回答，控制为一组紧凑局部链 -->
+<path class="line" d="M356 638H504" stroke="#398900" marker-end="url(#arr-green)"/>
+<path class="line" d="M556 638H704" stroke="#398900" marker-end="url(#arr-green)"/>
+
+<g class="flow-node" data-label="工单输入"><use href="#ico-ticket" x="44" y="104" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="70" y="176" text-anchor="middle">工单输入</text></g>
+<g class="flow-node" data-label="拆解待核事实"><use href="#ico-bridge" x="148" y="104" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="174" y="176" text-anchor="middle">拆解待核事实</text></g>
+<g class="flow-node" data-label="设备—合同映射"><use href="#ico-bridge" x="272" y="80" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="298" y="152" text-anchor="middle">设备—合同映射</text></g>
+<g class="flow-node" data-label="关键事件时间线"><use href="#ico-clock" x="272" y="197" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="298" y="269" text-anchor="middle">关键事件时间线</text></g>
+<g class="flow-node" data-label="结构化事实包"><use href="#ico-ledger" x="399" y="136" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="425" y="208" text-anchor="middle">结构化事实包</text></g>
+<g class="flow-node" data-label="SQL事实包"><use href="#ico-ticket" x="122" y="260" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="148" y="332" text-anchor="middle">SQL事实包</text></g>
+<g class="flow-node" data-label="定位合同"><use href="#ico-searchdoc" x="536" y="104" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="562" y="176" text-anchor="middle">定位合同</text></g>
+<g class="flow-node" data-label="章节与条款"><use href="#ico-clause" x="640" y="104" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="666" y="176" text-anchor="middle">章节与条款</text></g>
+<g class="flow-node" data-label="维修时限"><use href="#ico-clock" x="764" y="80" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="790" y="152" text-anchor="middle">维修时限</text></g>
+<g class="flow-node" data-label="范围与例外"><use href="#ico-scope" x="764" y="197" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="790" y="269" text-anchor="middle">范围与例外</text></g>
+<g class="flow-node" data-label="适用规则"><use href="#ico-check" x="894" y="136" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="920" y="208" text-anchor="middle">适用规则</text></g>
+<g class="flow-node" data-label="条款规则包"><use href="#ico-clause" x="614" y="260" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="640" y="332" text-anchor="middle">条款规则包</text></g>
+<g class="flow-node" data-label="前置依赖检查"><use href="#ico-check" x="56" y="474" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="82" y="546" text-anchor="middle">前置依赖检查</text></g>
+<g class="flow-node" data-label="事实—规则对齐"><use href="#ico-align" x="196" y="474" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="222" y="546" text-anchor="middle">事实—规则对齐</text></g>
+<g class="flow-node" data-label="时长与时限比较"><use href="#ico-compare" x="349" y="474" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="375" y="546" text-anchor="middle">时长与时限比较</text></g>
+<g class="flow-node" data-label="判定"><use href="#ico-decision" x="484" y="474" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="510" y="546" text-anchor="middle">判定</text></g>
+<g class="flow-node" data-label="符合约定"><use href="#ico-check" x="624" y="474" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="650" y="546" text-anchor="middle">符合约定</text></g>
+<g class="flow-node" data-label="超过时限"><use href="#ico-over" x="759" y="474" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="785" y="546" text-anchor="middle">超过时限</text></g>
+<g class="flow-node" data-label="无法判定"><use href="#ico-unknown" x="894" y="474" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="920" y="546" text-anchor="middle">无法判定</text></g>
+<g class="flow-node" data-label="来源证据"><use href="#ico-evidence" x="304" y="612" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="330" y="684" text-anchor="middle">来源证据</text></g>
+<g class="flow-node" data-label="逐项核验账本"><use href="#ico-ledger" x="504" y="612" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="530" y="684" text-anchor="middle">逐项核验账本</text></g>
+<g class="flow-node" data-label="答案与引用"><use href="#ico-answer" x="704" y="612" width="52" height="52" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="730" y="684" text-anchor="middle">答案与引用</text></g>
+</svg>

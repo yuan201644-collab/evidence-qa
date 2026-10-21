@@ -1,0 +1,512 @@
+{
+  "run_type": "exposed_development_regression_not_unseen_evaluation",
+  "run_id": "20261013T113900Z-1fcaf42d",
+  "database_name": "postgres",
+  "database_fingerprint_verified": true,
+  "question_pack_sha256": "23e124f703225db06552d9b12e3f3105b333567a3084e61c69273ea71f0c9938",
+  "raw_answers_sha256": "0d8a66105605eb7337ce2893d27f339afd06110f3e57844dce46e4db747eec48",
+  "freeze_sha256": "ec1cca1754da4db3b55ab4b4716f508338c839d891e3c3d0b83a5bb4060940ac",
+  "reference_queries_sha256": "0ea6ec368759658ad879df47ad9cfb8900faa562678dbb01f697d965711f04c0",
+  "answer_key_read_only_after_capture": true,
+  "answer_bearing_files_absent_from_source_manifest": true,
+  "case_count": 20,
+  "exact_result_matches": 13,
+  "execution_successes": 13,
+  "required_table_candidate_recall": {
+    "hits": 0,
+    "required": 42,
+    "ratio": 0.0
+  },
+  "required_table_plan_recall": {
+    "hits": 0,
+    "required": 42,
+    "ratio": 0.0
+  },
+  "warning": "题目、数据和参考查询均为已曝光开发材料；结果只用于当前实现回归，不是盲测、比赛准确率或泛化证据。",
+  "cases": [
+    {
+      "id": "E02",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "humanresources.department",
+          "humanresources.employee",
+          "humanresources.employeedepartmenthistory"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "humanresources.department",
+          "humanresources.employee",
+          "humanresources.employeedepartmenthistory"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 2,
+      "reference_row_count": 2,
+      "columns_match": true,
+      "error": null
+    },
+    {
+      "id": "T4V3-01",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "sales.salesorderheader",
+          "sales.salesorderheadersalesreason",
+          "sales.salesreason"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "sales.salesorderheader",
+          "sales.salesorderheadersalesreason",
+          "sales.salesreason"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 3,
+      "reference_row_count": 3,
+      "columns_match": true,
+      "error": null
+    },
+    {
+      "id": "T4V3-02",
+      "http_status": 200,
+      "executed": false,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "production.product",
+          "production.productinventory"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "production.product",
+          "production.productinventory"
+        ]
+      },
+      "exact_result_match": false,
+      "system_row_count": null,
+      "reference_row_count": null,
+      "columns_match": false,
+      "error": "no_successful_sql_execution_trace"
+    },
+    {
+      "id": "T4V3-03",
+      "http_status": 200,
+      "executed": false,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "sales.salesorderheader",
+          "sales.salesterritory"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "sales.salesorderheader",
+          "sales.salesterritory"
+        ]
+      },
+      "exact_result_match": false,
+      "system_row_count": null,
+      "reference_row_count": null,
+      "columns_match": false,
+      "error": "no_successful_sql_execution_trace"
+    },
+    {
+      "id": "T4V3-04",
+      "http_status": null,
+      "executed": false,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "purchasing.shipmethod",
+          "sales.salesorderheader"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "purchasing.shipmethod",
+          "sales.salesorderheader"
+        ]
+      },
+      "exact_result_match": false,
+      "system_row_count": null,
+      "reference_row_count": null,
+      "columns_match": false,
+      "error": "no_successful_sql_execution_trace"
+    },
+    {
+      "id": "T4V3-05",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "production.product",
+          "production.productcategory",
+          "production.productsubcategory"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "production.product",
+          "production.productcategory",
+          "production.productsubcategory"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 4,
+      "reference_row_count": 4,
+      "columns_match": true,
+      "error": null
+    },
+    {
+      "id": "T4V3-06",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "production.location",
+          "production.productinventory"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "production.location",
+          "production.productinventory"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 14,
+      "reference_row_count": 14,
+      "columns_match": true,
+      "error": null
+    },
+    {
+      "id": "T4V3-07",
+      "http_status": 200,
+      "executed": false,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "person.countryregion",
+          "person.stateprovince"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "person.countryregion",
+          "person.stateprovince"
+        ]
+      },
+      "exact_result_match": false,
+      "system_row_count": null,
+      "reference_row_count": null,
+      "columns_match": false,
+      "error": "no_successful_sql_execution_trace"
+    },
+    {
+      "id": "T4V3-08",
+      "http_status": null,
+      "executed": false,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "purchasing.purchaseorderheader",
+          "purchasing.vendor"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "purchasing.purchaseorderheader",
+          "purchasing.vendor"
+        ]
+      },
+      "exact_result_match": false,
+      "system_row_count": null,
+      "reference_row_count": null,
+      "columns_match": false,
+      "error": "no_successful_sql_execution_trace"
+    },
+    {
+      "id": "T4V3-09",
+      "http_status": 200,
+      "executed": false,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "humanresources.department",
+          "humanresources.employeedepartmenthistory"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "humanresources.department",
+          "humanresources.employeedepartmenthistory"
+        ]
+      },
+      "exact_result_match": false,
+      "system_row_count": null,
+      "reference_row_count": null,
+      "columns_match": false,
+      "error": "no_successful_sql_execution_trace"
+    },
+    {
+      "id": "T4V3-10",
+      "http_status": 200,
+      "executed": false,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "production.product",
+          "production.productcategory",
+          "production.productinventory",
+          "production.productsubcategory"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "production.product",
+          "production.productcategory",
+          "production.productinventory",
+          "production.productsubcategory"
+        ]
+      },
+      "exact_result_match": false,
+      "system_row_count": null,
+      "reference_row_count": null,
+      "columns_match": false,
+      "error": "no_successful_sql_execution_trace"
+    },
+    {
+      "id": "T4V3-11",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "production.product",
+          "production.productcategory",
+          "production.productsubcategory"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "production.product",
+          "production.productcategory",
+          "production.productsubcategory"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 37,
+      "reference_row_count": 37,
+      "columns_match": true,
+      "error": null
+    },
+    {
+      "id": "T4V3-12",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "purchasing.productvendor",
+          "purchasing.vendor"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "purchasing.productvendor",
+          "purchasing.vendor"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 86,
+      "reference_row_count": 86,
+      "columns_match": true,
+      "error": null
+    },
+    {
+      "id": "U01",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "sales.currencyrate"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "sales.currencyrate"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 12,
+      "reference_row_count": 12,
+      "columns_match": true,
+      "error": null
+    },
+    {
+      "id": "U06",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "sales.salesorderheadersalesreason",
+          "sales.salesreason"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "sales.salesorderheadersalesreason",
+          "sales.salesreason"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 3,
+      "reference_row_count": 3,
+      "columns_match": true,
+      "error": null
+    },
+    {
+      "id": "U09",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "purchasing.productvendor"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "purchasing.productvendor"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 86,
+      "reference_row_count": 86,
+      "columns_match": true,
+      "error": null
+    },
+    {
+      "id": "U13",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "purchasing.purchaseorderheader"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "purchasing.purchaseorderheader"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 4,
+      "reference_row_count": 4,
+      "columns_match": true,
+      "error": null
+    },
+    {
+      "id": "U16",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "purchasing.purchaseorderdetail",
+          "purchasing.purchaseorderheader"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "purchasing.purchaseorderdetail",
+          "purchasing.purchaseorderheader"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 4,
+      "reference_row_count": 4,
+      "columns_match": true,
+      "error": null
+    },
+    {
+      "id": "U19",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "production.billofmaterials"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "production.billofmaterials"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 2480,
+      "reference_row_count": 2480,
+      "columns_match": true,
+      "error": null
+    },
+    {
+      "id": "U29",
+      "http_status": 200,
+      "executed": true,
+      "candidate_table_coverage": {
+        "covered": [],
+        "missing": [
+          "person.stateprovince",
+          "sales.salestaxrate"
+        ]
+      },
+      "planned_table_coverage": {
+        "covered": [],
+        "missing": [
+          "person.stateprovince",
+          "sales.salestaxrate"
+        ]
+      },
+      "exact_result_match": true,
+      "system_row_count": 26,
+      "reference_row_count": 26,
+      "columns_match": true,
+      "error": null
+    }
+  ]
+}

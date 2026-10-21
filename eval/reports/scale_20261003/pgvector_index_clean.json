@@ -1,0 +1,30 @@
+{
+  "schema": "rag_scale_index_20261003_020442",
+  "backend": "pgvector",
+  "rows": [
+    {
+      "scale": "10",
+      "actual_pages": 14,
+      "file": "KB-003_10页规模版.pdf",
+      "file_sha256": "8a4d3dcb1cbf35a3f5340d6bfd00c6f9e9fdacfffdc0cbb2ee3ac5104f781633",
+      "chunks": 47,
+      "index_seconds": 16.42
+    },
+    {
+      "scale": "100",
+      "actual_pages": 126,
+      "file": "KB-003_100页规模版.pdf",
+      "file_sha256": "6f2d3fbfc3d23b2afe9921d4c842d20f1d28c2e404588483df58b52e2b39c81d",
+      "chunks": 380,
+      "index_seconds": 134.83
+    },
+    {
+      "scale": "500",
+      "actual_pages": 509,
+      "file": "KB-003_500页规模版.pdf",
+      "file_sha256": "60f2e0d4b596a071ae84acc88eeee4da8eb1ff3902056ac1d0c727a64f92307e",
+      "chunks": 1523,
+      "index_seconds": 532.02
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+flowchart TD
+    A[用户问题与会话上下文] --> B[保留原问句；必要时记录改写候选]
+    B --> C{关键信息是否充分?}
+    C -->|否| CL[澄清并停止猜测执行]
+    C -->|是| P[形成待答事实与依赖计划]
+    P --> DAG[单次计划依赖图<br/>仅依赖可并行；无关问题走短路径]
+    DAG --> S{事实适合哪个来源?}
+    S --> SQL[只读SQL候选<br/>校验后执行]
+    S --> DOC[文档检索候选]
+    S --> KG[KAG可选候选<br/>当前主项目接入为模拟工具]
+    SQL --> F[抽取候选事实及查询上下文]
+    DOC --> F
+    KG --> F
+    F --> ID{跨源对象映射是否有依据?}
+    ID -->|否/歧义| BR[定向查映射或请求澄清]
+    ID -->|是| MET{时间/指标/单位/粒度是否一致?}
+    BR --> BUD{预算与尝试上限未耗尽?}
+    BUD -->|是| DAG
+    BUD -->|否| PART[停止相关分支；保留已确认事实]
+    MET -->|否| ALIGN[对齐口径或限制结论]
+    MET -->|是| LINK[把每项事实关联到实际证据定位]
+    ALIGN --> LINK
+    LINK --> CHECK{必需事实有足够证据且无未解冲突?}
+    CHECK -->|是| ANS[代码按证据生成完整或限定答案]
+    CHECK -->|缺证据| BR
+    CHECK -->|来源冲突| CON[并列展示；无权威规则则不裁决]
+    PART --> OUT[明确未确认项与停止原因]
+    CON --> OUT
+    ANS --> OUT
+    OUT --> TRACE[记录调用、候选命中、验证结果、最终引用的不同语义]
+
+    classDef verified fill:#d9ead3,stroke:#38761d,color:#111;
+    classDef todo fill:#fff2cc,stroke:#bf9000,color:#111;
+    classDef suggested fill:#d9eaf7,stroke:#3d85c6,color:#111;
+    classDef absent fill:#f4cccc,stroke:#cc0000,color:#111;
+    class A,B,SQL,DOC,TRACE todo;
+    class C,P,DAG,S,F,ID,MET,LINK,CHECK,CL,BR,BUD,PART,ALIGN,CON,ANS,OUT todo;
+    class KG suggested;
+
+    LEGEND[图例：绿色=已验证；黄色=已有能力/设计节点待验证；蓝色=建议/可选；红色=未实现。跨源对象验证、逐事实证据关系及预算状态编排为目标设计，不表示当前已实现。]

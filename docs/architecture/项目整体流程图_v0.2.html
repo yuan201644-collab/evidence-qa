@@ -1,0 +1,380 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>项目整体流程图 v0.2</title><style>html,body{margin:0;background:#e9eef3;font-family:"Microsoft YaHei",sans-serif}nav{position:sticky;top:0;background:#fff;padding:12px 22px;box-shadow:0 1px 8px #cad4df;z-index:1;display:flex;gap:12px;align-items:center}button,a{border:1px solid #ccd8e2;border-radius:7px;background:white;color:#213c53;padding:7px 12px;font-size:14px;text-decoration:none;cursor:pointer}main{padding:16px}svg{display:block;width:100%;height:auto;background:#fff;box-shadow:0 3px 16px #c9d3dd}body.export{background:#f8fafc}body.export nav{display:none}body.export main{padding:0}body.export svg{width:2600px;box-shadow:none}@media print{nav{display:none}main{padding:0}svg{box-shadow:none}}</style></head><body><nav><strong>项目整体流程图</strong><button onclick="setZoom(.6)">适应屏幕</button><button onclick="setZoom(1)">100%</button><button onclick="setZoom(1.5)">150%</button><a href="项目整体流程图_v0.2.svg" download>下载矢量图</a><span style="color:#607589">实线：已实现处理关系　紫色虚框：KAG 接入规划</span></nav><main><svg xmlns="http://www.w3.org/2000/svg" width="2600" height="2460" viewBox="0 0 2600 2460" role="img" aria-labelledby="title desc"><title id="title">知证：多模态可解释精准问数问答项目整体流程图</title><desc id="desc">分开展示离线数据准备、在线问答编排、SQL工具、文档检索工具、隔离跨源事实核验、结果与证据展示、模型和工程支撑及离线评测。KAG使用虚线标记未接入规划。</desc><defs><marker id="a213c53" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#213c53"/></marker><marker id="s213c53" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#213c53"/></marker><marker id="a607589" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#607589"/></marker><marker id="s607589" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#607589"/></marker><marker id="accd8e2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ccd8e2"/></marker><marker id="sccd8e2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ccd8e2"/></marker><marker id="a46866f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#46866f"/></marker><marker id="s46866f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#46866f"/></marker><marker id="af1f8f4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f1f8f4"/></marker><marker id="sf1f8f4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f1f8f4"/></marker><marker id="a3c77ad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3c77ad"/></marker><marker id="s3c77ad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3c77ad"/></marker><marker id="af0f6fc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f0f6fc"/></marker><marker id="sf0f6fc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f0f6fc"/></marker><marker id="a338b96" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#338b96"/></marker><marker id="s338b96" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#338b96"/></marker><marker id="aeef8f8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#eef8f8"/></marker><marker id="seef8f8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#eef8f8"/></marker><marker id="ab98249" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b98249"/></marker><marker id="sb98249" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b98249"/></marker><marker id="afcf6ef" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#fcf6ef"/></marker><marker id="sfcf6ef" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#fcf6ef"/></marker><marker id="a80649b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#80649b"/></marker><marker id="s80649b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#80649b"/></marker><marker id="af7f3fb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f7f3fb"/></marker><marker id="sf7f3fb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f7f3fb"/></marker><marker id="ab66c51" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b66c51"/></marker><marker id="sb66c51" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b66c51"/></marker></defs><g font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif"><rect width="2600" height="2460" fill="#f8fafc"/>
+<text x="1300" y="68" font-size="49" fill="#213c53" font-weight="700" text-anchor="middle">多模态数据驱动的可解释精准问数 / 问答智能体</text>
+<text x="1300" y="111" font-size="25" fill="#607589" font-weight="400" text-anchor="middle">知证 · 数据准备 → 问题理解与工具编排 → 查询 / 检索 / 跨源核验 → 有来源依据的回答</text>
+<rect x="30" y="140" width="2540" height="325" rx="14" fill="#f1f8f4" stroke="#ccd8e2" stroke-width="1.7"/>
+<path d="M44 140H2556Q2570 140 2570 154V191H30V154Q30 140 44 140Z" fill="#46866f"/>
+<text x="50" y="175" font-size="29" fill="#fff" font-weight="700" text-anchor="start">一、数据接入与准备</text>
+<text x="2552" y="174" font-size="19" fill="#fff" font-weight="400" text-anchor="end">离线准备；更新数据或索引时执行</text>
+<g id="card1" data-box="50,207,589,104">
+<rect x="50" y="207" width="589" height="104" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(65 216) scale(.82)" stroke="#46866f" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="20" cy="9" rx="15" ry="6"/><path d="M5 9v22c0 8 30 8 30 0V9M5 20c0 8 30 8 30 0"/></g>
+<text x="118" y="243" font-size="24" fill="#46866f" font-weight="700" text-anchor="start" data-card="card1">结构化业务数据</text>
+<text x="70" y="274" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card1">PostgreSQL：Chinook / AdventureWorks</text>
+<text x="70" y="301" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card1">跨源试验使用独立业务库与数据范围</text>
+</g>
+<g id="card2" data-box="50,338,589,104">
+<rect x="50" y="338" width="589" height="104" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(65 347) scale(.82)" stroke="#338b96" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h17l8 8v26H9zM26 3v9h8M15 19h13M15 25h13M15 31h9"/></g>
+<text x="118" y="374" font-size="24" fill="#338b96" font-weight="700" text-anchor="start" data-card="card2">非结构化原始文档</text>
+<text x="70" y="405" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card2">PDF / Word / Markdown / TXT</text>
+<text x="70" y="432" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card2">扫描 PDF 按页进入文字识别流程</text>
+</g>
+<polyline points="645,259 678,259" fill="none" stroke="#46866f" stroke-width="3" stroke-linejoin="round" marker-end="url(#a46866f)"/>
+<polyline points="645,390 678,390" fill="none" stroke="#338b96" stroke-width="3" stroke-linejoin="round" marker-end="url(#a338b96)"/>
+<g id="card3" data-box="687,207,589,104">
+<rect x="687" y="207" width="589" height="104" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(702 216) scale(.82)" stroke="#46866f" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="34" height="30" rx="3"/><path d="M3 15h34M3 25h34M14 5v30M25 5v30"/></g>
+<text x="755" y="243" font-size="24" fill="#46866f" font-weight="700" text-anchor="start" data-card="card3">读取数据库结构</text>
+<text x="707" y="274" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card3">表、字段、类型、主外键与结构目录</text>
+<text x="707" y="301" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card3">保留原始业务数据；不改写为文档</text>
+</g>
+<g id="card4" data-box="687,338,589,104">
+<rect x="687" y="338" width="589" height="104" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(702 347) scale(.82)" stroke="#338b96" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h17l8 8v26H9zM26 3v9h8M15 19h13M15 25h13M15 31h9"/></g>
+<text x="755" y="374" font-size="24" fill="#338b96" font-weight="700" text-anchor="start" data-card="card4">解析与文本规范化</text>
+<text x="707" y="405" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card4">文本层抽取；扫描页离线文字识别</text>
+<text x="707" y="432" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card4">断行合并、表格还原、保留来源定位</text>
+</g>
+<polyline points="1282,259 1315,259" fill="none" stroke="#46866f" stroke-width="3" stroke-linejoin="round" marker-end="url(#a46866f)"/>
+<polyline points="1282,390 1315,390" fill="none" stroke="#338b96" stroke-width="3" stroke-linejoin="round" marker-end="url(#a338b96)"/>
+<g id="card5" data-box="1324,207,589,104">
+<rect x="1324" y="207" width="589" height="104" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1339 216) scale(.82)" stroke="#46866f" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="2" width="13" height="10" rx="2"/><rect x="2" y="28" width="13" height="10" rx="2"/><rect x="25" y="28" width="13" height="10" rx="2"/><path d="M20 12v9H8v7M20 21h12v7"/></g>
+<text x="1392" y="243" font-size="24" fill="#46866f" font-weight="700" text-anchor="start" data-card="card5">业务语义与关系信息</text>
+<text x="1344" y="274" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card5">中文描述、实体别名、指标与时间口径</text>
+<text x="1344" y="301" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card5">外键关系用于候选定位及关联规划</text>
+</g>
+<g id="card6" data-box="1324,338,589,104">
+<rect x="1324" y="338" width="589" height="104" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1339 347) scale(.82)" stroke="#338b96" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="2" width="13" height="10" rx="2"/><rect x="2" y="28" width="13" height="10" rx="2"/><rect x="25" y="28" width="13" height="10" rx="2"/><path d="M20 12v9H8v7M20 21h12v7"/></g>
+<text x="1392" y="374" font-size="24" fill="#338b96" font-weight="700" text-anchor="start" data-card="card6">目录识别与层级切片 · 任务 7</text>
+<text x="1344" y="405" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card6">书签 → 编号规则 → 字号容错</text>
+<text x="1344" y="432" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card6">保留文档、章节、页码与可得坐标</text>
+</g>
+<polyline points="1919,259 1952,259" fill="none" stroke="#46866f" stroke-width="3" stroke-linejoin="round" marker-end="url(#a46866f)"/>
+<polyline points="1919,390 1952,390" fill="none" stroke="#338b96" stroke-width="3" stroke-linejoin="round" marker-end="url(#a338b96)"/>
+<g id="card7" data-box="1961,207,589,104">
+<rect x="1961" y="207" width="589" height="104" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1976 216) scale(.82)" stroke="#46866f" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="20" cy="9" rx="15" ry="6"/><path d="M5 9v22c0 8 30 8 30 0V9M5 20c0 8 30 8 30 0"/></g>
+<text x="2029" y="243" font-size="24" fill="#46866f" font-weight="700" text-anchor="start" data-card="card7">查询侧可用资源</text>
+<text x="1981" y="274" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card7">结构目录 + 别名词典 + 关联关系</text>
+<text x="1981" y="301" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card7">业务数据由工具 A 执行 SQL 时只读访问</text>
+</g>
+<g id="card8" data-box="1961,338,589,104">
+<rect x="1961" y="338" width="589" height="104" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1976 347) scale(.82)" stroke="#338b96" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="17" r="12"/><path d="m26 26 11 11"/></g>
+<text x="2029" y="374" font-size="24" fill="#338b96" font-weight="700" text-anchor="start" data-card="card8">双通道索引与原文定位</text>
+<text x="1981" y="405" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card8">关键词索引 + bge 向量 / pgvector</text>
+<text x="1981" y="432" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card8">原文及片段定位供工具 B 检索与引用</text>
+</g>
+<rect x="30" y="505" width="2540" height="255" rx="14" fill="#f0f6fc" stroke="#ccd8e2" stroke-width="1.7"/>
+<path d="M44 505H2556Q2570 505 2570 519V556H30V519Q30 505 44 505Z" fill="#3c77ad"/>
+<text x="50" y="540" font-size="29" fill="#fff" font-weight="700" text-anchor="start">二、用户交互与问答编排</text>
+<text x="2552" y="539" font-size="19" fill="#fff" font-weight="400" text-anchor="end">在线入口：Vue 工作台 / FastAPI 接口</text>
+<g id="card9" data-box="50,573,589,139">
+<rect x="50" y="573" width="589" height="139" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(65 582) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h32v23H17l-9 9v-9H4zM11 13h18M11 20h12"/></g>
+<text x="118" y="609" font-size="25" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card9">用户问题与会话上下文</text>
+<text x="70" y="640" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card9">自然语言输入、历史轮次与已补充条件</text>
+<text x="70" y="667" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card9">会话隔离、取消 / 替换问题、上下文恢复</text>
+<text x="70" y="694" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card9">单源问题走相应工具的短路径</text>
+</g>
+<g id="card10" data-box="687,573,589,139">
+<rect x="687" y="573" width="589" height="139" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(702 582) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="17" r="12"/><path d="m26 26 11 11"/></g>
+<text x="755" y="609" font-size="25" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card10">要素识别与标准化 · 任务 1</text>
+<text x="707" y="640" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card10">识别对象、指标、时间与筛选条件</text>
+<text x="707" y="667" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card10">别名 / 错别字 / 相对时间规范化</text>
+<text x="707" y="694" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card10">保留原意，不补造缺失业务条件</text>
+</g>
+<g id="card11" data-box="1324,573,589,139">
+<rect x="1324" y="573" width="589" height="139" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1339 582) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m20 3 15 6v11c0 9-7 15-15 18C12 35 5 29 5 20V9zM11 20l6 6 13-14"/></g>
+<text x="1392" y="609" font-size="25" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card11">语义检查与澄清 · 任务 3</text>
+<text x="1344" y="640" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card11">检查指标口径、维度、比较时间范围</text>
+<text x="1344" y="667" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card11">条件不足：请求补充；条件齐全：继续</text>
+<text x="1344" y="694" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card11">用户补充后恢复原问题及任务状态</text>
+</g>
+<g id="card12" data-box="1961,573,589,139">
+<rect x="1961" y="573" width="589" height="139" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1976 582) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="2" width="13" height="10" rx="2"/><rect x="2" y="28" width="13" height="10" rx="2"/><rect x="25" y="28" width="13" height="10" rx="2"/><path d="M20 12v9H8v7M20 21h12v7"/></g>
+<text x="2029" y="609" font-size="25" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card12">意图路由与执行计划</text>
+<text x="1981" y="640" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card12">依据数据源元信息和问法选择工具</text>
+<text x="1981" y="667" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card12">普通查询 / 文档问答：工具调用计划</text>
+<text x="1981" y="694" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card12">已启用跨源场景：显式事实依赖计划</text>
+</g>
+<polyline points="645,641 678,641" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<polyline points="1282,641 1315,641" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<polyline points="1919,641 1952,641" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<polyline points="1618,717 1618,739 345,739 345,717" fill="none" stroke="#b98249" stroke-width="3" stroke-linejoin="round" marker-end="url(#ab98249)"/>
+<rect x="605" y="725" width="770" height="28" rx="0" fill="#f0f6fc" stroke="#f0f6fc" stroke-width="1.7"/>
+<text x="990" y="746" font-size="19" fill="#b98249" font-weight="400" text-anchor="middle">缺少条件 → 向用户澄清；补充后的新一轮输入继续处理</text>
+<text x="1300" y="794" font-size="22" fill="#607589" font-weight="400" text-anchor="middle">选择对应路径；工具不必全部调用，也不固定并行</text>
+<polyline points="2255,762 2255,804 430,804 430,824" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<polyline points="1300,804 1300,824" fill="none" stroke="#338b96" stroke-width="3" stroke-linejoin="round" marker-end="url(#a338b96)"/>
+<polyline points="2170,804 2170,824" fill="none" stroke="#80649b" stroke-width="3" stroke-linejoin="round" marker-end="url(#a80649b)"/>
+<rect x="30" y="830" width="805" height="770" rx="14" fill="#f0f6fc" stroke="#ccd8e2" stroke-width="1.7"/>
+<path d="M44 830H821Q835 830 835 844V881H30V844Q30 830 44 830Z" fill="#3c77ad"/>
+<text x="50" y="865" font-size="29" fill="#fff" font-weight="700" text-anchor="start">三 A、自然语言转 SQL（NL2SQL）</text>
+<text x="817" y="864" font-size="19" fill="#fff" font-weight="400" text-anchor="end">查询工具</text>
+<rect x="865" y="830" width="805" height="770" rx="14" fill="#eef8f8" stroke="#ccd8e2" stroke-width="1.7"/>
+<path d="M879 830H1656Q1670 830 1670 844V881H865V844Q865 830 879 830Z" fill="#338b96"/>
+<text x="885" y="865" font-size="29" fill="#fff" font-weight="700" text-anchor="start">三 B、检索增强问答（RAG）</text>
+<text x="1652" y="864" font-size="19" fill="#fff" font-weight="400" text-anchor="end">文档工具</text>
+<rect x="1700" y="830" width="870" height="770" rx="14" fill="#f7f3fb" stroke="#ccd8e2" stroke-width="1.7"/>
+<path d="M1714 830H2556Q2570 830 2570 844V881H1700V844Q1700 830 1714 830Z" fill="#80649b"/>
+<text x="1720" y="865" font-size="29" fill="#fff" font-weight="700" text-anchor="start">三 C、跨源事实核验</text>
+<text x="2552" y="864" font-size="19" fill="#fff" font-weight="400" text-anchor="end">显式启用的隔离实验路径</text>
+<g id="card13" data-box="50,904,765,103">
+<rect x="50" y="904" width="765" height="103" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(65 913) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="17" r="12"/><path d="m26 26 11 11"/></g>
+<text x="118" y="940" font-size="25" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card13">表与字段候选定位 · 任务 4</text>
+<text x="70" y="971" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card13">结合结构元信息、中文描述与业务别名</text>
+<text x="70" y="998" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card13">排除干扰项；候选相似不等于关系成立</text>
+</g>
+<g id="card14" data-box="885,904,765,103">
+<rect x="885" y="904" width="765" height="103" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(900 913) scale(.82)" stroke="#338b96" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="2" width="13" height="10" rx="2"/><rect x="2" y="28" width="13" height="10" rx="2"/><rect x="25" y="28" width="13" height="10" rx="2"/><path d="M20 12v9H8v7M20 21h12v7"/></g>
+<text x="953" y="940" font-size="25" fill="#338b96" font-weight="700" text-anchor="start" data-card="card14">选择单轮或多跳检索</text>
+<text x="905" y="971" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card14">单轮直接检索；多跳按配置启用</text>
+<text x="905" y="998" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card14">多跳分解子问题，使用前跳事实构造后跳查询</text>
+</g>
+<polyline points="432,1010 432,1023" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<polyline points="1267,1010 1267,1023" fill="none" stroke="#338b96" stroke-width="3" stroke-linejoin="round" marker-end="url(#a338b96)"/>
+<g id="card15" data-box="50,1029,765,103">
+<rect x="50" y="1029" width="765" height="103" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(65 1038) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="2" width="13" height="10" rx="2"/><rect x="2" y="28" width="13" height="10" rx="2"/><rect x="25" y="28" width="13" height="10" rx="2"/><path d="M20 12v9H8v7M20 21h12v7"/></g>
+<text x="118" y="1065" font-size="25" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card15">外键关联与查询计划 · 任务 5</text>
+<text x="70" y="1096" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card15">选择关联键和关联路径，明确聚合粒度</text>
+<text x="70" y="1123" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card15">无法确认关系时请求澄清或限定回答</text>
+</g>
+<g id="card16" data-box="885,1029,765,103">
+<rect x="885" y="1029" width="765" height="103" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(900 1038) scale(.82)" stroke="#338b96" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="17" r="12"/><path d="m26 26 11 11"/></g>
+<text x="953" y="1065" font-size="25" fill="#338b96" font-weight="700" text-anchor="start" data-card="card16">关键词 + 语义双通道召回</text>
+<text x="905" y="1096" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card16">BM25 关键词与本地 bge 向量检索</text>
+<text x="905" y="1123" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card16">按排名融合（RRF），保留片段来源</text>
+</g>
+<polyline points="432,1135 432,1148" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<polyline points="1267,1135 1267,1148" fill="none" stroke="#338b96" stroke-width="3" stroke-linejoin="round" marker-end="url(#a338b96)"/>
+<g id="card17" data-box="50,1154,765,103">
+<rect x="50" y="1154" width="765" height="103" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(65 1163) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h17l8 8v26H9zM26 3v9h8M15 19h13M15 25h13M15 31h9"/></g>
+<text x="118" y="1190" font-size="25" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card17">生成候选 SQL</text>
+<text x="70" y="1221" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card17">国产语言模型基于结构目录与计划生成</text>
+<text x="70" y="1248" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card17">支持单表、多表关联、聚合及嵌套查询</text>
+</g>
+<g id="card18" data-box="885,1154,765,103">
+<rect x="885" y="1154" width="765" height="103" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(900 1163) scale(.82)" stroke="#338b96" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="2" width="13" height="10" rx="2"/><rect x="2" y="28" width="13" height="10" rx="2"/><rect x="25" y="28" width="13" height="10" rx="2"/><path d="M20 12v9H8v7M20 21h12v7"/></g>
+<text x="953" y="1190" font-size="25" fill="#338b96" font-weight="700" text-anchor="start" data-card="card18">重排与上下文组织</text>
+<text x="905" y="1221" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card18">本地 bge 重排；合并、去重及引用链组织</text>
+<text x="905" y="1248" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card18">多跳按充分性与跳数预算决定是否继续检索</text>
+</g>
+<polyline points="432,1260 432,1273" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<polyline points="1267,1260 1267,1273" fill="none" stroke="#338b96" stroke-width="3" stroke-linejoin="round" marker-end="url(#a338b96)"/>
+<g id="card19" data-box="50,1279,765,103">
+<rect x="50" y="1279" width="765" height="103" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(65 1288) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m20 3 15 6v11c0 9-7 15-15 18C12 35 5 29 5 20V9zM11 20l6 6 13-14"/></g>
+<text x="118" y="1315" font-size="25" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card19">执行前校验与有限修复</text>
+<text x="70" y="1346" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card19">sqlglot 语法树：只读、表字段、关联语义</text>
+<text x="70" y="1373" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card19">仅可修复的失败回传重写；尝试次数有限</text>
+</g>
+<g id="card20" data-box="885,1279,765,103">
+<rect x="885" y="1279" width="765" height="103" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(900 1288) scale(.82)" stroke="#338b96" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h32v23H17l-9 9v-9H4zM11 13h18M11 20h12"/></g>
+<text x="953" y="1315" font-size="25" fill="#338b96" font-weight="700" text-anchor="start" data-card="card20">有依据的答案生成</text>
+<text x="905" y="1346" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card20">国产语言模型只基于给定检索上下文回答</text>
+<text x="905" y="1373" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card20">资料不足时说明缺口；多跳汇合后生成答案</text>
+</g>
+<polyline points="432,1385 432,1398" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<polyline points="1267,1385 1267,1398" fill="none" stroke="#338b96" stroke-width="3" stroke-linejoin="round" marker-end="url(#a338b96)"/>
+<g id="card21" data-box="50,1404,765,103">
+<rect x="50" y="1404" width="765" height="103" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(65 1413) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="20" cy="9" rx="15" ry="6"/><path d="M5 9v22c0 8 30 8 30 0V9M5 20c0 8 30 8 30 0"/></g>
+<text x="118" y="1440" font-size="25" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card21">只读执行与结果管理</text>
+<text x="70" y="1471" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card21">PostgreSQL：事务只读、超时及容量限制</text>
+<text x="70" y="1498" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card21">保留 SQL / 结果来源；分页、导出与截断提示</text>
+</g>
+<g id="card22" data-box="885,1404,765,103">
+<rect x="885" y="1404" width="765" height="103" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(900 1413) scale(.82)" stroke="#338b96" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h17l8 8v26H9zM26 3v9h8M15 19h13M15 25h13M15 31h9"/></g>
+<text x="953" y="1440" font-size="25" fill="#338b96" font-weight="700" text-anchor="start" data-card="card22">引用解析与来源投影</text>
+<text x="905" y="1471" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card22">答案引用标记对应实际使用的文档片段</text>
+<text x="905" y="1498" font-size="21" fill="#213c53" font-weight="400" text-anchor="start" data-card="card22">文档 / 页码 / 章节 / 字符区间 / 可得框坐标</text>
+</g>
+<polyline points="809,1313 824,1313 824,1189 809,1189" fill="none" stroke="#b98249" stroke-width="2" stroke-linejoin="round" marker-end="url(#sb98249)"/>
+<polyline points="1628,1180 1658,1180 1658,938 1630,938" fill="none" stroke="#b98249" stroke-width="3" stroke-linejoin="round" marker-end="url(#ab98249)"/>
+<text x="1646" y="1089" font-size="16" fill="#b98249" font-weight="400" text-anchor="end">继续</text>
+<text x="1646" y="1111" font-size="16" fill="#b98249" font-weight="400" text-anchor="end">下一跳</text>
+<text x="432" y="1548" font-size="19" fill="#3c77ad" font-weight="400" text-anchor="middle">校验 / 执行报错：仅可修复错误有限回传到 SQL 生成</text>
+<text x="1267" y="1548" font-size="19" fill="#338b96" font-weight="400" text-anchor="middle">索引按需准备 / 加载；每次提问不重复解析与 OCR</text>
+<g id="card23" data-box="1720,904,830,98">
+<rect x="1720" y="904" width="830" height="98" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1735 913) scale(.82)" stroke="#80649b" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="20" cy="9" rx="15" ry="6"/><path d="M5 9v22c0 8 30 8 30 0V9M5 20c0 8 30 8 30 0"/></g>
+<text x="1788" y="940" font-size="24" fill="#80649b" font-weight="700" text-anchor="start" data-card="card23">① 读取对象事实 · 调用工具 A</text>
+<text x="1740" y="967" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card23">工单 → 设备编号 / 开单时间 / 设备客户</text>
+<text x="1740" y="992" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card23">明确业务编号；同名对象仅作为候选</text>
+</g>
+<polyline points="2135,1003 2135,1006" fill="none" stroke="#80649b" stroke-width="2" stroke-linejoin="round" marker-end="url(#s80649b)"/>
+<g id="card24" data-box="1720,1009,830,98">
+<rect x="1720" y="1009" width="830" height="98" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1735 1018) scale(.82)" stroke="#80649b" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m20 3 15 6v11c0 9-7 15-15 18C12 35 5 29 5 20V9zM11 20l6 6 13-14"/></g>
+<text x="1788" y="1045" font-size="24" fill="#80649b" font-weight="700" text-anchor="start" data-card="card24">② 核验跨源桥接关系 · 调用工具 A</text>
+<text x="1740" y="1072" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card24">设备 → 合同：受控依据、客户一致、候选唯一</text>
+<text x="1740" y="1097" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card24">分别检查映射有效期、合同有效期及合同状态</text>
+</g>
+<polyline points="2135,1108 2135,1111" fill="none" stroke="#80649b" stroke-width="2" stroke-linejoin="round" marker-end="url(#s80649b)"/>
+<g id="card25" data-box="1720,1114,830,98">
+<rect x="1720" y="1114" width="830" height="98" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1735 1123) scale(.82)" stroke="#80649b" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="16"/><path d="M20 9v12l9 5"/></g>
+<text x="1788" y="1150" font-size="24" fill="#80649b" font-weight="700" text-anchor="start" data-card="card25">③ 核验事件与时间事实 · 调用工具 A</text>
+<text x="1740" y="1177" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card25">检查关键事件、先后顺序、时区及实际耗时</text>
+<text x="1740" y="1202" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card25">前置事实不受支持时跳过依赖它的后续任务</text>
+</g>
+<polyline points="2135,1213 2135,1216" fill="none" stroke="#80649b" stroke-width="2" stroke-linejoin="round" marker-end="url(#s80649b)"/>
+<g id="card26" data-box="1720,1219,830,98">
+<rect x="1720" y="1219" width="830" height="98" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1735 1228) scale(.82)" stroke="#80649b" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="17" r="12"/><path d="m26 26 11 11"/></g>
+<text x="1788" y="1255" font-size="24" fill="#80649b" font-weight="700" text-anchor="start" data-card="card26">④ 定向检索并核验规则 · 调用工具 B</text>
+<text x="1740" y="1282" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card26">只查候选合同；核对设备范围和修复时限</text>
+<text x="1740" y="1307" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card26">识别特别约定、未约定及未消解的条款冲突</text>
+</g>
+<polyline points="2135,1318 2135,1321" fill="none" stroke="#80649b" stroke-width="2" stroke-linejoin="round" marker-end="url(#s80649b)"/>
+<g id="card27" data-box="1720,1324,830,98">
+<rect x="1720" y="1324" width="830" height="98" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1735 1333) scale(.82)" stroke="#80649b" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m20 3 15 6v11c0 9-7 15-15 18C12 35 5 29 5 20V9zM11 20l6 6 13-14"/></g>
+<text x="1788" y="1360" font-size="24" fill="#80649b" font-weight="700" text-anchor="start" data-card="card27">⑤ 对齐口径并形成判定</text>
+<text x="1740" y="1387" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card27">统一指标定义、起止事件、单位及适用范围</text>
+<text x="1740" y="1412" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card27">确定性计算与比较；不借用响应 / 到场时限</text>
+</g>
+<polyline points="2135,1423 2135,1426" fill="none" stroke="#80649b" stroke-width="2" stroke-linejoin="round" marker-end="url(#s80649b)"/>
+<g id="card28" data-box="1720,1429,830,98">
+<rect x="1720" y="1429" width="830" height="98" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1735 1438) scale(.82)" stroke="#80649b" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h17l8 8v26H9zM26 3v9h8M15 19h13M15 25h13M15 31h9"/></g>
+<text x="1788" y="1465" font-size="24" fill="#80649b" font-weight="700" text-anchor="start" data-card="card28">⑥ 事实—证据关联与限定输出</text>
+<text x="1740" y="1492" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card28">每项已核验事实关联实际 SQL / 文档证据</text>
+<text x="1740" y="1517" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card28">保留已确认部分；说明缺失、冲突或阻断原因</text>
+</g>
+<text x="2135" y="1550" font-size="19" fill="#80649b" font-weight="400" text-anchor="middle">当前事实计划覆盖工单—合同；通用跨业务规划仍需扩展</text>
+<text x="2135" y="1581" font-size="19" fill="#607589" font-weight="400" text-anchor="middle">阻断后限定回答；补查和重试受次数 / 时间预算约束</text>
+<polyline points="432,1603 432,1630 1267,1630" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round"/>
+<polyline points="1267,1603 1267,1657" fill="none" stroke="#338b96" stroke-width="3" stroke-linejoin="round" marker-end="url(#a338b96)"/>
+<polyline points="2135,1603 2135,1630 1267,1630" fill="none" stroke="#80649b" stroke-width="3" stroke-linejoin="round" marker-end="url(#a80649b)"/>
+<text x="1300" y="1624" font-size="20" fill="#607589" font-weight="400" text-anchor="middle">各路径返回答案候选、实际结果与来源；单源问答无需绕行跨源核验</text>
+<rect x="30" y="1670" width="2540" height="210" rx="14" fill="#f1f8f4" stroke="#ccd8e2" stroke-width="1.7"/>
+<path d="M44 1670H2556Q2570 1670 2570 1684V1721H30V1684Q30 1670 44 1670Z" fill="#46866f"/>
+<text x="50" y="1705" font-size="29" fill="#fff" font-weight="700" text-anchor="start">四、答案整合、可解释性与用户呈现</text>
+<text x="2552" y="1704" font-size="19" fill="#fff" font-weight="400" text-anchor="end">统一响应：answer / sql / refs / trace / need_clarify</text>
+<g id="card29" data-box="50,1737,589,113">
+<rect x="50" y="1737" width="589" height="113" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(65 1746) scale(.82)" stroke="#46866f" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h32v23H17l-9 9v-9H4zM11 13h18M11 20h12"/></g>
+<text x="118" y="1773" font-size="24" fill="#46866f" font-weight="700" text-anchor="start" data-card="card29">回答与结果</text>
+<text x="70" y="1804" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card29">完整回答 / 已确认部分 / 澄清与失败说明</text>
+<text x="70" y="1831" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card29">查询表格、分页、完整结果导出与截断提醒</text>
+</g>
+<g id="card30" data-box="687,1737,589,113">
+<rect x="687" y="1737" width="589" height="113" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(702 1746) scale(.82)" stroke="#46866f" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="20" cy="9" rx="15" ry="6"/><path d="M5 9v22c0 8 30 8 30 0V9M5 20c0 8 30 8 30 0"/></g>
+<text x="755" y="1773" font-size="24" fill="#46866f" font-weight="700" text-anchor="start" data-card="card30">结构化数据证据</text>
+<text x="707" y="1804" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card30">实际 SQL、表 / 字段 / 记录与查询条件</text>
+<text x="707" y="1831" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card30">查询零结果须关联实际执行事实</text>
+</g>
+<g id="card31" data-box="1324,1737,589,113">
+<rect x="1324" y="1737" width="589" height="113" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1339 1746) scale(.82)" stroke="#46866f" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h17l8 8v26H9zM26 3v9h8M15 19h13M15 25h13M15 31h9"/></g>
+<text x="1392" y="1773" font-size="24" fill="#46866f" font-weight="700" text-anchor="start" data-card="card31">文档证据与原文查看</text>
+<text x="1344" y="1804" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card31">引用卡片、章节与页码、文本片段定位</text>
+<text x="1344" y="1831" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card31">有真实框坐标时显示原文区域高亮</text>
+</g>
+<g id="card32" data-box="1961,1737,589,113">
+<rect x="1961" y="1737" width="589" height="113" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1976 1746) scale(.82)" stroke="#46866f" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="2" width="13" height="10" rx="2"/><rect x="2" y="28" width="13" height="10" rx="2"/><rect x="25" y="28" width="13" height="10" rx="2"/><path d="M20 12v9H8v7M20 21h12v7"/></g>
+<text x="2029" y="1773" font-size="24" fill="#46866f" font-weight="700" text-anchor="start" data-card="card32">执行轨迹（Trace）</text>
+<text x="1981" y="1804" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card32">代码记录工具调用、入参出参、耗时和命中</text>
+<text x="1981" y="1831" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card32">展示实际执行过程，支持检查失败原因</text>
+</g>
+<rect x="30" y="1915" width="2540" height="190" rx="14" fill="#fcf6ef" stroke="#ccd8e2" stroke-width="1.7"/>
+<path d="M44 1915H2556Q2570 1915 2570 1929V1966H30V1929Q30 1915 44 1915Z" fill="#b98249"/>
+<text x="50" y="1950" font-size="29" fill="#fff" font-weight="700" text-anchor="start">五、模型与工程支撑</text>
+<text x="2552" y="1949" font-size="19" fill="#fff" font-weight="400" text-anchor="end">能力支撑关系；不是新增的用户操作步骤</text>
+<g id="card33" data-box="50,1982,589,110">
+<rect x="50" y="1982" width="589" height="110" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(65 1991) scale(.82)" stroke="#b98249" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h32v23H17l-9 9v-9H4zM11 13h18M11 20h12"/></g>
+<text x="118" y="2018" font-size="24" fill="#b98249" font-weight="700" text-anchor="start" data-card="card33">国产语言模型（LLM）</text>
+<text x="70" y="2049" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card33">支撑 SQL 生成、文档回答及多跳规划</text>
+<text x="70" y="2076" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card33">模型服务可配置；调用设超时与重试</text>
+</g>
+<g id="card34" data-box="687,1982,589,110">
+<rect x="687" y="1982" width="589" height="110" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(702 1991) scale(.82)" stroke="#b98249" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="17" r="12"/><path d="m26 26 11 11"/></g>
+<text x="755" y="2018" font-size="24" fill="#b98249" font-weight="700" text-anchor="start" data-card="card34">本地向量、重排与文字识别</text>
+<text x="707" y="2049" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card34">bge：文档向量化与重排；OCR：扫描页</text>
+<text x="707" y="2076" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card34">离线文字识别与本地小模型推理</text>
+</g>
+<g id="card35" data-box="1324,1982,589,110">
+<rect x="1324" y="1982" width="589" height="110" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1339 1991) scale(.82)" stroke="#b98249" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="2" width="13" height="10" rx="2"/><rect x="2" y="28" width="13" height="10" rx="2"/><rect x="25" y="28" width="13" height="10" rx="2"/><path d="M20 12v9H8v7M20 21h12v7"/></g>
+<text x="1392" y="2018" font-size="24" fill="#b98249" font-weight="700" text-anchor="start" data-card="card35">运行与配置管理</text>
+<text x="1344" y="2049" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card35">FastAPI / Vue / PostgreSQL / Docker</text>
+<text x="1344" y="2076" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card35">统一工具协议、配置开关与异常记录</text>
+</g>
+<g id="card36" data-box="1961,1982,589,110">
+<rect x="1961" y="1982" width="589" height="110" rx="12" fill="#fff" stroke="#80649b" stroke-width="1.7" stroke-dasharray="10 7"/>
+<g transform="translate(1976 1991) scale(.82)" stroke="#80649b" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="2" width="13" height="10" rx="2"/><rect x="2" y="28" width="13" height="10" rx="2"/><rect x="25" y="28" width="13" height="10" rx="2"/><path d="M20 12v9H8v7M20 21h12v7"/></g>
+<text x="2029" y="2018" font-size="24" fill="#80649b" font-weight="700" text-anchor="start" data-card="card36">知识增强生成（KAG）· 支线</text>
+<text x="1981" y="2049" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card36">独立实验：RAG 证据缺口时考虑图谱补充</text>
+<text x="1981" y="2076" font-size="20" fill="#213c53" font-weight="400" text-anchor="start" data-card="card36">接入主链路为规划；模拟图工具不代表接入</text>
+</g>
+<rect x="30" y="2140" width="2540" height="230" rx="14" fill="#f0f6fc" stroke="#ccd8e2" stroke-width="1.7"/>
+<path d="M44 2140H2556Q2570 2140 2570 2154V2191H30V2154Q30 2140 44 2140Z" fill="#3c77ad"/>
+<text x="50" y="2175" font-size="29" fill="#fff" font-weight="700" text-anchor="start">六、独立离线评测与改进</text>
+<text x="2552" y="2174" font-size="19" fill="#fff" font-weight="400" text-anchor="end">标准答案仅供评分；不进入模型输入或检索索引</text>
+<g id="card37" data-box="50,2208,460,115">
+<rect x="50" y="2208" width="460" height="115" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(65 2217) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h17l8 8v26H9zM26 3v9h8M15 19h13M15 25h13M15 31h9"/></g>
+<text x="118" y="2244" font-size="24" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card37">题集与判据</text>
+<text x="70" y="2275" font-size="19" fill="#213c53" font-weight="400" text-anchor="start" data-card="card37">数据来源、问题与参考答案分离</text>
+<text x="70" y="2302" font-size="19" fill="#213c53" font-weight="400" text-anchor="start" data-card="card37">区分开发回归和新留出题</text>
+</g>
+<polyline points="517,2260 551,2260" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<g id="card38" data-box="560,2208,460,115">
+<rect x="560" y="2208" width="460" height="115" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(575 2217) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m20 3 15 6v11c0 9-7 15-15 18C12 35 5 29 5 20V9zM11 20l6 6 13-14"/></g>
+<text x="628" y="2244" font-size="24" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card38">版本冻结与预检</text>
+<text x="580" y="2275" font-size="19" fill="#213c53" font-weight="400" text-anchor="start" data-card="card38">代码、数据、模型配置、评分口径</text>
+<text x="580" y="2302" font-size="19" fill="#213c53" font-weight="400" text-anchor="start" data-card="card38">只读连接与索引预检；登记摘要</text>
+</g>
+<polyline points="1027,2260 1061,2260" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<g id="card39" data-box="1070,2208,460,115">
+<rect x="1070" y="2208" width="460" height="115" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1085 2217) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="2" width="13" height="10" rx="2"/><rect x="2" y="28" width="13" height="10" rx="2"/><rect x="25" y="28" width="13" height="10" rx="2"/><path d="M20 12v9H8v7M20 21h12v7"/></g>
+<text x="1138" y="2244" font-size="24" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card39">运行真实系统</text>
+<text x="1090" y="2275" font-size="19" fill="#213c53" font-weight="400" text-anchor="start" data-card="card39">主线回归 / 同条件配对实验</text>
+<text x="1090" y="2302" font-size="19" fill="#213c53" font-weight="400" text-anchor="start" data-card="card39">封存原始回答、错误、耗时与轨迹</text>
+</g>
+<polyline points="1537,2260 1571,2260" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<g id="card40" data-box="1580,2208,460,115">
+<rect x="1580" y="2208" width="460" height="115" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(1595 2217) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m20 3 15 6v11c0 9-7 15-15 18C12 35 5 29 5 20V9zM11 20l6 6 13-14"/></g>
+<text x="1648" y="2244" font-size="24" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card40">评分、盲审与核验</text>
+<text x="1600" y="2275" font-size="19" fill="#213c53" font-weight="400" text-anchor="start" data-card="card40">结果匹配、忠实度、引用与鲁棒性</text>
+<text x="1600" y="2302" font-size="19" fill="#213c53" font-weight="400" text-anchor="start" data-card="card40">独立盲审与分歧裁决；核验封存</text>
+</g>
+<polyline points="2047,2260 2081,2260" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<g id="card41" data-box="2090,2208,460,115">
+<rect x="2090" y="2208" width="460" height="115" rx="12" fill="#fff" stroke="#ccd8e2" stroke-width="1.7"/>
+<g transform="translate(2105 2217) scale(.82)" stroke="#3c77ad" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="16"/><path d="M20 9v12l9 5"/></g>
+<text x="2158" y="2244" font-size="24" fill="#3c77ad" font-weight="700" text-anchor="start" data-card="card41">分析与版本改进</text>
+<text x="2110" y="2275" font-size="19" fill="#213c53" font-weight="400" text-anchor="start" data-card="card41">逐题错误归因、效率瓶颈与限制</text>
+<text x="2110" y="2302" font-size="19" fill="#213c53" font-weight="400" text-anchor="start" data-card="card41">修复后另版本回归；新题再复验</text>
+</g>
+<text x="1300" y="2350" font-size="21" fill="#3c77ad" font-weight="400" text-anchor="middle">覆盖基础 SQL / 文档问答、任务 1 / 3 / 4 / 5 / 7、五轮以上对话、鲁棒性及两档数据规模效率分析</text>
+<polyline points="70,2410 140,2410" fill="none" stroke="#3c77ad" stroke-width="3" stroke-linejoin="round" marker-end="url(#a3c77ad)"/>
+<text x="153" y="2417" font-size="20" fill="#607589" font-weight="400" text-anchor="start">实线：已实现模块的处理关系</text>
+<polyline points="800,2410 870,2410" fill="none" stroke="#b98249" stroke-width="3" stroke-linejoin="round" marker-end="url(#ab98249)"/>
+<text x="883" y="2417" font-size="20" fill="#607589" font-weight="400" text-anchor="start">橙色回路：满足条件时的澄清 / 多跳</text>
+<polyline points="1650,2410 1720,2410" fill="none" stroke="#80649b" stroke-width="3" stroke-linejoin="round" stroke-dasharray="9 7" marker-end="url(#a80649b)"/>
+<text x="1733" y="2417" font-size="20" fill="#607589" font-weight="400" text-anchor="start">紫色虚框：尚未接入的增强规划</text>
+<text x="1300" y="2448" font-size="18" fill="#607589" font-weight="400" text-anchor="middle">v0.2 · 2026-10-12 · 按当前工作区实现绘制；能力验收情况以对应测试记录为准</text>
+</g></svg></main><script>function setZoom(v){document.querySelector('svg').style.width=v===.6?'100%':(2600*v)+'px'}if(location.search.includes('export'))document.body.classList.add('export');</script></body></html>

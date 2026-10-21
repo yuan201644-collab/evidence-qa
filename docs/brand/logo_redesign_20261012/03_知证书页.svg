@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="知证书页概念标志">
+  <path d="M19 32c18-9 32-7 45 2v66c-13-9-27-11-45-2z" fill="#15171b"/>
+  <path d="M109 32c-18-9-32-7-45 2v66c13-9 27-11 45-2z" fill="#15171b"/>
+  <path d="M29 48c10-3 19-2 27 2M29 62c10-3 19-2 27 2M29 76c10-3 19-2 27 2" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <path d="M99 48c-10-3-19-2-27 2M99 62c-10-3-19-2-27 2M99 76c-10-3-19-2-27 2" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <path d="m52 89 11 10 15-19" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

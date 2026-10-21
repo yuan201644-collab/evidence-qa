@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">事实流 FactFlow</title>
+  <path d="m13 6 6 3v7l-6 4-6-4V9z" fill="#315bc7"/>
+  <path d="m35 6 6 3v7l-6 4-6-4V9z" fill="#8fa8e9"/>
+  <path d="m24 27 7 4v8l-7 4-7-4v-8z" fill="#168b82"/>
+  <path d="m17 18 5 8m9-8-5 8" fill="none" stroke="#254ba6" stroke-width="3" stroke-linecap="round"/>
+  <path d="m22 25 2-2 2 2-2 2z" fill="#fff"/>
+</svg>

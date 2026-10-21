@@ -1,0 +1,8 @@
+equipment_id,equipment_name,customer_id,site_name
+DEV-EVAL-001,星桥推理节点,ORG-EVAL-001,评测园区甲
+DEV-EVAL-002,边缘计算节点,ORG-EVAL-001,评测园区甲
+DEV-EVAL-003,边缘计算节点,ORG-EVAL-002,评测园区乙
+DEV-EVAL-004,政务交换主机,ORG-EVAL-003,评测园区丙
+DEV-EVAL-005,存储节点,ORG-EVAL-002,评测园区丁
+DEV-EVAL-006,传输节点,ORG-EVAL-005,评测园区戊
+DEV-EVAL-007,安全网关,ORG-EVAL-006,评测园区己

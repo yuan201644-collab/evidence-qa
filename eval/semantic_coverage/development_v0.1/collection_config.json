@@ -1,0 +1,17 @@
+{
+  "_comment": "S2-H 采集配置（eval/semantic_coverage/development_v0.1/）。driver.py 读取本文件决定采集范围。",
+  "version": "v0.1",
+  "gate_mode_note": "采集时 NL2SQL_REQUIREMENT_GATE 的值由被测服务进程自行声明；driver 不设置也不冒称。",
+  "default_timeout_seconds": 180.0,
+  "session_prefix": "semcov",
+  "datasets": {
+    "chinook": {
+      "note": "主业务库（ict-db:5432/chinook），SC 题面直接问真实库",
+      "fingerprint_scope": "business"
+    },
+    "semantic_coverage_fixture": {
+      "note": "隔离样本库 tests/fixtures/semantic_coverage/，SC-05/13/15/16 等边界题在样本上复核",
+      "fingerprint_scope": "database"
+    }
+  }
+}

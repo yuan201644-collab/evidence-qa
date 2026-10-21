@@ -1,0 +1,12 @@
+{
+  "service":"FastAPI /api/ask",
+  "nl2sql_backend":"real",
+  "document_search_backend":"rag",
+  "graph_backend":"mock",
+  "dialect":"postgres",
+  "read_only_sql":true,
+  "model":"DeepSeek-V4.1-Flash",
+  "database_connection":".env DATABASE_URL; value intentionally omitted",
+  "schema_meta_file":"infra/schema_meta_scale.json",
+  "schema_meta_note":"规模题只在 scale.sales_scale_{1000,10000,100000} 三张表上运行，故用独立元数据；合成表刻意不进 infra/schema_meta.json，避免给默认业务链路的 Schema Linking 引入无关干扰项。"
+}

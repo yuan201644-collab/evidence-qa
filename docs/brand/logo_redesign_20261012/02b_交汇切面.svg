@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="交汇切面精修概念标志">
+  <path d="M18 32 45 19l31 12v42L50 89 19 75z" fill="#15171b"/>
+  <path d="m110 32-27-13-31 12v42l26 16 31-14z" fill="#15171b"/>
+  <path d="M31 42 49 34v36l-18 9zM97 42 79 34v36l18 9z" fill="#fff"/>
+  <path d="m64 58 28 22-28 34-28-34z" fill="#15171b" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+  <path d="m52 81 9 9 19-22" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

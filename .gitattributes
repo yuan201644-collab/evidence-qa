@@ -1,0 +1,17 @@
+# 行尾策略（仓库级，随 clone 一起生效）
+#
+# 1) 文本文件在仓库内统一为 LF，避免不同平台 clone 后出现 CRLF/LF 差异。
+#    注意：此行只影响「入库时的归一化」，不改变工作区已有文件。
+* text=auto eol=lf
+
+# 2) 语料样本必须按原始字节入库。
+#    原因：data/corpus/manifest.json 中每份样本都有 file_sha256_local 逐份哈希校验
+#    （校验逻辑见 data/corpus/tools/verify_corpus.py）。一旦 git 在入库或检出时
+#    做了行尾转换，哈希即失配，语料校验会 FAIL。
+#    标记 -text（禁用文本转换）后，无论对方机器的 core.autocrlf 设成什么，
+#    这些文件都按原始字节存取。
+#    实际受这行保护的只有 raw/ 下的文本样本（KB-010.md / KB-012.txt）；
+#    其余 13 份 PDF/DOCX 是二进制，git 本来就不做转换。
+#    2026-09-20 实测（临时仓库，置同一组规则）：匹配本行的 .md 入库后 blob 里
+#    CR 字节数保持 2；未匹配本行的对照组 .txt，blob 内 CR 被转成 0。
+data/corpus/raw/** -text

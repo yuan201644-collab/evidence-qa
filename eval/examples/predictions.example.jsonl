@@ -1,0 +1,8 @@
+{"id": "nl2sql-e-01", "sql": "SELECT count(*) AS customer_count FROM customer;", "latency_ms": 412.0}
+{"id": "nl2sql-e-02", "sql": "SELECT name FROM genre ORDER BY name;", "latency_ms": 412.0}
+{"id": "nl2sql-e-03", "sql": "SELECT round(sum(unit_price), 2) AS total_price FROM track;", "latency_ms": 412.0}
+{"id": "nl2sql-e-04", "sql": "SELECT count(*) AS employee_count FROM employee;", "latency_ms": 412.0}
+{"id": "nl2sql-e-05", "sql": "SELECT count(*) FROM customer;", "latency_ms": 380.0}
+{"id": "rob-01", "sql": "SELECT count(*) AS customer_count FROM customer;", "latency_ms": 350.0}
+{"id": "rob-10", "clarified": true, "latency_ms": 600.0}
+{"id": "rag-e-01", "answer": "整机质保期为验收合格之日起 36 个月；GPU 加速卡单独按 24 个月计算。", "retrieved": [{"kind": "doc", "doc_id": "KB-001_智能计算设备年度维保服务合同.pdf", "section_path": "第二章 质保条款", "snippet": "2.1　质保期限：自设备验收合格之日起 36 个月；其中 GPU 加速卡因工艺特性单独按 24 个月计算。", "score": 0.91}, {"kind": "doc", "doc_id": "KB-013_机房运维操作规程.pdf", "section_path": "第四章 备件管理", "snippet": "备件更换后应登记型号与更换日期。", "score": 0.42}], "answer_refs": [{"kind": "doc", "doc_id": "KB-001_智能计算设备年度维保服务合同.pdf", "section_path": "第二章 质保条款", "snippet": "2.1　质保期限：自设备验收合格之日起 36 个月；其中 GPU 加速卡因工艺特性单独按 24 个月计算。", "score": 0.91}], "latency_ms": 980.0}

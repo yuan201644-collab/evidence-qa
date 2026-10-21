@@ -1,0 +1,9 @@
+# F 项 证据碰撞最小实现与单测方案 —— SHA-256 清单
+# 口径：只读实测 + 方案；未改实现/契约/判据/测试；契约影响已列清单待 A 确认
+# 生成方式：只读哈希计算，未改动任何内容
+#
+# 行尾策略：仓库 .gitattributes 为 `* text=auto eol=lf`，入库为 LF 形态。
+#   [LF] = 入库形态（跨平台复核用）；[本地] = 本机工作副本形态。
+
+[LF]   23363011d8d3cacc11a12d433fc70fe7c40801fc30d681b20bb9a14de711a630  eval/reports/c-line-1013/mainline/C-fact-review-F-plan-20261015/F_证据碰撞最小实现与单测方案.md
+[LF]   77dcc1005267b9ab4f8d4c2e261622c28edd8df9de629bc8a27edb30906e529b  eval/reports/c-line-1013/mainline/C-fact-review-F-plan-20261015/probe_f_evidence_collision.py

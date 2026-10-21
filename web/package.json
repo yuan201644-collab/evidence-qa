@@ -1,0 +1,32 @@
+{
+  "name": "askdata-agent-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "test:runtime": "node scripts/verify-runtime.cjs",
+    "test:ui": "node scripts/verify-workspace.cjs",
+    "test:ui:live": "node scripts/verify-workspace.cjs --live",
+    "test:theme": "node scripts/verify-theme.cjs",
+    "test:motion": "node scripts/verify-motion.cjs",
+    "test:process": "node scripts/verify-process.cjs",
+    "brand:preview": "node scripts/render-brand-overview.cjs",
+    "postinstall": "node scripts/sync-pdfjs-assets.mjs"
+  },
+  "dependencies": {
+    "pdfjs-dist": "6.3.289",
+    "pinia": "4.0.3",
+    "vue": "3.5.43"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@vitejs/plugin-vue": "6.0.9",
+    "playwright": "1.64.0",
+    "typescript": "5.9.3",
+    "vite": "8.3.0",
+    "vue-tsc": "3.3.11"
+  }
+}

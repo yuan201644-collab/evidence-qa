@@ -1,0 +1,299 @@
+{
+  "contract_version": "1.1.1",
+  "database": "cross_source_demo",
+  "dialect": "postgres",
+  "source": "live:cross_source_demo",
+  "generated_at": "2026-10-03T15:58:28+00:00",
+  "generator": "export_schema_meta.py (information_schema + pg_constraint)",
+  "tables": [
+    {
+      "table": "contract_equipment",
+      "schema": "cross_source_demo",
+      "description": "合同与设备的明确映射表。映射有效期独立于合同有效期；只有受控 mapping_basis 才可用于关联。",
+      "row_count": 5,
+      "primary_key": [
+        "contract_id",
+        "equipment_id"
+      ],
+      "columns": [
+        {
+          "name": "contract_id",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "映射目标合同编号。",
+          "sample_values": []
+        },
+        {
+          "name": "equipment_id",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "被映射设备的稳定编号。",
+          "sample_values": []
+        },
+        {
+          "name": "valid_from",
+          "type": "DATE",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "设备—合同映射生效起始日期，包含该日。",
+          "sample_values": []
+        },
+        {
+          "name": "valid_to",
+          "type": "DATE",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "设备—合同映射有效截止日期，包含该日。",
+          "sample_values": []
+        },
+        {
+          "name": "mapping_basis",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "建立设备—合同关系的依据；只有受控依据可接受。",
+          "sample_values": []
+        }
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "contract_id"
+          ],
+          "references": {
+            "schema": "cross_source_demo",
+            "table": "contracts",
+            "columns": [
+              "contract_id"
+            ]
+          }
+        },
+        {
+          "columns": [
+            "equipment_id"
+          ],
+          "references": {
+            "schema": "cross_source_demo",
+            "table": "equipment",
+            "columns": [
+              "equipment_id"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "table": "contracts",
+      "schema": "cross_source_demo",
+      "description": "维保合同主表。合同适用性需要同时核对状态、合同生效日期范围和客户范围。",
+      "row_count": 3,
+      "primary_key": [
+        "contract_id"
+      ],
+      "columns": [
+        {
+          "name": "contract_id",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "合同编号，与合同文档编号对应。",
+          "sample_values": []
+        },
+        {
+          "name": "customer_id",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "合同所属客户编号，应与设备所属客户核对。",
+          "sample_values": []
+        },
+        {
+          "name": "effective_from",
+          "type": "DATE",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "合同有效期起始日期，包含该日。",
+          "sample_values": []
+        },
+        {
+          "name": "effective_to",
+          "type": "DATE",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "合同有效期结束日期，包含该日。",
+          "sample_values": []
+        },
+        {
+          "name": "status",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "合同状态；只有明确生效状态可用于 SLA 判定。",
+          "sample_values": []
+        },
+        {
+          "name": "timezone",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "合同约定的业务时区。",
+          "sample_values": []
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "equipment",
+      "schema": "cross_source_demo",
+      "description": "设备主数据表。equipment_id 是稳定对象编号；设备名称不得作为跨源关系键。",
+      "row_count": 6,
+      "primary_key": [
+        "equipment_id"
+      ],
+      "columns": [
+        {
+          "name": "equipment_id",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "设备稳定编号；跨源关联优先且必须使用该编号，不按名称匹配。",
+          "sample_values": []
+        },
+        {
+          "name": "equipment_name",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "设备显示名称，可能重名，不可单独作为合同映射键。",
+          "sample_values": []
+        },
+        {
+          "name": "customer_id",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "设备所属客户编号；需与合同客户范围核对。",
+          "sample_values": []
+        },
+        {
+          "name": "site_name",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "设备所在站点名称。",
+          "sample_values": []
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "work_order_events",
+      "schema": "cross_source_demo",
+      "description": "工单事件表。修复耗时应按 service_restored 减 accepted 计算，事件时间带时区。",
+      "row_count": 24,
+      "primary_key": [
+        "work_order_id",
+        "event_type"
+      ],
+      "columns": [
+        {
+          "name": "work_order_id",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "事件所属工单编号。",
+          "sample_values": []
+        },
+        {
+          "name": "event_type",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "业务事件类型；accepted 为受理，service_restored 为服务恢复。",
+          "sample_values": []
+        },
+        {
+          "name": "event_at",
+          "type": "TIMESTAMPTZ",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "事件发生时间，含时区；两个事件相减前须确认顺序和口径。",
+          "sample_values": []
+        }
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "work_order_id"
+          ],
+          "references": {
+            "schema": "cross_source_demo",
+            "table": "work_orders",
+            "columns": [
+              "work_order_id"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "table": "work_orders",
+      "schema": "cross_source_demo",
+      "description": "工单主表。opened_at 是工单开单时间，不等于 accepted 受理事件。",
+      "row_count": 7,
+      "primary_key": [
+        "work_order_id"
+      ],
+      "columns": [
+        {
+          "name": "work_order_id",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": true,
+          "description": "工单唯一编号。",
+          "sample_values": []
+        },
+        {
+          "name": "equipment_id",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "工单对应设备稳定编号。",
+          "sample_values": []
+        },
+        {
+          "name": "opened_at",
+          "type": "TIMESTAMPTZ",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "工单开单时间；不替代事件表中的 accepted 受理时间。",
+          "sample_values": []
+        },
+        {
+          "name": "summary",
+          "type": "TEXT",
+          "nullable": false,
+          "is_primary_key": false,
+          "description": "工单摘要文本。",
+          "sample_values": []
+        }
+      ],
+      "foreign_keys": [
+        {
+          "columns": [
+            "equipment_id"
+          ],
+          "references": {
+            "schema": "cross_source_demo",
+            "table": "equipment",
+            "columns": [
+              "equipment_id"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

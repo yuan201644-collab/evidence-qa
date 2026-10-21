@@ -1,0 +1,55 @@
+{
+  "label": "运行数据绑定修订后的开发回归评分",
+  "task": 5,
+  "authorized_by": "A（2026-10-14 指示：T5 有条件按方案①继续）",
+  "binding_basis": "eval/reports/c-line-1013/mainline/C_复核_20261013_重跑T345.md 第二节（2026-10-13 18:45-20:20 GMT+8 实测）；该报告随 feat-archive-c-run-1013 于 2026-10-13 22:15:01 +0800 提交（0b030c8），早于 2026-10-14 评分会话。",
+  "collection_date": "2026-10-13",
+  "generated_at_utc": "2026-10-14T01:38:30.005699+00:00",
+  "hashes": {
+    "original_data_manifest": {
+      "path": "eval\\mainline\\development_v0.1\\t5_v02_data_manifest.json",
+      "sha256": "d99d028ec876784cd9c61203d4c2ccfe80fd7d0a7ddf9bd1ff94147a8afc2abd"
+    },
+    "revised_data_manifest": {
+      "path": "eval\\mainline\\development_v0.1\\t5_v02_data_manifest.rev1.json",
+      "sha256": "b08765bc843005cbe6485b39b1bead40a9728e3ccbccbb3d72048bd1bb7ee201"
+    },
+    "original_freeze_archive": {
+      "path": "eval/reports/c-line-1013/mainline/C-review-1013/t5-throttled/freeze.json",
+      "sha256": "5120cf84626d46e2d9a7074fd357111d2cb49a7691ae4a5c566e959906ab112e",
+      "untouched": true
+    },
+    "pristine_scoring_copy_freeze": {
+      "path": "agent_temp/c_review_20261014/t5-throttled/freeze.json",
+      "sha256": "5120cf84626d46e2d9a7074fd357111d2cb49a7691ae4a5c566e959906ab112e",
+      "untouched": true
+    },
+    "bound_scoring_copy_freeze": {
+      "path": "agent_temp\\c_review_20261014\\t5-throttled-rev1\\freeze.json",
+      "sha256": "773c3ed052836e8b4cfa4232cf74f00b359e2664eeb2524408d1e2a737577c53"
+    },
+    "raw_answers": {
+      "path": "agent_temp\\c_review_20261014\\t5-throttled-rev1\\raw_answers.jsonl",
+      "sha256": "cb168b98a3f8e62c0aa57e123277506b62f1b00448562bb53b9f1ea3707cc06a"
+    }
+  },
+  "flow_deviation": [
+    "偏离点 1：评分数据绑定的口径由「清单声明值」改为「采集当时实际库指纹」，属流程偏离，原清单/冻结/回答均未改动，仅新增 rev1 清单与绑定副本。",
+    "偏离点 2：新清单文件名 t5_v02_data_manifest.rev1.json 与评分脚本硬编码的清单目录 eval/mainline/development_v0.1/ 一致；脚本未改，靠副本 freeze.json 的 data_manifest 指向完成绑定。",
+    "偏离点 3：rev1 副本为新目录，未改写既有评分副本 t5-throttled/，也未触碰归档原件。"
+  ],
+  "fingerprint_used": {
+    "database": "chinook",
+    "base_table_count": 14,
+    "total_rows": 126607,
+    "content_sha256": "0fe6c67e5e29550a561955e22b1105db8c78298026077c4b153516ac074a506b"
+  },
+  "constraints_respected": {
+    "code_changed": false,
+    "questions_changed": false,
+    "reference_changed": false,
+    "scoring_criteria_changed": false,
+    "model_rerun": false,
+    "originals_overwritten": false
+  }
+}

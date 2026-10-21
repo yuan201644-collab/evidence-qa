@@ -1,0 +1,303 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1136" viewBox="0 0 1800 1136" role="img" aria-labelledby="title desc">
+  <title id="title">知证 VeriMind 问数问答与事实核验流程：鲜艳配色与斜体艺术标题版</title>
+  <desc id="desc">参考技术方案工程图的具象图标与模块连线表达。问题经上下文处理和事实规划后，按需调用数据库或文档取证；跨源问题增加对象关系与适用条件核验。三路事实进入统一核验与证据账本，由项目回答器输出结论、引用及处理记录。</desc>
+  <defs>
+    <style>
+      text { font-family:"Microsoft YaHei","Noto Sans CJK SC",sans-serif; fill:#26323a; }
+      .heading { font-family:"华文琥珀","STHupo","Microsoft YaHei",sans-serif; font-size:36px; font-weight:400; font-style:italic; letter-spacing:1.2px; fill:#124ac7; }
+      .module { font-family:"华文琥珀","STHupo","Microsoft YaHei",sans-serif; font-size:28px; font-weight:400; font-style:italic; letter-spacing:1px; }
+      .name { font-size:19px; font-weight:700; }
+      .detail { font-size:15px; fill:#526169; }
+      .small { font-size:13px; fill:#526169; }
+      .annotation { font-size:14px; fill:#526169; }
+      .edgeLabel { font-size:16px; font-weight:700; fill:#53606b; paint-order:stroke; stroke:#fff; stroke-width:5px; stroke-linejoin:round; }
+      .ink { stroke:#33404b; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+      .line { fill:none; stroke:#536672; stroke-width:2.3; stroke-linejoin:round; stroke-linecap:round; marker-end:url(#arrow); }
+      .queryLine { fill:none; stroke:#009c88; stroke-width:2.5; stroke-linejoin:round; stroke-linecap:round; marker-end:url(#queryArrow); }
+      .docLine { fill:none; stroke:#ef7900; stroke-width:2.5; stroke-linejoin:round; stroke-linecap:round; marker-end:url(#docArrow); }
+      .jointLine { fill:none; stroke:#a02ad0; stroke-width:2.5; stroke-linejoin:round; stroke-linecap:round; marker-end:url(#jointArrow); }
+      .flow { fill:none; stroke:#329b22; stroke-width:2.4; stroke-linejoin:round; stroke-linecap:round; marker-end:url(#flowArrow); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.8" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#536672"/></marker>
+    <marker id="queryArrow" viewBox="0 0 10 10" refX="8.8" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#009c88"/></marker>
+    <marker id="docArrow" viewBox="0 0 10 10" refX="8.8" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#ef7900"/></marker>
+    <marker id="jointArrow" viewBox="0 0 10 10" refX="8.8" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#a02ad0"/></marker>
+    <marker id="flowArrow" viewBox="0 0 10 10" refX="8.8" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#329b22"/></marker>
+
+    <!-- 可复用的工程图示母版：彩色面、深色轮廓、具体物件。 -->
+    <symbol id="person" viewBox="0 0 80 80">
+      <path d="M15 64c1-16 9-25 23-25 13 0 23 9 24 25" fill="#21c9ae" class="ink"/>
+      <path d="m30 41 8 13 8-13" fill="#fff" class="ink"/>
+      <ellipse cx="38" cy="25" rx="12" ry="15" fill="#ffd2a3" class="ink"/>
+      <path d="M26 25c-3-16 9-23 19-16 6 3 7 9 5 15l-5-12c-4 7-10 8-19 8" fill="#3c566a" class="ink"/>
+      <path d="M25 53h45l-6 23H31Z" fill="#c1dff7" class="ink"/><path d="M23 76h49" fill="none" class="ink"/>
+      <circle cx="48" cy="64" r="3" fill="#6b9dca"/>
+    </symbol>
+    <symbol id="conversation" viewBox="0 0 80 80">
+      <path d="M6 9h50v34H28L14 54V43H6Z" fill="#95dcff" class="ink"/>
+      <path d="M24 34h49v33H60l-1 9-14-9H24Z" fill="#39d2b7" class="ink"/>
+      <path d="M16 21h30M16 29h22M34 46h29M34 54h23" fill="none" class="ink"/>
+      <circle cx="65" cy="16" r="10" fill="#ffd02f" class="ink"/><path d="m60 16 4 4 7-9" fill="none" class="ink"/>
+    </symbol>
+    <symbol id="conditions" viewBox="0 0 80 80">
+      <rect x="12" y="10" width="51" height="65" rx="4" fill="#fff3c5" class="ink"/>
+      <rect x="26" y="5" width="24" height="11" rx="3" fill="#ffb847" class="ink"/>
+      <circle cx="24" cy="29" r="3" fill="#04bba3"/><circle cx="24" cy="43" r="3" fill="#04bba3"/><circle cx="24" cy="57" r="3" fill="#04bba3"/>
+      <path d="M33 29h21M33 43h21M33 57h16" fill="none" class="ink"/>
+      <path d="m55 49 20 0-7 10v12h-6V59Z" fill="#4acfff" class="ink"/>
+    </symbol>
+    <symbol id="facts" viewBox="0 0 80 80">
+      <path d="M8 6h41l10 10v48H8Z" fill="#d5f5cc" class="ink"/><path d="M49 6v12h10" fill="#58c7aa" class="ink"/>
+      <path d="m16 26 3 3 5-7M16 40l3 3 5-7M16 54l3 3 5-7M30 26h19M30 40h19M30 54h13" fill="none" class="ink"/>
+      <path d="M58 30h12v18M58 58h12V48" fill="none" class="ink"/>
+      <circle cx="59" cy="29" r="6" fill="#ffd02f" class="ink"/><circle cx="59" cy="59" r="6" fill="#4ad2ff" class="ink"/><circle cx="70" cy="47" r="6" fill="#b16fe6" class="ink"/>
+    </symbol>
+    <symbol id="routing" viewBox="0 0 80 80">
+      <rect x="5" y="26" width="27" height="27" rx="5" fill="#4acfff" class="ink"/><path d="M12 35h13M12 43h9" fill="none" class="ink"/>
+      <path d="M32 40h15V15h13M47 40h13M47 40v25h13" fill="none" class="ink"/>
+      <path d="m55 10 7 5-7 5M55 35l7 5-7 5M55 60l7 5-7 5" fill="none" class="ink"/>
+      <rect x="64" y="7" width="13" height="16" rx="3" fill="#19ceb0" class="ink"/><rect x="64" y="32" width="13" height="16" rx="3" fill="#ffb739" class="ink"/><rect x="64" y="57" width="13" height="16" rx="3" fill="#ba78ed" class="ink"/>
+    </symbol>
+    <symbol id="database" viewBox="0 0 80 80">
+      <path d="M12 17v46c0 8 13 13 28 13s28-5 28-13V17" fill="#2bcdb7" class="ink"/>
+      <ellipse cx="40" cy="17" rx="28" ry="12" fill="#a0f0dd" class="ink"/>
+      <path d="M12 32c0 7 13 12 28 12s28-5 28-12M12 48c0 7 13 12 28 12s28-5 28-12M12 63c0 7 13 12 28 12s28-5 28-12" fill="none" class="ink"/>
+      <path d="M22 30v5M22 46v5M22 62v5" stroke="#e2fff5" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="sql" viewBox="0 0 80 80">
+      <path d="M10 7h40l13 13v53H10Z" fill="#fff0bd" class="ink"/><path d="M50 7v15h13" fill="#ffbf47" class="ink"/>
+      <text x="36" y="41" text-anchor="middle" font-size="15" font-weight="700">SQL</text><path d="M19 50h30M19 59h23" fill="none" class="ink"/>
+      <path d="M61 41v6l6 2 4-3 6 8-4 4 1 6 5 2-4 10-6-2-5 4-7-2-2-6-5-2-5 2-4-9 5-4-1-6 5-6 6 2Z" fill="#ffb739" class="ink" transform="translate(-2 -2) scale(.96)"/>
+      <circle cx="60" cy="60" r="7" fill="#fff4bb" class="ink"/>
+    </symbol>
+    <symbol id="shield" viewBox="0 0 80 80">
+      <path d="M40 5 69 16v22c0 18-10 30-29 38C21 68 11 56 11 38V16Z" fill="#b6ed77" class="ink"/>
+      <path d="m23 39 11 12 23-26" fill="none" stroke="#17854a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="35" y="14" width="10" height="5" rx="2" fill="#53b846"/>
+    </symbol>
+    <symbol id="table" viewBox="0 0 80 80">
+      <rect x="6" y="11" width="68" height="59" rx="3" fill="#fff" class="ink"/><path d="M6 15q0-4 4-4h60q4 0 4 4v12H6Z" fill="#53b9f2" class="ink"/>
+      <path d="M6 41h68M6 55h68M29 27v43M52 27v43" fill="none" class="ink"/>
+      <path d="M11 34h11M35 34h10M58 34h10M11 48h11M35 48h10M58 62h10" stroke="#93b9cb" stroke-width="2"/>
+      <path d="m59 49 6 5 11-13" fill="none" stroke="#159c5b" stroke-width="3"/>
+    </symbol>
+    <symbol id="documents" viewBox="0 0 80 80">
+      <path d="M5 6h38l10 10v47H5Z" fill="#a8deff" class="ink"/><path d="M43 6v12h10" fill="#55a5d6" class="ink"/>
+      <path d="M18 16h37l11 11v47H18Z" fill="#ffe5a8" class="ink"/><path d="M55 16v13h11" fill="#f6b44c" class="ink"/>
+      <path d="M30 28h32l12 12v37H30Z" fill="#fff" class="ink"/><path d="M62 28v14h12" fill="#c5d9ea" class="ink"/>
+      <path d="M38 49h27M38 57h27M38 65h18" fill="none" class="ink"/>
+      <rect x="2" y="33" width="22" height="12" rx="2" fill="#ef6267"/><text x="13" y="42" text-anchor="middle" font-size="8" fill="#fff" style="fill:#fff" font-weight="700">PDF</text>
+    </symbol>
+    <symbol id="parse" viewBox="0 0 80 80">
+      <path d="M6 8h33l10 10v47H6Z" fill="#fff1bb" class="ink"/><path d="M39 8v12h10M15 30h25M15 39h25M15 48h19" fill="none" class="ink"/>
+      <rect x="47" y="19" width="27" height="13" rx="2" fill="#58d0e5" class="ink"/><rect x="47" y="40" width="27" height="13" rx="2" fill="#9bdf68" class="ink"/><rect x="47" y="61" width="27" height="13" rx="2" fill="#ffd35a" class="ink"/>
+      <path d="M37 36h5v31h5M42 26h5M42 47h5" fill="none" class="ink"/>
+    </symbol>
+    <symbol id="retrieve" viewBox="0 0 80 80">
+      <rect x="5" y="8" width="14" height="10" rx="2" fill="#ffc52f" class="ink"/><rect x="30" y="3" width="14" height="10" rx="2" fill="#62c9ef" class="ink"/><rect x="56" y="10" width="14" height="10" rx="2" fill="#8cda5f" class="ink"/>
+      <path d="M7 27h63L47 48v17l-17 9V48Z" fill="#68e1cf" class="ink"/><path d="M18 34h40" fill="none" class="ink"/>
+      <circle cx="58" cy="59" r="12" fill="#fff0af" class="ink"/><path d="m67 68 9 9" fill="none" stroke="#33404b" stroke-width="5"/>
+    </symbol>
+    <symbol id="evidence" viewBox="0 0 80 80">
+      <path d="M9 6h42l12 13v56H9Z" fill="#fff" class="ink"/><path d="M51 6v15h12" fill="#d2e2ef" class="ink"/>
+      <path d="M18 31h34M18 43h34M18 55h22" fill="none" stroke="#abcad4" stroke-width="7"/>
+      <path d="M18 31h25M18 43h31" fill="none" stroke="#ffd235" stroke-width="7" opacity=".85"/>
+      <circle cx="57" cy="58" r="13" fill="#b5f0dd" fill-opacity=".85" class="ink"/><path d="m66 67 10 10" fill="none" stroke="#33404b" stroke-width="5"/>
+      <path d="m51 58 4 4 8-9" fill="none" stroke="#168f61" stroke-width="3"/>
+    </symbol>
+    <symbol id="graph" viewBox="0 0 80 80">
+      <path d="M15 15 41 35 67 14M41 35 14 64M41 35 68 65M15 15 14 64M67 14l1 51M14 64h54" fill="none" stroke="#8250a7" stroke-width="2.3"/>
+      <circle cx="15" cy="15" r="9" fill="#69d5e9" class="ink"/><circle cx="67" cy="14" r="9" fill="#ffcc36" class="ink"/><circle cx="14" cy="64" r="9" fill="#94e25f" class="ink"/><circle cx="68" cy="65" r="9" fill="#69d5e9" class="ink"/><circle cx="41" cy="35" r="15" fill="#c083f1" class="ink"/>
+      <circle cx="41" cy="35" r="6" fill="#fff"/>
+    </symbol>
+    <symbol id="mapping" viewBox="0 0 80 80">
+      <rect x="2" y="9" width="29" height="48" rx="3" fill="#a6efda" class="ink"/><rect x="49" y="25" width="29" height="48" rx="3" fill="#ffe18b" class="ink"/>
+      <circle cx="16" cy="24" r="6" fill="#46bda0"/><path d="M8 39h16M8 46h12M55 55h16M55 62h12" fill="none" class="ink"/>
+      <circle cx="64" cy="40" r="6" fill="#efad2f"/>
+      <path d="m31 27 9-7 9 7M49 56l-9 7-9-7" fill="none" class="ink"/><path d="M33 26h14M47 57H33" fill="none" stroke="#a348d1" stroke-width="3"/>
+    </symbol>
+    <symbol id="calendar" viewBox="0 0 80 80">
+      <rect x="6" y="14" width="66" height="58" rx="5" fill="#fff" class="ink"/><path d="M6 20q0-6 6-6h54q6 0 6 6v14H6Z" fill="#7bc8fb" class="ink"/>
+      <path d="M23 6v16M55 6v16" fill="none" stroke="#33404b" stroke-width="4" stroke-linecap="round"/>
+      <path d="M18 44h8M35 44h8M52 44h8M18 57h8M35 57h8" fill="none" stroke="#8db6d0" stroke-width="4"/>
+      <circle cx="59" cy="59" r="13" fill="#c0ee91" class="ink"/><path d="m52 59 5 5 9-11" fill="none" class="ink"/>
+    </symbol>
+    <symbol id="scope" viewBox="0 0 80 80">
+      <path d="M40 10v57M16 70h48M12 24h56M19 24 8 48h23ZM61 24 49 48h24Z" fill="#ffe4a5" class="ink"/>
+      <path d="M8 48q11 13 23 0M49 48q12 13 24 0" fill="#66d8bd" class="ink"/>
+      <circle cx="40" cy="17" r="7" fill="#8bb4ff" class="ink"/><path d="M30 68h20" fill="none" stroke="#33404b" stroke-width="4"/>
+    </symbol>
+    <symbol id="compare" viewBox="0 0 80 80">
+      <path d="M6 10h29v59H6Z" fill="#b8efdf" class="ink"/><path d="M45 10h29v59H45Z" fill="#ffe5a9" class="ink"/>
+      <path d="M13 23h15M13 33h15M52 23h15M52 33h15" fill="none" class="ink"/>
+      <path d="m13 48 5 5 9-10M52 48l5 5 9-10" fill="none" stroke="#299a51" stroke-width="3"/>
+      <path d="M35 39h10M35 46h10" fill="none" stroke="#a02ad0" stroke-width="3"/>
+    </symbol>
+    <symbol id="verify" viewBox="0 0 80 80">
+      <use href="#shield" x="2" y="0" width="62" height="70"/>
+      <circle cx="56" cy="55" r="16" fill="#fff1ab" fill-opacity=".93" class="ink"/><path d="m68 68 10 10" fill="none" stroke="#33404b" stroke-width="5"/>
+      <path d="M49 55h14M56 48v14" fill="none" stroke="#b98312" stroke-width="2"/>
+    </symbol>
+    <symbol id="compose" viewBox="0 0 80 80">
+      <path d="M6 12h62v43H36L20 69V55H6Z" fill="#8ee7c3" class="ink"/><path d="M17 25h40M17 36h31" fill="none" class="ink"/>
+      <path d="m40 65 5-14 23-25 9 9-24 25Z" fill="#ffcd45" class="ink"/><path d="m45 51 9 9M68 26l9 9" fill="none" class="ink"/>
+    </symbol>
+  </defs>
+
+  <rect width="1800" height="1136" fill="#fff"/>
+  <image href="../../web/public/brand/verimind-mark.svg" x="42" y="25" width="39" height="39"/>
+  <text x="900" y="48" text-anchor="middle" class="heading">知证 VeriMind 问数问答与事实核验流程</text>
+  <text x="900" y="77" text-anchor="middle" class="detail">问题理解与事实规划　·　按需查询和检索　·　核验结果与来源证据</text>
+
+  <!-- 问题规划：条件、事实和依赖先于工具执行。 -->
+  <rect x="40" y="100" width="1720" height="175" rx="14" fill="#fff" stroke="#147ce0" stroke-width="2.2"/>
+  <path d="M54 100h1692q14 0 14 14v24H40v-24q0-14 14-14Z" fill="#bce9ff" stroke="#147ce0" stroke-width="2"/>
+  <text x="900" y="126" text-anchor="middle" class="module" style="fill:#0058c9">问题理解与事实规划模块</text>
+  <use href="#person" x="96" y="150" width="70" height="70"/>
+  <text x="132" y="241" text-anchor="middle" class="name">用户提问</text>
+  <text x="132" y="263" text-anchor="middle" class="small">自然语言表达业务问题</text>
+  <use href="#conversation" x="404" y="151" width="69" height="69"/>
+  <text x="440" y="241" text-anchor="middle" class="name">接续上下文与纠错</text>
+  <text x="440" y="263" text-anchor="middle" class="small">保留原话、追问与补充条件</text>
+  <use href="#conditions" x="710" y="150" width="70" height="70"/>
+  <text x="745" y="241" text-anchor="middle" class="name">明确对象、时间与口径</text>
+  <text x="745" y="263" text-anchor="middle" class="small">条件不完整时继续澄清</text>
+  <use href="#facts" x="1074" y="150" width="72" height="72"/>
+  <text x="1110" y="241" text-anchor="middle" class="name">列出所需事实与依赖</text>
+  <text x="1110" y="263" text-anchor="middle" class="small">明确事实内容、来源及前置依赖</text>
+  <use href="#routing" x="1530" y="150" width="76" height="76"/>
+  <text x="1621" y="177" class="name">按需取证</text>
+  <text x="1621" y="202" class="detail">数据库 / 文档</text>
+  <text x="1621" y="227" class="detail">或两路共同取证</text>
+  <path d="M183 187H380" class="line"/>
+  <path d="M492 187H687" class="line"/>
+  <path d="M800 187H1050" class="line"/>
+  <path d="M1166 187H1504" class="line"/>
+
+  <!-- 选择一源或双源；不把单源强制串入跨源判定。 -->
+  <path d="M1568 225V302H200V330" class="line"/>
+  <path d="M1120 302V330" class="line"/>
+  <text x="645" y="296" text-anchor="middle" class="edgeLabel">按问题需要选择一源或双源</text>
+
+  <!-- 数据库取证：具体产物依次传递。 -->
+  <rect x="40" y="330" width="640" height="260" rx="14" fill="#fff" stroke="#00968a" stroke-width="2.2"/>
+  <path d="M54 330h612q14 0 14 14v25H40v-25q0-14 14-14Z" fill="#9beedd" stroke="#00968a" stroke-width="2"/>
+  <text x="360" y="357" text-anchor="middle" class="module" style="fill:#007d75">数据库取证模块</text>
+  <use href="#database" x="83" y="396" width="68" height="68"/>
+  <use href="#sql" x="243" y="396" width="68" height="68"/>
+  <use href="#shield" x="403" y="396" width="68" height="68"/>
+  <use href="#table" x="554" y="396" width="68" height="68"/>
+  <path d="M164 431H228" class="queryLine"/>
+  <path d="M324 431H388" class="queryLine"/>
+  <path d="M483 431H539" class="queryLine"/>
+  <text x="118" y="490" text-anchor="middle" class="name">表字段匹配</text>
+  <text x="278" y="490" text-anchor="middle" class="name">生成查询</text>
+  <text x="438" y="490" text-anchor="middle" class="name">只读校验</text>
+  <text x="589" y="490" text-anchor="middle" class="name">执行取数</text>
+  <text x="118" y="514" text-anchor="middle" class="small">表 / 字段 / 关系</text>
+  <text x="278" y="514" text-anchor="middle" class="small">受条件约束的 SQL</text>
+  <text x="438" y="514" text-anchor="middle" class="small">安全与结构检查</text>
+  <text x="589" y="514" text-anchor="middle" class="small">数值 / 明细 / 汇总</text>
+  <path d="M65 538H655" stroke="#b1e3d4" stroke-width="1.2"/>
+  <text x="360" y="566" text-anchor="middle" class="detail">输出：查询结果、筛选条件与来源表字段</text>
+
+  <!-- 文档取证：默认RAG；KAG仅在选用时补充候选原文。 -->
+  <rect x="730" y="330" width="1030" height="260" rx="14" fill="#fff" stroke="#f07800" stroke-width="2.2"/>
+  <path d="M744 330h1002q14 0 14 14v25H730v-25q0-14 14-14Z" fill="#ffe29a" stroke="#f07800" stroke-width="2"/>
+  <text x="1245" y="357" text-anchor="middle" class="module" style="fill:#c74f00">文档取证模块</text>
+  <use href="#documents" x="774" y="396" width="68" height="68"/>
+  <use href="#parse" x="951" y="396" width="68" height="68"/>
+  <use href="#retrieve" x="1134" y="396" width="68" height="68"/>
+  <use href="#evidence" x="1351" y="396" width="68" height="68"/>
+  <path d="M854 431H937" class="docLine"/>
+  <path d="M1032 431H1120" class="docLine"/>
+  <path d="M1217 431H1336" class="docLine"/>
+  <text x="808" y="490" text-anchor="middle" class="name">原始资料</text>
+  <text x="985" y="490" text-anchor="middle" class="name">解析与切片</text>
+  <text x="1168" y="490" text-anchor="middle" class="name">RAG 检索</text>
+  <text x="1385" y="490" text-anchor="middle" class="name">定位原文</text>
+  <text x="808" y="514" text-anchor="middle" class="small">正文 / 图文资料</text>
+  <text x="985" y="514" text-anchor="middle" class="small">结构与章节位置</text>
+  <text x="1168" y="514" text-anchor="middle" class="small">默认召回、重排</text>
+  <text x="1385" y="514" text-anchor="middle" class="small">候选合并、原文定位</text>
+  <rect x="1510" y="382" width="226" height="168" rx="10" fill="#fbf0ff" stroke="#af48df" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="1623" y="405" text-anchor="middle" font-size="17" font-weight="700" style="fill:#9b16ce">可选 KAG 补充</text>
+  <use href="#graph" x="1589" y="416" width="68" height="68"/>
+  <text x="1623" y="509" text-anchor="middle" class="small">手动选择深度检索</text>
+  <text x="1623" y="533" text-anchor="middle" class="small">仅补充候选原文</text>
+  <path d="M1507 447H1435" class="jointLine"/>
+  <path d="M755 538H1481" stroke="#f2d29b" stroke-width="1.2"/>
+  <text x="1118" y="566" text-anchor="middle" class="detail">输出：支持片段、文档身份、页码 / 章节与适用条件</text>
+
+  <!-- 两条单源路径直接到共同账本；双源关系另作检查。 -->
+  <path d="M200 590V851" class="queryLine"/>
+  <text x="216" y="710" class="edgeLabel">问数结果直接核验</text>
+  <text x="216" y="737" class="annotation">检查筛选条件与结果完整性</text>
+  <text x="216" y="760" class="annotation">保留数值、字段和查询依据</text>
+  <path d="M1550 590V851" class="docLine"/>
+  <text x="1566" y="710" class="edgeLabel">文档证据直接核验</text>
+  <text x="1566" y="737" class="annotation">核对原文是否支持所问事实</text>
+  <text x="1566" y="760" class="annotation">保留条件、例外与引用位置</text>
+  <path d="M590 590V635" class="queryLine"/>
+  <path d="M1150 590V635" class="docLine"/>
+  <text x="900" y="620" text-anchor="middle" class="edgeLabel">仅跨源问题进入联合核验</text>
+
+  <rect x="540" y="635" width="720" height="173" rx="14" fill="#fff" stroke="#a02ad0" stroke-width="2.2"/>
+  <path d="M554 635h692q14 0 14 14v23H540v-23q0-14 14-14Z" fill="#e9c6ff" stroke="#a02ad0" stroke-width="2"/>
+  <text x="900" y="661" text-anchor="middle" class="module" style="fill:#8b12b7">跨源关系与适用条件核验模块</text>
+  <use href="#mapping" x="572" y="686" width="51" height="51"/>
+  <use href="#calendar" x="748" y="686" width="51" height="51"/>
+  <use href="#scope" x="924" y="686" width="51" height="51"/>
+  <use href="#compare" x="1104" y="686" width="51" height="51"/>
+  <path d="M642 710H731" class="jointLine"/>
+  <path d="M818 710H907" class="jointLine"/>
+  <path d="M994 710H1087" class="jointLine"/>
+  <text x="599" y="758" text-anchor="middle" font-size="17" font-weight="700">对象映射</text>
+  <text x="775" y="758" text-anchor="middle" font-size="17" font-weight="700">状态与有效期</text>
+  <text x="951" y="758" text-anchor="middle" font-size="17" font-weight="700">范围与口径</text>
+  <text x="1131" y="758" text-anchor="middle" font-size="17" font-weight="700">事实与规则判定</text>
+  <text x="900" y="791" text-anchor="middle" class="annotation">关键映射、有效期或适用范围不成立时，停止相关结论</text>
+  <path d="M900 808V851" class="jointLine"/>
+  <text x="916" y="834" class="edgeLabel">关联事实</text>
+
+  <!-- 共同记录执行状态、事实支持及证据位置；统一回答由项目生成。 -->
+  <g transform="translate(0 36)">
+  <rect x="40" y="815" width="1720" height="245" rx="14" fill="#fff" stroke="#419600" stroke-width="2.2"/>
+  <path d="M54 815h1692q14 0 14 14v25H40v-25q0-14 14-14Z" fill="#c6ef8c" stroke="#419600" stroke-width="2"/>
+  <text x="900" y="842" text-anchor="middle" class="module" style="fill:#2c7d00">事实核验、证据账本与可追溯回答模块</text>
+  <text x="900" y="875" text-anchor="middle" class="annotation">执行状态、事实支持和证据关联分别记录；检查范围随问题类型变化</text>
+  <use href="#verify" x="107" y="916" width="76" height="76"/>
+  <text x="146" y="1019" text-anchor="middle" class="name">执行适用检查</text>
+  <text x="146" y="1043" text-anchor="middle" class="small">事实、条件与支持关系</text>
+  <path d="M211 955H318" class="flow"/>
+
+  <rect x="337" y="885" width="571" height="132" rx="5" fill="#fff" stroke="#419600" stroke-width="1.6"/>
+  <path d="M342 885h561q5 0 5 5v31H337v-31q0-5 5-5Z" fill="#dff3ca"/>
+  <path d="M337 921h571M337 965h571M522 885v132M711 885v132" fill="none" stroke="#b5d59a" stroke-width="1.2"/>
+  <text x="429" y="910" text-anchor="middle" font-size="18" font-weight="700">事实项</text>
+  <text x="616" y="910" text-anchor="middle" font-size="18" font-weight="700">状态与原因</text>
+  <text x="810" y="910" text-anchor="middle" font-size="18" font-weight="700">支持来源</text>
+  <text x="429" y="949" text-anchor="middle" class="detail">对象 / 时间 / 指标</text>
+  <text x="616" y="949" text-anchor="middle" class="detail">支持 / 缺失 / 冲突</text>
+  <text x="810" y="949" text-anchor="middle" class="detail">查询结果 / 原文片段</text>
+  <text x="429" y="993" text-anchor="middle" class="detail">执行与边界</text>
+  <text x="616" y="993" text-anchor="middle" class="detail">完成 / 未执行 / 失败</text>
+  <text x="810" y="993" text-anchor="middle" class="detail">本轮引用与执行记录</text>
+  <text x="622" y="1043" text-anchor="middle" class="name">核验结果与来源位置一并登记</text>
+  <path d="M928 955H1016" class="flow"/>
+  <use href="#compose" x="1040" y="916" width="76" height="76"/>
+  <text x="1078" y="1019" text-anchor="middle" class="name">项目回答器</text>
+  <text x="1078" y="1043" text-anchor="middle" class="small">组织结论、引用与边界说明</text>
+  <path d="M1137 955H1220" class="flow"/>
+
+  <rect x="1243" y="885" width="475" height="132" rx="6" fill="#fff" stroke="#6f8d97" stroke-width="1.6"/>
+  <path d="M1249 885h463q6 0 6 6v20h-475v-20q0-6 6-6Z" fill="#d6eaff"/>
+  <circle cx="1258" cy="898" r="3" fill="#7c9caa"/><circle cx="1270" cy="898" r="3" fill="#7c9caa"/><circle cx="1282" cy="898" r="3" fill="#7c9caa"/>
+  <path d="M1258 923h445v39h-445Z" fill="#e6f6d7"/>
+  <text x="1271" y="947" font-size="18" font-weight="700">结论与必要说明</text>
+  <rect x="1258" y="973" width="31" height="25" rx="3" fill="#ffda5a"/><text x="1273" y="991" text-anchor="middle" font-size="14">[1]</text>
+  <rect x="1297" y="973" width="31" height="25" rx="3" fill="#ffda5a"/><text x="1312" y="991" text-anchor="middle" font-size="14">[2]</text>
+  <text x="1342" y="991" class="detail">原文 / 数据依据 / 处理记录</text>
+  <text x="1480" y="1043" text-anchor="middle" class="name">用户查看答案并回到来源核对</text>
+  </g>
+</svg>

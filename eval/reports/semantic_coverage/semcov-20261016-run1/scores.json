@@ -1,0 +1,152 @@
+{
+  "total": 19,
+  "pass": 15,
+  "repair": 4,
+  "unknown": 0,
+  "clarification_accuracy": "2/3",
+  "silent_omissions": 0,
+  "end_to_end_pass_rate": "15/19",
+  "verdicts": [
+    {
+      "case_id": "SC-01",
+      "category": "normal_control",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-02",
+      "category": "clarification",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-03",
+      "category": "clarification",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-04",
+      "category": "normal_control",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-05",
+      "category": "capability_boundary",
+      "status": "repair",
+      "failed_checks": [
+        "答案未包含任何预期说明性关键词：时间、注册、口径、无法确定、不支持、没有可用"
+      ],
+      "notes": "响应未携带 sql_requirement_coverage（可能未开 fact-review 协商头）"
+    },
+    {
+      "case_id": "SC-06",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-07",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-08",
+      "category": "clarification",
+      "status": "repair",
+      "failed_checks": [
+        "应前置澄清但未澄清"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-09",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-11",
+      "category": "condition_coverage",
+      "status": "repair",
+      "failed_checks": [
+        "SQL 未包含预期条件：2023"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-12",
+      "category": "capability_boundary",
+      "status": "repair",
+      "failed_checks": [
+        "答案未包含任何预期说明性关键词：至今、截至今日、今天、当前"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-13",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-14",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-15",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-16",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-17",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-18",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-19",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-30",
+      "category": "negative_control",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    }
+  ]
+}

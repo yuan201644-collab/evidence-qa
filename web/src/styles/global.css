@@ -1,0 +1,21 @@
+@import './tokens.css';
+@import './motion.css';
+
+* { box-sizing: border-box; }
+html, body, #app { min-width: 320px; min-height: 100%; margin: 0; }
+body { background: var(--bg-app); color: var(--text-primary); font: 16px/1.6 "Inter", "PingFang SC", "Microsoft YaHei", sans-serif; -webkit-font-smoothing: antialiased; }
+/* 主题切换时给背景和文字一个短过渡：不加会让整页在切暗色时"啪"地跳变。
+   只过渡这两个属性，避免 transitions 意外命中布局属性造成性能问题。 */
+body { transition: background-color .18s ease, color .18s ease; }
+button, textarea, input { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .58; }
+button, a, textarea { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--brand-primary); outline-offset: 3px; }
+button.icon-button.close-button { display: grid; width: 34px; height: 34px; flex: 0 0 34px; place-items: center; padding: 0; border: 1px solid var(--border-strong); border-radius: 7px; color: var(--text-secondary); background: var(--bg-surface); transition: color var(--motion-fast), background-color var(--motion-fast), border-color var(--motion-fast); }
+button.icon-button.close-button:hover { border-color: var(--border-brand); color: var(--brand-primary); background: var(--brand-soft); }
+::selection { color: var(--text-on-brand); background: var(--brand-primary); }
+* { scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; animation-delay: 0ms !important; transition-duration: 0ms !important; transition-delay: 0ms !important; scroll-behavior: auto !important; }
+}

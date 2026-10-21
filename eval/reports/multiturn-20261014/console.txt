@@ -1,0 +1,80 @@
+﻿
+============================================================================
+多轮对话连续追问评测  |  后端 http://127.0.0.1:8021
+============================================================================
+
+【mt-01】客户维度的连续追问 —— 通过
+  连续通过 5/5 轮
+    ✓ 第1轮 [不需上文·未接上文] 平台上一共有多少位客户？
+        答：查询结果：customer_count：59。
+        结果行数：1（预期 1）
+    ✓ 第2轮 [需上文·已接上文] 只看美国的
+        答：查询结果：customer_count：13。
+        结果行数：1（预期 1）
+    ✓ 第3轮 [需上文·已接上文] 改成按城市分组
+        答：共 12 行，前 3 行：city：Boston、customer_count：1；city：Chicago、customer_count：1；city：Cupertino、customer_
+        结果行数：12（预期 12）
+    ✓ 第4轮 [需上文·已接上文] 那按员工分组呢
+        答：共 3 行，前 3 行：employee_id：3、employee_name：Jane Peacock、customer_count：3；employee_id：4、employee_nam
+        结果行数：3（预期 3）
+    ✓ 第5轮 [需上文·已接上文] 这个再按国家分一下
+        答：共 3 行，前 3 行：country：USA、employee_id：3、employee_name：Jane Peacock、customer_count：3；country：USA、em
+        结果行数：3（预期 3）
+
+【mt-02】发票聚合的连续切换 —— 通过
+  连续通过 5/5 轮
+    ✓ 第1轮 [不需上文·未接上文] 所有发票的总金额是多少？
+        答：查询结果：total_amount：2328.6。
+        结果行数：1（预期 1）
+    ✓ 第2轮 [需上文·已接上文] 那按开票国家分一下
+        答：共 24 行，前 3 行：billing_country：Argentina、total_amount：37.62；billing_country：Australia、total_amount
+        结果行数：24（预期 24）
+    ✓ 第3轮 [需上文·已接上文] 改成按月拆开
+        答：共 60 行，前 3 行：invoice_month：2021-01-01T00:00:00、total_amount：35.64；invoice_month：2021-02-01T00:00
+        结果行数：60（预期 60）
+    ✓ 第4轮 [需上文·已接上文] 那平均每张是多少
+        答：共 60 行，前 3 行：invoice_month：2021-01-01T00:00:00、avg_invoice_amount：5.94；invoice_month：2021-02-01T
+        结果行数：60（预期 60）
+    ✓ 第5轮 [需上文·已接上文] 这个最多的是哪个
+        答：查询结果：invoice_month：2024-09-01T00:00:00、avg_invoice_amount：7.785。
+        结果行数：1（预期 1）
+
+【mt-03】单个实体的逐层下钻 —— 未通过
+  连续通过 4/5 轮，首个失败在第 2 轮
+    ✓ 第1轮 [不需上文·未接上文] 客户 Frank Harris 是谁？
+        答：查询结果：customer_id：16、full_name：Frank Harris、company：Google Inc.、address：1600 Amphitheatre Parkway
+        结果行数：1（预期 1）
+    ✗ 第2轮 [需上文·已接上文] 他总共消费了多少？
+        答：查询结果：customer_id：16、customer_name：Frank Harris、company：Google Inc.、address：1600 Amphitheatre Par
+        结果行数：1（预期 1）
+        说明：答案未包含：37.62
+        实际 SQL：SELECT customer_id, first_name || ' ' || last_name AS customer_name, company, address, city, state, country, postal_code, phone, email, support_rep_id FROM customer WHERE first_name = 'Frank' AND last_name = 'Harris' ORDER BY customer_id LIMIT 1000
+    ✓ 第3轮 [需上文·已接上文] 改成看发票张数
+        答：查询结果：customer_id：16、customer_name：Frank Harris、invoice_count：7。
+        结果行数：1（预期 1）
+    ✓ 第4轮 [需上文·已接上文] 那他都买过哪些曲目
+        答：共 38 行，前 3 行：track_name：05 - Phantom of the Opera；track_name：A Novidade (Live)；track_name：Aces H
+        结果行数：38（预期 38）
+    ✓ 第5轮 [需上文·已接上文] 只看播放时长最长的
+        答：查询结果：track_name：Heaven Can Wait、duration_ms：440555。
+        结果行数：1（预期 1）
+
+【mt-04】文档问答的连续追问 —— 通过
+  连续通过 5/5 轮
+    ✓ 第1轮 [不需上文·未接上文] 智能计算设备年度维保服务合同里，质保期是多久？
+        答：质保期为自设备验收合格之日起 36 个月；其中 GPU 加速卡因工艺特性单独按 24 个月计算 [1]。
+    ✓ 第2轮 [需上文·已接上文] 那 GPU 加速卡呢
+        答：质保期限为自设备验收合格之日起 **36 个月** [1][2]。  其中，**GPU 加速卡**因工艺特性单独计算，质保期为 **24 个月** [1][2]。
+    ✓ 第3轮 [需上文·已接上文] 这个在合同第几条
+        答：质保期为自设备验收合格之日起 **36 个月** [1][2]。  其中，**GPU 加速卡因工艺特性单独按 24 个月计算** [1][2]。  该约定在合同 **第 2.1 条“质保期限”
+    ✓ 第4轮 [需上文·已接上文] 它的适用范围呢
+        答：质保期限为：自设备验收合格之日起 **36 个月**；其中 **GPU 加速卡因工艺特性单独按 24 个月计算**。[1][2]  该约定在合同 **第二章“质保条款”第 2.1 条**。[1
+    ✓ 第5轮 [需上文·已接上文] 那服务响应时限是多少
+        答：根据现有片段，回答如下：  - **质保期**：自设备验收合格之日起 **36 个月**；其中 **GPU 加速卡**因工艺特性单独按 **24 个月**计算[1]。 - **在合同第几条**
+
+----------------------------------------------------------------------------
+汇总：连续 5 轮以上全部通过的用例 3/4
+  待修：mt-03 第 2 轮「他总共消费了多少？」—— 答案未包含：37.62
+----------------------------------------------------------------------------
+说明：本报告只覆盖对话链路保持能力，不等价于 eval/runner.py 的准确率口径。
+JSON 已写入 agent_temp\multiturn_run_20261014\result.json

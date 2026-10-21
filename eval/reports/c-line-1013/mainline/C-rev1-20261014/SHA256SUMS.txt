@@ -1,0 +1,13 @@
+b08765bc843005cbe6485b39b1bead40a9728e3ccbccbb3d72048bd1bb7ee201  eval/mainline/development_v0.1/t5_v02_data_manifest.rev1.json    # rev1 清单 T5
+ab2c57d0b9e578f1c0421244633daf972ccc05ca1bba2886d033e0776eebded0  eval/mainline/development_v0.1/t3_run3_data_manifest.rev1.json    # rev1 清单 T3
+d99d028ec876784cd9c61203d4c2ccfe80fd7d0a7ddf9bd1ff94147a8afc2abd  eval/mainline/development_v0.1/t5_v02_data_manifest.json    # 原清单 T5（未动）
+451642be10300fe9fdf7ff9d1cae46163662630bdb264819e1c4a4316531238e  eval/mainline/development_v0.1/t3_run3_data_manifest.json    # 原清单 T3（未动）
+16ff2c9a6aeb96ada08b628e9105caf5c28f0de7133dfa007f9d4b91740eedfe  eval/reports/c-line-1013/mainline/C_复核_20261013_重跑T345.md    # 采集时指纹依据
+33c761d0c68ddc13f7ca5be96ddae12cb4d06effd46b522206e091af2ce29fe5  eval/mainline/development_v0.1/t5_v02_questions.jsonl    # T5 题包
+6e2682e0b0033ba5a810b08af94f7e87318febedec379bb9221e5f003f178ac8  eval/mainline/development_v0.1/t3_v02_questions.jsonl    # T3 题包
+d23ba5c3f207f097f976ac8433308401c1134542183fadbcc0245f8e0ab30980  eval/reports/c-line-1013/mainline/C-rev1-20261014/C_运行数据绑定修订登记_20261014.md
+a89ff1dae332f116cf490378e39fe7a7227758c216f4ecdd02f8d20bdf95dfa0  eval/reports/c-line-1013/mainline/C-rev1-20261014/prepare_t3_rev1.py
+31cbcd1045801fe8eb4edf3d5f612fe1e7838726a9dee624e32cfbded51cf3da  eval/reports/c-line-1013/mainline/C-rev1-20261014/reproduce_sem12.py
+e5c740ef686fdb94969b2bd4df424e97d4b249aed2f909d6634f9a2af8b4ccec  eval/reports/c-line-1013/mainline/C-rev1-20261014/sem12_reproduction_output.txt
+36dafc1d74db9eca0f43d5b3d3acb43f9ecb9880ad807a56433a679bfbd4a01f  eval/reports/c-line-1013/mainline/C-rev1-20261014/t5_development_score.json
+6c4958a42837395849d78beb9abb6d4b7b1f8047143cc44a0e1562e9b9436eb5  eval/reports/c-line-1013/mainline/C-rev1-20261014/t5_rev1_binding_record.json

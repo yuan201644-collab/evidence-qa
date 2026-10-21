@@ -1,0 +1,23 @@
+{
+  "policy_id": "cross_source_mapping_basis",
+  "version": "2026-10-06.v1",
+  "status": "draft",
+  "source": {
+    "kind": "team_rule_draft",
+    "document": "docs/architecture/跨源业务规则与比较流程提案_v0.1.md",
+    "summary": "工单—设备—合同合成演示范围内的映射依据状态；未定义值不得直接建立适用合同关系。"
+  },
+  "allowed": [
+    "explicit_equipment_schedule",
+    "attached_asset_schedule",
+    "signed_asset_register",
+    "signed_acceptance_record"
+  ],
+  "denied": [],
+  "undefined_examples": [
+    "field_email_note",
+    "dispatch_annotation",
+    "provisional_visual_check",
+    "equipment_name_guess"
+  ]
+}

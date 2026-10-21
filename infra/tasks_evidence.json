@@ -1,0 +1,137 @@
+{
+  "contract_version": "1.0.0",
+  "generated_at": "2026-10-12",
+  "purpose": "中级任务能力面板的数据源。这里只登记「已经跑出来、有报告可查」的证据；查不到的写 under_review，不编。",
+  "audience_note": "评审可据此核对每一条状态对应的报告路径。面板不做二次判分，只呈现本文件。",
+  "tasks": [
+    {
+      "id": 1,
+      "title": "要素精准识别与问题改写",
+      "subtitle": "别名泛化、错别字/全角/口语归一化、时间词标准化",
+      "status": "verified",
+      "status_label": "已验证（鲁棒性回归）",
+      "headline": "退化输入 15/16",
+      "metrics": [
+        { "label": "退化输入子集", "value": "15/16", "ratio": 0.9375, "help": "错别字、业务别名、全角字符、口语冗余、时间词五类混合" },
+        { "label": "错别字型", "value": "3/3", "ratio": 1.0 },
+        { "label": "业务别名型", "value": "3/3", "ratio": 1.0 },
+        { "label": "时间词型", "value": "7/7", "ratio": 1.0 },
+        { "label": "全角字符型", "value": "1/1", "ratio": 1.0 },
+        { "label": "口语填充型", "value": "1/1", "ratio": 1.0 }
+      ],
+      "mechanism": "先识别要素再标准化：业务别名表把「买家/曲风/同事」映射到 customer/genre/employee；错别字与全角走规范化；时间词以固定锚点 2024-06-15 折算成左闭右开区间（去年→2023 全年、上个月→2024-05、上季度→2024 Q1）。",
+      "evidence": [
+        { "kind": "report", "path": "eval/reports/run-deepseek-robust-20261002T070612Z.md", "note": "真实链路 18 题鲁棒性回归，逐退化类型分布" },
+        { "kind": "cases", "path": "eval/cases/robust_cases.jsonl", "note": "rob-01 ~ rob-18 全部用例及期望行为" },
+        { "kind": "doc", "path": "docs/要素识别与改写_接口_v0.1.md", "note": "别名表与 unresolved 约定" },
+        { "kind": "test", "path": "app/test_normalizer.py", "note": "18.7 KB 单元测试" }
+      ],
+      "known_gaps": [
+        "中英混排 1 题未通过（rob-07：题干混入英文表名 track/name，被当噪声丢弃）",
+        "2 题「歧义应澄清」计入澄清子集而非本任务，不计入上面的 15/16",
+        "别名表是有限词表，未证明对「未收录新类型要素」的泛化能力"
+      ],
+      "scope": "已曝光开发集回归，非盲测"
+    },
+    {
+      "id": 3,
+      "title": "智能语义校验与澄清",
+      "subtitle": "维度缺失时主动追问，补充后在原会话恢复",
+      "status": "verified",
+      "status_label": "已验证（20/20 开发题）",
+      "headline": "20/20 场景通过",
+      "metrics": [
+        { "label": "T3 开发题场景清单", "value": "20/20", "ratio": 1.0, "help": "18 个缺项场景主动追问，2 个负控制不误追问" },
+        { "label": "多轮请求完成", "value": "43/43", "ratio": 1.0, "help": "全部 HTTP 200" },
+        { "label": "SQL 只读重放一致", "value": "22/22", "ratio": 1.0, "help": "22 条实际 SQL 在只读事务重执行，与回答值六位小数一致" }
+      ],
+      "mechanism": "语义校验器先判断「要素齐不齐」：缺指标或缺周期就不生成 SQL，转为追问；用户补充后由 session memory 拼回原问题再查。取消/换问题/交错会话都有分支处理。",
+      "evidence": [
+        { "kind": "report", "path": "eval/reports/mainline/t3-dev-v0.2-final-20261007-run1/report.md", "note": "T3 扩展开发集最终在线回归" },
+        { "kind": "report", "path": "eval/reports/mainline/current-candidate-20261007-summary.md", "note": "当前候选三任务汇总" },
+        { "kind": "test", "path": "tests/test_mainline_clarifier_memory.py", "note": "7.9 KB：生命周期、补充、改问、TTL/容量" },
+        { "kind": "test", "path": "tests/test_mainline_semantic_validator.py", "note": "11.7 KB" }
+      ],
+      "known_gaps": [
+        "早期真实链路实测澄清子集为 0/2（rob-10/rob-11），该批为「歧义问句」；T3 的 20/20 是「缺项澄清」场景，两者口径不同，不可互相替代",
+        "多进程共享会话、进程重启后的会话恢复不属于已实现能力",
+        "长时间压力未测"
+      ],
+      "scope": "已曝光开发集回归，非盲测"
+    },
+    {
+      "id": 4,
+      "title": "精准表定位 Schema Linking",
+      "subtitle": "在复杂库中定位正确表字段并排除语义相近干扰项",
+      "status": "verified",
+      "status_label": "已验证（AdventureWorks 71 张基表）",
+      "headline": "严格结果匹配 20/20",
+      "metrics": [
+        { "label": "严格结果匹配", "value": "20/20", "ratio": 1.0 },
+        { "label": "SQL 执行成功", "value": "20/20", "ratio": 1.0 },
+        { "label": "必需表计划召回", "value": "42/42", "ratio": 1.0 },
+        { "label": "候选表召回", "value": "39/42", "ratio": 0.9286 }
+      ],
+      "mechanism": "不靠表名硬匹配：先用中文描述把问题里的业务词链到候选表与字段，再按外键图规划关联路径，最后过 sqlglot 只读校验。AdventureWorks 有 71 张基表、760,838 行，Person/Person 这类同名 schema 与大小写敏感都按原样处理。",
+      "evidence": [
+        { "kind": "report", "path": "eval/reports/mainline/current-candidate-20261007-summary.md", "note": "T4 20/20 严格匹配，运行编号 20261007T153953Z" },
+        { "kind": "report", "path": "eval/reports/mainline/t4-dev-v0.3-20261007-summary.md", "note": "开发集报告" },
+        { "kind": "doc", "path": "docs/architecture/U19大结果集交付方案_v0.1.md", "note": "U19 大结果集 2,480 行完整交付" },
+        { "kind": "test", "path": "tests/test_mainline_linker_planner.py", "note": "15.3 KB" }
+      ],
+      "known_gaps": [
+        "候选表召回 39/42，有 3 个必需表的候选集里漏了正确答案（最终计划仍补回，故未致错）",
+        "早期 U19 曾因默认 1,000 行上限截断为 1,000/2,480，现已受控扩展到 2,480 行并通过在线检查；该题集已曝光"
+      ],
+      "scope": "已曝光开发集回归，非盲测"
+    },
+    {
+      "id": 5,
+      "title": "高质量多表关联 NL2SQL",
+      "subtitle": "JOIN、聚合、嵌套查询与关联粒度",
+      "status": "verified",
+      "status_label": "已验证（20/20 严格匹配）",
+      "headline": "严格结果匹配 20/20",
+      "metrics": [
+        { "label": "严格结果匹配", "value": "20/20", "ratio": 1.0 }
+      ],
+      "mechanism": "关联路径规划器按外键图选路径，重点处理一对多导致的重复计数；生成后用 sqlglot 做语义校验（粒度、聚合口径），只允许单条只读 SELECT。",
+      "evidence": [
+        { "kind": "report", "path": "eval/reports/mainline/t5-dev-v0.2-20261007-summary.md", "note": "T5 开发集报告，含运行前后数据库指纹核对" },
+        { "kind": "report", "path": "eval/reports/mainline/current-candidate-20261007-summary.md", "note": "运行编号 20261007T154313Z" },
+        { "kind": "test", "path": "eval/cases/nl2sql.jsonl", "note": "15 题中 7 题为 multi_table" }
+      ],
+      "known_gaps": [
+        "不代表覆盖所有 JOIN、聚合、嵌套查询与粒度陷阱",
+        "题库规模 20 题，为开发集"
+      ],
+      "scope": "已曝光开发集回归，非盲测"
+    },
+    {
+      "id": 7,
+      "title": "不标准目录结构鲁棒识别",
+      "subtitle": "目录层级丢失、编号混乱时仍按正确层级组织切片",
+      "status": "verified",
+      "status_label": "已验证（含 3 份目录混乱版文档）",
+      "headline": "编号容错识别 + 分层切片",
+      "metrics": [
+        { "label": "目录混乱版语料", "value": "3 份", "help": "KB-002 / KB-004 / KB-015，与正常版同源内容" },
+        { "label": "识别通道", "value": "3 条", "help": "内嵌书签 → 编号容错 → 字号容错，按准确度依次降级" },
+        { "label": "章节归属断言", "value": "通过", "help": "多级标题各归其章，不出现「全部堆在最后一章」" }
+      ],
+      "mechanism": "三级降级识别：PDF 自带书签最准；书签丢失时靠编号写法（第二章/3.3/一、）识别；编号也认不出时靠字号比正文大反推。这批语料标题与正文同为 10.5pt，所以主要走第二条通道。识别出标题树后再按层级切分，写入每个切片的 section_path。",
+      "evidence": [
+        { "kind": "code", "path": "app/rag/ingest/toc.py", "note": "264 行，三条识别通道与降级顺序写在模块 docstring" },
+        { "kind": "cases", "path": "eval/cases/rag.jsonl", "note": "rag-h-01 为 outline_broken 类型，指向 KB-002 目录混乱版" },
+        { "kind": "cases", "path": "eval/cases/rag_multihop.jsonl", "note": "rag-mh-13 跨版本一致性（目录混乱版 vs 正常版）" },
+        { "kind": "test", "path": "app/test_rag_ingest.py", "note": "12.8 KB：章节归属、bboxes、真实语料 KB-010 缺陷现场回归" }
+      ],
+      "known_gaps": [
+        "全部 15 份语料共 1 个基准形态是「编号保留但层级被打乱」；未测「编号完全缺失且字号无差异」的极端形态",
+        "标题识别目前以中文编号体系为主"
+      ],
+      "scope": "已注入缺陷的语料回归，非外部真实文档盲测"
+    }
+  ],
+  "suite_note": "本面板的状态与数字均取自 eval/reports/ 下已封存的运行报告；面板本身不重新跑分、不做二次判定。日常复核请在「系统评测」面板跑一次真实链路。"
+}

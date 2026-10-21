@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-10-16T12:39:49+0800",
+  "base": "http://127.0.0.1:8000",
+  "timeout_seconds": 180.0,
+  "questions_sha256": "c86fbd4272f9962079388f533f352bb6543994d121495901813963942bf6bbfd",
+  "git": {
+    "commit": "45cc4219797b2760f57e2fd44d90e4a9b045e2b0",
+    "worktree_dirty": true,
+    "dirty_status_sha256": "628ba3921580efa4656cfc3e61c58f4c2e1bc96814b61128c947985bd201ee79",
+    "dirty_status_lines": 117
+  },
+  "database_fingerprints": {},
+  "service": {
+    "health": {
+      "status": "ok"
+    },
+    "gate_mode": "unreported"
+  },
+  "credentials_note": "凭据经环境变量传入，未写入本记录"
+}

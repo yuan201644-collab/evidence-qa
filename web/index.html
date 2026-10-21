@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/brand/verimind-mark.svg?v=20261012" />
+    <meta name="theme-color" content="#315bc7" />
+    <meta name="description" content="知证 VeriMind：通过 FEVA 事实—证据核验架构查询业务数据、检索文档，并查看答案依据与实际处理记录。" />
+    <title>知证 VeriMind · 可解释精准问数问答</title>
+    <script>
+      // 首屏防闪烁：必须在样式表生效前把 data-theme 写到 <html> 上。
+      // 未设置偏好时默认亮色；只有用户明确选择“跟随系统”时才读取系统主题。
+      // 存储键 'askdata-theme' 与 src/utils/theme.ts 的 THEME_STORAGE_KEY 必须一致。
+      (function () {
+        try {
+          var stored = localStorage.getItem('askdata-theme')
+          var theme = stored === 'light' || stored === 'dark'
+            ? stored
+            : (stored === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          document.documentElement.dataset.theme = theme
+          if (theme === 'dark') {
+            var meta = document.querySelector('meta[name="theme-color"]')
+            if (meta) meta.setAttribute('content', '#14181f')
+          }
+        } catch (error) {
+          // 存储不可用（隐私模式）时退化为亮色，不阻断页面加载。
+          document.documentElement.dataset.theme = 'light'
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "dataset": "deterministic synthetic sales scale fixture",
+  "database_name": "chinook",
+  "schema": "scale",
+  "source_commit": "1de728c209ced00a263538189a6b16ce98c7a4b5",
+  "tables": [
+    {"name":"sales_scale_1000","row_count":1000,"content_md5":"7bb1ed38251170ab5d3e4fd8360a3193"},
+    {"name":"sales_scale_10000","row_count":10000,"content_md5":"4836d3fb93556d847133e36c063dee20"},
+    {"name":"sales_scale_100000","row_count":100000,"content_md5":"cc0237928ac3076d90c0d0e6181598ef"}
+  ],
+  "fixture_scope":"efficiency measurement only; synthetic data; not a quality or real-business test set"
+}

@@ -1,0 +1,23 @@
+{
+  "_comment": "S2-H 语义覆盖第二轮真实采集评分快照（semcov-20261016-run2，缺陷修复后）。判分口径：P1 裁定 (c)，unknown 单列。",
+  "run_dir": "eval/reports/semantic_coverage/semcov-20261016-run2",
+  "collected_at": "2026-10-16T12:38+0800",
+  "gate_mode": "warn（服务进程 .env 默认）",
+  "totals": {"total": 19, "pass": 19, "repair": 0, "unknown": 0},
+  "metrics": {
+    "clarification_accuracy": "3/3",
+    "silent_omissions": 0,
+    "end_to_end_pass_rate": "19/19"
+  },
+  "fixes_verified": [
+    {"id": "SC-05", "r2": "sql_requirement_coverage=failed + 答案附「没有可用的时间依据」，不含 59"},
+    {"id": "SC-08", "r2": "正确澄清「新入职还是在职」，reason_code=time_semantics_ambiguous"},
+    {"id": "SC-11", "r2": "不再误挡，正常出结果；闸门如实标 failed（模型 SQL 未写季度过滤，属生成层问题，已登记）"},
+    {"id": "SC-12", "r2": "sql_requirement_coverage=unknown 标黄 + 答案附「至今」截止锚点说明"}
+  ],
+  "notes": [
+    "本轮采集带 x-askdata-fact-review: 2 头，核验卡三态（passed/failed/unknown）在真实链路首次全验证。",
+    "SC-11 r2 暴露生成层问题：模型 SQL 漏写时间过滤、闸门兜底标注——闸门拦住静默丢弃但正确做法是生成层写对（母方案 §8.3 错误候选修复回路，后续迭代）。",
+    "run1（修复前基线）目录保留作对照。"
+  ]
+}

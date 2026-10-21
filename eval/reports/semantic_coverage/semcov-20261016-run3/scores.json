@@ -1,0 +1,144 @@
+{
+  "total": 19,
+  "pass": 19,
+  "repair": 0,
+  "unknown": 0,
+  "clarification_accuracy": "3/3",
+  "silent_omissions": 0,
+  "end_to_end_pass_rate": "19/19",
+  "verdicts": [
+    {
+      "case_id": "SC-01",
+      "category": "normal_control",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-02",
+      "category": "clarification",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-03",
+      "category": "clarification",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-04",
+      "category": "normal_control",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-05",
+      "category": "capability_boundary",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-06",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-07",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-08",
+      "category": "clarification",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-09",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-11",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-12",
+      "category": "capability_boundary",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-13",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-14",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-15",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-16",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-17",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-18",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-19",
+      "category": "condition_coverage",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    },
+    {
+      "case_id": "SC-30",
+      "category": "negative_control",
+      "status": "pass",
+      "failed_checks": [],
+      "notes": ""
+    }
+  ]
+}

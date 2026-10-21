@@ -1,0 +1,16 @@
+{
+    admin off
+    auto_https off
+}
+
+# Account authentication is enforced by VeriMind FastAPI.
+http://:8011 {
+    bind 127.0.0.1
+    route {
+        header >Cache-Control "private, no-store"
+        reverse_proxy 127.0.0.1:8000 {
+            # FastAPI validates the browser Origin against this forwarded host.
+            header_up X-Forwarded-Host {http.request.host}
+        }
+    }
+}

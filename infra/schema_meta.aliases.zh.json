@@ -1,0 +1,87 @@
+{
+  "version": "0.2",
+  "updated_at": "2026-10-07",
+  "notes": [
+    "人工别名表 —— 要素识别与改写（中级任务 1）的 B 层数据，见 docs/要素识别与改写_接口_v0.1.md §7/§10。",
+    "与 schema_meta.json（生成物）完全分离：schema 重跑生成脚本不会动这个文件。",
+    "table_mentions 只记录业务实体，不改写原词；用于保留“订单数”等指标含义。",
+    "values 的键是库里真实存在的取值（2026-10-02 实测：SELECT DISTINCT customer.country / employee.title / genre.name）。",
+    "values 的完整清单以 SELECT DISTINCT 为准（接口文档 §十一.3，C 负责）；本版为人工首轮，宁可少收录。",
+    "docs 一节只放『短说法 → 文档编号』的人工补充；完整题名由代码从 data/corpus/manifest.json 自动派生，不在此重复。"
+  ],
+  "tables": {
+    "album": ["唱片", "专辑唱片"],
+    "artist": ["歌手", "乐队", "艺人"],
+    "customer": ["买家", "顾客", "消费方"],
+    "employee": ["同事", "职员", "雇员"],
+    "genre": ["曲风", "流派", "音乐类型"],
+    "invoice": ["账单", "单据"],
+    "invoice_line": ["发票明细", "销售明细"],
+    "media_type": ["媒介类型"],
+    "playlist": ["播放列表", "歌单"],
+    "playlist_track": ["歌单曲目"],
+    "track": ["歌曲", "单曲"]
+  },
+  "table_mentions": {
+    "invoice": ["订单数", "订单量"]
+  },
+  "columns": {
+    "track.unit_price": ["单价"],
+    "customer.country": ["所在国家", "国别"],
+    "customer.city": ["所在城市"],
+    "invoice.invoice_date": ["开票日期"]
+  },
+  "values": {
+    "customer.country": {
+      "USA": ["美国", "美利坚"],
+      "Canada": ["加拿大"],
+      "Brazil": ["巴西"],
+      "Germany": ["德国", "德意志"],
+      "France": ["法国"],
+      "Sweden": ["瑞典"],
+      "Norway": ["挪威"],
+      "Czech Republic": ["捷克"],
+      "Argentina": ["阿根廷"],
+      "Spain": ["西班牙"],
+      "Italy": ["意大利"],
+      "Hungary": ["匈牙利"],
+      "India": ["印度"],
+      "Belgium": ["比利时"],
+      "Chile": ["智利"],
+      "Netherlands": ["荷兰"],
+      "Austria": ["奥地利"],
+      "Australia": ["澳大利亚"],
+      "United Kingdom": ["英国"],
+      "Portugal": ["葡萄牙"],
+      "Finland": ["芬兰"],
+      "Denmark": ["丹麦"],
+      "Poland": ["波兰"],
+      "Ireland": ["爱尔兰"]
+    },
+    "employee.title": {
+      "General Manager": ["总经理"],
+      "Sales Manager": ["销售经理"],
+      "Sales Support Agent": ["销售支持", "客服代表"],
+      "IT Manager": ["IT 经理"],
+      "IT Staff": ["IT 员工"]
+    },
+    "genre.name": {
+      "Heavy Metal": ["重金属"],
+      "Latin": ["拉丁音乐"],
+      "Classical": ["古典音乐"],
+      "Opera": ["歌剧"],
+      "Comedy": ["喜剧"],
+      "Electronica/Dance": ["电子舞曲"],
+      "R&B/Soul": ["节奏布鲁斯"],
+      "Hip Hop/Rap": ["嘻哈", "说唱"],
+      "Jazz": ["爵士"],
+      "Blues": ["蓝调"],
+      "Rock": ["摇滚"],
+      "Pop": ["流行"]
+    }
+  },
+  "docs": {
+    "KB-001": ["维保合同"],
+    "KB-003": ["数据中台白皮书"]
+  }
+}

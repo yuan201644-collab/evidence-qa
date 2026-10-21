@@ -1,0 +1,712 @@
+{
+  "meta": {
+    "generated_at": "2026-10-17T16:49:44+00:00",
+    "git_commit": "7cfae67",
+    "git_dirty": true,
+    "predictor": "jsonl",
+    "dialect": "postgres",
+    "dialect_source": "explicit",
+    "case_files": [
+      "eval\\cases\\gov_procurement\\nl2sql.jsonl"
+    ],
+    "top_k": 5
+  },
+  "gov": {
+    "overall": {
+      "total": 30,
+      "passed": 16,
+      "passed_strict": 16,
+      "passed_loose_only": 0,
+      "failed": 13,
+      "errored": 1,
+      "accuracy": 0.5333,
+      "strict_accuracy": 0.5333,
+      "error_rate": 0.0333,
+      "bands": {
+        "rate": 0.5333,
+        "ge_90": {
+          "score": 0,
+          "reached": false
+        },
+        "ge_80": {
+          "score": 0,
+          "reached": false
+        },
+        "ge_70": {
+          "score": 0,
+          "reached": false
+        }
+      }
+    },
+    "by_difficulty": {
+      "easy": {
+        "total": 6,
+        "passed": 4,
+        "passed_strict": 4,
+        "passed_loose_only": 0,
+        "failed": 2,
+        "errored": 0,
+        "accuracy": 0.6667,
+        "strict_accuracy": 0.6667,
+        "error_rate": 0.0,
+        "bands": {
+          "rate": 0.6667,
+          "ge_90": {
+            "score": 0,
+            "reached": false
+          },
+          "ge_80": {
+            "score": 0,
+            "reached": false
+          },
+          "ge_70": {
+            "score": 0,
+            "reached": false
+          }
+        }
+      },
+      "hard": {
+        "total": 10,
+        "passed": 3,
+        "passed_strict": 3,
+        "passed_loose_only": 0,
+        "failed": 6,
+        "errored": 1,
+        "accuracy": 0.3,
+        "strict_accuracy": 0.3,
+        "error_rate": 0.1,
+        "bands": {
+          "rate": 0.3,
+          "ge_90": {
+            "score": 0,
+            "reached": false
+          },
+          "ge_80": {
+            "score": 0,
+            "reached": false
+          },
+          "ge_70": {
+            "score": 0,
+            "reached": false
+          }
+        }
+      },
+      "medium": {
+        "total": 14,
+        "passed": 9,
+        "passed_strict": 9,
+        "passed_loose_only": 0,
+        "failed": 5,
+        "errored": 0,
+        "accuracy": 0.6429,
+        "strict_accuracy": 0.6429,
+        "error_rate": 0.0,
+        "bands": {
+          "rate": 0.6429,
+          "ge_90": {
+            "score": 0,
+            "reached": false
+          },
+          "ge_80": {
+            "score": 0,
+            "reached": false
+          },
+          "ge_70": {
+            "score": 0,
+            "reached": false
+          }
+        }
+      }
+    },
+    "by_scope": {
+      "multi_table": {
+        "total": 12,
+        "passed": 4,
+        "passed_strict": 4,
+        "passed_loose_only": 0,
+        "failed": 7,
+        "errored": 1,
+        "accuracy": 0.3333,
+        "strict_accuracy": 0.3333,
+        "error_rate": 0.0833,
+        "bands": {
+          "rate": 0.3333,
+          "ge_90": {
+            "score": 0,
+            "reached": false
+          },
+          "ge_80": {
+            "score": 0,
+            "reached": false
+          },
+          "ge_70": {
+            "score": 0,
+            "reached": false
+          }
+        }
+      },
+      "null_edge": {
+        "total": 3,
+        "passed": 0,
+        "passed_strict": 0,
+        "passed_loose_only": 0,
+        "failed": 3,
+        "errored": 0,
+        "accuracy": 0.0,
+        "strict_accuracy": 0.0,
+        "error_rate": 0.0,
+        "bands": {
+          "rate": 0.0,
+          "ge_90": {
+            "score": 0,
+            "reached": false
+          },
+          "ge_80": {
+            "score": 0,
+            "reached": false
+          },
+          "ge_70": {
+            "score": 0,
+            "reached": false
+          }
+        }
+      },
+      "single_table": {
+        "total": 10,
+        "passed": 8,
+        "passed_strict": 8,
+        "passed_loose_only": 0,
+        "failed": 2,
+        "errored": 0,
+        "accuracy": 0.8,
+        "strict_accuracy": 0.8,
+        "error_rate": 0.0,
+        "bands": {
+          "rate": 0.8,
+          "ge_90": {
+            "score": 0,
+            "reached": false
+          },
+          "ge_80": {
+            "score": 8,
+            "reached": true
+          },
+          "ge_70": {
+            "score": 6,
+            "reached": true
+          }
+        }
+      },
+      "time_window": {
+        "total": 5,
+        "passed": 4,
+        "passed_strict": 4,
+        "passed_loose_only": 0,
+        "failed": 1,
+        "errored": 0,
+        "accuracy": 0.8,
+        "strict_accuracy": 0.8,
+        "error_rate": 0.0,
+        "bands": {
+          "rate": 0.8,
+          "ge_90": {
+            "score": 0,
+            "reached": false
+          },
+          "ge_80": {
+            "score": 8,
+            "reached": true
+          },
+          "ge_70": {
+            "score": 6,
+            "reached": true
+          }
+        }
+      }
+    },
+    "order_sensitive": {
+      "total": 17,
+      "passed": 7,
+      "passed_strict": 7,
+      "passed_loose_only": 0,
+      "failed": 9,
+      "errored": 1,
+      "accuracy": 0.4118,
+      "strict_accuracy": 0.4118,
+      "error_rate": 0.0588,
+      "bands": {
+        "rate": 0.4118,
+        "ge_90": {
+          "score": 0,
+          "reached": false
+        },
+        "ge_80": {
+          "score": 0,
+          "reached": false
+        },
+        "ge_70": {
+          "score": 0,
+          "reached": false
+        }
+      }
+    },
+    "cases": [
+      {
+        "id": "gov-e-01",
+        "kind": "pass",
+        "reason": "列序一致 + 行序无关 + 数值容差内一致",
+        "gold_rows": 1,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "easy",
+        "scope": "single_table",
+        "pred_sql": "SELECT COUNT(*) AS project_count FROM projects LIMIT 1000",
+        "latency_ms": 3343,
+        "order_matters": false,
+        "column_types": null
+      },
+      {
+        "id": "gov-e-02",
+        "kind": "pass",
+        "reason": "列序一致 + 行序无关 + 数值容差内一致",
+        "gold_rows": 1,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "easy",
+        "scope": "single_table",
+        "pred_sql": "SELECT COUNT(*) AS announcement_count FROM announcements LIMIT 1000",
+        "latency_ms": 1177,
+        "order_matters": false,
+        "column_types": null
+      },
+      {
+        "id": "gov-e-03",
+        "kind": "pass",
+        "reason": "列序一致 + 行序无关 + 数值容差内一致",
+        "gold_rows": 1,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "easy",
+        "scope": "single_table",
+        "pred_sql": "SELECT COUNT(DISTINCT supplier_id) AS different_supplier_count FROM suppliers LIMIT 1000",
+        "latency_ms": 2067,
+        "order_matters": false,
+        "column_types": null
+      },
+      {
+        "id": "gov-e-04",
+        "kind": "pass",
+        "reason": "列序一致 + 行序无关 + 数值容差内一致",
+        "gold_rows": 1,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "easy",
+        "scope": "single_table",
+        "pred_sql": "SELECT COUNT(DISTINCT regions.region_code) AS province_count FROM projects JOIN regions ON projects.region_code = regions.region_code LIMIT 1000",
+        "latency_ms": 1521,
+        "order_matters": false,
+        "column_types": null
+      },
+      {
+        "id": "gov-e-05",
+        "kind": "fail",
+        "reason": "行数不同：标准 6 行，预测 7 行",
+        "gold_rows": 6,
+        "pred_rows": 7,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "easy",
+        "scope": "single_table",
+        "pred_sql": "SELECT procurement_way, COUNT(*) AS project_count\nFROM projects\nGROUP BY procurement_way;",
+        "latency_ms": 934,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-e-06",
+        "kind": "fail",
+        "reason": "行序敏感（gold_sql 含 ORDER BY）但顺序不一致：结果集内容相同、顺序不同",
+        "gold_rows": 10,
+        "pred_rows": 10,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "easy",
+        "scope": "single_table",
+        "pred_sql": "SELECT kind, COUNT(*) AS announcement_count\nFROM announcements\nGROUP BY kind",
+        "latency_ms": 2334,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-e-07",
+        "kind": "pass",
+        "reason": "列序一致 + 行序无关 + 数值容差内一致",
+        "gold_rows": 1,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "single_table",
+        "pred_sql": "SELECT COUNT(*) AS project_count FROM projects WHERE budget_level = 'central' LIMIT 1000",
+        "latency_ms": 1108,
+        "order_matters": false,
+        "column_types": null
+      },
+      {
+        "id": "gov-e-08",
+        "kind": "pass",
+        "reason": "列序一致 + 行序按 ORDER BY 比对一致 + 数值容差内一致",
+        "gold_rows": 3,
+        "pred_rows": 3,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "single_table",
+        "pred_sql": "SELECT \n    budget_level,\n    COUNT(*) AS project_count,\n    ROUND((COUNT(*) * 100.0) / SUM(COUNT(*)) OVER (), 2) AS percentage\nFROM \n    projects\nGROUP BY \n    budget_level;",
+        "latency_ms": 3756,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-e-09",
+        "kind": "pass",
+        "reason": "列序一致 + 行序按 ORDER BY 比对一致 + 数值容差内一致",
+        "gold_rows": 5,
+        "pred_rows": 5,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "single_table",
+        "pred_sql": "SELECT \n    p.project_name AS project_name,\n    MAX(a.award_yuan) AS award_yuan\nFROM \n    awards a\nJOIN \n    projects p ON a.project_id = p.project_id\nWHERE \n    a.award_yuan > 0\nGROUP BY \n    p.project_name\nORDER BY \n    award_yuan DESC\nLIMIT 5;",
+        "latency_ms": 8801,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-e-10",
+        "kind": "pass",
+        "reason": "列序一致 + 行序无关 + 数值容差内一致",
+        "gold_rows": 1,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "single_table",
+        "pred_sql": "SELECT ROUND(AVG(a.award_yuan), 2) AS average_award_amount\nFROM awards a\nJOIN announcements an ON a.announcement_id = an.announcement_id\nJOIN projects p ON a.project_id = p.project_id\nWHERE an.kind IN ('中标公告', '成交公告') AND a.award_yuan > 0;",
+        "latency_ms": 10728,
+        "order_matters": false,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-01",
+        "kind": "pass",
+        "reason": "列序一致 + 行序按 ORDER BY 比对一致 + 数值容差内一致",
+        "gold_rows": 5,
+        "pred_rows": 5,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "multi_table",
+        "pred_sql": "SELECT regions.region_name, COUNT(projects.project_id) AS project_count\nFROM projects\nJOIN regions ON projects.region_code = regions.region_code\nGROUP BY regions.region_code, regions.region_name\nORDER BY project_count DESC\nLIMIT 5;",
+        "latency_ms": 3249,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-02",
+        "kind": "fail",
+        "reason": "列数不同：标准 3 列，预测 2 列",
+        "gold_rows": 5,
+        "pred_rows": 5,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "multi_table",
+        "pred_sql": "SELECT buyers.buyer_name, awards.award_yuan\nFROM awards\nJOIN projects ON awards.project_id = projects.project_id\nJOIN buyers ON projects.buyer_id = buyers.buyer_id\nWHERE awards.award_yuan > 0\nORDER BY awards.award_yuan DESC\nLIMIT 5;",
+        "latency_ms": 4144,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-03",
+        "kind": "fail",
+        "reason": "行序敏感（gold_sql 含 ORDER BY）且结果集内容也不一致",
+        "gold_rows": 5,
+        "pred_rows": 5,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "multi_table",
+        "pred_sql": "SELECT supplier_name, COUNT(DISTINCT project_id) AS project_count\nFROM suppliers\nJOIN awards ON suppliers.supplier_id = awards.supplier_id\nGROUP BY supplier_name\nORDER BY project_count DESC\nLIMIT 5;",
+        "latency_ms": 4344,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-04",
+        "kind": "fail",
+        "reason": "行序敏感（gold_sql 含 ORDER BY）且结果集内容也不一致",
+        "gold_rows": 5,
+        "pred_rows": 5,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "multi_table",
+        "pred_sql": "SELECT \n    projects.project_id, \n    COUNT(items.item_id) AS item_count\nFROM \n    items\nJOIN \n    announcements ON items.announcement_id = announcements.announcement_id\nJOIN \n    projects ON announcements.project_id = projects.project_id\nGROUP BY \n    projects.project_id\nORDER BY \n    item_count DESC\nLIMIT 5;",
+        "latency_ms": 2856,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-05",
+        "kind": "fail",
+        "reason": "列数不同：标准 2 列，预测 3 列",
+        "gold_rows": 5,
+        "pred_rows": 5,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "multi_table",
+        "pred_sql": "SELECT agencies.agency_id, agencies.agency_name, COUNT(projects.project_id) AS project_count\nFROM agencies\nJOIN projects ON agencies.agency_id = projects.agency_id\nGROUP BY agencies.agency_id, agencies.agency_name\nORDER BY project_count DESC\nLIMIT 5;",
+        "latency_ms": 3795,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-06",
+        "kind": "fail",
+        "reason": "结果集数值不一致（形状相同，1 行 × 1 列）；首处差异 标准=[('num', '96')] 预测=[('num', '4.28')]",
+        "gold_rows": 1,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "hard",
+        "scope": "multi_table",
+        "pred_sql": "SELECT ROUND(CAST(COUNT(CASE WHEN a.award_yuan < p.budget_yuan THEN 1 END) * 100.0 / COUNT(*) AS DECIMAL), 2) AS low_budget_ratio FROM awards AS a JOIN projects AS p ON a.project_id = p.project_id LIMIT 1000",
+        "latency_ms": 4143,
+        "order_matters": false,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-07",
+        "kind": "error",
+        "reason": "预测 SQL 执行报错：UndefinedColumn: column \"procurement_way\" does not exist\nLINE 1: SELECT procurement_way, ROUND(AVG(award_yuan), 2) AS average...\n               ^",
+        "gold_rows": 5,
+        "pred_rows": null,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "hard",
+        "scope": "multi_table",
+        "pred_sql": "SELECT procurement_way, ROUND(AVG(award_yuan), 2) AS average_award_amount\nFROM awards\nGROUP BY procurement_way",
+        "latency_ms": 4973,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-08",
+        "kind": "pass",
+        "reason": "列序一致 + 行序无关 + 数值容差内一致",
+        "gold_rows": 1,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "time_window",
+        "pred_sql": "SELECT COUNT(*) AS count_question FROM announcements WHERE publish_date >= '2026-10-16' AND publish_date < '2026-10-17' LIMIT 1000",
+        "latency_ms": 2373,
+        "order_matters": false,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-09",
+        "kind": "pass",
+        "reason": "列序一致 + 行序按 ORDER BY 比对一致 + 数值容差内一致",
+        "gold_rows": 1,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "hard",
+        "scope": "time_window",
+        "pred_sql": "SELECT publish_date, COUNT(*) AS announcement_count\nFROM announcements\nGROUP BY publish_date\nORDER BY announcement_count DESC\nLIMIT 1;",
+        "latency_ms": 2820,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-10",
+        "kind": "fail",
+        "reason": "列数不同：标准 3 列，预测 2 列",
+        "gold_rows": 1,
+        "pred_rows": 2659,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "hard",
+        "scope": "null_edge",
+        "pred_sql": "SELECT (SELECT COUNT(*) FROM projects WHERE budget_level = 'unknown') AS unknown_budget_projects_count, ROUND(CAST((SELECT COUNT(*) FROM projects WHERE budget_level = 'central') * 100.0 / (SELECT COUNT(*) FROM projects WHERE budget_level <> 'unknown') AS DECIMAL), 2) AS central_budget_percentage FROM projects LIMIT 5001",
+        "latency_ms": 3684,
+        "order_matters": false,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-11",
+        "kind": "pass",
+        "reason": "列序一致 + 行序按 ORDER BY 比对一致 + 数值容差内一致",
+        "gold_rows": 5,
+        "pred_rows": 5,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "multi_table",
+        "pred_sql": "SELECT \n    regions.region_name AS region_name,\n    SUM(awards.award_yuan) AS total_award_yuan\nFROM \n    awards\nJOIN \n    projects ON awards.project_id = projects.project_id\nJOIN \n    regions ON projects.region_code = regions.region_code\nWHERE \n    awards.award_yuan > 0\nGROUP BY \n    regions.region_name\nORDER BY \n    total_award_yuan DESC\nLIMIT 5;",
+        "latency_ms": 4867,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-12",
+        "kind": "fail",
+        "reason": "行序敏感（gold_sql 含 ORDER BY）且结果集内容也不一致",
+        "gold_rows": 5,
+        "pred_rows": 5,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "hard",
+        "scope": "multi_table",
+        "pred_sql": "SELECT buyer_name, SUM(award_yuan) AS total_award_yuan\nFROM buyers\nJOIN awards ON buyers.buyer_id = awards.supplier_id\nJOIN projects ON awards.project_id = projects.project_id\nGROUP BY buyers.buyer_id, buyer_name\nORDER BY total_award_yuan DESC\nLIMIT 5;",
+        "latency_ms": 10624,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-13",
+        "kind": "pass",
+        "reason": "列序一致 + 行序按 ORDER BY 比对一致 + 数值容差内一致",
+        "gold_rows": 5,
+        "pred_rows": 5,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "hard",
+        "scope": "multi_table",
+        "pred_sql": "SELECT \n    p.project_name,\n    i.item_name,\n    i.unit_price_yuan AS unit_price\nFROM \n    items i\nJOIN \n    announcements a ON i.announcement_id = a.announcement_id\nJOIN \n    projects p ON a.project_id = p.project_id\nJOIN \n    awards aw ON i.announcement_id = aw.announcement_id\nWHERE \n    i.unit_price_yuan > 0\nORDER BY \n    i.unit_price_yuan DESC\nLIMIT 5;",
+        "latency_ms": 15268,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-14",
+        "kind": "fail",
+        "reason": "行序敏感（gold_sql 含 ORDER BY）且结果集内容也不一致",
+        "gold_rows": 5,
+        "pred_rows": 5,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "multi_table",
+        "pred_sql": "SELECT \n    p.project_id,\n    COUNT(DISTINCT a.kind) AS announcement_types_count\nFROM \n    projects p\nJOIN \n    announcements a ON p.project_id = a.project_id\nGROUP BY \n    p.project_id\nORDER BY \n    announcement_types_count DESC\nLIMIT 5;",
+        "latency_ms": 5750,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-15",
+        "kind": "pass",
+        "reason": "列序一致 + 行序按 ORDER BY 比对一致 + 数值容差内一致",
+        "gold_rows": 5,
+        "pred_rows": 5,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "hard",
+        "scope": "multi_table",
+        "pred_sql": "SELECT \n    p.project_name,\n    pa.package_no,\n    COUNT(i.item_id) AS item_count\nFROM \n    packages pa\nJOIN \n    items i ON pa.package_id = i.package_id\nJOIN \n    projects p ON pa.project_id = p.project_id\nGROUP BY \n    p.project_name, pa.package_no\nORDER BY \n    item_count DESC\nLIMIT 5;",
+        "latency_ms": 12054,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-16",
+        "kind": "pass",
+        "reason": "列序一致 + 行序无关 + 数值容差内一致",
+        "gold_rows": 1,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "time_window",
+        "pred_sql": "SELECT COUNT(*) AS announcement_count FROM announcements WHERE publish_date >= '2026-10-15' AND publish_date < '2026-10-18' LIMIT 1000",
+        "latency_ms": 1784,
+        "order_matters": false,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-17",
+        "kind": "fail",
+        "reason": "行数不同：标准 7 行，预测 1 行",
+        "gold_rows": 7,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "hard",
+        "scope": "time_window",
+        "pred_sql": "SELECT \n    EXTRACT(ISODOW FROM publish_date) AS day_of_week,\n    COUNT(*) AS announcement_count\nFROM \n    announcements\nGROUP BY \n    day_of_week\nORDER BY \n    announcement_count DESC\nLIMIT 1;",
+        "latency_ms": 2660,
+        "order_matters": true,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-18",
+        "kind": "pass",
+        "reason": "列序一致 + 行序无关 + 数值容差内一致",
+        "gold_rows": 1,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "medium",
+        "scope": "time_window",
+        "pred_sql": "SELECT COUNT(DISTINCT project_id) AS project_count\nFROM projects\nWHERE first_announce_date >= '2026-10-01' AND first_announce_date < '2026-11-01';",
+        "latency_ms": 9038,
+        "order_matters": false,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-19",
+        "kind": "fail",
+        "reason": "行数不同：标准 1 行，预测 561 行",
+        "gold_rows": 1,
+        "pred_rows": 561,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "hard",
+        "scope": "null_edge",
+        "pred_sql": "SELECT (SELECT COUNT(*) FROM awards WHERE award_yuan = 0 OR award_yuan IS NULL) AS count_question, (SELECT ROUND(CAST(AVG(award_yuan) AS DECIMAL), 2) FROM awards WHERE award_yuan > 0) AS average_award_yuan_without_zeros, (SELECT ROUND((SUM(award_yuan) - (SELECT SUM(award_yuan) FROM awards WHERE award_yuan = 0 OR award_yuan IS NULL)) / NULLIF(SUM(award_yuan), 0) * 100, 2) FROM awards) AS average_award_yuan_with_zeros_percent FROM awards LIMIT 1000",
+        "latency_ms": 9109,
+        "order_matters": false,
+        "column_types": null
+      },
+      {
+        "id": "gov-m-20",
+        "kind": "fail",
+        "reason": "列数不同：标准 3 列，预测 2 列",
+        "gold_rows": 1,
+        "pred_rows": 1,
+        "column_permutation": null,
+        "degenerate": false,
+        "difficulty": "hard",
+        "scope": "null_edge",
+        "pred_sql": "SELECT (SELECT COUNT(*) FROM projects WHERE region_code IS NULL) AS project_count_with_no_region, ROUND(CAST(AVG(CASE WHEN region_code IS NOT NULL THEN awards.award_yuan ELSE NULL END) - AVG(awards.award_yuan) AS DECIMAL), 2) AS average_award_difference FROM awards JOIN projects ON awards.project_id = projects.project_id LIMIT 1000",
+        "latency_ms": 5850,
+        "order_matters": false,
+        "column_types": null
+      }
+    ],
+    "latency_ms": {
+      "n": 30,
+      "p50": 3795,
+      "p95": 12054,
+      "max": 15268
+    }
+  }
+}

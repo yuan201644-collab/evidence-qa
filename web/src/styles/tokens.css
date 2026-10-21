@@ -1,0 +1,207 @@
+/* 设计变量：颜色、圆角、阴影。
+ *
+ * 颜色分两层：
+ *   1. 语义 token（--bg-* / --text-* / --border-* / --brand-* / --state-* 等）——
+ *      业务代码只用这一层。每个 token 描述"这是什么"，不描述"它是什么颜色"，
+ *      所以换主题只需重定义这一层，组件代码一行不用改。
+ *   2. 主题值 —— :root 是亮色，:root[data-theme="dark"] 是暗色。
+ *
+ * 暗色不是把亮色取反。三处刻意例外：
+ *   - 阴影在暗色下改成更黑的叠加：亮色靠"灰色投影"表达层次，暗色下灰投影看不见，
+ *     要靠加深+提亮表面来拉层次。
+ *   - --surface-paper（PDF 纸张）在两套主题下都是白色：它是被渲染的文档内容本身，
+ *     不是界面的一部分，跟着主题变会让白底黑字的 PDF 看起来像浮在黑框里。
+ *   - 证据高亮（--evidence-amber-soft）在暗色下用低透明度黄色叠加：它叠在 PDF 的
+ *     白色画布上，用不透明实色会盖掉文档里的黑字。
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ---- 表面层级：从最底层页面到最上层浮层 ---- */
+  --bg-app: #f5f7fa;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f0f4f9;
+  --bg-hover: #f5f7fb;
+  --bg-elevated: #ffffff;
+
+  /* 半透明顶栏/卡片：需要透出底层背景时用 */
+  --bg-glass: rgba(255, 255, 255, 0.85);
+
+  /* PDF 纸张：两套主题下都保持白色（见文件头说明） */
+  --surface-paper: #ffffff;
+  /* PDF 纸张外的滚动容器 */
+  --bg-paper-stage: #edf0f5;
+
+  /* ---- 文字 ----
+   * --text-muted 只用于"看得到就行"的装饰性小字。承载真实信息的小字
+   * （会话存储位置、回答需核对证据这类提示）用 --text-secondary，不要用它：
+   * 实测它压在 --bg-subtle 上时对比度约 3.9，低于正文 4.5 的下限。 */
+  --text-primary: #1d2b40;
+  --text-heading: #233b66;
+  --text-secondary: #637086;
+  --text-muted: #75849a;
+  --text-faint: #96a2b3;
+  /* 深色底上的反白文字 */
+  --text-on-brand: #ffffff;
+
+  /* ---- 边框 ---- */
+  --border-subtle: #e4e9f0;
+  --border-strong: #d4dce8;
+  --border-brand: #cfdbf6;
+  /* 输入框聚焦边框 */
+  --border-focus: #8da9e4;
+
+  /* ---- 代码块（SQL 语句、工具输入输出）---- */
+  --code-bg: #213451;
+  --code-text: #d3e0fa;
+
+  /* ---- 品牌 ---- */
+  --brand-primary: #315bc7;
+  --brand-primary-weak: #5279dc;
+  --brand-soft: #edf2ff;
+  --brand-soft-strong: #dbe5fe;
+  --brand-deep: #254ba6;
+  --accent-teal: #168b82;
+  --accent-teal-soft: #edf7f4;
+
+  /* ---- 研究支线（KAG增强路线）----
+   * 用紫色与主线蓝区分，这是品牌图标规范定的：紫 = 研究支线，不得暗示已接入。
+   * 这一组只服务架构导览里那一张虚线卡，不参与问答链路任何渲染。 */
+  --research-icon-bg: #f7f2fb;
+  --research-icon-border: #e9e0f1;
+
+  /* ---- 状态 ---- */
+  --state-error: #c8452f;
+  --state-error-soft: #fceeea;
+  --state-error-border: #f0d9d4;
+  --state-error-text: #926255;
+  --state-success: #2e8b57;
+  --state-success-soft: #eaf6f0;
+  --state-warning: #946524;
+  --state-warning-soft: #fff3df;
+  --state-warning-border: #e5dfd3;
+  --state-neutral: #a8b2c2;
+
+  /* 用户提问气泡 */
+  --bubble-user-bg: #eaf0fc;
+  --bubble-user-border: #dfe7f8;
+  --bubble-user-text: #2a466f;
+
+  /* ---- 证据高亮 ----
+   * 消费点：PdfHighlightLayer.vue 叠在 PDF 白色画布上的高亮框。 */
+  --evidence-amber: #f2a63b;
+  --evidence-amber-soft: rgba(242, 166, 59, 0.28);
+
+  /* ---- 遮罩与阴影 ---- */
+  --scrim: rgba(23, 38, 62, 0.4);
+  --shadow-card: 0 3px 14px rgba(29, 43, 64, 0.035);
+  --shadow-menu: 0 8px 30px rgba(29, 43, 64, 0.125);
+  --shadow-panel: -15px 0 60px rgba(35, 59, 102, 0.15);
+  --shadow-guide: 0 30px 100px rgba(22, 35, 58, 0.19);
+  --shadow-brand: 0 4px 10px rgba(37, 75, 166, 0.1);
+  --shadow-drawer: 5px 0 35px rgba(23, 38, 62, 0.15);
+  --shadow-paper: 0 3px 16px rgba(35, 59, 102, 0.06);
+  /* 卡片悬停：必须比 --shadow-card 明显更重，否则悬停看不出变化 */
+  --shadow-card-hover: 0 8px 24px rgba(35, 59, 102, 0.031);
+  /* 输入框聚焦环：与 --border-focus 配套 */
+  --shadow-focus-ring: 0 0 0 3px rgba(49, 91, 199, 0.035);
+
+  /* ---- 圆角 ---- */
+  --radius-sm: 7px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* ---- 表面层级 ----
+   * 暗色下层次靠"越靠上层越亮"表达（亮色下是靠越上层越白＋投影）。
+   * 所以 bg-app 最暗，bg-surface 抬一档，bg-elevated 再抬一档。 */
+  --bg-app: #14181f;
+  --bg-surface: #1c222c;
+  --bg-subtle: #232b37;
+  --bg-hover: #252e3b;
+  --bg-elevated: #222a35;
+
+  --bg-glass: rgba(28, 34, 44, 0.85);
+
+  /* 纸张仍是白色：PDF 内容本身不会因为界面切主题而变 */
+  --surface-paper: #ffffff;
+  /* 纸张外的舞台变暗，形成"白纸浮在暗背景上"的正常观感 */
+  --bg-paper-stage: #0f1319;
+
+  /* ---- 文字 ----
+   * 与亮色同理，--text-muted 要够看：原 #7d8899 在 --bg-subtle 上只有 4.45，
+   * 卡在正文下限上，小字尤其吃力。 */
+  --text-primary: #e6ebf3;
+  --text-heading: #f2f5fa;
+  --text-secondary: #a7b2c4;
+  --text-muted: #8d99ab;
+  --text-faint: #6c7788;
+  --text-on-brand: #ffffff;
+
+  /* ---- 边框 ---- */
+  --border-subtle: #2d3644;
+  --border-strong: #3a4553;
+  --border-brand: #38508a;
+  --border-focus: #6d94e8;
+
+  /* ---- 代码块 ----
+   * 亮色下代码块是深色底浅字，暗色下反过来变成"比周围更深"的一层，
+   * 这样它仍然是一个清晰的、与正文区分的区块。 */
+  --code-bg: #10151d;
+  --code-text: #b9cdf0;
+
+  /* ---- 品牌 ----
+   * 暗色下品牌色整体提亮：原 #315bc7 在深底上对比度不足。 */
+  --brand-primary: #6d94e8;
+  --brand-primary-weak: #8aa9ee;
+  --brand-soft: #1e2a44;
+  --brand-soft-strong: #263553;
+  --brand-deep: #4a72d4;
+  --accent-teal: #3fb3a8;
+  --accent-teal-soft: #1a2f2d;
+
+  /* ---- 研究支线（KAG增强路线）----
+   * 亮色那版是浅紫底，直接搬到暗色会变成一块发光的白斑，必须重给一组深紫。 */
+  --research-icon-bg: #2a2233;
+  --research-icon-border: #3d3149;
+
+  /* ---- 状态 ---- */
+  --state-error: #e8877a;
+  --state-error-soft: #2e1f1d;
+  --state-error-border: #4a2f2b;
+  --state-error-text: #dda093;
+  --state-success: #56b98a;
+  --state-success-soft: #172c22;
+  --state-warning: #d9a45b;
+  --state-warning-soft: #2e2416;
+  --state-warning-border: #4a3b22;
+  --state-neutral: #5d6878;
+
+  /* 用户提问气泡：暗色下用低饱和的品牌蓝底，不要用亮色那种浅蓝 */
+  --bubble-user-bg: #202d47;
+  --bubble-user-border: #2e3f60;
+  --bubble-user-text: #c3d3f0;
+
+  /* ---- 证据高亮 ----
+   * 暗色下必须保持半透明：它叠在 PDF 白画布上，用不透明实色会盖掉文字。 */
+  --evidence-amber: #e8a94a;
+  --evidence-amber-soft: rgba(232, 169, 74, 0.22);
+
+  /* ---- 遮罩与阴影 ----
+   * 暗色下阴影要更黑更重：界面本身已经很暗，浅灰投影完全看不出来。 */
+  --scrim: rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 3px 14px rgba(0, 0, 0, 0.3);
+  --shadow-menu: 0 8px 30px rgba(0, 0, 0, 0.5);
+  --shadow-panel: -15px 0 60px rgba(0, 0, 0, 0.45);
+  --shadow-guide: 0 30px 100px rgba(0, 0, 0, 0.55);
+  --shadow-brand: 0 4px 10px rgba(0, 0, 0, 0.3);
+  --shadow-drawer: 5px 0 35px rgba(0, 0, 0, 0.45);
+  --shadow-paper: 0 3px 16px rgba(0, 0, 0, 0.5);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.42);
+  /* 暗色下聚焦环改亮色描边：亮色那版是 3.5% 品牌色，在暗底上完全看不见 */
+  --shadow-focus-ring: 0 0 0 3px rgba(109, 148, 232, 0.28);
+}

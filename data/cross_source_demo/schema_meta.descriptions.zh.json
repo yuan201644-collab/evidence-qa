@@ -1,0 +1,35 @@
+{
+  "_readme": "隔离跨源演示库的业务语义说明。与 schema_meta.json 分开维护；仅用于该演示库的 NL2SQL 实验。",
+  "database": "cross_source_demo",
+  "tables": {
+    "equipment": "设备主数据表。equipment_id 是稳定对象编号；设备名称不得作为跨源关系键。",
+    "contracts": "维保合同主表。合同适用性需要同时核对状态、合同生效日期范围和客户范围。",
+    "contract_equipment": "合同与设备的明确映射表。映射有效期独立于合同有效期；只有受控 mapping_basis 才可用于关联。",
+    "work_orders": "工单主表。opened_at 是工单开单时间，不等于 accepted 受理事件。",
+    "work_order_events": "工单事件表。修复耗时应按 service_restored 减 accepted 计算，事件时间带时区。"
+  },
+  "columns": {
+    "equipment.equipment_id": "设备稳定编号；跨源关联优先且必须使用该编号，不按名称匹配。",
+    "equipment.equipment_name": "设备显示名称，可能重名，不可单独作为合同映射键。",
+    "equipment.customer_id": "设备所属客户编号；需与合同客户范围核对。",
+    "equipment.site_name": "设备所在站点名称。",
+    "contracts.contract_id": "合同编号，与合同文档编号对应。",
+    "contracts.customer_id": "合同所属客户编号，应与设备所属客户核对。",
+    "contracts.effective_from": "合同有效期起始日期，包含该日。",
+    "contracts.effective_to": "合同有效期结束日期，包含该日。",
+    "contracts.status": "合同状态；只有明确生效状态可用于 SLA 判定。",
+    "contracts.timezone": "合同约定的业务时区。",
+    "contract_equipment.contract_id": "映射目标合同编号。",
+    "contract_equipment.equipment_id": "被映射设备的稳定编号。",
+    "contract_equipment.valid_from": "设备—合同映射生效起始日期，包含该日。",
+    "contract_equipment.valid_to": "设备—合同映射有效截止日期，包含该日。",
+    "contract_equipment.mapping_basis": "建立设备—合同关系的依据；只有受控依据可接受。",
+    "work_orders.work_order_id": "工单唯一编号。",
+    "work_orders.equipment_id": "工单对应设备稳定编号。",
+    "work_orders.opened_at": "工单开单时间；不替代事件表中的 accepted 受理时间。",
+    "work_orders.summary": "工单摘要文本。",
+    "work_order_events.work_order_id": "事件所属工单编号。",
+    "work_order_events.event_type": "业务事件类型；accepted 为受理，service_restored 为服务恢复。",
+    "work_order_events.event_at": "事件发生时间，含时区；两个事件相减前须确认顺序和口径。"
+  }
+}

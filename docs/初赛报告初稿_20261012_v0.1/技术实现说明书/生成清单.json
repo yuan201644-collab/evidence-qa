@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-18",
+  "version": "v0.3",
+  "status": "draft_with_unfilled_final_measurements",
+  "documents": [
+    {
+      "kind": "技术实现说明书",
+      "source": "技术实现说明书_正文.md",
+      "source_sha256": "13fc185d335bf293a65b95b97cb7352f1a754b2659acecb7744febc68286b88b",
+      "docx": "技术实现说明书_v0.3.docx"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+# AdventureWorks（PostgreSQL）—— 加压用复杂库，独立文件，不拖慢默认启动
+#
+# 状态：**已实测**（2026-09-18，Docker Desktop for Windows）。
+#   实测结论：容器 Up (healthy)、库 postgres 内 71 张基表 + 9 个视图 = 80 个对象、
+#   Person.Person 19972 行、Sales.SalesOrderHeader 31465 行，
+#   连库导出 schema_meta 得 6 个 schema / 80 表 / 607 字段 / 90 外键（其中 20 条跨 schema）。
+#   镜像摘要：chriseaton/adventureworks@sha256:07e46e828d40cb2ce728025662aae68c289a811244fd9297d189a7c42c3598f5
+#   镜像通道：Docker Hub 直连拉不动，实测可用镜像加速地址：
+#       docker pull docker.1panel.live/chriseaton/adventureworks:postgres
+#       docker tag  docker.1panel.live/chriseaton/adventureworks:postgres chriseaton/adventureworks:postgres
+#
+# 为什么单独一个文件而不是写进 docker-compose.yml：
+#   题面推荐它的理由是「复杂案例」——大量语义相近字段与跨 schema 外键，用来暴露表定位能力不足。
+#   但它是加压项，不是 M2（双链路打通）的前置。放在同一个 compose 里会让
+#   「一条命令起 Demo」这句话在评委机器上变慢变脆，违背任务书风险清单第 2 条。
+#
+# 两个必须写清楚的事实（都是实测出来的，写下来免得下次踩）：
+#
+#   1) 镜像自带的库名是 postgres，不是 adventureworks。
+#      镜像把数据烘焙在 PGDATA 里，而 compose 的 POSTGRES_DB 只决定
+#      「entrypoint 额外创建哪个库」。若设成 adventureworks，entrypoint 会新建一个
+#      同名空库，于是出现「连上了但一张表都没有」：
+#        db=postgres        -> 80 个对象   ← 数据在这里
+#        db=adventureworks  ->  0 个对象   ← 空壳，但 pg_isready 照样通过
+#      因此 POSTGRES_DB 必须写 postgres，健康检查也必须断言对象数。
+#
+#   2) schema 名是保留大小写的（Person / Sales / ...），查询时必须加双引号。
+#      实测 `select * from person.person` 报 relation does not exist，
+#      正确写法是 `select * from "Person"."Person"`。
+#      schema_meta 契约 v1.1.0 起已带 schema 字段，A 侧用 TableMeta.sql_name() 取限定名。
+#
+# 独立项目名 ict-aw：与 docker-compose.yml 分开记账。两者若共用同一个 compose 项目名，
+# 起其中一个会报「发现孤儿容器」，而 `up --remove-orphans` 会把另一个库直接删掉——
+# 这是会丢演示环境的操作，不值得为省一个字段去冒。
+name: ict-aw
+
+services:
+  adventureworks:
+    # tag + digest 双写：tag 给人读，digest 保证拿到的是同一份内容。
+    # 本镜像是浮动 tag，上游重推会让对象数不再是 80，健康检查会立刻亮红灯。
+    image: chriseaton/adventureworks:postgres@sha256:07e46e828d40cb2ce728025662aae68c289a811244fd9297d189a7c42c3598f5
+    container_name: ict-aw
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${AW_POSTGRES_PASSWORD:-postgres}
+      # 必须是 postgres：数据烘焙在这个库里，改成别的名字只会得到一个空壳库（见文件头第 1 条）
+      POSTGRES_DB: postgres
+    ports:
+      # 同 docker-compose.yml：只绑回环，不把开发口令库暴露给同网段
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - awdata:/var/lib/postgresql/data
+      - ./healthcheck:/opt/healthcheck:ro
+    healthcheck:
+      # 断言对象数 = 80，而不是只 pg_isready。
+      # pg_isready 无法区分「有数据的 postgres 库」与「空壳的 adventureworks 库」，
+      # 那个假阳性正是本文件头第 1 条描述的陷阱。
+      test:
+        - CMD-SHELL
+        - >-
+          pg_isready -q -U postgres -d postgres &&
+          [ "$$(psql -q -v ON_ERROR_STOP=1 -U postgres -d postgres -tAf /opt/healthcheck/adventureworks.sql)" = "1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      # 构建层已把数据 COPY 进 PGDATA，冷启动只需恢复，60s 足够；慢机器留足余地
+      start_period: 60s
+
+volumes:
+  awdata:
+    name: ict_awdata

@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="642" viewBox="0 0 1140 642" role="img" aria-labelledby="t d">
+<title id="t">NL2SQL 七步链路</title>
+<desc id="d">结构化问数的七个处理步骤。上排自左向右为输入标准化与要素记录、语义澄清与会话恢复、表字段定位、外键路径与查询粒度；下排自右向左为候选 SQL 生成与校验、有限修复与执行异常、只读执行与大结果管理。条件不足时向用户提问并等待补充，补充后回到原问题；重写一次仍失败则报错，不下发猜测答案。</desc>
+<defs>
+<marker id="arr-blue" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 12 6.5 1 12" fill="none" stroke="#0074e8" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arr-purple" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 12 6.5 1 12" fill="none" stroke="#a319d6" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arr-green" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 12 6.5 1 12" fill="none" stroke="#339d00" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arr-orange" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 11 6 1 11" fill="none" stroke="#e47c00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arr-gold" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 11 6 1 11" fill="none" stroke="#c99700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<filter id="hand-ink" x="-12%" y="-12%" width="124%" height="124%">
+      <feTurbulence type="fractalNoise" baseFrequency=".055" numOctaves="1" seed="17" result="grain"/>
+      <feDisplacementMap in="SourceGraphic" in2="grain" scale="2.1" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+<style>
+.bg{fill:#fff}
+.title{font-family:"华文行楷","STXingkai","华文琥珀","Microsoft YaHei",sans-serif;font-size:36px;font-style:italic;font-weight:700;fill:#004ea8}
+.subtitle{font-family:"Microsoft YaHei",sans-serif;font-size:16px;fill:#536878}
+.bandTitle{font-family:"华文琥珀","STHupo","Microsoft YaHei",sans-serif;font-size:24px;font-style:italic;font-weight:400;fill:#004d96}
+.bandPurple{fill:#7900ae}
+.stepTitle{font-family:"Microsoft YaHei",sans-serif;font-size:16px;font-weight:700;fill:#243d50}
+.stepText{font-family:"Microsoft YaHei",sans-serif;font-size:12.5px;fill:#536b7c}
+.moduleNote{font-family:"Microsoft YaHei",sans-serif;font-size:12.5px;fill:#425d70}
+.bottomTitle{font-family:"华文琥珀","STHupo","Microsoft YaHei",sans-serif;font-size:24px;font-style:italic;font-weight:400;fill:#246700}
+.smallLabel{font-family:"Microsoft YaHei",sans-serif;font-size:12px;font-weight:700;fill:#4e6272}
+.alert{font-family:"Microsoft YaHei",sans-serif;font-size:13px;font-weight:700;fill:#8d4d0c}
+.answerTitle{font-family:"Microsoft YaHei",sans-serif;font-size:16px;font-weight:700;fill:#173c6c}
+.line{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.iconLine{fill:none;stroke:#30485c;stroke-width:2.7;stroke-linecap:round;stroke-linejoin:round}
+.iconThin{fill:none;stroke:#30485c;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+</style>
+
+<style>
+.stepTitle{font-size:22px}
+.bandTitle{font-size:30px}
+.moduleNote{font-size:17px}
+.orderNo{font-family:"Microsoft YaHei",sans-serif;font-size:18px;font-weight:700;fill:#4a3000}
+.pill{font-family:"Microsoft YaHei",sans-serif;font-size:19px;font-weight:600}
+</style>
+
+<symbol id="ico-ticket" viewBox="10 1 44 60">
+  <path d="M17 9q1-3 4-3h25q3 1 3 4v43q-1 3-4 3H18q-3-1-3-4z" fill="#247ee5" stroke="#30485c" stroke-width="2.7" stroke-linejoin="round"/>
+  <path d="M19 14q0-2 3-2h22q2 1 2 3v35q0 2-3 2H21q-2 0-2-3z" fill="#fffdf1" stroke="#30485c" stroke-width="1.8"/>
+  <path d="m23 7 1-4q1-2 4-1h9q3 1 3 5l-1 4H23z" fill="#ffc735" stroke="#30485c" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M22 18h17v5H22z" fill="#23bdfa" stroke="#30485c" stroke-width="1.4"/>
+  <circle cx="24" cy="30" r="2.3" fill="#ff9a25" stroke="#30485c" stroke-width="1"/>
+  <path d="M29 30h10M22 37h3m4 0h11M22 43h3m4 0h10" class="iconThin"/>
+  <path d="M18 17v31" stroke="#ff5b6a" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="43" cy="46" r="7" fill="#58e087" stroke="#30485c" stroke-width="1.7"/>
+  <path d="m39.5 46 2.4 2.5 4.3-5" fill="none" stroke="#145c35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M19 56q13 2 27 0" fill="none" stroke="#30485c" stroke-width="1.7" stroke-linecap="round"/>
+</symbol>
+<symbol id="ico-unknown" viewBox="0 0 52 52">
+  <path d="m26 3 22 23-22 23L4 26z" fill="#ffdf39" stroke="#30485c" stroke-width="2.7" stroke-linejoin="round"/>
+  <path d="m26 8 17 18-17 18L9 26z" fill="none" stroke="#ff9f23" stroke-width="1.8" stroke-linejoin="round"/>
+  <circle cx="26" cy="26" r="12" fill="#fff7a1" stroke="#bd8100" stroke-width="1.8"/>
+  <path d="M21 21q1-7 7-6 7 1 6 7-1 4-7 6v3m0 4v1" fill="none" stroke="#554100" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M10 13 7 10m35 32 3 3M42 11l3-3" stroke="#ef7b28" stroke-width="2.5" stroke-linecap="round"/>
+</symbol>
+<symbol id="ico-scope" viewBox="4 8 56 48">
+  <path d="M8 16q1-4 5-4h37q4 1 4 5v29q-1 4-5 4H13q-5-1-5-5z" fill="#f0d3ff" stroke="#30485c" stroke-width="2.6"/>
+  <path d="M12 18h36v25H12z" fill="#e8f7ff" stroke="#9f55d4" stroke-width="1.8"/>
+  <circle cx="30" cy="30" r="12" fill="#b76aff" stroke="#30485c" stroke-width="2.2"/>
+  <circle cx="30" cy="30" r="7" fill="#ffdf35" stroke="#7e30bd" stroke-width="2"/>
+  <circle cx="30" cy="30" r="2.5" fill="#ff5c46"/>
+  <path d="M30 12v6m0 24v6M8 30h6m32 0h6" stroke="#30485c" stroke-width="2" stroke-linecap="round"/>
+  <path d="m40 43 4 4 8-10" fill="none" stroke="#159d5a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m16 14 2 2m27 27 2 2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+</symbol>
+<symbol id="ico-bridge" viewBox="3 8 58 46">
+  <path d="M7 17q1-4 5-4h15q4 1 4 5v24q-1 4-5 4H11q-4-1-4-5z" fill="#39aaff" stroke="#30485c" stroke-width="2.7"/>
+  <path d="M35 15q1-4 5-4h14q4 1 4 5v25q-1 4-5 4H39q-4-1-4-5z" fill="#a35bff" stroke="#30485c" stroke-width="2.7"/>
+  <path d="M11 19h16v4H11z" fill="#c6f4ff" stroke="#30485c" stroke-width="1.2"/>
+  <circle cx="14" cy="30" r="2" fill="#ffdc35"/><path d="M19 30h6m-11 6h11" stroke="#174f97" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M39 18h12v4H39z" fill="#ffe78a" stroke="#30485c" stroke-width="1.2"/>
+  <circle cx="42" cy="30" r="2" fill="#64f4b4"/><path d="M47 30h5m-13 6h13" stroke="#512481" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="m27 24 4-4 4 4v8l-4 4-4-4z" fill="#ff8e32" stroke="#30485c" stroke-width="2"/>
+  <path d="m24 27 4 0m10 0h-4m-3 9v5" fill="none" stroke="#ffe84d" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="31" cy="17" r="2.4" fill="#fff" stroke="#30485c" stroke-width="1.3"/>
+</symbol>
+<symbol id="ico-over" viewBox="0 0 52 52">
+  <path d="M26 4 44 11v13q0 15-18 24Q8 39 8 24V11z" fill="#ff8d36" stroke="#30485c" stroke-width="2.7" stroke-linejoin="round"/>
+  <path d="M26 9 39 14v10q0 10-13 18Q13 34 13 24V14z" fill="#ffd057" stroke="#e45728" stroke-width="1.8" stroke-linejoin="round"/>
+  <path d="M26 15v13m0 6v1" fill="none" stroke="#9b3516" stroke-width="4" stroke-linecap="round"/>
+  <path d="m12 11-4-4m32 4 4-4m-33 34-4 3" stroke="#e94c38" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M18 19q2-3 5-4m9 24q4-2 6-5" fill="none" stroke="#fff1ae" stroke-width="2" stroke-linecap="round"/>
+</symbol>
+<symbol id="ico-answer" viewBox="3 3 58 56">
+  <path d="M10 8q0-3 4-3h38q5 1 5 6l-1 27q-1 4-5 4H29L16 54l1-12h-5q-6 0-6-5z" fill="#7fe6ff" stroke="#30485c" stroke-width="2.7" stroke-linejoin="round"/>
+  <path d="M14 13q4-4 8 0m-7 8h27m-27 6h22" fill="none" stroke="#0871ca" stroke-width="2.3" stroke-linecap="round"/>
+  <circle cx="16" cy="33" r="1.8" fill="#f0536e"/><circle cx="22" cy="33" r="1.8" fill="#ffb629"/>
+  <path d="m39 32 15 1 3 20-17 1z" fill="#ffe347" stroke="#30485c" stroke-width="2.3" stroke-linejoin="round"/>
+  <path d="M42 37h10m-10 4h7" stroke="#30485c" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="m43 47 3 4 6-7" fill="none" stroke="#009f84" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m54 10 3-2m1 7 3 1" stroke="#ffad26" stroke-width="2" stroke-linecap="round"/>
+</symbol>
+<symbol id="ico-sql" viewBox="4 2 56 60">
+  <path d="M12 16q0-5 20-5t20 5v26q0 6-20 6t-20-6z" fill="#a8e6ff" stroke="#30485c" stroke-width="2.7"/>
+  <ellipse cx="32" cy="16" rx="20" ry="6" fill="#d9f6ff" stroke="#30485c" stroke-width="2.4"/>
+  <path d="M12 27q9 5 20 5t20-5M12 38q9 5 20 5 6 0 11-1.5" fill="none" stroke="#30485c" stroke-width="1.9" stroke-linecap="round"/>
+  <path d="m22 39 5 3.6-5 3.6" fill="none" stroke="#e0503c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m41 39-5 3.6 5 3.6" fill="none" stroke="#e0503c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="45" cy="49" r="7" fill="#58e087" stroke="#30485c" stroke-width="1.7"/>
+  <path d="m41.5 49 2.4 2.4 4.3-5" fill="none" stroke="#145c35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+</defs>
+<rect class="bg" width="1140" height="642"/>
+<rect x="16" y="16" width="1108" height="290" rx="14" fill="#f7fcff" stroke="#0074d8" stroke-width="2.2"/>
+<path d="M30 16h1080a14 14 0 0 1 14 14v34H16V30a14 14 0 0 1 14-14z" fill="#d4efff" stroke="#0074d8" stroke-width="1.7"/>
+<text class="bandTitle" x="570.0" y="54" text-anchor="middle">问题理解与查询构造</text>
+<rect x="16" y="332" width="1108" height="298" rx="14" fill="#f7fcff" stroke="#0074d8" stroke-width="2.2"/>
+<path d="M30 332h1080a14 14 0 0 1 14 14v34H16V346a14 14 0 0 1 14-14z" fill="#d4efff" stroke="#0074d8" stroke-width="1.7"/>
+<text class="bandTitle" x="570.0" y="370" text-anchor="middle">候选生成、有限修复与执行</text>
+<path class="line" d="M204 130H372" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M468 130H636" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M732 130H900" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M996 130H1114V442H996" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M900 442H618" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M522 442H204" stroke="#0074e8" marker-end="url(#arr-blue)"/>
+<path class="line" d="M570 390V384H948V396" stroke="#e47c00" stroke-dasharray="8 6" marker-end="url(#arr-orange)"/>
+<g class="flow-node" data-label="输入标准化与要素记录"><use href="#ico-ticket" x="114" y="88" width="84" height="84" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="156" y="202" text-anchor="middle"><tspan class="orderNo">①</tspan>输入标准化与要素记录</text></g>
+<g class="flow-node" data-label="语义澄清与会话恢复"><use href="#ico-unknown" x="378" y="88" width="84" height="84" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="420" y="202" text-anchor="middle"><tspan class="orderNo">②</tspan>语义澄清与会话恢复</text></g>
+<g class="flow-node" data-label="表字段定位"><use href="#ico-scope" x="642" y="88" width="84" height="84" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="684" y="202" text-anchor="middle"><tspan class="orderNo">③</tspan>表字段定位</text></g>
+<g class="flow-node" data-label="外键路径与查询粒度"><use href="#ico-bridge" x="906" y="88" width="84" height="84" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="948" y="202" text-anchor="middle"><tspan class="orderNo">④</tspan>外键路径与查询粒度</text></g>
+<g class="flow-node" data-label="候选 SQL 生成与校验"><use href="#ico-sql" x="906" y="400" width="84" height="84" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="948" y="514" text-anchor="middle"><tspan class="orderNo">⑤</tspan>候选 SQL 生成与校验</text></g>
+<g class="flow-node" data-label="有限修复与执行异常"><use href="#ico-over" x="528" y="400" width="84" height="84" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="570" y="514" text-anchor="middle"><tspan class="orderNo">⑥</tspan>有限修复与执行异常</text></g>
+<g class="flow-node" data-label="只读执行与大结果管理"><use href="#ico-answer" x="114" y="400" width="84" height="84" filter="url(#hand-ink)" aria-hidden="true"/><text class="stepTitle" x="156" y="514" text-anchor="middle"><tspan class="orderNo">⑦</tspan>只读执行与大结果管理</text></g>
+<rect x="280" y="216" width="280" height="46" rx="12" fill="#eaf5ff" stroke="#0074d8" stroke-width="1.8"/>
+<text class="pill" x="420" y="246" text-anchor="middle" fill="#00558f">条件不足：提问，等待补充</text>
+<path class="line" d="M420 206V214" stroke="#0074e8" stroke-dasharray="6 5" marker-end="url(#arr-blue)"/>
+<path class="line" d="M280 239H26V130H110" stroke="#0074e8" stroke-dasharray="6 5" marker-end="url(#arr-blue)"/>
+<rect x="430" y="536" width="280" height="46" rx="12" fill="#fff4e6" stroke="#e47c00" stroke-width="1.8"/>
+<text class="pill" x="570" y="566" text-anchor="middle" fill="#8a4b00">重写一次仍失败：报错</text>
+<path class="line" d="M570 518V534" stroke="#e47c00" stroke-dasharray="6 5" marker-end="url(#arr-orange)"/>
+<text class="moduleNote" x="570.0" y="290" text-anchor="middle">缺失条件先澄清，不静默补值；表与字段只在本轮命中的候选范围内定位</text>
+<text class="moduleNote" x="570.0" y="614" text-anchor="middle">所有 SQL 经只读 AST 校验后才执行；结果超行数上限时分页与导出，不下发全量</text>
+</svg>

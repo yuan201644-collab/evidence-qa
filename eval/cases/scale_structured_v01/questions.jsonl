@@ -1,0 +1,30 @@
+{"id":"S1K-Q01","task":5,"question":"统计 scale.sales_scale_1000 的销售记录总数。输出列名必须是 total_rows。"}
+{"id":"S1K-Q02","task":5,"question":"按销售大区统计 scale.sales_scale_1000 的记录数，按大区名称升序排列。输出列名必须依次是 region、record_count。"}
+{"id":"S1K-Q03","task":5,"question":"按销售大区汇总 scale.sales_scale_1000 的销售金额，金额从高到低排序；金额相同按大区名称升序。输出列名必须依次是 region、total_amount。"}
+{"id":"S1K-Q04","task":5,"question":"统计 scale.sales_scale_1000 在 2024 年（2024-01-01 含，2025-01-01 不含）的销售记录数。输出列名必须是 row_count。"}
+{"id":"S1K-Q05","task":5,"question":"统计 scale.sales_scale_1000 在 2024 年（2024-01-01 含，2025-01-01 不含）的销售金额合计。输出列名必须是 total_amount。"}
+{"id":"S1K-Q06","task":5,"question":"统计 scale.sales_scale_1000 在 2024 年华东地区（2024-01-01 含，2025-01-01 不含）的销售金额合计。输出列名必须是 total_amount。"}
+{"id":"S1K-Q07","task":5,"question":"按商品编号汇总 scale.sales_scale_1000 的销售金额，返回金额最高的前 10 个商品；金额相同按商品编号升序。输出列名必须依次是 product_id、total_amount。"}
+{"id":"S1K-Q08","task":5,"question":"按月份统计 scale.sales_scale_1000 在 2024 年（2024-01-01 含，2025-01-01 不含）的销售金额，并按月份升序。输出列名必须依次是 month、total_amount。"}
+{"id":"S1K-Q09","task":5,"question":"计算 scale.sales_scale_1000 的平均商品单价、最低商品单价和最高商品单价。输出列名必须依次是 avg_unit_price、min_unit_price、max_unit_price。"}
+{"id":"S1K-Q10","task":5,"question":"查询 scale.sales_scale_1000 中销售金额最高的 100 条记录，金额相同按 sale_id 升序，只输出 sale_id、amount 两列。"}
+{"id":"S10K-Q01","task":5,"question":"统计 scale.sales_scale_10000 的销售记录总数。输出列名必须是 total_rows。"}
+{"id":"S10K-Q02","task":5,"question":"按销售大区统计 scale.sales_scale_10000 的记录数，按大区名称升序排列。输出列名必须依次是 region、record_count。"}
+{"id":"S10K-Q03","task":5,"question":"按销售大区汇总 scale.sales_scale_10000 的销售金额，金额从高到低排序；金额相同按大区名称升序。输出列名必须依次是 region、total_amount。"}
+{"id":"S10K-Q04","task":5,"question":"统计 scale.sales_scale_10000 在 2024 年（2024-01-01 含，2025-01-01 不含）的销售记录数。输出列名必须是 row_count。"}
+{"id":"S10K-Q05","task":5,"question":"统计 scale.sales_scale_10000 在 2024 年（2024-01-01 含，2025-01-01 不含）的销售金额合计。输出列名必须是 total_amount。"}
+{"id":"S10K-Q06","task":5,"question":"统计 scale.sales_scale_10000 在 2024 年华东地区（2024-01-01 含，2025-01-01 不含）的销售金额合计。输出列名必须是 total_amount。"}
+{"id":"S10K-Q07","task":5,"question":"按商品编号汇总 scale.sales_scale_10000 的销售金额，返回金额最高的前 10 个商品；金额相同按商品编号升序。输出列名必须依次是 product_id、total_amount。"}
+{"id":"S10K-Q08","task":5,"question":"按月份统计 scale.sales_scale_10000 在 2024 年（2024-01-01 含，2025-01-01 不含）的销售金额，并按月份升序。输出列名必须依次是 month、total_amount。"}
+{"id":"S10K-Q09","task":5,"question":"计算 scale.sales_scale_10000 的平均商品单价、最低商品单价和最高商品单价。输出列名必须依次是 avg_unit_price、min_unit_price、max_unit_price。"}
+{"id":"S10K-Q10","task":5,"question":"查询 scale.sales_scale_10000 中销售金额最高的 100 条记录，金额相同按 sale_id 升序，只输出 sale_id、amount 两列。"}
+{"id":"S100K-Q01","task":5,"question":"统计 scale.sales_scale_100000 的销售记录总数。输出列名必须是 total_rows。"}
+{"id":"S100K-Q02","task":5,"question":"按销售大区统计 scale.sales_scale_100000 的记录数，按大区名称升序排列。输出列名必须依次是 region、record_count。"}
+{"id":"S100K-Q03","task":5,"question":"按销售大区汇总 scale.sales_scale_100000 的销售金额，金额从高到低排序；金额相同按大区名称升序。输出列名必须依次是 region、total_amount。"}
+{"id":"S100K-Q04","task":5,"question":"统计 scale.sales_scale_100000 在 2024 年（2024-01-01 含，2025-01-01 不含）的销售记录数。输出列名必须是 row_count。"}
+{"id":"S100K-Q05","task":5,"question":"统计 scale.sales_scale_100000 在 2024 年（2024-01-01 含，2025-01-01 不含）的销售金额合计。输出列名必须是 total_amount。"}
+{"id":"S100K-Q06","task":5,"question":"统计 scale.sales_scale_100000 在 2024 年华东地区（2024-01-01 含，2025-01-01 不含）的销售金额合计。输出列名必须是 total_amount。"}
+{"id":"S100K-Q07","task":5,"question":"按商品编号汇总 scale.sales_scale_100000 的销售金额，返回金额最高的前 10 个商品；金额相同按商品编号升序。输出列名必须依次是 product_id、total_amount。"}
+{"id":"S100K-Q08","task":5,"question":"按月份统计 scale.sales_scale_100000 在 2024 年（2024-01-01 含，2025-01-01 不含）的销售金额，并按月份升序。输出列名必须依次是 month、total_amount。"}
+{"id":"S100K-Q09","task":5,"question":"计算 scale.sales_scale_100000 的平均商品单价、最低商品单价和最高商品单价。输出列名必须依次是 avg_unit_price、min_unit_price、max_unit_price。"}
+{"id":"S100K-Q10","task":5,"question":"查询 scale.sales_scale_100000 中销售金额最高的 100 条记录，金额相同按 sale_id 升序，只输出 sale_id、amount 两列。"}

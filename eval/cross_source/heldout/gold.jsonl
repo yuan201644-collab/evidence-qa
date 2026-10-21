@@ -1,0 +1,7 @@
+{"case_id":"H01","expected_status":"repair_within_limit","expected_contract_id":"HT-EVAL-001","expected_evidence_pks":["WO-2026-0101","WO-2026-0101|accepted","WO-2026-0101|service_restored","HT-EVAL-001|DEV-EVAL-001","HT-EVAL-001"]}
+{"case_id":"H02","expected_status":"repair_over_limit","expected_contract_id":"HT-EVAL-001","expected_evidence_pks":["WO-2026-0102","WO-2026-0102|accepted","WO-2026-0102|service_restored","HT-EVAL-001|DEV-EVAL-002","HT-EVAL-001"]}
+{"case_id":"H03","expected_status":"missing_object_mapping","expected_contract_id":null,"expected_evidence_pks":["WO-2026-0103"],"required_ref_snippets":["mapping_candidates=0","不能按设备名称推断合同关系"]}
+{"case_id":"H04","expected_status":"no_active_contract","expected_contract_id":null,"expected_evidence_pks":["WO-2026-0104","HT-EVAL-003|DEV-EVAL-004","HT-EVAL-003"]}
+{"case_id":"H05","expected_status":"missing_required_event","expected_contract_id":"HT-EVAL-002","expected_evidence_pks":["WO-2026-0105","WO-2026-0105|accepted","HT-EVAL-002|DEV-EVAL-005","HT-EVAL-002"]}
+{"case_id":"H06","expected_status":"invalid_event_order","expected_contract_id":"HT-EVAL-002","expected_evidence_pks":["WO-2026-0106","WO-2026-0106|accepted","WO-2026-0106|service_restored","HT-EVAL-002|DEV-EVAL-005","HT-EVAL-002"]}
+{"case_id":"H07","expected_status":"ambiguous_active_contracts","expected_contract_id":null,"expected_evidence_pks":["WO-2026-0107","HT-EVAL-004|DEV-EVAL-007","HT-EVAL-004","HT-EVAL-005|DEV-EVAL-007","HT-EVAL-005"]}

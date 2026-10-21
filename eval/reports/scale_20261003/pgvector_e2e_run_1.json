@@ -1,0 +1,166 @@
+{
+  "backend": "pgvector",
+  "schema": "rag_scale_index_20261003_020442",
+  "retrieve_top_k": 20,
+  "rows": [
+    {
+      "scale": "10",
+      "file": "KB-003_10页规模版.pdf",
+      "e2e_ok": 10,
+      "e2e_errors": 0,
+      "samples": [
+        {
+          "query_index": 1,
+          "elapsed_ms": 9421.51
+        },
+        {
+          "query_index": 2,
+          "elapsed_ms": 9243.72
+        },
+        {
+          "query_index": 3,
+          "elapsed_ms": 35183.62
+        },
+        {
+          "query_index": 4,
+          "elapsed_ms": 7756.78
+        },
+        {
+          "query_index": 5,
+          "elapsed_ms": 8096.31
+        },
+        {
+          "query_index": 6,
+          "elapsed_ms": 18306.66
+        },
+        {
+          "query_index": 7,
+          "elapsed_ms": 9726.67
+        },
+        {
+          "query_index": 8,
+          "elapsed_ms": 27386.55
+        },
+        {
+          "query_index": 9,
+          "elapsed_ms": 34734.73
+        },
+        {
+          "query_index": 10,
+          "elapsed_ms": 7501.51
+        }
+      ],
+      "e2e_ms": {
+        "p50": 9574.09,
+        "p95": 34981.62,
+        "max": 35183.62
+      }
+    },
+    {
+      "scale": "100",
+      "file": "KB-003_100页规模版.pdf",
+      "e2e_ok": 10,
+      "e2e_errors": 0,
+      "samples": [
+        {
+          "query_index": 1,
+          "elapsed_ms": 9915.62
+        },
+        {
+          "query_index": 2,
+          "elapsed_ms": 12648.35
+        },
+        {
+          "query_index": 3,
+          "elapsed_ms": 29399.47
+        },
+        {
+          "query_index": 4,
+          "elapsed_ms": 10313.07
+        },
+        {
+          "query_index": 5,
+          "elapsed_ms": 6294.26
+        },
+        {
+          "query_index": 6,
+          "elapsed_ms": 17534.13
+        },
+        {
+          "query_index": 7,
+          "elapsed_ms": 12699.93
+        },
+        {
+          "query_index": 8,
+          "elapsed_ms": 22416.92
+        },
+        {
+          "query_index": 9,
+          "elapsed_ms": 22054.78
+        },
+        {
+          "query_index": 10,
+          "elapsed_ms": 8828.86
+        }
+      ],
+      "e2e_ms": {
+        "p50": 12674.14,
+        "p95": 26257.32,
+        "max": 29399.47
+      }
+    },
+    {
+      "scale": "500",
+      "file": "KB-003_500页规模版.pdf",
+      "e2e_ok": 10,
+      "e2e_errors": 0,
+      "samples": [
+        {
+          "query_index": 1,
+          "elapsed_ms": 11646.76
+        },
+        {
+          "query_index": 2,
+          "elapsed_ms": 9951.68
+        },
+        {
+          "query_index": 3,
+          "elapsed_ms": 41291.23
+        },
+        {
+          "query_index": 4,
+          "elapsed_ms": 9347.49
+        },
+        {
+          "query_index": 5,
+          "elapsed_ms": 7357.57
+        },
+        {
+          "query_index": 6,
+          "elapsed_ms": 41521.57
+        },
+        {
+          "query_index": 7,
+          "elapsed_ms": 11693.22
+        },
+        {
+          "query_index": 8,
+          "elapsed_ms": 18957.68
+        },
+        {
+          "query_index": 9,
+          "elapsed_ms": 14597.3
+        },
+        {
+          "query_index": 10,
+          "elapsed_ms": 9270.68
+        }
+      ],
+      "e2e_ms": {
+        "p50": 11669.99,
+        "p95": 41417.92,
+        "max": 41521.57
+      }
+    }
+  ]
+}

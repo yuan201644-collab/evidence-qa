@@ -1,0 +1,614 @@
+{
+  "base": "http://127.0.0.1:8021",
+  "generated_at": "2026-10-14T23:33:49+0800",
+  "scope": "多轮对话链路保持验证，非系统准确率实验",
+  "pass_rule": "一条用例 5 轮全部通过才算通过",
+  "attach_rule": "normalizer 输出含「用户补充或修改」接缝即判定为已接上文",
+  "cases": [
+    {
+      "case_id": "mt-01",
+      "title": "客户维度的连续追问",
+      "scoring": "初赛 优化-多轮对话上下文保持（连续 5 轮以上准确 → 5 分）",
+      "passed": true,
+      "turns_passed": 5,
+      "turns_total": 5,
+      "first_failure_round": null,
+      "turns": [
+        {
+          "round": 1,
+          "question": "平台上一共有多少位客户？",
+          "answer": "查询结果：customer_count：59。",
+          "status": 200,
+          "elapsed_ms": 3461.4,
+          "attached": false,
+          "depends_on_context": false,
+          "expect_hits": [
+            "59"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "customer_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT COUNT(*) AS customer_count FROM customer LIMIT 1000",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 2,
+          "question": "只看美国的",
+          "answer": "查询结果：customer_count：13。",
+          "status": 200,
+          "elapsed_ms": 1160.2,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "13"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "customer",
+            "country",
+            "USA"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "customer_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT COUNT(*) AS customer_count FROM public.customer WHERE country = 'USA' LIMIT 1000",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 3,
+          "question": "改成按城市分组",
+          "answer": "共 12 行，前 3 行：city：Boston、customer_count：1；city：Chicago、customer_count：1；city：Cupertino、customer_count：1 …",
+          "status": 200,
+          "elapsed_ms": 1946.5,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "共 12 行"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "city",
+            "USA"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 12,
+          "actual_row_count": 12,
+          "expected_columns": [
+            "city",
+            "customer_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT city, COUNT(*) AS customer_count FROM public.customer WHERE country = 'USA' GROUP BY city ORDER BY city LIMIT 1000",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 4,
+          "question": "那按员工分组呢",
+          "answer": "共 3 行，前 3 行：employee_id：3、employee_name：Jane Peacock、customer_count：3；employee_id：4、employee_name：Margaret Park、customer_count：6；employee_id：5、employee_name：Steve Johnson、customer_count：4。",
+          "status": 200,
+          "elapsed_ms": 4483.1,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "共 3 行"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "USA"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 3,
+          "actual_row_count": 3,
+          "expected_columns": [
+            "employee_name",
+            "customer_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT e.employee_id, e.first_name || ' ' || e.last_name AS employee_name, COUNT(*) AS customer_count FROM public.customer c JOIN public.employee e ON c.support_rep_id = e.employee_id WHERE c.country = 'USA' GROUP BY e.employee_id, e.first_name, e.last_name ORDER BY e.employee_id LIMIT 1000",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 5,
+          "question": "这个再按国家分一下",
+          "answer": "共 3 行，前 3 行：country：USA、employee_id：3、employee_name：Jane Peacock、customer_count：3；country：USA、employee_id：4、employee_name：Margaret Park、customer_count：6；country：USA、employee_id：5、employee_name：Steve Johnson、customer_count：4。",
+          "status": 200,
+          "elapsed_ms": 3797.0,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "共 3 行",
+            "USA"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "employee_name",
+            "country",
+            "USA"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 3,
+          "actual_row_count": 3,
+          "expected_columns": [
+            "employee_name",
+            "country",
+            "customer_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT c.country, e.employee_id, e.first_name || ' ' || e.last_name AS employee_name, COUNT(*) AS customer_count FROM public.customer c JOIN public.employee e ON c.support_rep_id = e.employee_id WHERE c.country = 'USA' GROUP BY c.country, e.employee_id, e.first_name, e.last_name ORDER BY c.country, e.employee_id LIMIT 1000",
+          "passed": true,
+          "note": ""
+        }
+      ],
+      "notes": "每轮均检查最终答案；所有省略客户主体的轮次都必须接上上下文。第 2 轮“只看美国的”依赖上一轮的客户对象，不能按独立问题判分。"
+    },
+    {
+      "case_id": "mt-02",
+      "title": "发票聚合的连续切换",
+      "scoring": "初赛 优化-多轮对话上下文保持（连续 5 轮以上准确 → 5 分）",
+      "passed": true,
+      "turns_passed": 5,
+      "turns_total": 5,
+      "first_failure_round": null,
+      "turns": [
+        {
+          "round": 1,
+          "question": "所有发票的总金额是多少？",
+          "answer": "查询结果：total_amount：2328.6。",
+          "status": 200,
+          "elapsed_ms": 1093.4,
+          "attached": false,
+          "depends_on_context": false,
+          "expect_hits": [
+            "2328.6"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "sum(total)"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "SELECT SUM(total) AS total_amount FROM invoice LIMIT 1000",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 2,
+          "question": "那按开票国家分一下",
+          "answer": "共 24 行，前 3 行：billing_country：Argentina、total_amount：37.62；billing_country：Australia、total_amount：37.62；billing_country：Austria、total_amount：42.62 …",
+          "status": 200,
+          "elapsed_ms": 1245.0,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "共 24 行"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "billing_country",
+            "sum(total)"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 24,
+          "actual_row_count": 24,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "SELECT billing_country, SUM(total) AS total_amount FROM invoice GROUP BY billing_country ORDER BY billing_country ASC",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 3,
+          "question": "改成按月拆开",
+          "answer": "共 60 行，前 3 行：invoice_month：2021-01-01T00:00:00、total_amount：35.64；invoice_month：2021-02-01T00:00:00、total_amount：37.62；invoice_month：2021-03-01T00:00:00、total_amount：37.62 …",
+          "status": 200,
+          "elapsed_ms": 1776.7,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "共 60 行",
+            "2021-01"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "invoice_date",
+            "sum(total)"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 60,
+          "actual_row_count": 60,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "SELECT date_trunc('month', invoice_date) AS invoice_month, SUM(total) AS total_amount FROM invoice GROUP BY date_trunc('month', invoice_date) ORDER BY invoice_month ASC",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 4,
+          "question": "那平均每张是多少",
+          "answer": "共 60 行，前 3 行：invoice_month：2021-01-01T00:00:00、avg_invoice_amount：5.94；invoice_month：2021-02-01T00:00:00、avg_invoice_amount：5.374286；invoice_month：2021-03-01T00:00:00、avg_invoice_amount：5.374286 …",
+          "status": 200,
+          "elapsed_ms": 3248.2,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "共 60 行",
+            "5.94"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "invoice_date",
+            "avg("
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 60,
+          "actual_row_count": 60,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "SELECT date_trunc('month', invoice_date) AS invoice_month, AVG(total) AS avg_invoice_amount FROM invoice GROUP BY date_trunc('month', invoice_date) ORDER BY invoice_month ASC",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 5,
+          "question": "这个最多的是哪个",
+          "answer": "查询结果：invoice_month：2024-09-01T00:00:00、avg_invoice_amount：7.785。",
+          "status": 200,
+          "elapsed_ms": 2390.5,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "2024-09",
+            "7.785"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "invoice_date",
+            "avg("
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "SELECT date_trunc('month', invoice_date) AS invoice_month, AVG(total) AS avg_invoice_amount FROM invoice GROUP BY date_trunc('month', invoice_date) ORDER BY avg_invoice_amount DESC, invoice_month ASC LIMIT 1",
+          "passed": true,
+          "note": ""
+        }
+      ],
+      "notes": "“改成按月拆开”表示月份替换国家维度；按结果值、行数与聚合/日期 SQL 事实判定，不要求模型采用固定列别名。"
+    },
+    {
+      "case_id": "mt-03",
+      "title": "单个实体的逐层下钻",
+      "scoring": "初赛 优化-多轮对话上下文保持（连续 5 轮以上准确 → 5 分）",
+      "passed": false,
+      "turns_passed": 4,
+      "turns_total": 5,
+      "first_failure_round": 2,
+      "turns": [
+        {
+          "round": 1,
+          "question": "客户 Frank Harris 是谁？",
+          "answer": "查询结果：customer_id：16、full_name：Frank Harris、company：Google Inc.、address：1600 Amphitheatre Parkway、city：Mountain View、state：CA。",
+          "status": 200,
+          "elapsed_ms": 2209.7,
+          "attached": false,
+          "depends_on_context": false,
+          "expect_hits": [
+            "Frank"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "SELECT customer_id, first_name || ' ' || last_name AS full_name, company, address, city, state, country, phone, email, support_rep_id FROM customer WHERE first_name = 'Frank' AND last_name = 'Harris' ORDER BY customer_id LIMIT 1;",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 2,
+          "question": "他总共消费了多少？",
+          "answer": "查询结果：customer_id：16、customer_name：Frank Harris、company：Google Inc.、address：1600 Amphitheatre Parkway、city：Mountain View、state：CA。",
+          "status": 200,
+          "elapsed_ms": 2680.1,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [],
+          "expect_missed": [
+            "37.62"
+          ],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "SELECT customer_id, first_name || ' ' || last_name AS customer_name, company, address, city, state, country, postal_code, phone, email, support_rep_id FROM customer WHERE first_name = 'Frank' AND last_name = 'Harris' ORDER BY customer_id LIMIT 1000",
+          "passed": false,
+          "note": "答案未包含：37.62"
+        },
+        {
+          "round": 3,
+          "question": "改成看发票张数",
+          "answer": "查询结果：customer_id：16、customer_name：Frank Harris、invoice_count：7。",
+          "status": 200,
+          "elapsed_ms": 2329.2,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "invoice_count：7"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [
+            "invoice_count"
+          ],
+          "missing_columns": [],
+          "actual_sql": "SELECT c.customer_id, c.first_name || ' ' || c.last_name AS customer_name, COUNT(i.invoice_id) AS invoice_count FROM customer c LEFT JOIN invoice i ON i.customer_id = c.customer_id WHERE c.first_name = 'Frank' AND c.last_name = 'Harris' GROUP BY c.customer_id, c.first_name, c.last_name ORDER BY c.customer_id LIMIT 1000",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 4,
+          "question": "那他都买过哪些曲目",
+          "answer": "共 38 行，前 3 行：track_name：05 - Phantom of the Opera；track_name：A Novidade (Live)；track_name：Aces High …",
+          "status": 200,
+          "elapsed_ms": 2461.4,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "共 38 行"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "track",
+            "customer"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 38,
+          "actual_row_count": 38,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "SELECT DISTINCT t.name AS track_name FROM customer AS c JOIN invoice AS i ON i.customer_id = c.customer_id JOIN invoice_line AS il ON il.invoice_id = i.invoice_id JOIN track AS t ON t.track_id = il.track_id WHERE c.first_name = 'Frank' AND c.last_name = 'Harris' ORDER BY track_name ASC LIMIT 1000",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 5,
+          "question": "只看播放时长最长的",
+          "answer": "查询结果：track_name：Heaven Can Wait、duration_ms：440555。",
+          "status": 200,
+          "elapsed_ms": 2035.2,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "Heaven Can Wait",
+            "440555"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [
+            "milliseconds"
+          ],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": 1,
+          "actual_row_count": 1,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "SELECT DISTINCT t.name AS track_name, t.milliseconds AS duration_ms FROM customer AS c JOIN invoice AS i ON i.customer_id = c.customer_id JOIN invoice_line AS il ON il.invoice_id = i.invoice_id JOIN track AS t ON t.track_id = il.track_id WHERE c.first_name = 'Frank' AND c.last_name = 'Harris' ORDER BY duration_ms DESC, track_name ASC LIMIT 1",
+          "passed": true,
+          "note": ""
+        }
+      ],
+      "notes": "客户消费、发票数和曲目必须都限定在 Frank Harris；聚合结果与显式排序指标须出现在本轮答案中。"
+    },
+    {
+      "case_id": "mt-04",
+      "title": "文档问答的连续追问",
+      "scoring": "初赛 优化-多轮对话上下文保持（连续 5 轮以上准确 → 5 分）",
+      "passed": true,
+      "turns_passed": 5,
+      "turns_total": 5,
+      "first_failure_round": null,
+      "turns": [
+        {
+          "round": 1,
+          "question": "智能计算设备年度维保服务合同里，质保期是多久？",
+          "answer": "质保期为自设备验收合格之日起 36 个月；其中 GPU 加速卡因工艺特性单独按 24 个月计算 [1]。",
+          "status": 200,
+          "elapsed_ms": 25454.9,
+          "attached": false,
+          "depends_on_context": false,
+          "expect_hits": [
+            "36"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": null,
+          "actual_row_count": null,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 2,
+          "question": "那 GPU 加速卡呢",
+          "answer": "质保期限为自设备验收合格之日起 **36 个月** [1][2]。\n\n其中，**GPU 加速卡**因工艺特性单独计算，质保期为 **24 个月** [1][2]。",
+          "status": 200,
+          "elapsed_ms": 8272.2,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "24"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": null,
+          "actual_row_count": null,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 3,
+          "question": "这个在合同第几条",
+          "answer": "质保期为自设备验收合格之日起 **36 个月** [1][2]。\n\n其中，**GPU 加速卡因工艺特性单独按 24 个月计算** [1][2]。\n\n该约定在合同 **第 2.1 条“质保期限”** [1][2]。",
+          "status": 200,
+          "elapsed_ms": 8751.7,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "2.1"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": null,
+          "actual_row_count": null,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 4,
+          "question": "它的适用范围呢",
+          "answer": "质保期限为：自设备验收合格之日起 **36 个月**；其中 **GPU 加速卡因工艺特性单独按 24 个月计算**。[1][2]\n\n该约定在合同 **第二章“质保条款”第 2.1 条**。[1]\n\n适用范围方面：\n- 质保覆盖部件包括：整机机箱、主板、电源模块、风扇模组、**GPU 加速卡**、内存条、固态硬盘；外接显示器、KVM 切换器、机柜 PDU **不在覆盖范围内**。[1]\n- 除外责任：因甲方擅自改装、进水、雷击或超范围超负荷运行造成的损坏，不在质保范围。[1]\n- 若指合同服务对象范围，则覆盖甲方部署于 **A3 机房与 B1 机房的全部智能计算设备，共 248 台**。[3]\n- 服务内容包括：故障响应、备件更换、季度巡检与固件升级四项。[4]。",
+          "status": 200,
+          "elapsed_ms": 17243.6,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "GPU",
+            "外接显示器"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": null,
+          "actual_row_count": null,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "",
+          "passed": true,
+          "note": ""
+        },
+        {
+          "round": 5,
+          "question": "那服务响应时限是多少",
+          "answer": "根据现有片段，回答如下：\n\n- **质保期**：自设备验收合格之日起 **36 个月**；其中 **GPU 加速卡**因工艺特性单独按 **24 个月**计算[1]。\n- **在合同第几条**：该约定在合同“第二章 质保条款”的 **2.1 条**，GPU 加速卡的特别计算方式也在同一条[1]。\n- **适用范围/覆盖情况**：\n  - 服务对象覆盖甲方部署于 **A3 机房与 B1 机房的全部智能计算设备，共 248 台**[2][3]。\n  - 覆盖部件包括：整机机箱、主板、电源模块、风扇模组、GPU 加速卡、内存条、固态硬盘；**外接显示器、KVM 切换器、机柜 PDU 不在覆盖范围内**[1][3]。\n  - 除外责任：因甲方擅自改装、进水、雷击或超范围超负荷运行造成的损坏，不在质保范围[1][3]。\n  - 服务区域限于中华人民共和国境内，不含港澳台地区的离岸机房[2]。\n  - 服务内容包括故障响应、备件更换、季度巡检与固件升级四项[2][4]。\n- **服务响应时限**：\n  - **一级故障（业务中断）**：30 分钟内响应，4 小时内到场[3]。\n  - **三级故障（不影响业务）**：24 小时内响应，7 个工作日内处理[4]。\n  - 二级故障的响应时限：根据现有资料无法回答。",
+          "status": 200,
+          "elapsed_ms": 19826.2,
+          "attached": true,
+          "depends_on_context": true,
+          "expect_hits": [
+            "30",
+            "分钟",
+            "2",
+            "小时"
+          ],
+          "expect_missed": [],
+          "expect_absent_hits": [],
+          "expect_sql_hits": [],
+          "expect_sql_missed": [],
+          "expect_sql_absent_hits": [],
+          "has_answer_assertion": true,
+          "expected_row_count": null,
+          "actual_row_count": null,
+          "expected_columns": [],
+          "missing_columns": [],
+          "actual_sql": "",
+          "passed": true,
+          "note": ""
+        }
+      ],
+      "notes": "文档问答连续追问。每轮必须命中该轮对应的合同事实，单有接续标记或引用不算答案正确。"
+    }
+  ]
+}

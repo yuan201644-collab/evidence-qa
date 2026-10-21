@@ -1,0 +1,88 @@
+{
+  "_comment": "S2 要求覆盖闸门 L2 层参考结果。判据与样本分开保存（母方案 :470）。改 seed.sql 必须同步重算本文件。",
+  "spec_source": "docs/architecture/限定条件保真与主动澄清修复实施方案_v0.1_20261015.md §7.1 (:432-470)",
+  "time_anchor": "2024-06-15",
+  "time_anchor_semantics": "截至 6 月 15 日 = 当日结束，即 < 2024-06-16T00:00:00Z",
+  "currency": "CNY",
+  "currency_note": "本样本明确声明金额单位为人民币元。真实业务元数据若无币种，不得把相同数字直接解释成人民币。",
+
+  "customer": {
+    "total": 4,
+    "brazil": 2,
+    "non_brazil_excluding_unknown": 1,
+    "unknown_country": 1,
+    "_notes": {
+      "non_brazil_excluding_unknown": "country IS NULL 的客户不算「非巴西」。这是最易错的口径。",
+      "unknown_country": "customer_id=4, country IS NULL"
+    }
+  },
+
+  "invoice": {
+    "total_count": 8,
+    "count_2023": 3,
+    "distinct_customers_2023": 2,
+    "total_2024_through_anchor": 499.99,
+    "total_2024_full_year": 899.99,
+    "sum_all": 1350.00,
+    "avg_all": 168.75,
+    "gt_100_count": 4,
+    "gte_100_count": 6,
+    "top3_by_amount": [18, 14, 12],
+    "top3_by_amount_values": [400.00, 300.00, 200.00],
+    "customers_without_invoice": [4],
+    "_notes": {
+      "count_2023": "11, 12, 15 三张。13 是 2022-12-31T23:59:59Z，**不得**算进 2023。",
+      "total_2024_through_anchor": "14(300.00) + 16(99.99) + 17(100.00) = 499.99。18 是 06-16，不得计入。",
+      "total_2024_full_year": "14 + 16 + 17 + 18 = 899.99。与 through_anchor 的差就是「至今被整年替代」的探测器。",
+      "gt_100_count": "严格 >100：12(200), 14(300), 17(100 不算), 18(400) -> 实为 12/14/18 + 15(100.01) = 4 张",
+      "gte_100_count": ">=100：11,12,14,15,17,18 = 6 张",
+      "top3_by_amount": "按金额降序前三：18(400), 14(300), 12(200)"
+    }
+  },
+
+  "employee": {
+    "new_hires_2023": 1,
+    "historical_headcount_2023": null,
+    "historical_headcount_capability_gap": true,
+    "_notes": {
+      "new_hires_2023": "hire_date 在 2023 年的只有 employee_id=2 (2023-06-01)。",
+      "historical_headcount_2023": "null = **不可由本表证明**。本表无离职/有效期/快照字段。",
+      "historical_headcount_capability_gap": "测试必须确认系统如实说明该能力缺口，而不是编造离职日期。"
+    }
+  },
+
+  "sc20_country_group": {
+    "countries_over_5": ["Brazil"],
+    "brazil_city_breakdown": {
+      "Sao Paulo": 4,
+      "Rio": 2
+    },
+    "_notes": {
+      "wrong_delete_filter": "删掉原国家筛选会多出 USA(5) 与 Canada(1)",
+      "wrong_move_having": "把旧 HAVING 机械搬到城市粒度会得到空集（城市粒度最大是 4，都不 >5）"
+    }
+  },
+
+  "documents": {
+    "TEST-DOC-A": {
+      "title": "智能设备维保服务合同",
+      "contract_no": "CT-A",
+      "equipment": "EQ-A",
+      "first_response_min": 30,
+      "repair_hours": 4,
+      "excludes": ["EQ-B"]
+    },
+    "TEST-DOC-B": {
+      "title": "智能设备维保服务合同",
+      "contract_no": "CT-B",
+      "equipment": "EQ-B",
+      "first_response_min": 60,
+      "repair_hours": 8,
+      "excludes": ["EQ-A"]
+    },
+    "_notes": {
+      "trap": "两份文档标题完全相同，只有合同号/设备/时限不同。按标题检索必然混同。",
+      "citation_offsets": "引用位置必须由 seed.sql 的真实文本计算，不许手填不存在的偏移。"
+    }
+  }
+}
