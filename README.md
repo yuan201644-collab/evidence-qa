@@ -104,6 +104,7 @@
 ├── docs/                   # 设计报告、技术说明书
 │   └── opinions/           # ★ 三人互提意见 / 报 bug 的收件箱（to-A / to-B / to-C）
 ├── release/                # 打包产物（提交用 ZIP）
+├── contrib/                # 开源贡献：KAG 抽取层改进（不参与运行，见下方说明）
 ├── pyproject.toml          # 依赖声明（uv 管理）
 ├── uv.lock                 # 全量版本锁定
 └── .gitignore
@@ -113,6 +114,37 @@
 
 > **注**：`app/rag/` 的实际结构是 `ingest/`（解析）+ `retrieval/`（检索）两个子包，
 > 上表已按磁盘实况更新。设计初稿里这些文件是平铺在 `rag/` 下的，09-20 更正。
+
+### 2.1 `contrib/`：对开源项目 KAG 的改进（不参与运行）
+
+`contrib/` 与 `app/`、`web/` 不是一类东西：**删掉它，系统照常启动**。
+它单独存在的理由，是把「我们对开源项目做了什么」从报告里的叙述变成可下载、
+可读、可复算的代码 —— 这也是 AIC 赛题方向三与「开放成果与复用价值」的落点。
+
+内容（详见 `contrib/README.md`）：
+
+| 文件 | 作用 | 需要 KAG |
+| --- | --- | --- |
+| `contrib/kag/kag_normalize.py` | 三元组结构归一、实体名归一、图谱质量指标 | 否 |
+| `contrib/kag/test_kag_normalize.py` | 上述逻辑的离线自测（18 项断言） | 否 |
+| `contrib/kag/audit_retrieval.py` | 检索/溯源审计（doc/page/section 命中率、MRR） | 否 |
+| `contrib/kag/kag_improve.py` | 接入 KAG 抽取器，注册为 `askdata_schema_free_extractor` | 是 |
+| `contrib/kag/builder.example.yaml` | 建图配置示例 | 是 |
+
+不需要装 KAG 就能验证的部分：
+
+```bash
+python contrib/kag/test_kag_normalize.py
+```
+
+核心事实：KAG 0.8.0 的默认建图链（`unstructured_builder_chain`）走**同步**
+抽取路径，而该路径 `schema_free_extractor.py:521` 有一个尾逗号，使三元组结构
+被包了两层，下游按 `len(tri) != 3` 过滤时**整批丢边**。修复后同批语料的
+语义关系边占比 0.57% → 33.41%（152/455）。
+
+注意两件事：① 该口径只说明「边被赋上了关系类型」，不说明关系语义正确；
+② 完整复现那组数字需要团队调优的提示词与 OpenSPG 环境，未随仓库发布，
+`contrib/README.md` 第五节写清了边界。尚未向上游提 Issue / PR。
 
 ## 三、技术选型（不可动摇项见项目行为基准 §三「技术框架」）
 

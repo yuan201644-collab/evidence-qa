@@ -1,0 +1,104 @@
+# ---------------------------------------------------------------------------
+# KAG 建图配置示例：把抽取器换成打过 R1/R2 补丁的实现
+#
+# 本文件不是可直接启动的完整配置，而是一份「与上游默认配置的差异说明」。
+# 完整可用配置请从 KAG 官方模板生成，然后按下面对照表改三处：
+#
+#   位置                                   上游默认                          本改进
+#   -------------------------------------  --------------------------------  ------------------------------
+#   kag_builder_pipeline.chain.extractor   type: schema_free_extractor       type: askdata_schema_free_extractor
+#   （可选）extractor.llm                  任意                              建议与原实验保持一致以便对照
+#   （可选）prompt 三件套                  上游默认提示词                    团队调优版（未随本目录发布）
+#
+# 与团队真实运行配置的一致性
+# --------------------------
+# 团队实际运行时用的就是 `type: askdata_schema_free_extractor`
+# （见 `runtime/kag_config.yaml` 第 66 行）。本示例把类型名对齐到那一份，
+# 保证「配置层面」可复现。
+#
+# 已知差异（务必读完再用）
+# ----------------------
+# 团队真实配置在 extractor 下还挂了三个自定义提示词类型
+#   ner_prompt:    type: strict_ner
+#   std_prompt:    type: strict_std
+#   triple_prompt: type: strict_triple
+# 这三组提示词是按政府采购/招投标语料调过的，属于业务资产，**未包含在本目录**。
+# 因此本示例只用上游默认提示词。这样跑出来的图会明显弱于团队报告的
+# 0.57% → 33.41%，属于预期现象 —— 它验证的是 R1/R2 的机制，不是复现那组数字。
+# 想复现那组数字，需要自行准备提示词，或直接引用报告中的观测值。
+# ---------------------------------------------------------------------------
+
+project:
+  # 换成你自己的 KAG / OpenSPG 服务地址
+  host_addr: http://127.0.0.1:8887
+  id: '40'
+  language: zh
+  # 每次建图换一个命名空间，避免与旧图混在一起
+  namespace: AskDataExample
+
+kag_builder_pipeline:
+  chain:
+    type: unstructured_builder_chain
+
+    # ---- 唯一必须改的地方 ------------------------------------------------
+    extractor:
+      # 上游写法是 schema_free_extractor；换成下面这行才会走 R1/R2 修复版。
+      # 前提：建图进程启动时 import 过 kag_improve（注册是 import 的副作用）。
+      type: askdata_schema_free_extractor
+      llm:
+        type: openai
+        base_url: https://api.deepseek.com
+        api_key: ${KAG_LLM_API_KEY}
+        model: deepseek-chat
+        # 抽取任务要确定性，温度压到 0
+        temperature: 0.0
+      # 下面三行在团队真实配置里指向 strict_ner / strict_std / strict_triple，
+      # 此处刻意省略 —— 省略即使用上游默认提示词。
+      # ner_prompt:
+      #   type: strict_ner
+      # std_prompt:
+      #   type: strict_std
+      # triple_prompt:
+      #   type: strict_triple
+
+    # ---- 以下保持上游默认即可 -------------------------------------------
+    reader:
+      type: mix_reader
+      pdf_reader:
+        type: pdf_reader
+      docx_reader:
+        type: docx_reader
+      txt_reader:
+        type: txt_reader
+      md_reader:
+        type: md_reader
+
+    post_processor:
+      type: kag_post_processor
+
+    splitter:
+      type: length_splitter
+      split_length: 1000
+      window_length: 150
+
+    vectorizer:
+      type: batch_vectorizer
+      vectorize_model:
+        type: openai
+        base_url: ${KAG_EMBEDDING_BASE_URL}
+        api_key: ${KAG_EMBEDDING_API_KEY}
+        model: bge-m3
+
+    writer:
+      type: kg_writer
+
+  num_threads_per_chain: 1
+  # 并发数与 R1 无关：`unstructured_builder_chain` 的调度是
+  #   run_extract → execute_node → node.invoke(item)      （default_chain.py:141）
+  # 即**同步** `invoke` → 抽取器的 `_invoke`，所以这个缺陷在默认建图链上必现，
+  # 不是并发才踩到的边角情况。异步 `_ainvoke` 只有异步调用方才会走到。
+  # 团队真实配置这里是 4（线程级并行），仍然走同步 `_invoke`。
+  num_chains: 4
+
+  scanner:
+    type: file_scanner

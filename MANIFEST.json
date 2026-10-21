@@ -1,15 +1,19 @@
 {
-  "generated_at": "2026-10-20T23:32:27+08:00",
+  "generated_at": "2026-10-21T20:30:43+08:00",
   "source_commit": "712f1b2fa72131a81790d7a0ea48baaabca4dd9e (drill_20261019)",
-  "source_note": "主体来自 D:/verify/drill_20261019；两份正式报告与 4 个总体文件来自 参考文件/项目总体（10-19 之后快照）；app/orchestrator.py 用包内版本，见 docs/reference/项目总体_1019更新快照/README.md",
+  "source_note": "主体来自 D:/verify/drill_20261019；两份正式报告与 4 个总体文件来自 参考文件/项目总体（10-19 之后快照）；app/orchestrator.py 用包内版本，见 docs/reference/项目总体_1019更新快照/README.md；contrib/ 为 2026-10-21 新增的开源贡献目录（不参与运行），见 contrib/README.md",
   "excludes": [
     ".venv/",
     "agent_temp/",
     "__pycache__/",
+    ".git/",
+    "node_modules/",
+    ".pytest_cache/",
+    "*.pyc / *.log",
     "MANIFEST.json 自身"
   ],
-  "file_count": 2519,
-  "total_bytes": 62328238,
+  "file_count": 2528,
+  "total_bytes": 62400050,
   "files": [
     {
       "path": ".agents/skills/verimind-process-diagram/SKILL.md",
@@ -63,8 +67,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 26009,
-      "sha256": "b30b6a63f347c32fc853a543d972c8a037c2d66abccf33b2d2cb899dc1226836"
+      "bytes": 27807,
+      "sha256": "17088ee56a5f0c27fcc62c357c68f96cbc5c983ab4728a3e18c3ff9de0800072"
     },
     {
       "path": "app/.gitkeep",
@@ -547,6 +551,46 @@
       "sha256": "e4f640ea179d82607d83623ed971b0b1f6d9710f8d4b38818944d4b84136458d"
     },
     {
+      "path": "contrib/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "contrib/NOTICE",
+      "bytes": 721,
+      "sha256": "2fbdfbaf059534aebd5cb873b4f1d70f9482c98355841769cccb5679569516fa"
+    },
+    {
+      "path": "contrib/README.md",
+      "bytes": 11574,
+      "sha256": "be9636a0352d2fa5202b0ed7670957d5f6978c7488d22d1ef18e59a4e3a084ee"
+    },
+    {
+      "path": "contrib/kag/audit_retrieval.py",
+      "bytes": 8150,
+      "sha256": "eb5492ede8d331cadfdeb7af64846eedc999a759fa1d2082f7613ee2e060b043"
+    },
+    {
+      "path": "contrib/kag/builder.example.yaml",
+      "bytes": 4315,
+      "sha256": "90d6e17df7086643fa95b03bf6e71aaab1b73076acf8ef1ee7982155285036b0"
+    },
+    {
+      "path": "contrib/kag/kag_improve.py",
+      "bytes": 7848,
+      "sha256": "67b1d1ee2103f567f59fdb444be90fd5eab401c3493f45a19594b651f3e64b87"
+    },
+    {
+      "path": "contrib/kag/kag_normalize.py",
+      "bytes": 5401,
+      "sha256": "70ed24704ee88373c2ed88e4ab4470848dc4180e13f397da83676f852d2e2453"
+    },
+    {
+      "path": "contrib/kag/test_kag_normalize.py",
+      "bytes": 4274,
+      "sha256": "029bfe0b1ffd21979e0ea4bc808a8439d948b10bdae87972ef35f9cfb1d27d86"
+    },
+    {
       "path": "data/corpus/.gitkeep",
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -970,6 +1014,11 @@
       "path": "docs/EvoOntology评分器校准预检查_v0.1.md",
       "bytes": 3514,
       "sha256": "9987a4d24f1cabbb8bdcd071b714c4994dff08b78971a9dd2a45fcedbc82918b"
+    },
+    {
+      "path": "docs/KAG线下一步方案_v2.0_20261021.md",
+      "bytes": 13968,
+      "sha256": "0596ac7b10221bef257d7001a6c60ff560fedb00b63a81e84661634f5dee4878"
     },
     {
       "path": "docs/KAG线规划与验证_v0.1.md",
@@ -12603,8 +12652,8 @@
     },
     {
       "path": "目录说明.md",
-      "bytes": 18859,
-      "sha256": "fb862589b8bcfedbfe5acf5248bbe7f716150d89511efb5f85ef379bbbe3e888"
+      "bytes": 21265,
+      "sha256": "fef6edb15c6a25d4caeb21dbed02508697c351f53698d57377518d4693360282"
     }
   ]
 }

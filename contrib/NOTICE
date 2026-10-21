@@ -1,0 +1,20 @@
+AskData Agent — KAG 抽取层改进（contrib/kag）
+Copyright 2026 AskData Agent contributors
+
+本目录以 Apache License 2.0 发布，全文见同目录 LICENSE。
+
+衍生关系声明
+------------
+kag_improve.py 继承并覆写了以下项目的类：
+
+    OpenSPG / KAG 0.8.0
+    Copyright 2023 OpenSPG Authors
+    Licensed under the Apache License, Version 2.0
+    https://github.com/OpenSPG/KAG
+
+上游未随发行版提供 NOTICE 文件，故此处仅作署名与来源说明，
+不构成对上游商标或作者身份的任何主张。
+
+本目录其余文件（kag_normalize.py、test_kag_normalize.py、
+audit_retrieval.py、builder.example.yaml、README.md）为原创，
+不包含上游源代码的复制。
