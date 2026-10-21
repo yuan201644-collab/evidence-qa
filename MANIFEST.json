@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T20:30:43+08:00",
+  "generated_at": "2026-10-21T20:31:23+08:00",
   "source_commit": "712f1b2fa72131a81790d7a0ea48baaabca4dd9e (drill_20261019)",
   "source_note": "主体来自 D:/verify/drill_20261019；两份正式报告与 4 个总体文件来自 参考文件/项目总体（10-19 之后快照）；app/orchestrator.py 用包内版本，见 docs/reference/项目总体_1019更新快照/README.md；contrib/ 为 2026-10-21 新增的开源贡献目录（不参与运行），见 contrib/README.md",
   "excludes": [
@@ -68,7 +68,7 @@
     {
       "path": "README.md",
       "bytes": 27807,
-      "sha256": "17088ee56a5f0c27fcc62c357c68f96cbc5c983ab4728a3e18c3ff9de0800072"
+      "sha256": "3dbdec2d82160567ef700f2b90c581d566b4c4fdef6d749bfddba84713c38566"
     },
     {
       "path": "app/.gitkeep",
@@ -563,7 +563,7 @@
     {
       "path": "contrib/README.md",
       "bytes": 11574,
-      "sha256": "be9636a0352d2fa5202b0ed7670957d5f6978c7488d22d1ef18e59a4e3a084ee"
+      "sha256": "d09ebb18cd3ff9826d7633b9d3b14786ae21b25d4c744b59ec20cd7252e4239e"
     },
     {
       "path": "contrib/kag/audit_retrieval.py",
@@ -12653,7 +12653,7 @@
     {
       "path": "目录说明.md",
       "bytes": 21265,
-      "sha256": "fef6edb15c6a25d4caeb21dbed02508697c351f53698d57377518d4693360282"
+      "sha256": "8f84a3d567e6d9766758255f1997d14a33fc8df706e63a9fdfeab2dd62bd5330"
     }
   ]
 }

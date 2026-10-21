@@ -126,7 +126,7 @@
 | 文件 | 作用 | 需要 KAG |
 | --- | --- | --- |
 | `contrib/kag/kag_normalize.py` | 三元组结构归一、实体名归一、图谱质量指标 | 否 |
-| `contrib/kag/test_kag_normalize.py` | 上述逻辑的离线自测（18 项断言） | 否 |
+| `contrib/kag/test_kag_normalize.py` | 上述逻辑的离线自测（17 项断言） | 否 |
 | `contrib/kag/audit_retrieval.py` | 检索/溯源审计（doc/page/section 命中率、MRR） | 否 |
 | `contrib/kag/kag_improve.py` | 接入 KAG 抽取器，注册为 `askdata_schema_free_extractor` | 是 |
 | `contrib/kag/builder.example.yaml` | 建图配置示例 | 是 |

@@ -101,7 +101,7 @@ re.sub("[^A-Za-z0-9\u4e00-\u9fa5 ]", " ", phrase.lower()).strip()
 python test_kag_normalize.py
 ```
 
-它会打印 18 项断言。其中最能说明问题的一条是：
+它会打印 17 项断言。其中最能说明问题的一条是：
 
 | 场景 | 上游 `assemble_sub_graph_with_triples` 能接纳的边数 |
 | --- | --- |
@@ -209,7 +209,7 @@ R1 是明确的 bug，提 PR 阻力最小；R2 是策略取舍，先讨论再改
 | `README.md` | 本文件 | 否 |
 | `LICENSE` | Apache-2.0 全文 | 否 |
 | `kag_normalize.py` | R1/R2/R3 的纯逻辑：`unpack_triples` / `grounding_text` / `build_graph_metrics` | **否** |
-| `test_kag_normalize.py` | 上述纯逻辑的离线自测，18 项断言 | **否** |
+| `test_kag_normalize.py` | 上述纯逻辑的离线自测，17 项断言 | **否** |
 | `audit_retrieval.py` | 检索/溯源审计：把引用与人工标注的标准出处比对，算 doc/page/section 命中率与 MRR | **否** |
 | `kag_improve.py` | 把 R1/R2 挂到 KAG 抽取器上，注册为 `askdata_schema_free_extractor` | 是 |
 | `builder.example.yaml` | 建图配置示例，标明与上游默认配置的唯一差异 | 是 |
