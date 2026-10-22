@@ -9,6 +9,8 @@
 
 ## 一、上游坐标（已逐行核实）
 
+表 A —— R1/R2/R3 所在的抽取层（`kag/builder/component/extractor/`）：
+
 | 项 | 值 |
 | --- | --- |
 | 项目 | OpenSPG / KAG |
@@ -20,12 +22,26 @@
 | 下游受影响点 | 同文件第 344–346 行（`assemble_sub_graph_with_triples`） |
 | 默认建图链 | `kag/builder/default_chain.py:77` `DefaultUnstructuredBuilderChain`，第 141 行 `node.invoke(item)` → 走**同步**路径 |
 
-> 核实方式：在未打补丁的 KAG 0.8.0 源码上直接读文件定位行号，
-> 不是根据日志或二手记录推断。
+表 B —— R4 所在的结果解析层（`kag/builder/prompt/default/`）：
+
+| 项 | 值 |
+| --- | --- |
+| 缺陷文件 | `kag/builder/prompt/default/util.py` |
+| 缺陷函数 | `load_knowIE_data`（第 8–54 行） |
+| 抛错位置 | 第 51–53 行 `raise ValueError("the output KnowUnit str is invalid: " ...)` |
+| 调用点 | `kag/builder/prompt/default/knowledge_unit.py:250`（`parse_response` 内） |
+| 全库事实 | 搜索 `strict=` 命中 **0** 处；搜索 `control char` / `0x1f` / `unescape_control` 均 **0** 处 |
+
+> 核实方式：在未打补丁的 KAG 0.8.0 源码（`fdab15b`）上直接读文件定位行号，
+> 不是根据日志或二手记录推断。表 B 的两处「0 处命中」是对整棵 `kag/` 源码树
+> 做全文搜索的结果。
+>
+> 两个缺陷是**独立**的：R1 让边写不进图，R4 让整篇文档的建图直接中断。
+> 修复也互不影响，可以分别提 PR。
 
 ---
 
-## 二、三项改进
+## 二、四项改进
 
 ### R1 三元组结构修复（同步路径）
 
@@ -91,6 +107,38 @@ re.sub("[^A-Za-z0-9\u4e00-\u9fa5 ]", " ", phrase.lower()).strip()
 **不**衡量「关系语义对不对」。后者只能人工抽样核对。
 报告里引用这个数字时必须带这句限定，否则会被读成「关系抽取准确率」。
 
+### R4 知识单元解析不再被单个裸换行打断
+
+这不是我们主动去找的缺陷，是**建库时被卡住才查出来的**。2026-10-22 在服务器上
+用 KAG 0.8.0 的网页端建「非结构化 + 混合索引」知识库，导入一篇带 30 行项目
+名单表格的立项公告，构建卡住不出图。日志里 7 分钟刷了 13 次：
+
+```
+kag/builder/prompt/default/knowledge_unit.py:250  parse_response
+  kag/builder/prompt/default/util.py:51
+    ValueError: the output KnowUnit str is invalid: ...
+json.decoder.JSONDecodeError: Invalid control character at: line 80 column 10 (char 3640)
+```
+
+根因：模型在 JSON 字符串值里写了一个**裸换行符**，而 `json.loads` 默认
+`strict=True`，遇到字符串内部的 0x00–0x1F 直接拒绝。
+
+上游 `util.py:8-54` 写了 5 层 fallback（截大括号、重拼大括号、剥 markdown 围栏、
+末尾补 `}`），逐层核对过：**没有一层处理字符串内的裸控制字符**。
+整棵 `kag/` 源码树里 `strict=` 一次都没出现过。所以 5 层全部落空，最后在 :51 抛错。
+
+修复只改一个参数：`json.loads(..., strict=False)`。Python 对该参数的定义就是
+「允许字符串内部出现控制字符」，除此之外不放松任何语法 —— 缺括号、多余逗号、
+非法转义照旧报错，`test_knowie_parse.py` 第 4 组专门守这条边界。
+
+顺带记录同一函数里两处不影响主结论的问题（可单独提）：
+
+- `:14-16` 的 `left_pos`/`right_pos` 在 `respond` 上计算，却用来切
+  `extract_ret_str` —— 后者是 `:12` 经 `modify_knowledge_unit`（`:160-167`）
+  改写、长度已变的字符串，长度不等时切片位置是错的；
+- `:23` 的正则 `(?<="Content": ")(.*?)(?=",\n    "Knowledge Type")` 只匹配
+  英文键，中文提示词下键名是「内容」「知识类型」，这条永不命中。
+
 ---
 
 ## 三、可执行证据
@@ -98,10 +146,11 @@ re.sub("[^A-Za-z0-9\u4e00-\u9fa5 ]", " ", phrase.lower()).strip()
 本目录里能离线跑的部分（不需要 KAG、不需要大模型、不需要图数据库）：
 
 ```bash
-python test_kag_normalize.py
+python test_kag_normalize.py      # R1/R2/R3 的纯逻辑，17 项断言
+python test_knowie_parse.py       # R4 的解析健壮性，29 项断言
 ```
 
-它会打印 17 项断言。其中最能说明问题的一条是：
+`test_kag_normalize.py` 最能说明问题的一条是：
 
 | 场景 | 上游 `assemble_sub_graph_with_triples` 能接纳的边数 |
 | --- | --- |
@@ -111,6 +160,30 @@ python test_kag_normalize.py
 | 恰好 3 条，归一后传入 | **3** |
 
 这不是模拟：`count_usable_edges()` 逐条复刻了上游第 344–346 行的过滤条件。
+
+`test_knowie_parse.py` 的验证更进一步 —— 它**直接拿上游真实的 `util.py` 跑**。
+设一个环境变量指向上游文件即可（不复制、不内嵌上游源码，只在内存里 `exec`）：
+
+```bash
+# Windows PowerShell
+$env:KAG_UTIL_PY="<你的 KAG 源码>/kag/builder/prompt/default/util.py"
+python test_knowie_parse.py
+```
+
+不设这个变量时第 6 组自动跳过，其余 29 项照常跑。设了之后会额外验证 8 项：
+
+| 断言 | 结果 |
+| --- | --- |
+| 原版源码里没有 `strict=` 字样 | 通过（印证 5 层都没处理控制字符） |
+| 真实 `load_knowIE_data` 对同一输入抛 `ValueError` | 通过 |
+| 抛的正是 `the output KnowUnit str is invalid:` | 通过 |
+| 在内存里给同一份源码打上补丁后能解析 | 通过 |
+| 补丁后的结果与我们的复刻实现逐字一致 | 通过 |
+| 正常 JSON 在补丁后结果不变（无副作用） | 通过 |
+
+也就是说：**这个修复不是我们"以为"有效，是在上游原函数上跑出来的。**
+（运行时 stderr 里会出现上游 logger 的 traceback，那是 5 层重试各自失败的现场，
+正是缺陷证据本身，不是测试失败。）
 
 ---
 
@@ -167,6 +240,12 @@ python test_kag_normalize.py
 > 修复后同批语料的语义关系边占比从 0.57% 升到 33.41%；
 > 修复逻辑与离线自测已开源，完整复现需自备提示词与 OpenSPG 环境。
 
+**R4 是例外：它完全可复现。** 上表三条限制（提示词、外部服务、语料口径）
+对它都不成立 —— 它只需要上游 `util.py` 一个文件，任何装了 Python 的机器都能验，
+而且验的是上游原函数而不是我们的复刻。这也是为什么报告里应该把 R4 和 R1
+分开讲：R1 的强项是「影响大」（整个建图链路无关系边），
+R4 的强项是「证据硬」（评审自己就能跑出前后对照）。
+
 ---
 
 ## 六、与上游的协作状态
@@ -207,6 +286,23 @@ it should be `List[list]`」，并直接链接 `schema_free_extractor` 的函数
 R1 是明确的 bug，提 PR 阻力最小；R2 是策略取舍，先讨论再改。
 这个区分本身就是「懂上游」的证据，答辩时可以直接讲。
 
+### 6.3 R4 的状态：补丁已就绪，Issue 待提
+
+R4 与 R1 性质不同，处置也不同：
+
+| | R1 | R4 |
+| --- | --- | --- |
+| 性质 | 明确的 bug（数据布局错） | 明确的 bug（解析过严） |
+| 是否改行为语义 | 否，只把错的数据摆正 | 是，放行了原先拒绝的输入 |
+| 完成度 | Issue #758 已提，PR 待提 | 补丁 + 离线自测已就绪 |
+| 复现难度 | 需装 KAG 才能跑真实链路 | **不需要 KAG**，真实上游函数可直接验 |
+| 提议动作 | 直接提 PR | 先提 Issue 附补丁，请维护者定 strict 口径 |
+
+R4 的补丁在 `kag/upstream_patch_knowie_parse.diff`，5 行改动，只加
+`strict=False`，不动 fallback 结构与错误消息。上游若担心「放得太宽」，
+可以只对 `:10` 那一层加，其余四层保留严格模式 —— 这一点在 Issue 里已经写明，
+把选择权交给维护者。
+
 ---
 
 ## 七、许可证与合规
@@ -232,25 +328,34 @@ R1 是明确的 bug，提 PR 阻力最小；R2 是策略取舍，先讨论再改
 | `LICENSE` | Apache-2.0 全文 | 否 |
 | `kag_normalize.py` | R1/R2/R3 的纯逻辑：`unpack_triples` / `grounding_text` / `build_graph_metrics` | **否** |
 | `test_kag_normalize.py` | 上述纯逻辑的离线自测，17 项断言 | **否** |
+| `knowie_parse.py` | R4 的纯逻辑：复刻上游 5 层 fallback + `strict` 开关 + 裸控制字符诊断 | **否** |
+| `test_knowie_parse.py` | R4 的离线自测，29 项断言；设 `KAG_UTIL_PY` 后额外 8 项直接跑真实上游函数 | **否** |
+| `upstream_patch_knowie_parse.diff` | R4 的可直接应用补丁（5 行改动） | 否 |
 | `audit_retrieval.py` | 检索/溯源审计：把引用与人工标注的标准出处比对，算 doc/page/section 命中率与 MRR | **否** |
 | `kag_improve.py` | 把 R1/R2 挂到 KAG 抽取器上，注册为 `askdata_schema_free_extractor` | 是 |
-| `builder.example.yaml` | 建图配置示例，标明与上游默认配置的唯一差异 | 是 |
-| `UPSTREAM_ISSUE.md` | 上游 Issue 正文（英/中双版），含 40 行无依赖复现脚本 | 否 |
+| `builder.example.yaml` | 建图配置示例，标明与上游默认配置的关键差异 | 是 |
+| `UPSTREAM_ISSUE.md` | R1 的上游 Issue 正文（英/中双版），含 40 行无依赖复现脚本 | 否 |
+| `UPSTREAM_ISSUE_R4.md` | R4 的上游 Issue 正文（英/中双版）+ 建议补丁说明 | 否 |
 
 一次完整的最小使用流程：
 
 ```bash
-# 1. 不需要 KAG 就能验证修复逻辑
+# 1. 不需要 KAG 就能验证全部修复逻辑
 python test_kag_normalize.py
+python test_knowie_parse.py
 
-# 2. 装上游后接入（示例）
+# 2. 想验证 R4 确实修好了上游原函数（可选）
+export KAG_UTIL_PY=/path/to/kag/builder/prompt/default/util.py
+python test_knowie_parse.py
+
+# 3. 装上游后接入（示例）
 pip install openspg-kag==0.8.0
 export PYTHONPATH="$PWD:$PYTHONPATH"
 python -c "import kag_improve"   # 触发注册
 
-# 3. 用 builder.example.yaml 建图（需自备 OpenSPG 与模型密钥）
+# 4. 用 builder.example.yaml 建图（需自备 OpenSPG 与模型密钥）
 
-# 4. 建图后算质量指标
+# 5. 建图后算质量指标
 python -c "
 from kag_normalize import build_graph_metrics
 import json

@@ -127,6 +127,9 @@
 | --- | --- | --- |
 | `contrib/kag/kag_normalize.py` | 三元组结构归一、实体名归一、图谱质量指标 | 否 |
 | `contrib/kag/test_kag_normalize.py` | 上述逻辑的离线自测（17 项断言） | 否 |
+| `contrib/kag/knowie_parse.py` | 知识单元解析复刻 + `strict` 开关 + 裸控制字符诊断 | 否 |
+| `contrib/kag/test_knowie_parse.py` | 上述逻辑的离线自测（29 项断言，设 `KAG_UTIL_PY` 后 37 项） | 否 |
+| `contrib/kag/upstream_patch_knowie_parse.diff` | 可直接应用的上游补丁（5 行） | 否 |
 | `contrib/kag/audit_retrieval.py` | 检索/溯源审计（doc/page/section 命中率、MRR） | 否 |
 | `contrib/kag/kag_improve.py` | 接入 KAG 抽取器，注册为 `askdata_schema_free_extractor` | 是 |
 | `contrib/kag/builder.example.yaml` | 建图配置示例 | 是 |
@@ -135,16 +138,24 @@
 
 ```bash
 python contrib/kag/test_kag_normalize.py
+python contrib/kag/test_knowie_parse.py
 ```
 
-核心事实：KAG 0.8.0 的默认建图链（`unstructured_builder_chain`）走**同步**
-抽取路径，而该路径 `schema_free_extractor.py:521` 有一个尾逗号，使三元组结构
-被包了两层，下游按 `len(tri) != 3` 过滤时**整批丢边**。修复后同批语料的
-语义关系边占比 0.57% → 33.41%（152/455）。
+两个上游缺陷，性质不同：
 
-注意两件事：① 该口径只说明「边被赋上了关系类型」，不说明关系语义正确；
-② 完整复现那组数字需要团队调优的提示词与 OpenSPG 环境，未随仓库发布，
-`contrib/README.md` 第五节写清了边界。尚未向上游提 Issue / PR。
+| | R1（建图丢边） | R4（解析中断） |
+| --- | --- | --- |
+| 位置 | `schema_free_extractor.py:521` | `util.py:10/18/29/42/49` |
+| 触发 | 默认建图链走**同步**路径，尾逗号把三元组包两层，下游按 `len(tri) != 3` **整批丢边** | 模型在 JSON 值里写裸换行，`json.loads` 默认 `strict=True` 直接拒绝，**整篇文档建图中断** |
+| 证据 | 离线断言：5 条三元组 → 0 条边；归一后 → 5 条边 | 离线断言 + **真实上游函数**前后对照（需设 `KAG_UTIL_PY`） |
+| 修复后 | 同批语料语义关系边占比 0.57% → 33.41%（152/455） | 同一输入 5 层重试全落空 → 一次通过 |
+| 复现门槛 | 需装 KAG | 只需上游 `util.py` 一个文件 |
+
+注意两件事：① 0.57% → 33.41% 这个口径只说明「边被赋上了关系类型」，
+不说明关系语义正确；② 完整复现那组数字需要团队调优的提示词与 OpenSPG 环境，
+未随仓库发布，`contrib/README.md` 第五节写清了边界。
+R1 已提 Issue [#758](https://github.com/OpenSPG/KAG/issues/758)；R4 补丁已就绪，
+Issue 正文见 `contrib/kag/UPSTREAM_ISSUE_R4.md`。
 
 ## 三、技术选型（不可动摇项见项目行为基准 §三「技术框架」）
 

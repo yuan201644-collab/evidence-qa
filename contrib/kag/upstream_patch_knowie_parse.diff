@@ -1,0 +1,57 @@
+# R4 patch for OpenSPG/KAG 0.8.0
+# File: kag/builder/prompt/default/util.py
+# Base: fdab15b (KAG 0.8.0)
+# Change: pass strict=False to the 5 json.loads() calls inside load_knowIE_data,
+#         so that raw control characters inside JSON string values are accepted.
+# Nothing else is touched: same fallback chain, same order, same error message.
+# Verify: python contrib/kag/test_knowie_parse.py
+#
+diff --git a/kag/builder/prompt/default/util.py b/kag/builder/prompt/default/util.py
+index 90fc408..200267a 100644
+--- a/kag/builder/prompt/default/util.py
++++ b/kag/builder/prompt/default/util.py
+@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
+ 
+ def load_knowIE_data(respond, lang="en"):
+     try:
+-        extract_ret = json.loads(respond)
++        extract_ret = json.loads(respond, strict=False)
+     except:
+         extract_ret_str = modify_knowledge_unit(respond)
+         try:
+@@ -15,7 +15,7 @@ def load_knowIE_data(respond, lang="en"):
+             right_pos = respond.rfind("}") + 1
+             extract_ret_str = extract_ret_str[left_pos:right_pos].strip()
+             extract_ret_str = extract_ret_str.replace("\\'", "'")
+-            extract_ret = json.loads(extract_ret_str)
++            extract_ret = json.loads(extract_ret_str, strict=False)
+         except:
+             try:
+                 extract_ret_str = "{" + "{".join(respond.split("{")[1:])
+@@ -26,7 +26,7 @@ def load_knowIE_data(respond, lang="en"):
+                     lambda match: match.group(1).replace('"', r"\""),
+                     extract_ret_str,
+                 )
+-                extract_ret = json.loads(extract_ret_str)
++                extract_ret = json.loads(extract_ret_str, strict=False)
+             except:
+                 try:
+                     if "```json" in extract_ret_str:
+@@ -39,14 +39,14 @@ def load_knowIE_data(respond, lang="en"):
+                         extract_ret = extract_ret_str.replace("\\'", "'").replace(
+                             '\\"', '"'
+                         )  # .replace('\"Sleazy\"' ,'\\\"Sleazy\\\"').replace('\\\"Planet of the Apes\\\"' ,'Planet of the Apes') #.replace("\\", '\\\\').replace("\'", "\\\'")
+-                    extract_ret = json.loads(extract_ret)
++                    extract_ret = json.loads(extract_ret, strict=False)
+                 except Exception as e:
+                     logger.warning(
+                         f"load_knowIE_data retry2 has exception {e} {respond}",
+                         exc_info=True,
+                     )
+                     try:
+-                        extract_ret = json.loads(extract_ret_str + "}")
++                        extract_ret = json.loads(extract_ret_str + "}", strict=False)
+                     except:
+                         raise ValueError(
+                             "the output KnowUnit str is invalid: " + respond
+
