@@ -171,9 +171,11 @@ python test_kag_normalize.py
 
 ## 六、与上游的协作状态
 
-**当前状态：Issue 正文已成稿（`kag/UPSTREAM_ISSUE.md`，中英双版），尚未提交到上游。**
+**当前状态：已向上游提交 Issue —— [OpenSPG/KAG#758](https://github.com/OpenSPG/KAG/issues/758)
+（2026-10-22，状态 `open`）。PR 尚未提交。**
 
-不掩盖这一点，是因为「生态贡献」要经得起追问。
+正文存档见 `kag/UPSTREAM_ISSUE.md`（英/中双版）。不掩盖「PR 还没提」这一点，
+是因为「生态贡献」要经得起追问。
 
 ### 6.1 一个必须正视的历史：PR #583 报过同一个缺陷，被关闭且未合并
 
@@ -193,9 +195,9 @@ it should be `List[list]`」，并直接链接 `schema_free_extractor` 的函数
 
 ### 6.2 下一步动作
 
-1. **提 Issue**（正文已成稿，见 `kag/UPSTREAM_ISSUE.md`）：同步/异步路径行为不一致、
-   默认建图链静默丢边，附 40 行无依赖复现脚本与预期/实际对照；
-2. **提 PR**：若 Issue 得到「是 bug」的回应，按上游贡献规范只提交 R1
+1. ~~提 Issue~~ —— **已完成**，[#758](https://github.com/OpenSPG/KAG/issues/758)：
+   同步/异步路径行为不一致、默认建图链静默丢边，附 40 行无依赖复现脚本与预期/实际对照；
+2. **提 PR**（进行中）：不等回应也可先按上游贡献规范提交，只改 R1
    （去尾逗号），不动提示词、不动业务逻辑，把改动压到最小可评审范围，
    并把 `test_kag_normalize.py` 里的复现改成 pytest 用例；
 3. **R2 单独提 Issue 讨论** —— 它改变的是实体比对松紧度（`processing_phrases`

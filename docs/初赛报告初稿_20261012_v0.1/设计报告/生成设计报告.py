@@ -462,10 +462,9 @@ def front(doc: Document, kind: str) -> None:
     p=doc.add_paragraph(kind,style="Subtitle");p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     p=doc.add_paragraph("知证 VeriMind",style="Subtitle");p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.space_before=Pt(15)
     p=doc.add_paragraph("事实—证据核验架构（FEVA）",style="Subtitle");p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.space_before=Pt(5)
-    for text in ["参赛单位  南京邮电大学",
-                 "指导教师  徐康",
-                 "队员      袁湘熙、胡雨航、祖启源"]:
-        p=doc.add_paragraph(text);p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.space_before=Pt(8)
+    # 匿名要求：AIC 附件1 规定技术报告、演示视频、答辩 PPT 均不得出现学校名称、
+    # 校徽与指导教师信息。故此处不再输出身份信息（原为参赛单位/指导教师/队员三行）。
+    # 身份信息只保留在团队内部记录，不进入任何对外材料。
     p=doc.add_paragraph("v0.3　2026 年 10 月 18 日");p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.space_before=Pt(33)
     _new_page_section(doc, None)
     p=doc.add_paragraph("目录",style="Title");p.alignment=WD_ALIGN_PARAGRAPH.CENTER

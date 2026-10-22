@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T20:44:01+08:00",
+  "generated_at": "2026-10-22T08:52:19+08:00",
   "source_commit": "712f1b2fa72131a81790d7a0ea48baaabca4dd9e (drill_20261019)",
   "source_note": "主体来自 D:/verify/drill_20261019；两份正式报告与 4 个总体文件来自 参考文件/项目总体（10-19 之后快照）；app/orchestrator.py 用包内版本，见 docs/reference/项目总体_1019更新快照/README.md；contrib/ 为 2026-10-21 新增的开源贡献目录（不参与运行），见 contrib/README.md",
   "excludes": [
@@ -13,7 +13,7 @@
     "MANIFEST.json 自身"
   ],
   "file_count": 2529,
-  "total_bytes": 62410457,
+  "total_bytes": 62411070,
   "files": [
     {
       "path": ".agents/skills/verimind-process-diagram/SKILL.md",
@@ -562,13 +562,13 @@
     },
     {
       "path": "contrib/README.md",
-      "bytes": 13125,
-      "sha256": "4cdd769354bddcf9040d0ec4ef430c300e078724241ab8d2c85e825513b7d0b7"
+      "bytes": 13282,
+      "sha256": "16d3e6e4901a3449a627bc5cd86bf41eaaaba149e13ce60cdf0243066723d6be"
     },
     {
       "path": "contrib/kag/UPSTREAM_ISSUE.md",
-      "bytes": 8856,
-      "sha256": "cdb5f63071bc88f0ceae2a965b74312ef44f12261beae9e1f7e8f88264411117"
+      "bytes": 9222,
+      "sha256": "0ea4cf734dfa325ee0a0791ec7e751abd8df37e480ebc0ed00fb6a219435b5cd"
     },
     {
       "path": "contrib/kag/audit_retrieval.py",
@@ -1937,8 +1937,8 @@
     },
     {
       "path": "docs/初赛报告初稿_20261012_v0.1/技术实现说明书/生成技术实现说明书.py",
-      "bytes": 21489,
-      "sha256": "fbf0b440aa6173555f174668a98334849416125cd95db9982daa31be40c02a1d"
+      "bytes": 21534,
+      "sha256": "990f3ab12b505c75be37dde84584f21d4f085550580d1006f6f45ecd5b0f7739"
     },
     {
       "path": "docs/初赛报告初稿_20261012_v0.1/技术实现说明书/生成清单.json",
@@ -2107,8 +2107,8 @@
     },
     {
       "path": "docs/初赛报告初稿_20261012_v0.1/设计报告/生成设计报告.py",
-      "bytes": 33852,
-      "sha256": "82bcb44c96c0c39a4ea134c7b7662b33b92ead0cdab1ece14651653a82c22335"
+      "bytes": 33897,
+      "sha256": "06ae4413bdafb3541c3631d2cc1d910e09a1f32d9bdae820d7106c058cab49f6"
     },
     {
       "path": "docs/初赛报告初稿_20261012_v0.1/设计报告/设计报告.docx",
