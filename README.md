@@ -34,6 +34,21 @@
 
 ---
 
+## 许可证
+
+| 范围 | 许可证 | 文件 |
+|---|---|---|
+| 本仓库（`app/`、`eval/`、`tests/`、`infra/`、`scripts/`、`web/`、`docs/` 等） | **GNU AGPL-3.0-or-later** | [`LICENSE`](LICENSE)（34,523 B，FSF 官方原文，未改动）；`pyproject.toml` 的 `license` 字段 |
+| `contrib/`（对上游 OpenSPG/KAG 的派生修改与可复用工具） | **Apache-2.0** | [`contrib/LICENSE`](contrib/LICENSE) + [`contrib/NOTICE`](contrib/NOTICE) |
+
+**为什么整体用 AGPL-3.0**：直接依赖 `pymupdf==1.28.2` 是"AGPL-3.0 或 Artifex 商业许可"双许可，被以库形式链接进一个对外提供服务的 Web 应用；AGPL 第 13 条要求通过网络交互的用户能够获得完整对应源码。选择"整体同许可"而非"换成宽松许可的解析库"，是为了在提交期内把许可义务显式履行到位，而不是把它留成风险。
+
+`contrib/` 用 Apache-2.0 是另一回事：它要向上游 Apache-2.0 的 KAG 提交补丁，同许可最容易合并。Apache-2.0 → AGPL-3.0 是单向兼容，两层不冲突。
+
+第三方资源的来源、版本、许可证与义务清单见 `../AIC赛题材料/开源及第三方资源使用清单_v0.2_20261024.md`。
+
+---
+
 ## 当前前端启动入口（2026-10-16）
 
 在仓库根目录运行 `start.cmd`，统一访问 **http://127.0.0.1:5184/**；不要从 `agent_temp` 或旧临时工作目录启动产品页面。首页应有“问数、问答、跨源问题”三个入口。

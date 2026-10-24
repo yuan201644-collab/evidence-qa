@@ -7,6 +7,14 @@ name = "askdata-agent"
 version = "0.1.0"
 description = "多模态数据驱动的可解释精准问数/问答智能体（赛题八）"
 readme = "README.md"
+# 本作品整体以 GNU AGPL-3.0-or-later 发布，见根目录 LICENSE。
+# 采用 AGPL-3.0 的直接原因：直接依赖 pymupdf（AGPL-3.0 或 Artifex 商业双许可）
+# 被以库形式链接进一个对外提供服务的 Web 应用，AGPL 第 13 条要求通过网络交互
+# 的用户能够获得完整对应源码。选择"整体同许可"而非"换库 / 买商业许可"，是为
+# 了在提交期内把许可义务显式履行到位，规避"许可证重大违规"的一票否决风险。
+# contrib/ 子目录另以 Apache-2.0 提供（便于向上游 Apache-2.0 项目提交），见
+# contrib/LICENSE 与 contrib/README.md。
+license = { text = "AGPL-3.0-or-later" }
 requires-python = ">=3.11"
 dependencies = [
     "fastapi==0.141.1",
