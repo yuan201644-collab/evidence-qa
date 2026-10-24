@@ -41,7 +41,7 @@
 
 ---
 
-## 二、四项改进
+## 二、五项改进
 
 ### R1 三元组结构修复（同步路径）
 
@@ -139,6 +139,50 @@ json.decoder.JSONDecodeError: Invalid control character at: line 80 column 10 (c
 - `:23` 的正则 `(?<="Content": ")(.*?)(?=",\n    "Knowledge Type")` 只匹配
   英文键，中文提示词下键名是「内容」「知识类型」，这条永不命中。
 
+### R6 编号字面召回（补一条检索通道）
+
+这一条不是「上游代码写错了」，而是**上游默认组合少了一路**，所以处理方式与
+R1/R4 不同：不改上游、不提 Issue，而是补一个检索器。
+
+病灶有两层，缺一层都不成立：
+
+1. Neo4j 全文索引 `_default_text_index` 用 `standard-no-stop-words` 分析器，
+   `NYS212001` 这类「字母+数字」连写串不产出可检索 token，
+   `search_text` 按编号查恒为 0 条；
+2. 默认混合检索只有向量 + 图谱两路，向量对只差一位的编号（`NYS212001` /
+   `NYS212002`）几乎不可区分，图谱里编号又不是实体属性，链不上去。
+
+`anchor_chunk_retriever` 的做法是加第三路：正则抽编号 → Chunk 标签上
+`CONTAINS` → 按命中锚点数排序。**不重建索引、不改分析器**，因为改分析器
+（例如换 `cjk`）会改变全库检索行为，风险与收益不成比例。
+
+接入沿用 R1 的注册表方式：
+
+```python
+@RetrieverABC.register("anchor_chunk_retriever")
+class AnchorChunkRetriever(RetrieverABC):
+    ...
+```
+
+实测（同一问题「NYS212001 的项目名称、申请人、所在单位？」）：
+
+| | 引用 | 答案 |
+| --- | --- | --- |
+| 补丁前 | 0 条 | 「未检索到编号为 NYS212001 的项目记录」 |
+| 补丁后 | `ATT_65041_01` | 项目名称／张艺／传媒与艺术学院，三字段全对 |
+
+检索器自己的日志是 `anchors=['NYS212001'] hits=1 returned=1`——全表只命中
+那一块，没有误召回。
+
+**边界（引用时必须一起说）**：
+
+- 只对问句里带编号的问题有效；锚点为空时直接返回空，不产生额外开销；
+- 只在混合检索路径生效，naive 路径的检索器是硬编码单路向量；
+- 178 个 Chunk 全表 `CONTAINS` 是毫秒级，十万级语料必须换成 `cjk` 分析器
+  或独立倒排，否则全表扫不可接受；
+- 它提升的是「编号题能不能答」，不是整体答对率——17 题里依赖编号的只有
+  一题，量级是 7/17 → 8/17，不能宣称「检索准确率整体提升」。
+
 ---
 
 ## 三、可执行证据
@@ -148,6 +192,7 @@ json.decoder.JSONDecodeError: Invalid control character at: line 80 column 10 (c
 ```bash
 python test_kag_normalize.py      # R1/R2/R3 的纯逻辑，17 项断言
 python test_knowie_parse.py       # R4 的解析健壮性，29 项断言
+python test_anchor_query.py       # R6 的锚点抽取与排序，20 项断言
 ```
 
 `test_kag_normalize.py` 最能说明问题的一条是：
@@ -246,6 +291,11 @@ python test_knowie_parse.py
 分开讲：R1 的强项是「影响大」（整个建图链路无关系边），
 R4 的强项是「证据硬」（评审自己就能跑出前后对照）。
 
+**R6 介于两者之间。** 它的纯逻辑（抽编号、排序）可以离线跑 20 项断言，
+任何人验得了；但要复现「0 引用 → 正确引用」这一步，需要 KAG 环境 + 一个
+带编号的语料（本仓库不含语料）。所以对外表述应分成两句：
+「抽取与排序逻辑可离线验证」+「端到端效果在团队服务器上实测，语料不外发」。
+
 ---
 
 ## 六、与上游的协作状态
@@ -336,6 +386,9 @@ R4 的补丁在 `kag/upstream_patch_knowie_parse.diff`，5 行改动，只加
 | `builder.example.yaml` | 建图配置示例，标明与上游默认配置的关键差异 | 是 |
 | `UPSTREAM_ISSUE.md` | R1 的上游 Issue 正文（英/中双版），含 40 行无依赖复现脚本 | 否 |
 | `UPSTREAM_ISSUE_R4.md` | R4 的上游 Issue 正文（英/中双版）+ 建议补丁说明 | 否 |
+| `anchor_query.py` | R6 的纯逻辑：编号抽取 `extract_anchors` / 命中排序 `rank_hits` | **否** |
+| `test_anchor_query.py` | R6 的离线自测，20 项断言 | **否** |
+| `anchor_chunk_retriever.py` | R6 的检索器：注册 `anchor_chunk_retriever`，Cypher `CONTAINS` 扫 Chunk | 是（需 Neo4j 直连） |
 
 一次完整的最小使用流程：
 
@@ -371,7 +424,8 @@ print(json.dumps(build_graph_metrics(edges), ensure_ascii=False, indent=2))
 - 技术报告「三、AI 技术与开源及第三方资源选择」→ 说明为什么选 KAG、
   为什么用注册表覆盖而不是改源码；
 - 技术报告「四、设计与实现过程」→ R1 的定位过程（同步/异步路径对比）
-  是很好的「关键实现」素材，比贴架构图有说服力；
+  是很好的「关键实现」素材，比贴架构图有说服力；R6 的「先证明索引不索引
+  编号，再补一条字面通道」是第二个可讲的定位过程；
 - 技术报告「六、创新性与开放价值」→ 用第三节的可执行证据 +
   第六节的上游协作计划，避免只写「我们做了优化」；
 - 答辩时若被问「这算不算实质改进」，直接打开 `test_kag_normalize.py`
