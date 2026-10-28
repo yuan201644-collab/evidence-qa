@@ -46,10 +46,22 @@ const GUIDE_STEPS: { id: GuideStep; label: string }[] = [
   { id: 'how', label: '怎么看答案' },
   { id: 'start', label: '开始用' },
 ]
-/** 每步的精选示例：全部来自灵感库中实测跑通过的问句（与 questionGallery.ts 同源）。 */
-const GUIDE_TRY_QUESTIONS = ['平台上一共有多少位客户？', '智能计算设备年度维保服务合同里，质保期是多久？']
-const GUIDE_START_QUESTIONS = ['2023 年一整年一共开了多少张发票？', '机房日常巡检的时间安排是怎样的？', '买家一共有多少位？']
-const CROSS_SOURCE_TRY_QUESTION = '工单 WO-2026-0001 是否在合同修复时限内完成？修复耗时是多少？'
+/**
+ * 每步的精选示例。
+ *
+ * 两条约束与 `questionGallery.ts` 一致：① 取自冻结题库（`qbank_v4.json`）原句，
+ * 一字不改——页面上的句子必须真的跑通过；② 句子自足，不带「上述名单」「该办法」
+ * 这类依赖上一题的指代，否则用户单独贴进来时模型不知道指哪份文件。
+ */
+const GUIDE_TRY_QUESTIONS = [
+  '2016 年度山东省高校科研发展计划自筹经费项目名单中，青岛黄海学院共有几项？其中应用类、基础类、研究报告类各多少项？',
+  '2024 年度名单中出现了 2023 年度名单没有的项目类别，是哪几类？各有多少项？',
+]
+const GUIDE_START_QUESTIONS = [
+  '2024 年度名单的项目总数比 2023 年度增加了多少项？',
+  '2017 年度山东省高校科研计划立项名单中，被标注为「自筹项目」的课题，其经费按山东省高校科学技术计划项目管理办法应由谁负责筹集？',
+  '2023、2024、2025 三个年度的安徽高校科研项目名单中，「重大」类项目分别有多少项？',
+]
 const architectureOpen = ref(false)
 /**
  * 架构导览的两种视图。
@@ -118,7 +130,11 @@ const homeQuestionSections = [
     description: '问某校、某年、某类有几项，逐条判定并指回原文块。',
     scope: '答案附逐行事实表：口径、判定值、证据块。',
     questions: [
-      '2016 年度山东省高校科研发展计划自筹经费项目名单中，中国石油大学（华东）的项目有几项？分别属于哪些类别？',
+      // 第一条必须是「表覆盖题面每一问 + 五轮跑批全对」的题。
+      // 原先放的是 M-17（中国石油大学（华东）几项 + 哪些类别），实测出问题：
+      // 表只出「全类别合计 10 项」一行，覆盖不了「哪些类别」，界面单发时
+      // 模型回原文数错、答成 1 项。判分器查数值所以算它对，人一眼看出错。
+      '2016 年度山东省高校科研发展计划自筹经费项目名单中，青岛黄海学院共有几项？其中应用类、基础类、研究报告类各多少项？',
       '2024 年度名单的项目总数比 2023 年度增加了多少项？',
       '2024 年度名单中出现了 2023 年度名单没有的项目类别，是哪几类？各有多少项？',
     ],
@@ -128,8 +144,8 @@ const homeQuestionSections = [
     description: '在立项名单与管理办法之间对照条款，答出原文依据。',
     scope: '答案可点击引用核对原文块。',
     questions: [
-      '该办法规定，项目应在合同结束后多长时间内申请结题验收？验收意见应由什么样的专家出具？',
       '2017 年度山东省高校科研计划立项名单中，被标注为「自筹项目」的课题，其经费按山东省高校科学技术计划项目管理办法应由谁负责筹集？',
+      '山东省的高校科研计划管理办法与安徽省 2025 年度高校科研项目立项通知，对「科研人员自筹经费」的态度分别是什么？',
     ],
   },
 ]
@@ -152,8 +168,8 @@ const composerRef = ref<{ fill: (question: string) => void; focus: () => void } 
  */
 const architectureModules = [
   {
-    name: 'KAG增强路线', icon: 'gap2graph', title: 'KAG 规划与检索', status: '用户可选·非默认路径',
-    concept: '上游能力（OpenSPG/KAG 0.8.0）',
+    name: 'KAG增强路线', icon: 'gap2graph', title: 'KAG 规划与检索', status: '上游能力 · 每个请求必经',
+    concept: '上游能力（OpenSPG/KAG 0.8.0 · Apache-2.0）',
     description: '把问题解析成逻辑形式，规划检索步骤，再走图、文本、向量三路召回原文块。',
     detail: '每个问题先由 KAG 的规划器（feva_domain_lf_static_planning_dag）解析成逻辑形式链，再按计划调检索器，返回带块正文的原文块。注意：KAG 规划的是「查什么」，不是「哪些事要确认」——后者由下面的事实层另拆一层。这是本项目对上游能力边界的实测结论，也是全部改造的出发点。',
     io: { input: '一句自然语言问题', output: '检索计划 + 召回块（块名、正文、相关性分）' },
@@ -640,32 +656,22 @@ onUnmounted(() => {
           <section class="welcome__intro vm-reveal" aria-labelledby="welcome-title">
             <div class="welcome__eyebrow"><span />循证问答 EvidenceQA <b>· 基于 OpenSPG/KAG</b></div>
             <h1 id="welcome-title">先查清事实，<em>再给可核对的答案。</em></h1>
-            <p class="welcome__description">系统先把问题拆成一条条待确认的事实，逐条判定，再让每个结论指回它的原文块。拆不动的题如实落回检索，不硬凑。</p>
+            <p class="welcome__description">科研管理岗每年要对着几十页立项、结题名单答一句「某校某年某类有几项」，靠人工翻页既慢又容易错。系统先把问题拆成一条条待确认的事实，逐条判定，再让每个结论指回它的原文块；拆不动的题如实落回检索，不硬凑。</p>
           </section>
           <section class="examples-section vm-reveal" aria-labelledby="examples-title">
             <div class="examples-heading"><div><span>按问题类型浏览</span><h2 id="examples-title">你可以这样提问</h2></div><p>点击示例只填入输入框，不会自动发送</p></div>
-            <div class="example-row" aria-label="问数、问答与跨源问题示例">
+            <div class="example-row" aria-label="名单统计与条款查找示例">
               <article
                 v-for="section in homeQuestionSections"
                 :key="section.id"
                 class="example-card vm-interact"
-                :class="[section.tone, { 'example-card--featured': section.id === 'cross-source' }]"
+                :class="[section.tone, { 'example-card--featured': section.id === 'count' }]"
                 :aria-labelledby="`home-path-${section.id}`"
               >
                 <div class="example-card__head">
                   <span class="example-card__icon vm-icon-shift"><AppIcon :name="section.icon" :size="20" /></span>
                   <div class="example-card__title"><h3 :id="`home-path-${section.id}`">{{ section.title }}</h3><small>{{ section.description }}</small></div>
-                  <button
-                    v-if="section.id === 'cross-source'"
-                    type="button"
-                    class="example-card__status example-card__status--retry"
-                    :class="{ 'is-ready': homeSectionAvailable(section.id), 'is-waiting': crossSourceDemoStatus === 'checking' }"
-                    :disabled="crossSourceDemoStatus === 'checking'"
-                    aria-label="重新检查跨源演示数据"
-                    title="重新检查独立跨源演示链路"
-                    @click="refreshCrossSourceDemoStatus"
-                  >{{ homeSectionStatus(section.id) }}<AppIcon name="retry" :size="11" /></button>
-                  <span v-else class="example-card__status" :class="{ 'is-ready': homeSectionAvailable(section.id) }">{{ homeSectionStatus(section.id) }}</span>
+                  <span class="example-card__status" :class="{ 'is-ready': homeSectionAvailable(section.id) }">{{ homeSectionStatus(section.id) }}</span>
                 </div>
                 <div class="example-card__questions">
                   <button
@@ -682,7 +688,6 @@ onUnmounted(() => {
                   </button>
                 </div>
                 <p class="example-card__scope">{{ section.scope }}</p>
-                <span v-if="section.id === 'cross-source'" class="example-card__feature-tag"><AppIcon name="check" :size="12" />本项目重点能力</span>
               </article>
             </div>
           </section>
@@ -709,18 +714,26 @@ onUnmounted(() => {
       </div>
     </section>
     <Teleport to="body">
-      <Transition name="vm-dialog"><SettingsPanel v-if="settingsOpen" @close="settingsOpen = false" /></Transition>
+      <Transition name="vm-dialog"><SettingsPanel v-if="settingsOpen" :direct-kag="askBackend === 'kag'" @close="settingsOpen = false" /></Transition>
       <Transition name="vm-dialog"><DatabasePanel v-if="databaseOpen" @close="databaseOpen = false" /></Transition>
       <Transition name="vm-dialog"><FactTablePanel v-if="factTableOpen" @close="factTableOpen = false" /></Transition>
     </Teleport>
     <Teleport to="body">
-      <Transition name="vm-dialog"><div v-if="architectureOpen" class="architecture-backdrop" :inert="!architectureOpen" @click.self="architectureOpen = false"><section class="architecture-dialog" role="dialog" aria-modal="true" aria-labelledby="architecture-title"><header><div><span class="architecture-dialog__eyebrow">VERIMIND · SYSTEM MAP</span><h2 id="architecture-title">FEVA 事实—证据核验架构</h2></div><button class="icon-button close-button vm-press" aria-label="关闭架构导览" @click="architectureOpen = false"><AppIcon name="close" /></button></header><p class="architecture-dialog__intro">系统先判断问题要查数据库还是文档；需要跨源核对时，再拆分事实、核验对象与口径，并把结论关联到证据。单源问数或问答仍走各自路径；当前专用跨源流程用于工单—合同场景。</p><div class="architecture-tabs" role="tablist" aria-label="架构导览视图"><button role="tab" :aria-selected="architectureView === 'flow'" :class="{ active: architectureView === 'flow' }" @click="switchArchitectureView('flow')"><AppIcon name="arrow" :size="13" />流程演示</button><button role="tab" :aria-selected="architectureView === 'modules'" :class="{ active: architectureView === 'modules' }" @click="switchArchitectureView('modules')"><AppIcon name="sources" :size="13" />模块目录</button></div>
+      <Transition name="vm-dialog"><div v-if="architectureOpen" class="architecture-backdrop" :inert="!architectureOpen" @click.self="architectureOpen = false"><section class="architecture-dialog" role="dialog" aria-modal="true" aria-labelledby="architecture-title"><header><div><span class="architecture-dialog__eyebrow">EVIDENCE QA · SYSTEM MAP</span><h2 id="architecture-title">FEVA 事实—证据核验架构</h2></div><button class="icon-button close-button vm-press" aria-label="关闭架构导览" @click="architectureOpen = false"><AppIcon name="close" /></button></header><p class="architecture-dialog__intro">每个问题都完整走一遍上游 KAG：解析逻辑形式 → 规划检索 → 图/文本/向量三路召回 → 生成答案。本项目的改动是在生成之前插一层<b>事实表</b>——把问题拆成一条条待确认的事实，用结构化记录逐条判定，再走图上「实体指回原文块」的边为每条事实挂证据。上面是链路，下面是分工。</p><div class="architecture-tabs" role="tablist" aria-label="架构导览视图"><button role="tab" :aria-selected="architectureView === 'flow'" :class="{ active: architectureView === 'flow' }" @click="switchArchitectureView('flow')"><AppIcon name="arrow" :size="13" />流程演示</button><button role="tab" :aria-selected="architectureView === 'modules'" :class="{ active: architectureView === 'modules' }" @click="switchArchitectureView('modules')"><AppIcon name="sources" :size="13" />模块目录</button></div>
         <div v-if="architectureView === 'flow'" class="architecture-flowview" role="tabpanel">
           <ol class="feva-flow"><li v-for="(stage, index) in FEVA_FLOW" :key="stage.step" class="feva-flow__item" :class="{ 'is-reached': flowProgress > index, 'is-active': flowProgress === index + 1 }" :style="{ '--motion-order': index, '--stage-step': index }"><span class="feva-flow__index">{{ String(index + 1).padStart(2, '0') }}</span><div class="feva-flow__body"><b>{{ stage.step }}</b><small>{{ stage.desc }}</small><em>由 {{ stage.module }} 承担</em></div><span class="feva-flow__pulse" aria-hidden="true" /></li></ol>
-          <div class="feva-outlets" :class="{ 'is-visible': flowProgress >= FEVA_FLOW.length }"><span class="feva-outlets__label">随后进入</span><span v-for="outlet in FEVA_OUTLETS" :key="outlet.name" class="feva-outlets__card"><AppIcon :name="outlet.icon" :size="14" /><b>{{ outlet.name }}</b><small>{{ outlet.label }}</small></span><span class="feva-outlets__card research"><AppIcon name="link" :size="14" /><b>KAG增强路线</b><small>用户手选·非默认</small></span></div>
-          <p class="feva-flow__note">这条路径对工单—合同这类跨源复合问题成立。只有一句单源问题时，系统会直接进入下面的问数或问答链路，不经过前五个阶段。</p>
+          <div class="feva-outlets" :class="{ 'is-visible': flowProgress >= FEVA_FLOW.length }"><span class="feva-outlets__label">随后进入</span><span v-for="outlet in FEVA_OUTLETS" :key="outlet.name" class="feva-outlets__card"><AppIcon :name="outlet.icon" :size="14" /><b>{{ outlet.name }}</b><small>{{ outlet.label }}</small></span></div>
+          <p class="feva-flow__note">五个阶段对「能拆成事实」的题成立；条款题与依赖上文的指代题拆不动，会如实跳过中间三步、落回检索作答——这一步的诚实比多答一题重要。</p>
         </div>
-        <div v-else class="architecture-module-grid" role="tabpanel"><article v-for="(module, index) in architectureModules" :key="module.name" class="architecture-module vm-reveal" :style="{ '--motion-order': Math.min(index, 4) }" :class="{ 'architecture-module--research': !module.wired, 'is-expanded': expandedModules.has(module.name) }"><button class="architecture-module__toggle vm-press" :aria-expanded="expandedModules.has(module.name)" @click="toggleModule(module.name)"><div class="architecture-module__head"><span class="architecture-module__icon" aria-hidden="true"><img :src="`/brand/icons/${module.icon}.svg`" alt="" /></span><div class="architecture-module__labels"><b>{{ module.name }}</b><span>{{ module.name === 'KAG增强路线' ? (kagReady ? '用户可选·已就绪' : '用户可选·服务未就绪') : module.status }}</span></div></div><h3>{{ module.title }}</h3><p>{{ module.description }}</p><span class="architecture-module__more">{{ expandedModules.has(module.name) ? '收起' : '展开详细' }}<AppIcon name="chevron" :size="12" /></span></button><div v-if="expandedModules.has(module.name)" class="architecture-module__detail vm-detail"><p>{{ module.detail }}</p><dl><div><dt>输入</dt><dd>{{ module.io.input }}</dd></div><div><dt>输出</dt><dd>{{ module.io.output }}</dd></div></dl><p class="architecture-module__wired" :class="{ 'is-off': !module.wired && !(module.name === 'KAG增强路线' && kagReady) }"><AppIcon :name="module.wired || (module.name === 'KAG增强路线' && kagReady) ? 'check' : 'warning'" :size="12" />{{ module.name === 'KAG增强路线' ? (kagReady ? '仅在用户选择 KAG 补充深度检索时启用；标准路径仍走 RAG' : 'KAG 服务未就绪；标准检索保持可用') : module.wired ? '已接入问答路径' : '当前未接入问答路径' }}</p></div></article></div>
+        <div v-else class="architecture-module-grid" role="tabpanel"><article v-for="(module, index) in architectureModules" :key="module.name" class="architecture-module vm-reveal" :style="{ '--motion-order': Math.min(index, 4) }" :class="{ 'architecture-module--research': !module.wired, 'is-expanded': expandedModules.has(module.name) }"><button class="architecture-module__toggle vm-press" :aria-expanded="expandedModules.has(module.name)" @click="toggleModule(module.name)"><div class="architecture-module__head"><span class="architecture-module__icon" aria-hidden="true"><img :src="`/brand/icons/${module.icon}.svg`" alt="" /></span><div class="architecture-module__labels"><b>{{ module.name }}</b><span>{{ module.name === 'KAG增强路线' ? (kagReady ? '上游能力 · 已连接' : '上游能力 · 服务未连接') : module.status }}</span></div></div><h3>{{ module.title }}</h3><p>{{ module.description }}</p><span class="architecture-module__more">{{ expandedModules.has(module.name) ? '收起' : '展开详细' }}<AppIcon name="chevron" :size="12" /></span></button><div v-if="expandedModules.has(module.name)" class="architecture-module__detail vm-detail"><p>{{ module.detail }}</p><dl><div><dt>输入</dt><dd>{{ module.io.input }}</dd></div><div><dt>输出</dt><dd>{{ module.io.output }}</dd></div></dl><p class="architecture-module__wired" :class="{ 'is-off': !module.wired && !(module.name === 'KAG增强路线' && kagReady) }"><AppIcon :name="module.wired || (module.name === 'KAG增强路线' && kagReady) ? 'check' : 'warning'" :size="12" />{{ module.name === 'KAG增强路线' ? (kagReady ? '每个请求必经：规划 → 检索 → 生成' : '服务未连接，问答不可用') : module.wired ? '已接入问答路径' : '当前未接入问答路径' }}</p></div></article></div>
+        <aside class="architecture-dialog__upstream" aria-label="上游与本项目自研的边界">
+          <b>上游与本项目自研的边界</b>
+          <dl>
+            <div><dt>上游</dt><dd>OpenSPG / KAG <code>0.8.0</code>（Apache-2.0，基线 <code>OpenSPG-KAG-fdab15b</code>）。规划、检索、生成三件事全部由它完成。</dd></div>
+            <div><dt>本项目新增</dt><dd><code>contrib/kag/</code>：事实判定扩展层、抽取器开关、结构化聚合检索路、编号检索补丁。全部以「新增模块 + 类方法补丁 + 标记文件开关」实现，不删改上游逻辑，可单独回滚。</dd></div>
+            <div><dt>上游贡献</dt><dd><a href="https://github.com/OpenSPG/KAG/issues/758" target="_blank" rel="noopener noreferrer">OpenSPG/KAG #758</a>：<code>SchemaFreeExtractor</code> 尾逗号把三元组包成一元组、语义边被静默丢弃。修复后语义边占比 0.57% → 33.41%，事实表的证据边正是靠它才建得出来。</dd></div>
+          </dl>
+        </aside>
         <p class="architecture-dialog__note">这些名称用于帮助理解项目中的实际模块和研究方向，不代表独立算法或额外验收结论。</p></section></div></Transition>
     </Teleport>
     <Teleport to="body">
@@ -730,33 +743,33 @@ onUnmounted(() => {
         </nav>
         <div class="guide__panes" :class="`guide__panes--${guideStep}`">
         <div v-if="guideStep === 'what'" class="guide__pane" role="tabpanel">
-          <p class="guide__lead">系统支持三类问题，并按问题选择对应的数据与文档路径：</p>
+          <p class="guide__lead">语料是 14 份公开的高校科研项目公示文件（立项名单、结题验收结果、管理办法与通知），系统只做两件事：<b>名单里的数</b>和<b>办法里的条款</b>。</p>
           <ul class="guide__kinds">
-            <li><b>问数</b><span>用自然语言查询业务数据；答案可查看本次执行记录与数据来源。</span></li>
-            <li><b>问答</b><span>从资料中查找条款与说明；引用可打开对应原文位置。</span></li>
-            <li><b>跨源问题</b><span>先核对不同来源中的对象关系与适用条件，再组织结论和证据。</span></li>
+            <li><b>名单统计</b><span>问某校、某年、某类有几项。答案附逐行事实表：口径、判定值、证据块。</span></li>
+            <li><b>跨年对比</b><span>问「比去年多了几项」「多了哪几类」。这是集合运算，不是再数一遍。</span></li>
+            <li><b>条款查找</b><span>在名单与管理办法之间对照，答出原文依据。条款不出事实表——条款正文不在结构化记录里。</span></li>
           </ul>
-          <p class="guide__note">事实卡展示本轮实际记录的事实状态、检查与证据关联，不表示答案中的每句话都已独立核验。超出数据与资料范围的问题会说明依据不足或请求补充条件。</p>
+          <p class="guide__note">能拆成「某文档 · 某单位 · 某类别」的题会生成事实表；拆不动的题（条款题、依赖上文的指代题）如实落回检索作答。<b>表里没有的数，就是语料里没有</b>——不会补一个看起来合理的。</p>
+          <p class="guide__note">语料全部来自公开的省级教育主管部门公示文件；问题里出现的单位是文件中的项目承担单位，与参赛团队无关。</p>
           <p class="guide__try">试一试：</p>
           <ul class="guide__examples">
             <li v-for="question in GUIDE_TRY_QUESTIONS" :key="question"><button type="button" @click="pickGuideQuestion(question)">{{ question }}<AppIcon name="arrow" :size="13" /></button></li>
-            <li v-if="crossSourceDemoStatus === 'ready'"><button type="button" @click="pickGuideQuestion(CROSS_SOURCE_TRY_QUESTION)">{{ CROSS_SOURCE_TRY_QUESTION }}<AppIcon name="arrow" :size="13" /></button></li>
           </ul>
         </div>
         <div v-else-if="guideStep === 'how'" class="guide__pane" role="tabpanel">
           <ol class="guide__list">
-            <li><b>问得具体：给出口径，答案才可核对</b><span>提供文档名、对象、指标与时间范围；问得太模糊系统会反问而不是硬猜，直接在输入框补充即可。</span></li>
-            <li><b>查看事实卡与引用：核对本轮记录及其范围</b><span>事实卡说明哪些处理已执行、哪些检查有结果，以及证据是否关联；点击引用可打开文档原文或数据来源。它不替代逐句事实审查。</span></li>
-            <li><b>展开处理详情，在同一会话里继续追问</b><span>「查看处理详情」展示实际工具调用链，每步输入输出与耗时都在。追问时代词、省略主语都能接上；答案下方的「可以接着问」点了直接发送。</span></li>
+            <li><b>先看事实表的三列，再看答案</b><span>每行是「口径 → 判定值 → 证据块」。判定由 1031 条结构化记录做集合运算得出，不经过模型——同一个问题问几次都是同一个数，可复算、可审计。</span></li>
+            <li><b>点证据块，核对模型当时读到的原文</b><span>证据取自图里「实体指回原文块」的边（实测 34,525 条）。点开看到的是那一段原文，不是一句转述。</span></li>
+            <li><b>侧栏「事实核验」：不提问也能看判定过程</b><span>31 道冻结题任选，离线重算，不调用模型、不占额度、秒出。演示时若某题在等，用它先把机制讲清楚。</span></li>
           </ol>
-          <p class="guide__note">检索方式：标准检索默认使用项目 RAG。KAG 补充深度检索（RAG + KAG）是 Beta 测试路径，稳定性与效率尚未充分验证；仅在 KAG 服务就绪时可选，选择前会再次提示。KAG 只补充候选原文，不替代项目的答案与引用流程。</p>
+          <p class="guide__note">检索与生成由 KAG（OpenSPG/KAG 0.8.0，Apache-2.0）完成，事实层是本项目在它之上补的一层。单题通常 1–3 分钟，重的题会到 5 分钟——等待时输入框会变成停止按钮，可随时中止。</p>
         </div>
         <div v-else class="guide__pane" role="tabpanel">
-          <p class="guide__lead">挑一句试试，或直接开始提问。完整的能力清单在输入框左侧的四角星里。</p>
+          <p class="guide__lead">挑一句试试，或直接提问。完整的可问清单在输入框左侧的四角星里，按能力分了组。</p>
           <ul class="guide__examples">
             <li v-for="question in GUIDE_START_QUESTIONS" :key="question"><button type="button" @click="pickGuideQuestion(question)">{{ question }}<AppIcon name="arrow" :size="13" /></button></li>
           </ul>
-          <p class="guide__note">服务与数据状态看左下角；回答过程中输入框会变成停止按钮，随时可中止等待。会话保存在当前浏览器。</p>
+          <p class="guide__note">同一题重跑应当给出同一个结论——如果两次不一样，说明那次靠的是检索原文而不是事实表，可以在答案里的处理详情看到差别。会话只保存在这个浏览器；左下角是服务与图状态。</p>
         </div>
         </div>
         <div class="guide__footer"><span class="guide__skip-text">可随时从顶部“使用指南”再次打开</span><button class="guide__confirm vm-press" @click="nextGuideStep">{{ guideStepIndex === GUIDE_STEPS.length - 1 ? '开始提问' : '下一步' }}<AppIcon name="arrow" :size="17" /></button></div></section></div></Transition>
@@ -1055,6 +1068,17 @@ button.architecture-button:hover { background: var(--brand-soft-strong); }
 .architecture-module__wired { display: flex; align-items: center; gap: 5px; margin: 11px 0 0; color: var(--accent-teal); font-size: 11.5px; }
 .architecture-module__wired.is-off { color: var(--state-warning); }
 .architecture-dialog__note { margin: 15px 0 0; color: var(--text-muted); font-size: 12px; line-height: 1.7; }
+/* 上游 / 自研边界：评分表「AI 与开源融合」看的是「谁做了什么、什么许可、边界在哪」，
+   这一段要能在演示时直接念出来。放 dl 而不是句子里，是因为评委常要抄这三行。 */
+.architecture-dialog__upstream { margin: 18px 0 0; padding: 13px 15px; border: 1px solid var(--border-subtle); border-radius: 10px; background: var(--bg-subtle); }
+.architecture-dialog__upstream > b { display: block; margin-bottom: 9px; color: var(--text-heading); font-size: 13px; }
+.architecture-dialog__upstream dl { display: grid; gap: 8px; margin: 0; }
+.architecture-dialog__upstream dl > div { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 10px; }
+.architecture-dialog__upstream dt { color: var(--text-faint); font-size: 12px; }
+.architecture-dialog__upstream dd { margin: 0; color: var(--text-secondary); font-size: 12.5px; line-height: 1.7; }
+.architecture-dialog__upstream code { padding: 1px 4px; border-radius: 4px; color: var(--brand-primary); background: var(--brand-soft); font-size: 11.5px; }
+.architecture-dialog__upstream a { color: var(--brand-primary); text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 640px) { .architecture-dialog__upstream dl > div { grid-template-columns: 1fr; gap: 2px; } }
 @media (max-width: 1279px) {
   .workspace { --sidebar-width: 218px; }
   .topbar { padding-right: 16px; padding-left: 16px; }

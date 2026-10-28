@@ -8,6 +8,15 @@ import type { EditableModelProfile, ModelProfileDraft } from '../api/model-confi
 import { useAuthStore } from '../stores/auth'
 
 const emit = defineEmits<{ close: [] }>()
+/**
+ * 后端直连 KAG 时为真。
+ *
+ * 直连链路的模型、温度、检索路数全部由 KAG 容器里的配置决定，应用侧改了不生效。
+ * 这一整块「API 与模型配置」（含密钥输入框）在这种模式下必须隐藏：留着它，
+ * 演示时点开设置会看到一排 API 密钥输入框和一个改了没反应的模型 ID，
+ * 既误导又不体面。配置本身仍然存在于后端，只是不在这条链路上生效。
+ */
+const props = withDefaults(defineProps<{ directKag?: boolean }>(), { directKag: false })
 
 const { theme } = useTheme()
 const conversation = useConversationStore()
@@ -104,7 +113,7 @@ function clearAllLocalData() {
           <span class="settings__mark"><AppIcon name="gear" :size="20" /></span>
           <div>
             <h2 id="settings-title">设置</h2>
-            <p>偏好保存在浏览器，模型配置保存在后端</p>
+            <p>{{ props.directKag ? '偏好保存在浏览器；模型与检索由 KAG 侧决定' : '偏好保存在浏览器，模型配置保存在后端' }}</p>
           </div>
         </div>
         <button class="icon-button close-button vm-press" aria-label="关闭设置" @click="emit('close')"><AppIcon name="close" :size="18" /></button>
@@ -125,7 +134,7 @@ function clearAllLocalData() {
           </div>
         </section>
 
-        <section v-if="auth.isAdmin" class="settings-group" aria-labelledby="settings-model-config">
+        <section v-if="!props.directKag && auth.isAdmin" class="settings-group" aria-labelledby="settings-model-config">
           <h3 id="settings-model-config">API 与模型配置</h3>
           <p class="settings-group__hint">配置已接入的 DeepSeek 与 GLM 服务。仅管理员可编辑；保存时密钥通过当前 HTTPS 页面提交给后端并写入项目的 .env 文件。接口不会返回密钥，浏览器也不会持久化密钥。密钥输入留空会保留现有值，保存后立即生效；本次问答使用的模型仍可在顶栏切换。</p>
           <p v-if="modelLoadError" class="settings-model__error" role="alert">{{ modelLoadError }}</p>
@@ -146,15 +155,19 @@ function clearAllLocalData() {
             </article>
           </div>
         </section>
-        <section v-else class="settings-group" aria-label="模型配置权限">
+        <section v-else-if="!props.directKag" class="settings-group" aria-label="模型配置权限">
           <h3>模型服务</h3>
           <p class="settings-group__hint">模型服务地址与密钥由管理员统一维护。你可以在提问框中选择当前已启用的模型。</p>
+        </section>
+        <section v-else class="settings-group" aria-label="模型与检索来源">
+          <h3>模型与检索</h3>
+          <p class="settings-group__hint">本页的问答由 KAG 服务端完成：用哪个模型、怎么检索、召回多少块，都由 KAG 侧的配置决定，应用界面不提供这些选项。应用侧能调的是界面外观与本地会话。</p>
         </section>
 
         <section class="settings-group" aria-labelledby="settings-storage">
           <h3 id="settings-storage">数据与隐私</h3>
           <p class="settings-group__hint">
-            会话与模型选择保存在当前浏览器，并按登录账号隔离；API 地址、模型 ID 和密钥保存在后端项目的 .env 文件。清空本机数据只清理当前账号的会话和模型选择，不会删除后端模型配置。
+            {{ props.directKag ? '会话保存在当前浏览器，并按登录账号隔离。清空本机数据只清理当前账号的会话与界面偏好，不影响 KAG 侧任何配置。' : '会话与模型选择保存在当前浏览器，并按登录账号隔离；API 地址、模型 ID 和密钥保存在后端项目的 .env 文件。清空本机数据只清理当前账号的会话和模型选择，不会删除后端模型配置。' }}
           </p>
           <button class="settings__action settings__action--danger" @click="requestClearConfirmation">清空对话和本地设置</button>
           <section v-if="clearConfirmOpen" ref="clearConfirmation" class="settings-confirm" role="alertdialog" aria-labelledby="settings-clear-title" aria-describedby="settings-clear-description">

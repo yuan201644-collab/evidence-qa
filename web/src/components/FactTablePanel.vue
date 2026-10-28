@@ -33,6 +33,19 @@ const grouped = computed(() => {
 const activeQuestion = computed(
   () => questions.value.find((q) => q.qid === activeQid.value)?.text ?? '',
 )
+/**
+ * 题干是否依赖上一题的上下文。
+ *
+ * 冻结题库是成套出的：`该名单中，中国海洋大学有几项` 前一句才刚说过是哪份名单。
+ * 在这面板里它们是**独立点开**的，没有上文，所以定位不到文档、不出表。
+ * 不标出来，会让人以为「这套方法连这题都算不出来」；标出来才是真实情形——
+ * 缺的是线索，不是能力。这类题在完整对话里正常。
+ */
+const NEEDS_CONTEXT_RE = /^(上述|两份名单|三份名单)|该名单|该办法/
+function needsContext(text: string): boolean {
+  return NEEDS_CONTEXT_RE.test(text || '')
+}
+const contextCount = computed(() => questions.value.filter((q) => needsContext(q.text)).length)
 
 async function loadQuestion(text: string, qid: string) {
   activeQid.value = qid
@@ -87,7 +100,7 @@ onMounted(async () => {
 
       <div class="ft-body">
         <aside class="ft-list" aria-label="题库">
-          <p class="ft-list__hint">冻结题库 {{ questions.length }} 道</p>
+          <p class="ft-list__hint">冻结题库 {{ questions.length }} 道<template v-if="contextCount"> · 其中 {{ contextCount }} 道标了「需上文」</template></p>
           <div v-for="(items, layer) in grouped" :key="layer" class="ft-list__group">
             <p class="ft-list__label">{{ LAYER_LABEL[layer] || layer }}<small>{{ items.length }}</small></p>
             <button
@@ -99,7 +112,9 @@ onMounted(async () => {
               :title="q.text"
               @click="loadQuestion(q.text, q.qid)"
             >
-              <b>{{ q.qid }}</b><span>{{ q.text }}</span>
+              <b>{{ q.qid }}</b>
+              <i v-if="needsContext(q.text)" class="ft-list__ctx" title="题干依赖上一题上下文，单独重算时缺少文档线索">需上文</i>
+              <span>{{ q.text }}</span>
             </button>
           </div>
         </aside>
@@ -136,7 +151,8 @@ onMounted(async () => {
           </template>
 
           <div v-else class="ft-placeholder">
-            这道题拆不成「某文档 · 某单位 · 某类别」形式的子问，因此不出表，会落回检索链路作答。
+            <template v-if="needsContext(activeQuestion)">这道题的题干依赖上一题的上下文（「上述」「该名单」这类指代），在本面板里被单独点开，缺少属于哪份文档的线索，因此不定位、不出表。放到完整对话里接着上一题问，它才会生成事实表。</template>
+            <template v-else>这道题拆不成「某文档 · 某单位 · 某类别」形式的子问（例如条款题：条款正文不在结构化记录里），因此不出表，会落回检索链路作答。</template>
           </div>
 
           <dl v-if="graph" class="ft-graph">
@@ -175,11 +191,12 @@ onMounted(async () => {
 .ft-list__group { margin-bottom: 12px; }
 .ft-list__label { display: flex; align-items: center; gap: 6px; margin: 0 0 6px; color: var(--text-muted); font-size: 12px; }
 .ft-list__label small { padding: 0 5px; border-radius: 4px; background: var(--bg-elevated); font-size: 11px; }
-.ft-list__item { display: flex; width: 100%; gap: 7px; margin-bottom: 4px; padding: 7px 8px; border: 1px solid transparent; border-radius: 7px; color: var(--text-secondary); text-align: left; background: transparent; font-size: 12px; line-height: 1.45; }
+.ft-list__item { display: flex; width: 100%; flex-wrap: wrap; gap: 4px 7px; margin-bottom: 4px; padding: 7px 8px; border: 1px solid transparent; border-radius: 7px; color: var(--text-secondary); text-align: left; background: transparent; font-size: 12px; line-height: 1.45; }
 .ft-list__item:hover { background: var(--bg-elevated); }
 .ft-list__item.is-active { border-color: var(--border-brand); background: var(--brand-soft); color: var(--text-heading); }
 .ft-list__item b { flex: none; color: var(--brand-primary); font-variant-numeric: tabular-nums; }
-.ft-list__item span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.ft-list__item span { display: -webkit-box; flex: 1 1 100%; order: 3; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.ft-list__ctx { flex: none; order: 2; padding: 1px 5px; border-radius: 4px; color: var(--state-warning); background: var(--state-warning-soft); font-size: 10px; font-style: normal; white-space: nowrap; }
 .ft-main { overflow-y: auto; padding: 18px; }
 .ft-question { margin: 0 0 12px; color: var(--text-heading); font-size: 14px; line-height: 1.6; }
 .ft-error { margin: 0 0 12px; padding: 8px 10px; border-radius: 7px; color: var(--state-error-text); background: var(--state-error-soft); font-size: 12px; }

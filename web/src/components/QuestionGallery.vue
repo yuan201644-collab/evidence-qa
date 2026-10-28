@@ -96,13 +96,15 @@ function use(question: string) {
 .gallery__trigger { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border: 1px solid var(--border-brand); border-radius: 9px; color: var(--brand-primary); background: linear-gradient(135deg, var(--brand-soft) 0%, var(--bg-surface) 45%, var(--brand-soft-strong) 100%); cursor: pointer; transition: color var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease), box-shadow var(--motion-fast) var(--motion-ease), transform var(--motion-fast) var(--motion-ease); }
 .gallery__trigger:hover { color: var(--brand-primary); border-color: var(--brand-primary); background: linear-gradient(135deg, var(--brand-soft-strong) 0%, var(--brand-soft) 55%, var(--bg-surface) 100%); box-shadow: var(--shadow-focus-ring); transform: translateY(-1px); }
 .gallery__trigger[aria-expanded='true'] { color: var(--text-on-brand); border-color: var(--brand-primary); background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-weak) 100%); box-shadow: none; transform: none; }
-.gallery__pop { position: absolute; bottom: calc(100% + 10px); left: 0; z-index: 40; width: min(620px, calc(100vw - 48px)); border: 1px solid var(--border-subtle); border-radius: 14px; background: var(--bg-surface); box-shadow: var(--shadow-card); overflow: hidden; }
+/* max-height + 内部滚动：清单从 24 条换成按能力分组后，每组 3 条问题各带一句说明，
+   整块高度会超过视口顶部。让它自己滚，而不是被浏览器裁掉上半截。 */
+.gallery__pop { position: absolute; bottom: calc(100% + 10px); left: 0; z-index: 40; display: flex; max-height: min(74vh, 620px); width: min(620px, calc(100vw - 48px)); flex-direction: column; border: 1px solid var(--border-subtle); border-radius: 14px; background: var(--bg-surface); box-shadow: var(--shadow-card); overflow: hidden; }
 .gallery__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 13px 15px 11px; border-bottom: 1px solid var(--border-subtle); }
 .gallery__head b { display: block; font-size: 15px; color: var(--text-heading); }
 .gallery__head span { display: block; margin-top: 2px; font-size: 12.5px; color: var(--text-secondary); }
 .gallery__close { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; padding: 0; border: 0; border-radius: 7px; color: var(--text-faint); background: transparent; cursor: pointer; }
 .gallery__close:hover { color: var(--text-heading); background: var(--bg-hover); }
-.gallery__body { display: grid; grid-template-columns: 138px minmax(0, 1fr); }
+.gallery__body { display: grid; min-height: 0; grid-template-columns: 138px minmax(0, 1fr); overflow-y: auto; }
 .gallery__tabs { display: flex; flex-direction: column; gap: 2px; padding: 9px; border-right: 1px solid var(--border-subtle); background: var(--bg-subtle); }
 .gallery__tabs button { display: flex; align-items: center; gap: 7px; padding: 7px 9px; border: 0; border-radius: 8px; font-size: 13.5px; color: var(--text-secondary); background: transparent; cursor: pointer; text-align: left; }
 .gallery__tabs button:hover { color: var(--text-heading); background: var(--bg-hover); }
