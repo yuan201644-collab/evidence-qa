@@ -665,7 +665,7 @@ onUnmounted(() => {
                 v-for="section in homeQuestionSections"
                 :key="section.id"
                 class="example-card vm-interact"
-                :class="[section.tone, { 'example-card--featured': section.id === 'count' }]"
+                :class="section.tone"
                 :aria-labelledby="`home-path-${section.id}`"
               >
                 <div class="example-card__head">
@@ -917,14 +917,11 @@ button.architecture-button:hover { background: var(--brand-soft-strong); }
 .example-card__question:hover:not(:disabled), .example-card__question:focus-visible:not(:disabled) { border-color: var(--border-brand); color: var(--brand-primary); background: var(--brand-soft); outline: none; }
 .example-card__question:disabled { color: var(--text-muted); background: var(--bg-subtle); cursor: not-allowed; opacity: .72; }
 .example-card__scope { margin: auto 0 0; color: var(--text-faint); font-size: 10.5px; line-height: 1.45; }
-.example-card--featured { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; gap: 9px 20px; padding: 15px 17px; border-color: color-mix(in srgb, var(--brand-primary) 32%, var(--border-subtle)); background: linear-gradient(105deg, color-mix(in srgb, var(--brand-primary) 7%, var(--bg-surface)), var(--bg-surface) 68%); }
-.example-card--featured::before { position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--brand-primary); content: ''; }
-.example-card--featured .example-card__head { grid-column: 1; }
-.example-card--featured .example-card__questions { grid-column: 2; grid-row: 1 / span 2; }
-.example-card--featured .example-card__question { min-height: 52px; border-color: color-mix(in srgb, var(--brand-primary) 23%, var(--border-subtle)); background: color-mix(in srgb, var(--brand-primary) 5%, var(--bg-surface)); font-weight: 550; }
-.example-card--featured .example-card__scope { grid-column: 1; margin-left: 42px; }
-.example-card__feature-tag { position: static; grid-column: 1; justify-self: start; display: inline-flex; align-items: center; gap: 4px; margin-left: 42px; color: var(--brand-primary); font-size: 10px; font-weight: 650; }
-.example-card__feature-tag svg { color: var(--accent-teal); }
+/* 两张示例卡等宽等高。
+   原来第一张带 `--featured`（跨整行、左右分栏），第二张半宽，看上去就是
+   「一大一小」；老项目那套是给三入口用的（一个重点 + 两个普通），现在只剩
+   两个入口，主次之分反而别扭——两条路径对评委价值相同。 */
+.example-card.is-checked { border-color: color-mix(in srgb, var(--brand-primary) 30%, var(--border-subtle)); }
 .source-scope, .welcome-flow { margin-top: 19px; padding-top: 16px; border-top: 1px solid var(--border-subtle); }
 .source-scope__heading, .welcome-flow__heading { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
 .source-scope__heading > div > span, .welcome-flow__heading > span { display: block; margin-bottom: 3px; color: var(--brand-primary); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
@@ -1154,10 +1151,6 @@ button.architecture-button:hover { background: var(--brand-soft-strong); }
   .feva-brief__note { grid-column: 2; }
   .example-row { grid-template-columns: 1fr; gap: 9px; }
   .example-card { gap: 9px; padding: 12px; }
-  .example-card--featured { grid-column: auto; grid-template-columns: minmax(0, 1fr); gap: 9px; padding: 13px 12px 12px 14px; }
-  .example-card--featured .example-card__head, .example-card--featured .example-card__questions, .example-card--featured .example-card__scope { grid-column: 1; grid-row: auto; }
-  .example-card--featured .example-card__scope { margin-left: 42px; padding-right: 2px; }
-  .example-card__feature-tag { justify-self: start; margin-left: 42px; font-size: 9px; }
   .example-card__question { padding: 8px; font-size: 11.5px; }
   .example-card__status { max-width: 105px; white-space: nowrap; }
   .examples-heading p { max-width: 118px; text-align: right; }
