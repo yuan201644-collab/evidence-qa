@@ -1,0 +1,80 @@
+--- _tmp/merger_orig.py	2026-10-26 23:49:15.251642500 +0800
++++ _tmp/merger_ctx.py	2026-10-27 00:23:34.080250200 +0800
+@@ -10,6 +10,7 @@
+ # is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ # or implied.
+ import math
++import os
+ from typing import List
+ from kag.interface import (
+     Task,
+@@ -20,6 +21,41 @@
+ )
+ 
+ 
++def _auth_weight():
++    """权威证据块加权倍数；读 /tmp/kag_auth_weight，缺失或 <=1 时返回 0（即关闭）。
++
++    动机：rrf_normalize 只按名次打分（1/(idx+1)），丢弃检索器自报分数，
++    导致「确定性证据块」与「向量相似度捞到的普通块」同分；而 context_select
++    只保底前 4 块，证据因此常被挤出上下文。该开关把 chunk_id 以
++    structured_aggregate# 开头的块分数乘以倍数后再排序。
++    默认关闭，基线行为不变（不加权、不重排）。
++    """
++    try:
++        with open("/tmp/kag_auth_weight") as f:
++            v = float(f.read().strip() or 0)
++        return v if v > 1.0 else 0.0
++    except Exception:
++        return 0.0
++
++
++def _ctx_topn():
++    """合并结果截断长度；读 /tmp/kag_ctx_topn，缺失或 <=1 时返回 0（即关闭）。
++
++    动机：加权只能决定证据块排第一，决定不了模型忽略其后 30~50 块（约 2 万字）
++    的干扰原文——实测证据 134 字 vs 干扰约 2 万字（约 1:150），模型倾向自行重数。
++    该开关把交给生成器的块数截断到前 N 块，噪声随之消失；graphs（出处来源）
++    不受影响，仍由三路检索完整回填。
++    截断时强制保留 structured_aggregate# 证据块（即使未进前 N）。
++    默认关闭，基线行为不变。
++    """
++    try:
++        with open("/tmp/kag_ctx_topn") as f:
++            v = int(f.read().strip() or 0)
++        return v if v > 1 else 0
++    except Exception:
++        return 0
++
++
+ @RetrieverOutputMerger.register("kag_merger")
+ class KAGRetrieverOutputMerger(RetrieverOutputMerger):
+     """A custom merger implementation for combining retrieved chunks from multiple retrievers.
+@@ -140,6 +176,27 @@
+         retrieved_chunks = kwargs.get("retrieved_chunks", None)
+         chunk_lists = [x.chunks for x in retrieve_outputs]
+         merged = self.chunk_merge(chunk_lists, self.rrf_normalize)
++        auth_w = _auth_weight()
++        if auth_w > 1.0:
++            for _c in merged:
++                if str(getattr(_c, "chunk_id", "") or "").startswith(
++                    "structured_aggregate#"
++                ):
++                    _c.score = float(_c.score or 0) * auth_w
++            merged.sort(key=lambda _x: -float(_x.score or 0))
++        topn = _ctx_topn()
++        if topn and len(merged) > topn:
++            _keep_idx = [
++                _i
++                for _i, _c in enumerate(merged)
++                if str(getattr(_c, "chunk_id", "") or "").startswith(
++                    "structured_aggregate#"
++                )
++            ][:1]
++            _order = _keep_idx + [
++                _i for _i in range(len(merged)) if _i not in _keep_idx
++            ]
++            merged = [merged[_i] for _i in _order[:topn]]
+         if retrieved_chunks is not None:
+             chunk_texts = [x.content for x in merged]
+             retrieved_chunks.extend(chunk_texts)
