@@ -1,7 +1,15 @@
 import type { AskProgressStage, AskRequest, AskResponse, ResultSetPage } from '../types/contracts'
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? ''
-const ASK_TIMEOUT_MS = 180_000
+/**
+ * 一次问答的最长等待时间。
+ *
+ * 定 10 分钟不是拍脑袋：KAG 直连链路的单题实测分布是「中位 1.5–2 分钟、
+ * 长尾 5 分钟上下、最长见过 305 秒」，原来的 3 分钟会把这批长尾题
+ * 在客户端先掐断，用户看到的是「超时」，而服务端其实还在正常算。
+ * 后端自己的超时是 420 秒，这里必须比它大，否则永远是前端先报错。
+ */
+const ASK_TIMEOUT_MS = 600_000
 
 function responseError(status: number): string {
   if (status === 429) return '服务当前较忙，请稍后重新尝试。'
@@ -142,7 +150,7 @@ export async function ask(request: AskRequest, signal?: AbortSignal, modelProfil
     if (controller.signal.aborted) {
       const reason: unknown = controller.signal.reason
       if (reason instanceof DOMException && reason.name === 'TimeoutError') {
-        throw new Error('等待回答已超过 3 分钟，请稍后重试或简化问题。')
+        throw new Error('等待回答已超过 10 分钟，请稍后重试或简化问题。')
       }
       throw new Error('已停止等待本次回答。')
     }
@@ -226,7 +234,7 @@ export async function askWithProgress(
     if (controller.signal.aborted) {
       const reason: unknown = controller.signal.reason
       if (reason instanceof DOMException && reason.name === 'TimeoutError') {
-        throw new Error('等待回答已超过 3 分钟，请稍后重试或简化问题。')
+        throw new Error('等待回答已超过 10 分钟，请稍后重试或简化问题。')
       }
       throw new Error('已停止等待本次回答。')
     }

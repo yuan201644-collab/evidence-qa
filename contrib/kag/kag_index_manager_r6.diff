@@ -1,0 +1,29 @@
+--- a/kag/indexer/kag_index_manager.py
++++ b/kag/indexer/kag_index_manager.py
+@@ -790,4 +790,25 @@
+                 "top_k": 20,
+                 "kag_qa_task_config_key": kb_task_project_id,
+             },
+-        ]
++            {
++                "type": "text_chunk_retriever",
++                "vectorize_model": vectorize_model_config,
++                "search_api": {
++                    "type": "openspg_search_api",
++                    "kag_qa_task_config_key": kb_task_project_id,
++                },
++                "top_k": 10,
++                "kag_qa_task_config_key": kb_task_project_id,
++            },
++            {
++                "type": "anchor_chunk_retriever",
++                "search_api": {
++                    "type": "openspg_search_api",
++                    "kag_qa_task_config_key": kb_task_project_id,
++                },
++                "top_k": 5,
++                "scan_limit": 50,
++                "max_anchors": 8,
++                "kag_qa_task_config_key": kb_task_project_id,
++            },
++        ]

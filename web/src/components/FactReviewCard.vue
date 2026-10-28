@@ -87,6 +87,27 @@ function refLabel(index: number): string {
   if (ref.kind === 'sql') return `${ref.table}${ref.column ? ` · ${ref.column}` : ''}`
   return ref.doc_title || `文档来源 ${index + 1}`
 }
+
+/**
+ * 证据按钮按文档归并。
+ *
+ * 一条事实的证据往往落在同一份文档的多个块上（实测一条事实能挂 6 个块），
+ * 而 `doc_title` 只到文档级，逐个渲染会出现一整排「查看安徽 2024 年度 立项名单」
+ * ——看起来像重复 bug，实际是同文档的不同块。归并成一个按钮 + 块数，
+ * 点击落到该文档的第一个块。
+ */
+function evidenceGroups(item: FactReviewItem): { index: number; label: string; count: number }[] {
+  const groups = new Map<string, { index: number; label: string; count: number }>()
+  for (const index of item.evidence_ref_indices) {
+    if (!Number.isInteger(index) || index < 0 || index >= props.refs.length) continue
+    const ref = props.refs[index]
+    const key = ref.kind === 'doc' ? `d:${ref.doc_title || ref.doc_id}` : `t:${ref.table}`
+    const found = groups.get(key)
+    if (found) found.count += 1
+    else groups.set(key, { index, label: refLabel(index), count: 1 })
+  }
+  return [...groups.values()]
+}
 </script>
 
 <template>
@@ -113,6 +134,25 @@ function refLabel(index: number): string {
           </span>
         </div>
         <p v-if="item.summary" class="fact-review__summary">{{ item.summary }}</p>
+        <!--
+          三列是本项目为「可溯源事实核验」补的：原卡片只说「这条成立不成立」，
+          而对公示语料做计数核验时，真正要展示的是「按什么口径算的、算出多少、
+          凭哪一块原文」。三者缺一，核验就退回成了结论。
+        -->
+        <dl v-if="item.value || item.criterion || item.evidence_chunk" class="fact-review__facts">
+          <div v-if="item.criterion">
+            <dt>口径</dt>
+            <dd>{{ item.criterion }}</dd>
+          </div>
+          <div v-if="item.value" class="fact-review__facts-value">
+            <dt>判定值</dt>
+            <dd>{{ item.value }}</dd>
+          </div>
+          <div v-if="item.evidence_chunk">
+            <dt>证据块</dt>
+            <dd><code>{{ item.evidence_chunk }}</code></dd>
+          </div>
+        </dl>
         <div v-if="item.checks.length" class="fact-review__checks">
           <span
             v-for="(check, index) in item.checks"
@@ -133,13 +173,13 @@ function refLabel(index: number): string {
           <span>{{ executionLabel(item.execution_status) }}</span>
           <span>{{ evidenceLabel(item.evidence_link_status) }}</span>
           <button
-            v-for="index in item.evidence_ref_indices.filter((value) => value >= 0 && value < refs.length)"
-            :key="`${item.fact_id}-ref-${index}`"
+            v-for="group in evidenceGroups(item)"
+            :key="`${item.fact_id}-ref-${group.index}`"
             type="button"
             class="fact-review__source"
-            @click="emit('selectRef', index)"
+            @click="emit('selectRef', group.index)"
           >
-            查看{{ refLabel(index) }}
+            查看{{ group.label }}<template v-if="group.count > 1"> · {{ group.count }} 块</template>
           </button>
         </footer>
       </li>
@@ -165,6 +205,14 @@ function refLabel(index: number): string {
 .fact-review__status--pass { color: var(--accent-teal); font-weight: 700; }
 .fact-review__summary, .fact-review__reason { margin: 7px 0 0; color: var(--text-secondary); font-size: 13px; line-height: 1.65; overflow-wrap: anywhere; }
 .fact-review__reason { color: var(--text-muted); }
+/* 三列信息条：口径 / 判定值 / 证据块。判定值用等宽数字并放大，
+   因为它才是这条事实的结论；口径和块名是它的两个说明。 */
+.fact-review__facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin: 9px 0 0; padding: 9px 11px; border-radius: 8px; background: var(--bg-elevated); }
+.fact-review__facts > div { min-width: 0; }
+.fact-review__facts dt { color: var(--text-faint); font-size: 11px; letter-spacing: .02em; }
+.fact-review__facts dd { margin: 3px 0 0; overflow-wrap: anywhere; color: var(--text-secondary); font-size: 13px; line-height: 1.5; }
+.fact-review__facts-value dd { color: var(--text-heading); font-size: 16px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.fact-review__facts code { padding: 1px 5px; border-radius: 4px; background: var(--bg-subtle); color: var(--text-secondary); font-size: 12px; }
 .fact-review__checks { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .fact-review__check { padding: 3px 7px; border: 1px solid var(--border-subtle); border-radius: 5px; color: var(--text-secondary); background: var(--bg-elevated); font-size: 11px; }
 /* 三态用颜色区分，不要只靠文字 —— 演示时评委一眼扫过去要能看出哪项没落实。

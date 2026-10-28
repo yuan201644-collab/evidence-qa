@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">循证问答</title>
+  <desc id="desc">一条事实落到原文块上的品牌标志：上方为待核验的事实，下方为承载它的证据块</desc>
+  <rect width="128" height="128" rx="30" fill="#315bc7"/>
+  <!-- 事实：一条待核验的断言 -->
+  <rect x="26" y="26" width="76" height="12" rx="6" fill="#fff" opacity="0.92"/>
+  <rect x="26" y="46" width="52" height="10" rx="5" fill="#c8d7ff"/>
+  <!-- 证据：被指回的那一块 -->
+  <rect x="26" y="72" width="76" height="30" rx="8" fill="#e8eeff" opacity="0.28"/>
+  <rect x="34" y="80" width="60" height="5" rx="2.5" fill="#fff" opacity="0.75"/>
+  <rect x="34" y="90" width="44" height="5" rx="2.5" fill="#fff" opacity="0.45"/>
+  <!-- 指向：虚线连接事实与证据块 -->
+  <path d="M64 58v10" stroke="#168b82" stroke-width="5" stroke-linecap="round"/>
+  <path d="m57 66 7 7 7-7" fill="none" stroke="#168b82" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

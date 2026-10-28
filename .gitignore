@@ -339,3 +339,14 @@ docs/初赛报告初稿_20261012_v0.1/汇报风格示例_*.svg
 /docs/初赛报告初稿_20261012_v0.1/Word导出PDF.ps1
 /docs/初赛报告初稿_20261012_v0.1/*_过期20261012.*
 /docs/初赛报告初稿_20261012_v0.1/figures/
+
+# ---- 前端构建与依赖生成的产物（2026-10-28 补）----
+# tsbuildinfo：`vue-tsc -b` 的增量缓存，每次构建都变，进仓库只会制造无意义 diff。
+web/tsconfig.app.tsbuildinfo
+web/tsconfig.node.tsbuildinfo
+# pdfjs 字体与编码表：`web/scripts/sync-pdfjs-assets.mjs` 在 postinstall 时
+# 从 node_modules 复制过来（186 个文件 / 2.2MB）。源头是依赖包，
+# 提交进来等于把第三方的字体文件再存一份，且随 pdfjs 版本变化产生整目录 diff。
+# 复核方式：`cd web && npm install` 会自动重建。
+web/public/pdfjs/cmaps/
+web/public/pdfjs/standard_fonts/

@@ -12,9 +12,9 @@ const sqlRef = computed(() => props.refItem?.kind === 'sql' ? props.refItem : un
 
 <template>
   <aside class="evidence-panel">
-    <div v-if="!refItem" class="evidence-empty"><span><AppIcon name="link" :size="27" /></span><h2>把答案与出处放在一起</h2><p>点击答案中的引用编号或来源卡片，<br />在这里核对文档原文与数据记录。</p></div>
+    <div v-if="!refItem" class="evidence-empty"><span><AppIcon name="link" :size="27" /></span><h2>把答案与出处放在一起</h2><p>点击答案中的引用编号或事实核验卡里的证据块，<br />在这里核对模型当时读到的原文。</p></div>
     <template v-else-if="doc && doc.page"><details class="quoted-snippet"><summary>引用片段 <small>{{ doc.section_path || (doc.extraction_method === 'plain' ? '文档片段' : '第 ' + doc.page + ' 页') }}</small></summary><blockquote>{{ doc.snippet }}</blockquote></details><DocumentEvidenceViewer :key="doc.doc_id" :ref-item="doc" /></template>
-    <section v-else-if="doc" class="doc-fallback"><span class="source-type"><AppIcon name="document" :size="15" />文档证据</span><h3>{{ doc.doc_title || doc.doc_id }}</h3><p class="source-id">{{ doc.doc_id }}<span v-if="doc.section_path"> · {{ doc.section_path }}</span></p><div class="fragment-label">原文引用片段</div><blockquote>{{ doc.snippet }}</blockquote><p class="fragment-note">该来源未提供页码，当前展示返回的引用片段。</p></section>
+    <section v-else-if="doc" class="doc-fallback"><span class="source-type"><AppIcon name="document" :size="15" />原文块证据</span><h3>{{ doc.doc_title || doc.doc_id }}</h3><p class="source-id">{{ doc.doc_id }}<span v-if="doc.section_path"> · {{ doc.section_path }}</span></p><div class="fragment-label">原文引用片段</div><blockquote>{{ doc.snippet }}</blockquote><p class="fragment-note">这是模型生成答案时实际读到的原文块（按相关性排序），不是事后检索的近似结果。</p></section>
     <SqlEvidencePanel v-else-if="sqlRef" :ref-item="sqlRef" :sql="sql" :data-source="dataSource" />
   </aside>
 </template>
