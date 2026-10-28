@@ -29,9 +29,9 @@ async function submit() {
 <template>
   <main class="auth-page">
     <section class="auth-card" aria-labelledby="auth-title">
-      <img class="auth-card__mark" src="/brand/verimind-mark.svg?v=20261012" alt="知证 VeriMind" />
+      <img class="auth-card__mark" src="/brand/evidence-qa-mark.svg?v=20261028" alt="循证问答" />
       <p class="auth-card__eyebrow">SECURE WORKSPACE</p>
-      <h1 id="auth-title">登录知证</h1>
+      <h1 id="auth-title">登录循证问答</h1>
       <p class="auth-card__subtitle">使用管理员分配的账号进入问答工作台。</p>
       <form class="auth-form" @submit.prevent="submit">
         <label class="auth-field">

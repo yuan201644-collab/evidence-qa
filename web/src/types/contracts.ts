@@ -140,6 +140,12 @@ export type FactReviewItem = {
   evidence_ref_indices: number[]
   reason_code?: string | null
   reason?: string | null
+  /** 判定出的值（如「38 项」）；status 说成不成立，value 说成立时是多少。 */
+  value?: string | null
+  /** 判定口径，即 label 的前半段（哪份文档、哪一年）。 */
+  criterion?: string | null
+  /** 证据所在原文块标识（如 AH24_v2_split_4），与 evidence_ref_indices 同指一处。 */
+  evidence_chunk?: string | null
 }
 
 export type FactReview = {

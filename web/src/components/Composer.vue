@@ -12,9 +12,11 @@ const props = withDefaults(
     suggestions?: Suggestion[]
     modelProfileId?: string
     retrievalMode?: 'standard' | 'deep'
+    /** 后端直连 KAG 时为真：此时「选哪个模型」「标准/深度检索」都不再生效，控件应隐藏。 */
+    directKag?: boolean
     kagReady?: boolean
   }>(),
-  { welcome: false, suggestions: () => [], modelProfileId: '', retrievalMode: 'standard', kagReady: false },
+  { welcome: false, suggestions: () => [], modelProfileId: '', retrievalMode: 'standard', kagReady: false, directKag: false },
 )
 const emit = defineEmits<{
   submit: [question: string]
@@ -156,18 +158,27 @@ watch(deepConfirmOpen, async (open) => {
       </div>
     </div>
     <form class="composer" @submit.prevent="submit">
-      <div class="composer__input"><QuestionGallery v-if="!disabled" @pick="fill" /><span v-else class="composer__spark"><AppIcon name="spark" :size="19" /></span><textarea ref="textarea" v-model="value" :disabled="disabled" rows="2" aria-label="输入问题" :placeholder="welcome ? '有什么问题？试着问一问数据或文档…' : '继续提问，或补充需要的信息…'" @keydown="keydown" /></div>
+      <div class="composer__input"><QuestionGallery v-if="!disabled" @pick="fill" /><span v-else class="composer__spark"><AppIcon name="spark" :size="19" /></span><textarea ref="textarea" v-model="value" :disabled="disabled" rows="2" aria-label="输入问题" :placeholder="welcome ? '有什么问题？问某校某年某类有几项，或某份办法怎么规定…' : '继续提问，或补充需要的信息…'" @keydown="keydown" /></div>
       <div class="composer__bottom">
         <div class="composer__aside">
           <!-- 模型选择放在这里而不是顶栏：它是「这一问用哪个模型」的设置，
                和输入是一体的；放顶栏会让人以为它管整个工作台。 -->
           <div class="composer__mode-group" role="group" aria-label="本轮问答设置">
+            <!--
+              直连 KAG 时这两个控件是假的：模型由后端固定（容器内的 glm-4-flash），
+              检索模式也只有一条路（KAG 自己的三路召回）。留着它们，演示时会有人
+              问「换成别的模型会怎样」，而答案是「不会怎样」——不如直接说明由谁负责。
+            -->
+            <span v-if="directKag" class="composer__fixed-route">
+              <AppIcon name="gap2graph" :size="14" />检索与生成由 KAG 完成
+            </span>
             <ModelSelector
+              v-else
               :model-profile-id="modelProfileId"
               :disabled="disabled"
               @update:model-profile-id="emit('update:modelProfileId', $event)"
             />
-            <label class="retrieval-mode" :class="{ 'retrieval-mode--deep': retrievalMode === 'deep' }">
+            <label v-if="!directKag" class="retrieval-mode" :class="{ 'retrieval-mode--deep': retrievalMode === 'deep' }">
               <AppIcon class="retrieval-mode__icon" name="document" :size="14" />
               <select ref="retrievalModeSelect" :value="retrievalMode" :disabled="disabled" aria-label="文档检索模式" @change="updateRetrievalMode">
               <option value="standard">标准检索</option>
@@ -182,8 +193,8 @@ watch(deepConfirmOpen, async (open) => {
         <button v-else type="submit" class="vm-press vm-interact" :disabled="!value.trim()" aria-label="发送问题"><span>发送</span><AppIcon class="vm-icon-shift" name="arrow" :size="17" /></button>
       </div>
     </form>
-    <p v-if="!kagReady" class="retrieval-mode-note">KAG 补充深度检索尚未就绪，当前可使用标准检索。</p>
-    <p v-else-if="retrievalMode === 'deep'" class="retrieval-mode-note">KAG 补充深度检索会增加等待时间；仅对文档检索生效。</p>
+    <p v-if="!directKag && !kagReady" class="retrieval-mode-note">KAG 补充深度检索尚未就绪，当前可使用标准检索。</p>
+    <p v-else-if="!directKag && retrievalMode === 'deep'" class="retrieval-mode-note">KAG 补充深度检索会增加等待时间；仅对文档检索生效。</p>
     <p class="composer-note"><AppIcon name="link" :size="12" />回答请结合来源证据核对；信息不足时可继续补充条件。</p>
     <details class="composer-note-mobile">
       <summary aria-label="查看回答提示"><AppIcon name="link" :size="13" /><span>提示</span></summary>
@@ -248,6 +259,8 @@ textarea::placeholder { color: var(--text-faint); }
 .composer__mode-group { display: flex; align-items: center; gap: 6px; min-width: 0; }
 .composer__hint { color: var(--text-faint); font-size: 11px; white-space: nowrap; }
 .retrieval-mode { position: relative; display: inline-flex; flex: 0 1 auto; align-items: center; min-width: 0; min-height: 30px; border: 1px solid var(--border-brand); border-radius: 9px 6px 9px 6px; color: var(--brand-primary); background: var(--brand-soft); transition: border-color var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease); }
+/* 直连 KAG 时替代模型选择的那行静态说明：不是控件，所以不用边框和下拉箭头。 */
+.composer__fixed-route { display: inline-flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 9px; border: 1px solid var(--border-subtle); border-radius: 9px 6px 9px 6px; color: var(--text-muted); background: var(--bg-subtle); font-size: 12px; white-space: nowrap; }
 .retrieval-mode:hover { border-color: var(--brand-primary); background: var(--brand-soft-strong); }
 .retrieval-mode--deep { border-color: var(--state-warning-border); color: var(--state-warning); background: var(--state-warning-soft); }
 .retrieval-mode--deep:hover { border-color: var(--state-warning); background: var(--state-warning-soft); }
