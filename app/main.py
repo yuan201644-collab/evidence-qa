@@ -418,6 +418,79 @@ def kag_status(request: Request) -> dict[str, object]:
         return {"ready": False, "status": "unavailable", "reason_code": "configuration_invalid"}
 
 
+@app.get("/api/kag/remote")
+def kag_remote(request: Request) -> dict[str, object]:
+    """远程 KAG 服务的可达性与图规模底数。
+
+    与 `/api/kag/status` 的区别：那个探测的是**本地 KAG runtime 子进程**
+    （老项目形态，`D:\\kag\\python310`），本项目的 KAG 跑在实验服务器上，
+    两者不是一回事。这里单独一个接口，不去改老接口的语义。
+
+    `reachable` 只做 TCP 连接判断，不发认证请求：演示前点一下就知道
+    网络通不通，不必等一次完整问答；真正的鉴权问题会在提问时报出来。
+    """
+    _request_user(request)
+    from app import kag_ask
+
+    base = os.environ.get("KAG_BASE", "http://10.166.33.23:8887")
+    parsed = urlsplit(base)
+    host, port = parsed.hostname, parsed.port or 80
+    reachable, detail = False, None
+    try:
+        import socket
+
+        with socket.create_connection((host, port), timeout=3):
+            reachable = True
+    except Exception as exc:  # noqa: BLE001 - 只回可读原因，不回堆栈
+        detail = type(exc).__name__
+
+    return {
+        "base": base,
+        "app_id": int(os.environ.get("KAG_APP_ID", "5")),
+        "backend": (os.environ.get("ASK_BACKEND") or "orchestrator").strip().lower(),
+        "reachable": reachable,
+        "status": "ready" if reachable else "unavailable",
+        "reason_code": detail,
+        "graph": kag_ask.graph_stats(),
+    }
+
+
+@app.post("/api/kag/fact-table")
+def kag_fact_table(request: Request, payload: dict) -> dict[str, object]:
+    """离线重算一道题的事实表（不调 KAG、不耗模型）。
+
+    存在的理由：演示时想单独讲「这条事实是怎么判出来的」，而不必每次都
+    等两分钟跑完整问答。它跑的是和注入时**同一份** `facts.build()`，
+    唯一差别是证据列留空——没有检索就不该声称有证据。
+    """
+    _request_user(request)
+    from app import kag_ask
+
+    question = str((payload or {}).get("question") or "").strip()
+    if not question:
+        raise HTTPException(status_code=400, detail="question 不能为空")
+    return kag_ask.fact_table(question)
+
+
+@app.get("/api/kag/questions")
+def kag_questions(request: Request) -> dict[str, object]:
+    """冻结题库（31 道可判题）的题干清单，供事实表页做「换个问题看看」。"""
+    _request_user(request)
+    path = (Path(__file__).resolve().parent.parent / "contrib" / "kag"
+            / "feva_override" / "data" / "qbank_v4.json")
+    if not path.exists():
+        return {"questions": []}
+    data = json.loads(path.read_text(encoding="utf-8"))
+    items = data.get("questions") if isinstance(data, dict) else data
+    out = []
+    for q in items or []:
+        qid = q.get("qid") or q.get("id")
+        text = q.get("text") or q.get("question")
+        if qid and text:
+            out.append({"qid": qid, "text": text, "layer": q.get("layer")})
+    return {"questions": out}
+
+
 @app.get("/api/database/status", response_model=DatabaseStatusResponse)
 def database_status(request: Request) -> DatabaseStatusResponse:
     """Return live database connectivity and safe schema-catalog identity."""
@@ -568,6 +641,38 @@ def _ask_response_payload(response: AskResponse, *, include_fact_review: bool) -
     return payload
 
 
+def _answer_dispatch(
+    question: str,
+    session_id: str,
+    *,
+    retrieval_mode: str = "standard",
+    progress_callback=None,
+) -> AskResponse:
+    """选一条回答链路，其余代码完全不动。
+
+    `ASK_BACKEND=kag` 时走直连 KAG（`app/kag_ask.py`），默认值仍是原编排层。
+    做成环境变量而不是新路由，有三个理由：
+      · 前端 `ask.ts` 已经按 `AskResponse` 消费 `/api/ask` 与 `/api/ask/stream`，
+        加一条新路由等于要前端同时维护两套解析；
+      · 出问题时改一个环境变量即可回滚，不需要回滚代码；
+      · 两条链路的对外契约完全相同，切换对调用方不可见。
+    """
+    backend = (os.environ.get("ASK_BACKEND") or "orchestrator").strip().lower()
+    if backend == "kag":
+        from . import kag_ask
+
+        payload = kag_ask.answer(question, session_id,
+                                 progress_callback=progress_callback)
+        # 过一遍契约再返回：宁可在这里报错，也不要让不合规的字段流到前端。
+        return AskResponse(**payload)
+
+    options = {"retrieval_mode": retrieval_mode} if retrieval_mode != "standard" else {}
+    if progress_callback is None:
+        return _orchestrator.answer(question, session_id, **options)
+    return _orchestrator.answer(question, session_id, **options,
+                                progress_callback=progress_callback)
+
+
 @app.post("/api/ask", response_model=AskResponse)
 def ask(req: AskRequest, request: Request) -> JSONResponse:
     """提问接口。
@@ -580,11 +685,10 @@ def ask(req: AskRequest, request: Request) -> JSONResponse:
     include_fact_review = _requested_fact_review(request)
     try:
         with model_profile_scope(profile_id):
-            answer_options = {"retrieval_mode": req.retrieval_mode} if req.retrieval_mode != "standard" else {}
-            response = _orchestrator.answer(
+            response = _answer_dispatch(
                 req.question,
                 _scoped_session_id(user, req.session_id),
-                **answer_options,
+                retrieval_mode=req.retrieval_mode,
             )
             return JSONResponse(content=_ask_response_payload(
                 response, include_fact_review=include_fact_review
@@ -616,11 +720,10 @@ async def ask_stream(req: AskRequest, request: Request) -> StreamingResponse:
             try:
                 def answer_with_profile() -> AskResponse:
                     with model_profile_scope(profile_id):
-                        answer_options = {"retrieval_mode": req.retrieval_mode} if req.retrieval_mode != "standard" else {}
-                        return _orchestrator.answer(
+                        return _answer_dispatch(
                             req.question,
                             scoped_session_id,
-                            **answer_options,
+                            retrieval_mode=req.retrieval_mode,
                             progress_callback=publish,
                         )
 

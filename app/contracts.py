@@ -464,6 +464,32 @@ class FactReviewItem(BaseModel):
     reason_code: str | None = None
     reason: str | None = None
 
+    # 以下三个字段是方向三为「可溯源事实核验」补的（v2 契约的向后兼容扩展）。
+    # 原契约只能表达「这条事实判成什么状态」，表达不了「判出什么值」「凭哪一块」——
+    # 而对公示语料做计数核验时，值本身和它落在哪个块才是要展示的东西。
+    value: str | None = Field(
+        default=None,
+        description=(
+            "判定出的值（如「38 项」）。与 status 分工：status 说的是这条成不成立，"
+            "value 说的是成立时具体是多少。非计数类的事实可以不填。"
+        ),
+    )
+    criterion: str | None = Field(
+        default=None,
+        description=(
+            "这条事实的判定口径，即 label 的前半段（如「AH24（安徽 2024 年度）」）——"
+            "指明它属于哪份文档、哪一年。界面用它做分组，避免与 label 重复显示。"
+        ),
+    )
+    evidence_chunk: str | None = Field(
+        default=None,
+        description=(
+            "本行证据所在的原文块标识（如「AH24_v2_split_4」），与 "
+            "evidence_ref_indices 指向同一处、两种表示：索引供前端跳转，"
+            "块名供人与日志直接引用。取不到时留空，不要填占位串。"
+        ),
+    )
+
 
 class FactReview(BaseModel):
     """Optional, versioned projection of a request-scoped fact ledger."""
