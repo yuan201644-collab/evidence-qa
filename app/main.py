@@ -432,7 +432,8 @@ def kag_remote(request: Request) -> dict[str, object]:
     _request_user(request)
     from app import kag_ask
 
-    base = os.environ.get("KAG_BASE", "http://10.166.33.23:8887")
+    # 同 app/kag_ask.py：默认本机端口，真实地址由 KAG_BASE 注入。
+    base = os.environ.get("KAG_BASE", "http://127.0.0.1:8887")
     parsed = urlsplit(base)
     host, port = parsed.hostname, parsed.port or 80
     reachable, detail = False, None

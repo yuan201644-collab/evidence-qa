@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-10-24T17:40:54+08:00",
   "source_commit": "712f1b2fa72131a81790d7a0ea48baaabca4dd9e (drill_20261019)",
-  "source_note": "主体来自 D:/verify/drill_20261019；两份正式报告与 4 个总体文件来自 参考文件/项目总体（10-19 之后快照）；app/orchestrator.py 用包内版本，见 docs/reference/项目总体_1019更新快照/README.md；contrib/ 为 2026-10-21 新增的开源贡献目录（不参与运行），见 contrib/README.md",
+  "source_note": "主体来自 D:/verify/drill_20261019；两份正式报告与 4 个总体文件来自 参考文件/项目总体（10-19 之后快照）；app/orchestrator.py 用包内版本，见 docs/reference/项目总体_1019更新快照/README.md；contrib/ 为 2026-10-21 新增的开源贡献目录（不参与运行），见 contrib/README.md；2026-10-28 为公开发布移除 12 份内部文件（含校名/派工/排期），其余条目校验值未变",
   "excludes": [
     ".venv/",
     "agent_temp/",
@@ -12,8 +12,8 @@
     "*.pyc / *.log",
     "MANIFEST.json 自身"
   ],
-  "file_count": 2540,
-  "total_bytes": 62527095,
+  "file_count": 2528,
+  "total_bytes": 62292897,
   "files": [
     {
       "path": ".agents/skills/verimind-process-diagram/SKILL.md",
@@ -869,11 +869,6 @@
       "path": "docker-compose.yml",
       "bytes": 308,
       "sha256": "07d9c869690ba460285e97e209cae0247057c875178aa0358d6f25fee8d816f5"
-    },
-    {
-      "path": "docs/B与C测评复测和结构化规模实测_20261012.md",
-      "bytes": 11663,
-      "sha256": "f4463dfaf3b47dd1d2f3d3fb8f20924cc27879b7228eba9db6299353c58e4903"
     },
     {
       "path": "docs/CHANGELOG_schema_meta.md",
@@ -1806,16 +1801,6 @@
       "sha256": "d8221e3997812063c3518ed4a82585f672be9932bb59ee8f3633055f4ed8f84b"
     },
     {
-      "path": "docs/reference/大赛报名通知_原文.txt",
-      "bytes": 7917,
-      "sha256": "47e4f4706975d747964a71d6ac5b8f7bf290d8fd076237d2499d27310cb66238"
-    },
-    {
-      "path": "docs/reference/赛题八_题面原文.txt",
-      "bytes": 23478,
-      "sha256": "066b0db43e41e853fdf1fa2672fe315522f29975a24658461f162d923983a8bb"
-    },
-    {
       "path": "docs/reference/项目总体_1019更新快照/README.md",
       "bytes": 2509,
       "sha256": "4d81bfbec959c95968bcdc720b8855c08ac8fb86c4f49523d29a77276f1060ab"
@@ -1869,11 +1854,6 @@
       "path": "docs/交付包目录说明_20261018.md",
       "bytes": 13798,
       "sha256": "0b27cf6d598acd4bab7e970b529588f00c4f710cfde8592f798f791e0d81d70b"
-    },
-    {
-      "path": "docs/初赛截止纠正与当前排期_20261010.md",
-      "bytes": 3607,
-      "sha256": "905bf75392825e4c56d4bce03a1158ee6c98c95c3845db0b286c1f6de0146fb2"
     },
     {
       "path": "docs/初赛报告初稿_20261012_v0.1/两份初赛报告待补内容与证据闭环计划_v0.1_20261016.md",
@@ -2316,24 +2296,9 @@
       "sha256": "5fa3bf188f42ea51093b28fe94cadc51f3c95d5e940e896cd76ce5d4ab4f10d8"
     },
     {
-      "path": "docs/组员测试执行_B文档与前端_20261011-13.md",
-      "bytes": 12893,
-      "sha256": "c3b9e2b14c908fc33ee8c5702a48fe6b601d734d83204e3c8377aead2e1158bc"
-    },
-    {
-      "path": "docs/组员测试执行_C数据库与中级任务_20261011-13.md",
-      "bytes": 14592,
-      "sha256": "70bd88b8a1ff07ad1c19fd59d42c4c0746223a10ae41a833871716cb3b6b23ba"
-    },
-    {
       "path": "docs/结构化规模效率实测_20261012.md",
       "bytes": 8230,
       "sha256": "2873b80dabd86348cb23c493ce138b1bee958ca92879b9a70741810cd833c3cf"
-    },
-    {
-      "path": "docs/致B_DocRef解析方式字段_回复.md",
-      "bytes": 5720,
-      "sha256": "4846293a5696ea63d7a946037b9fc13a2d27317cf7a42314e0e6ff6498406725"
     },
     {
       "path": "docs/要素识别与改写_接口_v0.1.md",
@@ -2349,11 +2314,6 @@
       "path": "docs/评测口径_v0.1.md",
       "bytes": 12730,
       "sha256": "52666024857a268b90440e2a46b0d22ffd285e2704b9c84a6d43b607522a895f"
-    },
-    {
-      "path": "docs/负责人项目补齐清单_20261010.md",
-      "bytes": 11249,
-      "sha256": "81eafc476edfba094bc8365aafbe2af98e52b4c7a504fcce9cb294cf829d27d1"
     },
     {
       "path": "docs/账号系统设计_v0.1.md",
@@ -2379,26 +2339,6 @@
       "path": "docs/静态业务语义层实验记录_v0.1.md",
       "bytes": 6633,
       "sha256": "4566a4ab558f22aadc1c9573b788e3ab182a1f957999ef810e42cabf427feb5c"
-    },
-    {
-      "path": "docs/项目对话交流记录_B与C下一步任务_20261012.md",
-      "bytes": 5519,
-      "sha256": "db9c0edb47f836bbedb3256c824796566436a597be9ca127d04de652e58e2753"
-    },
-    {
-      "path": "docs/项目收口任务与冲刺计划_组员版_20261010_v0.1.docx",
-      "bytes": 46417,
-      "sha256": "785626aaf8a1c0ec8594e0126d8d6cbbc07e93d92f99290885db406726097f0b"
-    },
-    {
-      "path": "docs/项目收口任务与冲刺计划_组员版_20261010_v0.2.docx",
-      "bytes": 46565,
-      "sha256": "42ded59c3fa1ac8ee19b75a098fb4ce5295ef07311a02af6820130000acdb5b4"
-    },
-    {
-      "path": "docs/项目收口任务与冲刺计划_组员版_20261010_v0.3.docx",
-      "bytes": 44578,
-      "sha256": "6d9592c7d064afbbfc093d2ce2b5221e36c55b65d4a054df01063de41e11788d"
     },
     {
       "path": "docs/项目概况.docx",

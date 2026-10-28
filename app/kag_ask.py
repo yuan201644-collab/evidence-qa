@@ -312,7 +312,9 @@ def answer(question: str, session_id: str = "", progress_callback=None) -> dict:
     前端会当成一次正常的「没答上来」，而不是假装成功。
     """
     client = kag_client.KagClient(
-        base=os.environ.get("KAG_BASE", "http://10.166.33.23:8887"),
+        # 默认指向 KAG 的本机端口；实验服务器的地址由 KAG_BASE 注入，
+        # 不写进仓库（公开仓库里出现内网地址既无必要，也没法给评审复现）。
+        base=os.environ.get("KAG_BASE", "http://127.0.0.1:8887"),
         account=os.environ.get("KAG_ACCOUNT", "openspg"),
         password=os.environ.get("KAG_PASSWORD", "openspgadmin"),
         app_id=int(os.environ.get("KAG_APP_ID", "5")),
