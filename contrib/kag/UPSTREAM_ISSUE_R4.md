@@ -1,17 +1,19 @@
-# 上游 Issue 正文：R4 知识单元解析（待提交）
+# 上游 Issue 正文：R4 知识单元解析（已提交 #759）
 
-> **状态：未提交。** 本文是第二个 Issue 的备用正文，与
-> `UPSTREAM_ISSUE.md`（R1，已提交为
+> **状态：已提交。** <https://github.com/OpenSPG/KAG/issues/759>
+> 提交时间 2026-10-29 08:21（UTC+8），提交账号 `yuan201644-collab`，当前状态 `open`。
+> 与 `UPSTREAM_ISSUE.md`（R1，已提交为
 > [#758](https://github.com/OpenSPG/KAG/issues/758)）相互独立。
 >
-> 用法：把 `=== 正文开始 ===` 与 `=== 正文结束 ===` 之间的内容整体粘到
-> <https://github.com/OpenSPG/KAG/issues/new>，标题用第一行。
-> 中文对照在末尾「中文备查」，仅供技术报告附录引用，不要粘进 Issue。
+> 用法：本文件保留 Issue 全文以便复现与引用；如需重新提交，把下面
+> `=== 正文开始 ===` 与 `=== 正文结束 ===` 之间的内容整体复制到
+> <https://github.com/OpenSPG/KAG/issues/new> ，标题用第一行。
+> 中文对照在末尾「中文备查」，仅供报告附录引用，不要粘进 Issue。
 >
 > 核实基线：KAG 0.8.0 源码包（`KAG_VERSION` 文件内容 `0.8.0`，源码目录
 > `OpenSPG-KAG-fdab15b`）。本文所有行号均在该源码上逐行核对。
-> **未**核对当前 master —— 本次撰写环境访问 `api.github.com` 超时，
-> 因此不声明 master 是否仍存在该缺陷。
+> **已核对当前 master（2026-10-29）：master 的 sha 就是 `fdab15b`，与本项目基线是
+> 同一个 commit，上游一个提交都没往前走，`util.py:10` 仍无 `strict` 参数，缺陷仍在原位。**
 
 ---
 
