@@ -1,20 +1,32 @@
-AskData Agent — KAG 抽取层改进（contrib/kag）
-Copyright 2026 AskData Agent contributors
+EvidenceQA（循证问答）— 对 KAG 的派生修改与可复用工具（contrib/）
+Copyright 2026 EvidenceQA contributors
 
 本目录以 Apache License 2.0 发布，全文见同目录 LICENSE。
 
 衍生关系声明
 ------------
-kag_improve.py 继承并覆写了以下项目的类：
+以下文件继承、覆写或修改了 OpenSPG / KAG 的类或函数：
 
     OpenSPG / KAG 0.8.0
     Copyright 2023 OpenSPG Authors
     Licensed under the Apache License, Version 2.0
     https://github.com/OpenSPG/KAG
 
+    kag_improve.py                      继承 SchemaFreeExtractor，覆写三元组抽取（R1）
+    kag_extractor_switch.py             按类型名注册上述子类，替换默认抽取器
+    upstream_patch_knowie_parse.diff    解析层最小补丁（R4），供上游采纳
+    kag_index_manager_r6.diff           检索器补丁（R6），扩展编号锚点召回
+    kag_index_manager_r6_full.py        上述补丁的完整可读版本
+    kag_merger_authority_and_topn.diff  合并器补丁，按权威度与 TopN 收敛
+    feva_override/                      事实判定扩展层；复用上游
+                                        LLMIndexGenerator.invoke 作为注入点，
+                                        未复制上游源代码
+
 上游未随发行版提供 NOTICE 文件，故此处仅作署名与来源说明，
 不构成对上游商标或作者身份的任何主张。
 
-本目录其余文件（kag_normalize.py、test_kag_normalize.py、
-audit_retrieval.py、builder.example.yaml、README.md）为原创，
+本目录其余文件（kag_normalize.py、kag_improve.py 中非继承的部分、
+struct_agg_core.py、structured_aggregate_retriever.py、anchor_query.py、
+anchor_chunk_retriever.py、knowie_parse.py、audit_retrieval.py、
+builder.example.yaml、测试文件与说明文档）为原创，
 不包含上游源代码的复制。

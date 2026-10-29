@@ -1,7 +1,7 @@
 """llm.py - 生成答案用的 LLM 客户端（OpenAI 兼容协议）
 
-赛题八题面建议“大模型订购国产 Token”，本项目用国产 LLM API（如通义千问 /
-DeepSeek），它们都兼容 OpenAI 的 /v1/chat/completions 协议。这里用一个最小客户端
+本模块用国产 LLM API（如通义千问 / DeepSeek），它们都兼容 OpenAI 的
+/v1/chat/completions 协议。这里用一个最小客户端
 直接发 HTTP 请求（标准库 urllib），不依赖官方 SDK，零新增依赖。
 
 环境变量（变量名以 .env.example 为准）：

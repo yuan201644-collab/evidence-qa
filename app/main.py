@@ -73,7 +73,7 @@ from app.model_config_store import (
 )
 from app.orchestrator import build_default_orchestrator
 
-app = FastAPI(title="AskData Agent", version="0.2.0")
+app = FastAPI(title="EvidenceQA", version="0.2.0")
 logger = logging.getLogger(__name__)
 _auth_store = AuthStore()
 
