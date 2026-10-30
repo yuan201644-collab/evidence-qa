@@ -197,7 +197,7 @@ python contrib/kag/test_knowie_parse.py
 | --- | --- | --- |
 | 位置 | `schema_free_extractor.py:521` | `util.py:10/18/29/42/49` |
 | 触发 | 默认建图链走**同步**路径，尾逗号把三元组包两层，下游按 `len(tri) != 3` **整批丢边** | 模型在 JSON 值里写裸换行，`json.loads` 默认 `strict=True` 直接拒绝，**整篇文档建图中断** |
-| 证据 | 离线断言：5 条三元组 → 0 条边；归一后 → 5 条边 | 离线断言 + **真实上游函数**前后对照（需设 `KAG_UTIL_PY`） |
+| 证据 | **SDK 同条件对照**（同材料、同 LLM、同代码路径，仅三元组数据布局不同）：原版两轮语义边 **0／0**，归一后 **60／59**；另有单元测试 5 条 → 0 → 5 作机制佐证 | 离线断言 + **真实上游函数**前后对照（需设 `KAG_UTIL_PY`） |
 | 修复后 | 同批语料语义关系边占比 0.57% → 33.41%（152/455） | 同一输入 5 层重试全落空 → 一次通过 |
 | 复现门槛 | 需装 KAG | 只需上游 `util.py` 一个文件 |
 
@@ -207,11 +207,24 @@ python contrib/kag/test_knowie_parse.py
 R1 已提 Issue [#758](https://github.com/OpenSPG/KAG/issues/758)；R4 补丁已就绪，
 Issue 正文见 `contrib/kag/UPSTREAM_ISSUE_R4.md`。
 
-## 三、技术选型（不可动摇项见项目行为基准 §三「技术框架」）
+## 三、技术选型
 
-后端 **FastAPI + pydantic v2**；编排层**自研**（不用 LangChain 全家桶），单智能体 + 工具调用；
-业务库 **PostgreSQL（Docker）**；**sqlglot** 做 SQL 校验与方言解耦；**pgvector** 为主；
-国产 LLM API 生成 + **bge** 本地小模型做向量与重排；**RapidOCR** 离线 OCR；monorepo + docker-compose。
+**本作品的问答链路**（建库、问答与全部被引用的实验结果都走这一条）：
+
+| 环节 | 选型 |
+|---|---|
+| 知识图谱与检索生成 | **OpenSPG / KAG 0.8.0**（Apache-2.0），部署在实验服务器，四容器（server / neo4j / mysql / minio），`ASK_BACKEND=kag` 直连 |
+| 建图模型 | **deepseek-flash**（DeepSeek 官方 API，关闭思考链；R8 补丁保证） |
+| 问答模型 | **glm-4-flash**（智谱开放平台） |
+| 向量 | **Qwen3-Embedding-8B**（4096 维，SiliconFlow 云端 API），向量存在图库块节点属性里，不另起向量库 |
+| 应用后端 | **FastAPI + pydantic v2**，编排自研，不引入 LangChain 类框架 |
+| 文档解析 | KAG 内置解析（含本项目 R4 补丁）；应用侧用 **PyMuPDF** 做上传材料的块切分 |
+| 前端 | **Vue 3 + Pinia + PDF.js** |
+
+> **仓库里还保留着上一阶段（另一赛题）的文档检索链路**：PostgreSQL + pgvector + bge-m3 /
+> bge-reranker 本地模型 + RapidOCR + sqlglot。代码与依赖仍在（`app/rag/`、`app/nl2sql/`），
+> 但**不参与本作品任何被引用的结果**；把 `DOC_SEARCH_BACKEND` 设为 `rag`、或不设
+> `ASK_BACKEND=kag` 才会走回那条链路。逐项状态见仓库 `docs/开源及第三方资源使用清单_v1.0_20261030.md` §9。
 
 ## 四、四条原则（写代码前先读）
 
