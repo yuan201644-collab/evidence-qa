@@ -357,3 +357,9 @@ _内部文档_不公开/
 # web/dist 例外：仓库随附前端构建产物，使评审只装 Python 依赖即可看到界面（不需要 Node）。
 !web/dist/
 !web/dist/**
+# 本机演示启动器生成的账号库与临时截图，不进仓库
+data/local_auth.db
+data/local_auth.db-*
+_shots/
+# 本地一次性验证脚本（需要 playwright，不随仓库分发）
+_tools/
