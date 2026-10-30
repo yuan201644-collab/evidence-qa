@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="metric-align-title">
+  <title id="metric-align-title">口径对齐 MetricAlign</title>
+  <path d="M5 9h38l-3 10H5z" fill="#315bc7"/>
+  <path d="M5 29h35l3 10H5z" fill="#8fa8e9"/>
+  <path d="M24 5v38" fill="none" stroke="#254ba6" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="m24 19 5 5-5 5-5-5z" fill="#168b82"/>
+</svg>

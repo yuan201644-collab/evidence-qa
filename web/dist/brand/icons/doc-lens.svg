@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">文证透镜 DocLens</title>
+  <path d="m10 4 19 2 9 9-2 28-24-2-5-6z" fill="#315bc7"/>
+  <path d="m29 6v10h9" fill="#8fa8e9"/>
+  <path d="m15 23 12-5 5 3-12 5z" fill="#dce5ff"/>
+  <path d="m15 30 9-4 5 3-9 4z" fill="#8fa8e9"/>
+  <path d="m28 31 5-2 7 7-2 7-7-2-5-5z" fill="#55d4c3"/>
+  <path d="m31 31 5 5" fill="none" stroke="#254ba6" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

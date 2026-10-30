@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">证据账本 EvidenceLedger</title>
+  <path d="m10 6 20 2 8 8-2 25-22-2-7-8z" fill="#8fa8e9"/>
+  <path d="m8 10 19 1 8 8-1 24-23-2-6-7z" fill="#315bc7"/>
+  <path d="m27 11v9h8" fill="none" stroke="#dce5ff" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="m15 28 4-3 4 3v7l-4 3-4-3z" fill="#55d4c3"/>
+  <path d="m16.5 31.5 2 2 3.5-4" fill="none" stroke="#254ba6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

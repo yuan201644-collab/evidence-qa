@@ -353,3 +353,7 @@ web/public/pdfjs/standard_fonts/
 
 # 内部管理类文档，不随仓库公开
 _内部文档_不公开/
+
+# web/dist 例外：仓库随附前端构建产物，使评审只装 Python 依赖即可看到界面（不需要 Node）。
+!web/dist/
+!web/dist/**

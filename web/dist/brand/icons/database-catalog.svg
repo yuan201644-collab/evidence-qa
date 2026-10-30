@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="database-catalog-title">
+  <title id="database-catalog-title">数据库与库表目录</title>
+  <path d="M8 12 24 4l16 9v22L24 44 8 35z" fill="#315bc7"/>
+  <path d="m24 21 16-8v22l-16 9z" fill="#254ba6"/>
+  <path d="m8 12 16-8 16 9-16 8z" fill="#8fa8e9"/>
+  <path d="m13 20 11 6 11-6M13 27l11 6 11-6" fill="none" stroke="#dbe5fe" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"/>
+  <path d="m24 21v23" fill="none" stroke="#55d4c3" stroke-linecap="round" stroke-width="2"/>
+</svg>

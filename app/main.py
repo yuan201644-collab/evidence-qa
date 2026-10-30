@@ -1060,7 +1060,7 @@ if frontend_dist.is_dir():
 
 _PUBLIC_LOGIN_HTML = """<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="light dark"><title>登录 · 知证 VeriMind</title>
+<meta name="color-scheme" content="light dark"><title>登录 · 循证问答</title>
 <style>
 *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#f5f7fa;color:#1d2b40;font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
 .card{width:min(420px,100%);padding:38px;border:1px solid #e4e9f0;border-radius:22px;background:#fff;box-shadow:0 18px 60px rgba(35,59,102,.12)}
@@ -1069,6 +1069,6 @@ h1{margin:0;color:#233b66;font-size:25px;text-align:center}.sub{margin:9px 0 26p
 form{display:grid;gap:16px}label{display:grid;gap:7px;color:#637086;font-size:12px;font-weight:650}input{width:100%;padding:12px 13px;border:1px solid #e4e9f0;border-radius:10px;outline:0;color:#1d2b40;background:#fff;font:inherit;font-size:14px}input:focus{border-color:#8da9e4;box-shadow:0 0 0 3px #edf2ff}
 button{min-height:44px;border:0;border-radius:10px;color:#fff;background:#315bc7;font:inherit;font-size:14px;font-weight:700;cursor:pointer}button:disabled{opacity:.55;cursor:wait}.error{min-height:0;margin:0;color:#c8452f;font-size:12px}.foot{margin:22px 0 0;color:#75849a;font-size:11px;text-align:center}
 @media(prefers-color-scheme:dark){body{background:#141922;color:#f2f5fa}.card{border-color:#303a4b;background:#1d2430}h1{color:#f2f5fa}.sub,label{color:#bac5d6}input{border-color:#303a4b;color:#f2f5fa;background:#151b25}.foot{color:#93a1b6}}
-</style></head><body><main class="card"><img class="mark" src="/brand/verimind-mark.svg" alt="知证 VeriMind"><p class="eyebrow">SECURE WORKSPACE</p><h1>登录知证</h1><p class="sub">使用管理员分配的账号进入问答工作台。</p>
+</style></head><body><main class="card"><img class="mark" src="/brand/verimind-mark.svg" alt="循证问答"><p class="eyebrow">SECURE WORKSPACE</p><h1>登录循证问答</h1><p class="sub">使用管理员分配的账号进入问答工作台。</p>
 <form id="login"><label>用户名<input name="username" autocomplete="username" minlength="3" maxlength="48" required autofocus></label><label>密码<input name="password" type="password" autocomplete="current-password" maxlength="256" required></label><p id="error" class="error" role="alert"></p><button id="submit" type="submit">安全登录</button></form><p class="foot">账号由系统管理员创建 · 登录会话有效期 12 小时</p></main>
 <script>const form=document.querySelector('#login'),button=document.querySelector('#submit'),error=document.querySelector('#error');form.addEventListener('submit',async event=>{event.preventDefault();button.disabled=true;button.textContent='正在验证…';error.textContent='';const data=new FormData(form);try{const response=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:data.get('username'),password:data.get('password')})});if(!response.ok){const body=await response.json().catch(()=>({}));throw new Error(body.detail||'登录失败，请重试。')}location.replace('/')}catch(reason){error.textContent=reason instanceof Error?reason.message:'无法连接登录服务。';button.disabled=false;button.textContent='安全登录'}})</script></body></html>"""

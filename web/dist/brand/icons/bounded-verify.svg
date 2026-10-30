@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">有界求证 BoundedVerify</title>
+  <path d="m24 4 15 8v17l-15 9-15-9V12z" fill="#dce5ff"/>
+  <path d="m24 8 11 6v13l-11 7-11-7V14z" fill="#315bc7"/>
+  <path d="m24 8 11 6-11 6-11-6z" fill="#8fa8e9"/>
+  <path d="m24 20 11-6v13l-11 7z" fill="#254ba6"/>
+  <path d="m22 19 2-1 2 1v8l-2 2-2-2z" fill="#55d4c3"/>
+</svg>

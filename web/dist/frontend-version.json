@@ -1,0 +1,6 @@
+{
+  "schema": "verimind_frontend_v1",
+  "ui_id": "three-question-modes-v1",
+  "release_date": "2026-10-16",
+  "features": ["structured_query", "document_qa", "cross_source"]
+}

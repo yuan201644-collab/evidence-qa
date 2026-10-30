@@ -39,7 +39,7 @@ def _read_password(args: argparse.Namespace) -> str | None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="管理 VeriMind 本机账号")
+    parser = argparse.ArgumentParser(description="管理循证问答本机账号")
     commands = parser.add_subparsers(dest="command", required=True)
     admin = commands.add_parser("create-admin", help="创建首个管理员账号")
     admin.add_argument("--username", default="admin")

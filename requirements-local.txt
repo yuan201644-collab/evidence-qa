@@ -1,0 +1,17 @@
+# 本机演示（评审/复现）所需的最小依赖
+#
+# 只跑「界面 + 冻结题库 + 逐题事实表重算」这条路径时，装这 6 个包即可，
+# 不需要 torch / sentence-transformers / OCR / 向量库 —— 那些属于仓库里保留的
+# 上一阶段文档检索链路，本作品的建库与问答不走它。
+#
+#     python -m pip install -r requirements-local.txt
+#     python scripts/start_local.py
+#
+# 前后端同源：后端会直接托管 web/dist（仓库已随附构建产物），
+# 因此不需要 Node。要改前端源码时才需要 `cd web && npm ci && npm run build`。
+fastapi>=0.110
+uvicorn>=0.27
+pydantic>=2.6
+pymupdf>=1.24
+sqlglot>=26.0
+psycopg[binary]>=3.1
