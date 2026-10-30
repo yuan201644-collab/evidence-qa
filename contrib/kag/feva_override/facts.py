@@ -88,6 +88,23 @@ def _org_candidates(org):
     return uniq
 
 
+def _clean_blocks(names):
+    """归一化图里查出的块名。
+
+    图节点名带双引号（`"SD16_v2_split_30"`），而召回侧的 `section_path` 不带
+    （`SD16_v2_split_30`）。不归一化，`ref_index` 永远匹配不上，界面就会显示
+    「本次检索未召回该文档的块」——块其实召回到了，只是名字对不上。
+    """
+    out = []
+    for n in names:
+        if not n:
+            continue
+        s = str(n).strip().strip('"').strip()
+        if s:
+            out.append(s)
+    return out
+
+
 def evidence(doc, org=None, limit=12):
     """一条事实的证据块：走 `(项目)-[:source]->(块)` 这条边。
 
@@ -103,14 +120,14 @@ def evidence(doc, org=None, limit=12):
                 "WHERE ch.name CONTAINS $pat "
                 "RETURN DISTINCT ch.name AS n LIMIT $lim",
                 {"pat": pat, "lim": limit})
-            return [r["n"] for r in rows if r.get("n")]
+            return _clean_blocks(r["n"] for r in rows if r.get("n"))
         for cand in _org_candidates(org):
             rows = _runner(
                 "MATCH (p)-[:`承担单位`]->(o) MATCH (p)-[:source]->(ch) "
                 "WHERE ch.name CONTAINS $pat AND o.name CONTAINS $org "
                 "RETURN DISTINCT ch.name AS n LIMIT $lim",
                 {"pat": pat, "org": cand, "lim": limit})
-            got = [r["n"] for r in rows if r.get("n")]
+            got = _clean_blocks(r["n"] for r in rows if r.get("n"))
             if got:
                 return got
         return []

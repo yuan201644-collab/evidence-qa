@@ -174,6 +174,41 @@ def _doc_title(doc: str) -> str:
     return "%s %s 年度 %s（%s）" % (prov, year, kind, doc)
 
 
+# 模型偶尔会把服务端给它的引用标记原样吐出来，形如
+# `<reference id="chunk:9_0"></reference>`。前端只认 `[n]` 形式的角标，
+# 不清掉的话这些标签会当成正文显示在答案里。
+_REF_TAG_RE = re.compile(r"""<reference\s+id\s*=\s*["']([^"']+)["']\s*>?\s*</reference>""",
+                         re.IGNORECASE)
+# 标签常常被包在括号里（`7项（<reference …/>）`），删掉标签会剩一对空括号。
+_EMPTY_BRACKET_RE = re.compile(r"[（(【\[]\s*[)）】\]]")
+_SPACE_BEFORE_PUNCT_RE = re.compile(r"[ \t]+([，。；：、）】！？%])")
+
+
+def _normalize_answer_refs(text: str, ref_index: dict) -> str:
+    """把答案里的 `<reference id=…>` 标签换成前端能渲染的 `[n]` 角标。
+
+    `ref_index` 是「块名 → refs 下标」。能对上的换成 1 起的角标；对不上的
+    （例如账本注入的合成条目 `chunk:9_0`，它不在召回块列表里）直接去掉，
+    宁可少一个角标，也不留一串原始的 XML 标签在答案正文里。
+
+    顺带去掉成对的 `**`：界面按纯文本渲染，Markdown 强调不会被解析，
+    原样显示成星号。
+    """
+    if not text:
+        return text
+    if "<reference" in text.lower():
+        def repl(m):
+            name = m.group(1).strip()
+            idx = ref_index.get(name)
+            return "[%d]" % (idx + 1) if isinstance(idx, int) else ""
+
+        text = _REF_TAG_RE.sub(repl, text)
+    # 删标签后可能留下空括号与空格，收干净再交给前端
+    text = _EMPTY_BRACKET_RE.sub("", text)
+    text = _SPACE_BEFORE_PUNCT_RE.sub(r"\1", text)
+    return _BOLD_RE.sub(r"\1", text)
+
+
 def _criterion(label: str) -> tuple[str, str]:
     """从行标签里拆出「口径」与「事实名」。
 
@@ -347,7 +382,7 @@ def answer(question: str, session_id: str = "", progress_callback=None) -> dict:
            "completed" if review else "skipped")
 
     return {
-        "answer": res.answer,
+        "answer": _normalize_answer_refs(res.answer, ref_index),
         "trace": _trace(res, len(rows)),
         "refs": refs,
         "sql": None,

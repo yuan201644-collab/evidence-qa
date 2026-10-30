@@ -48,6 +48,31 @@ class KagChunk:
     score: float = 0.0
 
 
+def _decode_chunk_content(value) -> str:
+    """把 `resultNodes[].properties.content` 解码成纯正文。
+
+    服务端下发的这个字段是**被序列化过一次的 JSON 字符串**：正文里的换行
+    变成字面 `\\n`（反斜杠 + n 两个字符），整串还带首尾双引号。不解码的话
+    界面上会显示成 `"SD16_v2\\n《2016年…》项目清单如下。`——引号多余、
+    换行不生效，看起来像渲染 bug。这里只做解码，不改动任何字符内容。
+    """
+    if value is None:
+        return ""
+    text = value if isinstance(value, str) else str(value)
+    stripped = text.strip()
+    if stripped[:1] == '"' and stripped[-1:] == '"':
+        try:
+            decoded = json.loads(stripped)
+        except (ValueError, TypeError):
+            decoded = None
+        if isinstance(decoded, str):
+            return decoded.strip()
+    # 没有外层引号但仍有字面转义的情况（部分节点如此），退化为替换。
+    if "\\n" in text:
+        text = text.replace("\\r\\n", "\n").replace("\\n", "\n").replace("\\t", "\t")
+    return text.strip()
+
+
 @dataclass
 class KagResult:
     answer: str = ""
@@ -226,7 +251,7 @@ class KagClient:
                     if raw in seen:
                         continue
                     props = node.get("properties") or {}
-                    content = str(props.get("content") or "").strip()
+                    content = _decode_chunk_content(props.get("content"))
                     # 块正文首行是块名本身（"AH24_v2_split_4\n项目编号 ..."），
                     # 去掉它，界面上显示的是纯正文。
                     if content.startswith(raw):
