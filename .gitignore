@@ -350,3 +350,6 @@ web/tsconfig.node.tsbuildinfo
 # 复核方式：`cd web && npm install` 会自动重建。
 web/public/pdfjs/cmaps/
 web/public/pdfjs/standard_fonts/
+
+# 内部管理类文档，不随仓库公开
+_内部文档_不公开/
